@@ -3,6 +3,15 @@ Talent Gap Analyzer API - Main Application
 FastAPI application for managing company data, HR inputs, and feeding Samya's gap algorithm
 """
 
+import sys
+from pathlib import Path
+
+# Add PARENT directory to path (so we can import 'algorithm' as a package)
+# This is safer than adding algorithm directly as it won't shadow 'models'
+parent_path = Path(__file__).parent.parent
+if str(parent_path) not in sys.path:
+    sys.path.append(str(parent_path))  # Use append, not insert(0)
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager

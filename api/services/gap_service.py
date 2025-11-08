@@ -1,21 +1,54 @@
 """
 Gap Analysis Service
-PLACEHOLDER - Will be implemented by Samya
-This service will contain the gap calculation algorithm
+Integrates Samya's TalentGapAlgorithm with the API
 """
 
-from typing import Dict, List
+import sys
+from pathlib import Path
+from typing import Dict, List, TYPE_CHECKING
+
 from models.employee import Employee
 from models.role import Role
 from models.hr_forms import EmployeeSkillGap, HRGapAnalysisRequest
+from services.data_loader import data_loader
+from services.model_adapter import ModelAdapter
+
+# Lazy imports for algorithm to avoid import issues
+GapCalculator = None
+DEFAULT_WEIGHTS = {
+    'skills': 0.50,
+    'responsibilities': 0.25,
+    'ambitions': 0.15,
+    'dedication': 0.10
+}
+
+def _import_algorithm():
+    """Lazy import of algorithm modules"""
+    global GapCalculator, DEFAULT_WEIGHTS
+    if GapCalculator is not None:
+        return
+    
+    # Add parent directory to path so we can import 'algorithm' package
+    parent_path = Path(__file__).parent.parent.parent
+    if str(parent_path) not in sys.path:
+        sys.path.append(str(parent_path))
+    
+    try:
+        import algorithm.gap_calculator as gc
+        import algorithm.models as am
+        GapCalculator = gc.GapCalculator
+        DEFAULT_WEIGHTS = am.DEFAULT_WEIGHTS.copy()
+    except ImportError as e:
+        print(f"Warning: Could not import algorithm: {e}")
+        # Keep defaults
 
 
 class GapAnalysisService:
     """
     Service for calculating talent gaps between current employees and future role requirements
     
-    PLACEHOLDER - Implementation by Samya
-    Algorithm should calculate:
+    Implementation: Integrates Samya's TalentGapAlgorithm
+    Algorithm calculates:
     - gap_score = 0.50 * skills_gap + 0.25 * responsibilities_gap + 0.15 * ambitions_gap + 0.10 * dedication_gap
     
     Classifications:
@@ -26,16 +59,41 @@ class GapAnalysisService:
     - NOT_VIABLE: gap > 80%
     """
     
-    @staticmethod
+    _gap_calculator = None
+    _skills_catalog = None
+    
+    @classmethod
+    def _get_gap_calculator(cls):
+        """Get or create the gap calculator instance"""
+        # Import algorithm on first use
+        _import_algorithm()
+        
+        if cls._gap_calculator is None:
+            # Build skills catalog from data_loader
+            skills_data = data_loader.get_skills()
+            cls._skills_catalog = {}
+            
+            for skill_id, skill_data in skills_data.items():
+                algo_skill = ModelAdapter.api_skill_to_algo(skill_data)
+                cls._skills_catalog[skill_id] = algo_skill
+            
+            # Initialize gap calculator with skills catalog
+            cls._gap_calculator = GapCalculator(
+                skills_catalog=cls._skills_catalog,
+                weights=DEFAULT_WEIGHTS.copy()
+            )
+        
+        return cls._gap_calculator
+    
+    @classmethod
     def calculate_gap(
+        cls,
         employee: Employee,
         target_role: Role,
         weights: Dict[str, float] = None
     ) -> EmployeeSkillGap:
         """
         Calculate gap between employee and target role
-        
-        PLACEHOLDER - To be implemented by Samya
         
         Args:
             employee: Current employee data
@@ -45,19 +103,83 @@ class GapAnalysisService:
         Returns:
             EmployeeSkillGap with scores and classification
         """
-        # TODO: Implement gap calculation algorithm
-        pass
+        # Get gap calculator
+        calculator = cls._get_gap_calculator()
+        
+        # Override weights if provided
+        if weights:
+            calculator.weights = weights
+        
+        # Convert API models to algorithm models
+        algo_employee = ModelAdapter.api_employee_to_algo(employee)
+        algo_role = ModelAdapter.api_role_to_algo(target_role, cls._skills_catalog)
+        
+        # Calculate gap using Samya's algorithm
+        gap_result = calculator.calculate_gap(algo_employee, algo_role)
+        
+        # Convert score (0-1, higher is better) to gap percentage (0-100, lower is better)
+        gap_percentage = ModelAdapter.score_to_gap_percentage(gap_result.overall_score)
+        
+        # Extract component gaps
+        skills_gap = ModelAdapter.score_to_gap_percentage(gap_result.component_scores['skills'])
+        responsibilities_gap = ModelAdapter.score_to_gap_percentage(gap_result.component_scores['responsibilities'])
+        ambitions_gap = ModelAdapter.score_to_gap_percentage(gap_result.component_scores['ambitions'])
+        dedication_gap = ModelAdapter.score_to_gap_percentage(gap_result.component_scores['dedication'])
+        
+        # Convert GapBand to classification string
+        classification = ModelAdapter.gap_band_to_classification(gap_result.band)
+        
+        # Generate recommendations from gap details
+        recommendations = []
+        if gap_result.detailed_gaps:
+            # detailed_gaps es una lista de strings con los gaps identificados
+            for gap in gap_result.detailed_gaps[:3]:  # Top 3 gaps
+                recommendations.append(f"Address gap: {gap}")
+        
+        # Agregar recomendaciones del algoritmo si existen
+        if gap_result.recommendations:
+            for rec in gap_result.recommendations[:2]:  # Top 2 recommendations
+                if isinstance(rec, dict):
+                    recommendations.append(rec.get('action', str(rec)))
+                else:
+                    recommendations.append(str(rec))
+        
+        if len(recommendations) == 0:
+            recommendations.append("Employee is ready for this role!")
+        
+        # Build skill gaps dict from detailed_gaps
+        skill_gaps_dict = {}
+        if gap_result.detailed_gaps:
+            for i, gap in enumerate(gap_result.detailed_gaps):
+                skill_gaps_dict[f"gap_{i}"] = {
+                    "description": gap,
+                    "severity": "high" if i < 3 else "medium"
+                }
+        
+        # Build EmployeeSkillGap response
+        return EmployeeSkillGap(
+            employee_id=employee.id_empleado,
+            employee_name=employee.nombre,
+            target_role_id=target_role.id,
+            target_role_title=target_role.titulo,
+            overall_gap_score=gap_percentage,
+            skill_gaps=skill_gaps_dict,
+            responsibilities_gap=responsibilities_gap,
+            ambitions_alignment=100 - ambitions_gap,  # Convert to alignment (higher is better)
+            dedication_availability=100 - dedication_gap,  # Convert to availability (higher is better)
+            classification=classification,
+            recommendations=recommendations
+        )
     
-    @staticmethod
+    @classmethod
     def calculate_bulk_gaps(
+        cls,
         employees: Dict[int, Employee],
         roles: Dict[str, Role],
         request: HRGapAnalysisRequest
     ) -> List[EmployeeSkillGap]:
         """
         Calculate gaps for multiple employees against multiple roles
-        
-        PLACEHOLDER - To be implemented by Samya
         
         Args:
             employees: All employees to analyze
@@ -67,95 +189,84 @@ class GapAnalysisService:
         Returns:
             List of EmployeeSkillGap results
         """
-        # TODO: Implement bulk gap analysis
-        # This should:
-        # 1. Filter employees based on request.include_employees and request.include_chapters
-        # 2. Filter roles based on request.target_roles
-        # 3. Calculate gap for each employee-role combination
-        # 4. Return sorted results
-        pass
+        print(f"📊 Starting bulk gap analysis...")
+        print(f"   Total employees: {len(employees)}")
+        print(f"   Total roles: {len(roles)}")
+        print(f"   Target roles: {request.target_roles}")
+        
+        results = []
+        
+        # Filter employees
+        filtered_employees = {}
+        for emp_id, employee in employees.items():
+            # Filter by employee IDs if specified
+            if request.include_employees and emp_id not in request.include_employees:
+                continue
+            # Filter by chapters if specified
+            if request.include_chapters and employee.chapter not in request.include_chapters:
+                continue
+            filtered_employees[emp_id] = employee
+        
+        print(f"   Filtered employees: {len(filtered_employees)}")
+        
+        # Filter roles
+        filtered_roles = {}
+        if request.target_roles:
+            for role_id in request.target_roles:
+                if role_id in roles:
+                    filtered_roles[role_id] = roles[role_id]
+                else:
+                    print(f"   ⚠️  Role {role_id} not found in roles catalog")
+        else:
+            filtered_roles = roles
+        
+        print(f"   Filtered roles: {len(filtered_roles)}")
+        
+        # Calculate gap for each employee-role combination
+        for employee in filtered_employees.values():
+            for role in filtered_roles.values():
+                try:
+                    print(f"   🔍 Calculating: {employee.nombre} vs {role.titulo}")
+                    gap_result = cls.calculate_gap(
+                        employee=employee,
+                        target_role=role,
+                        weights=request.algorithm_weights
+                    )
+                    results.append(gap_result)
+                    print(f"      ✅ Gap: {gap_result.overall_gap_score:.2f}% - {gap_result.classification}")
+                except Exception as e:
+                    print(f"      ❌ Error: {e}")
+                    import traceback
+                    traceback.print_exc()
+        
+        # Sort by overall gap score (ascending - best matches first)
+        results.sort(key=lambda x: x.overall_gap_score)
+        
+        print(f"✅ Bulk analysis complete: {len(results)} results")
+        return results
     
     @staticmethod
-    def calculate_skills_gap(
-        current_skills: Dict[str, int],
-        required_skills: List[str],
-        available_skills: Dict[str, any]
-    ) -> float:
+    def _estimate_readiness_time(gap_percentage: float, classification: str) -> str:
         """
-        Calculate skills gap percentage
-        
-        PLACEHOLDER - To be implemented by Samya
+        Estimate time to readiness based on gap
         
         Args:
-            current_skills: Employee's current skills and levels
-            required_skills: List of required skill IDs for role
-            available_skills: Catalog of available skills with metadata
+            gap_percentage: Overall gap percentage
+            classification: Gap classification
         
         Returns:
-            Gap percentage (0-100)
+            Estimated time string
         """
-        # TODO: Implement skills gap calculation
-        pass
-    
-    @staticmethod
-    def calculate_responsibilities_gap(
-        current_responsibilities: List[str],
-        required_responsibilities: List[str]
-    ) -> float:
-        """
-        Calculate responsibilities gap percentage
-        
-        PLACEHOLDER - To be implemented by Samya
-        
-        Args:
-            current_responsibilities: Employee's current responsibilities
-            required_responsibilities: Role's required responsibilities
-        
-        Returns:
-            Gap percentage (0-100)
-        """
-        # TODO: Implement responsibilities gap calculation
-        pass
-    
-    @staticmethod
-    def calculate_ambitions_alignment(
-        employee_ambitions: Dict,
-        target_role: Role
-    ) -> float:
-        """
-        Calculate alignment between employee ambitions and target role
-        
-        PLACEHOLDER - To be implemented by Samya
-        
-        Args:
-            employee_ambitions: Employee's career ambitions
-            target_role: Target role details
-        
-        Returns:
-            Alignment score (0-100, higher is better alignment)
-        """
-        # TODO: Implement ambitions alignment calculation
-        pass
-    
-    @staticmethod
-    def calculate_dedication_availability(
-        current_dedication: Dict[str, int],
-        required_dedication: str
-    ) -> float:
-        """
-        Calculate if employee has dedication availability for role
-        
-        PLACEHOLDER - To be implemented by Samya
-        
-        Args:
-            current_dedication: Employee's current project dedications
-            required_dedication: Role's expected dedication (e.g., "30-40h/semana")
-        
-        Returns:
-            Availability score (0-100)
-        """
-        # TODO: Implement dedication availability calculation
-        pass
+        if classification == "READY":
+            return "0-3 months"
+        elif classification == "READY_WITH_SUPPORT":
+            return "3-6 months"
+        elif classification == "NEAR":
+            return "6-12 months"
+        elif classification == "FAR":
+            return "12-18 months"
+        else:  # NOT_VIABLE
+            return ">18 months or role change recommended"
     
     @staticmethod
     def classify_gap(gap_score: float) -> str:
@@ -179,25 +290,55 @@ class GapAnalysisService:
         else:
             return "NOT_VIABLE"
     
-    @staticmethod
+    @classmethod
     def generate_recommendations(
+        cls,
         employee: Employee,
         target_role: Role,
-        gap_details: Dict
+        gap_details: Dict = None
     ) -> List[str]:
         """
         Generate development recommendations for employee
         
-        PLACEHOLDER - To be implemented by Samya
-        
         Args:
             employee: Employee data
             target_role: Target role
-            gap_details: Detailed gap analysis
+            gap_details: Detailed gap analysis (optional)
         
         Returns:
             List of actionable recommendations
         """
-        # TODO: Implement recommendation generation
-        # Could potentially use LLM here for Level 3
-        pass
+        recommendations = []
+        
+        # Skill-based recommendations
+        employee_skills = set(employee.habilidades.keys())
+        required_skills = set(target_role.habilidades_requeridas)
+        missing_skills = required_skills - employee_skills
+        
+        if missing_skills:
+            recommendations.append(f"Develop skills: {', '.join(list(missing_skills)[:3])}")
+        
+        # Level up existing skills
+        low_skills = [skill_id for skill_id, level in employee.habilidades.items() 
+                      if skill_id in required_skills and level < 7]
+        if low_skills:
+            recommendations.append(f"Improve proficiency in: {', '.join(low_skills[:2])}")
+        
+        # Responsibility recommendations
+        if target_role.responsabilidades:
+            recommendations.append(f"Gain experience in: {target_role.responsabilidades[0]}")
+        
+        # Level alignment
+        current_level = employee.ambiciones.nivel_aspiracion.lower()
+        target_level = target_role.nivel.value.lower()
+        
+        if target_level == "lead" and current_level != "lead":
+            recommendations.append("Develop leadership skills and team management experience")
+        elif target_level == "senior" and current_level in ["junior", "mid"]:
+            recommendations.append("Focus on senior-level responsibilities and mentoring")
+        
+        # Chapter transition
+        if employee.chapter != target_role.capitulo:
+            recommendations.append(f"Consider cross-training in {target_role.capitulo} chapter")
+        
+        return recommendations[:5]  # Limit to top 5 recommendations

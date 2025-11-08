@@ -184,10 +184,10 @@ async def request_gap_analysis(
     background_tasks: BackgroundTasks
 ):
     """
-    HR form to request a gap analysis
+    HR form to request a gap analysis using Samya's algorithm
     
-    PLACEHOLDER - Gap analysis will be implemented by Samya
-    This endpoint accepts the request and returns an analysis ID
+    Calculates talent gaps between current employees and target roles
+    Returns immediate results with the analysis
     """
     # Generate analysis ID
     analysis_id = str(uuid.uuid4())
@@ -204,16 +204,35 @@ async def request_gap_analysis(
                 detail=f"Target role {role_id} not found"
             )
     
-    # TODO: Queue analysis job (Samya will implement the actual algorithm)
-    # background_tasks.add_task(GapAnalysisService.calculate_bulk_gaps, employees, roles, request)
-    
-    return HRGapAnalysisResponse(
-        analysis_id=analysis_id,
-        status="queued",
-        created_at=datetime.now().isoformat(),
-        estimated_completion="< 5 hours",
-        message=f"Gap analysis queued. Analysis ID: {analysis_id}. Check /api/v1/hr/analysis/{analysis_id} for results."
-    )
+    # Run gap analysis using Samya's algorithm
+    try:
+        print(f"🔍 Running gap analysis {analysis_id}...")
+        gap_results = GapAnalysisService.calculate_bulk_gaps(employees, roles, request)
+        print(f"✅ Analysis complete: {len(gap_results)} gap calculations")
+        
+        # Store results in memory (for demo purposes)
+        if not hasattr(data_loader, '_analysis_results'):
+            data_loader._analysis_results = {}
+        data_loader._analysis_results[analysis_id] = {
+            'status': 'completed',
+            'results': gap_results,
+            'created_at': datetime.now().isoformat(),
+            'request': request.dict()
+        }
+        
+        return HRGapAnalysisResponse(
+            analysis_id=analysis_id,
+            status="completed",
+            created_at=datetime.now().isoformat(),
+            estimated_completion="completed",
+            message=f"Gap analysis completed successfully. Found {len(gap_results)} matches. View results at /api/v1/hr/analysis/{analysis_id}"
+        )
+    except Exception as e:
+        print(f"❌ Error in gap analysis: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Gap analysis failed: {str(e)}"
+        )
 
 
 @router.get("/analysis/{analysis_id}")
@@ -221,14 +240,43 @@ async def get_analysis_results(analysis_id: str):
     """
     Get gap analysis results by ID
     
-    PLACEHOLDER - To be implemented by Samya
+    Returns the stored analysis results from Samya's algorithm
     """
-    # TODO: Retrieve analysis results from store/database
+    # Retrieve analysis results from memory store
+    if not hasattr(data_loader, '_analysis_results'):
+        data_loader._analysis_results = {}
+    
+    if analysis_id not in data_loader._analysis_results:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Analysis {analysis_id} not found"
+        )
+    
+    analysis_data = data_loader._analysis_results[analysis_id]
+    
+    # Convert EmployeeSkillGap objects to dicts for JSON response
+    results = []
+    for gap in analysis_data['results']:
+        results.append({
+            "employee_id": gap.employee_id,
+            "employee_name": gap.employee_name,
+            "target_role_id": gap.target_role_id,
+            "target_role_title": gap.target_role_title,
+            "overall_gap_score": gap.overall_gap_score,
+            "classification": gap.classification,
+            "skill_gaps": gap.skill_gaps,
+            "responsibilities_gap": gap.responsibilities_gap,
+            "ambitions_alignment": gap.ambitions_alignment,
+            "dedication_availability": gap.dedication_availability,
+            "recommendations": gap.recommendations
+        })
+    
     return {
         "analysis_id": analysis_id,
-        "status": "pending",
-        "message": "Gap analysis algorithm will be implemented by Samya",
-        "results": None
+        "status": analysis_data['status'],
+        "created_at": analysis_data['created_at'],
+        "total_results": len(results),
+        "results": results
     }
 
 
