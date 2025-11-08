@@ -1,0 +1,54 @@
+{
+  "step": 4,
+  "name": "Critical gap analysis",
+  "timestamp": "2025-11-08T15:40:23.595424",
+  "bottlenecks": [
+    {
+      "skill_id": "S-OKR",
+      "skill_name": "OKRs y Roadmapping",
+      "gap_percentage": 90.0,
+      "affected_roles": 1,
+      "blocked_transitions": 9,
+      "bottleneck_impact": 4.5,
+      "priority_level": 0.18000000000000002
+    },
+    {
+      "skill_id": "S-ANALISIS",
+      "skill_name": "Análisis Estratégico",
+      "gap_percentage": 80.0,
+      "affected_roles": 1,
+      "blocked_transitions": 8,
+      "bottleneck_impact": 3.2,
+      "priority_level": 0.12800000000000003
+    },
+    {
+      "skill_id": "S-STAKE",
+      "skill_name": "Stakeholder Management",
+      "gap_percentage": 80.0,
+      "affected_roles": 1,
+      "blocked_transitions": 8,
+      "bottleneck_impact": 3.2,
+      "priority_level": 0.12800000000000003
+    }
+  ],
+  "chapter_gaps": {
+    "Strategy": {
+      "total_employees": 2,
+      "total_roles": 1,
+      "total_possible_transitions": 2,
+      "ready_transitions": 0,
+      "readiness_percentage": 0.0,
+      "critical_skills": {
+        "OKRs y Roadmapping": 1
+      },
+      "health_status": "CRITICAL",
+      "recommended_actions": [
+        "Urgente: Plan de desarrollo acelerado",
+        "Considerar contratación externa para roles críticos",
+        "Reforzar training en: OKRs y Roadmapping"
+      ]
+    }
+  },
+  "skill_shortages": [],
+  "transition_blockers": []
+}

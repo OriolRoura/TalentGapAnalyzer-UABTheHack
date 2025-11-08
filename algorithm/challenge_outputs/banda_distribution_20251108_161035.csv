@@ -1,0 +1,11 @@
+employee_id,best_band,is_ready
+1001,NEAR,False
+1002,NEAR,False
+1003,NOT_VIABLE,False
+1004,NOT_VIABLE,False
+1005,FAR,False
+1006,FAR,False
+1007,NOT_VIABLE,False
+1008,NOT_VIABLE,False
+1009,FAR,False
+1010,FAR,False
