@@ -65,11 +65,12 @@
     {
       "id": "R-STR-LEAD",
       "título": "Head of Strategy",
-      "nivel": "Lead",
+      "nivel": "lead",
+      "capítulo": "Strategy",
       "responsabilidades": [
-        "Definir visión y prioridades estratégicas (OKRs).",
-        "Alinear roadmap de capítulos con objetivos de negocio.",
-        "Dirigir discovery y workshops ejecutivos."
+        "Definir visión y prioridades estratégicas (OKRs)",
+        "Alinear roadmap de capítulos con objetivos de negocio",
+        "Dirigir discovery y workshops ejecutivos"
       ],
       "habilidades_requeridas": [
         "S-OKR",
@@ -77,6 +78,168 @@
         "S-STAKE"
       ],
       "dedicación_esperada": "30-40h/semana"
+    },
+    {
+      "id": "R-PM",
+      "título": "Project Manager",
+      "nivel": "mid",
+      "capítulo": "Strategy",
+      "responsabilidades": [
+        "Planificación de sprints",
+        "Seguimiento de riesgos",
+        "Coordinación de entregables"
+      ],
+      "habilidades_requeridas": [
+        "S-PM",
+        "S-STAKE",
+        "S-ANALISIS",
+        "S-OKR"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-MTX-ARCH",
+      "título": "Martech Architect",
+      "nivel": "lead",
+      "capítulo": "Martech",
+      "responsabilidades": [
+        "Arquitectura CRM/CDP",
+        "Integraciones n8n/HubSpot",
+        "Gobernanza de datos"
+      ],
+      "habilidades_requeridas": [
+        "S-CRM",
+        "S-AUTOM",
+        "S-DATA",
+        "S-SQLPY"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-CRM-ADMIN",
+      "título": "CRM Admin (HubSpot)",
+      "nivel": "mid",
+      "capítulo": "Martech",
+      "responsabilidades": [
+        "Pipelines y propiedades",
+        "Workflows y scoring",
+        "Calidad de datos"
+      ],
+      "habilidades_requeridas": [
+        "S-CRM",
+        "S-AUTOM",
+        "S-EMAIL",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-DATA-ANL",
+      "título": "Data Analyst",
+      "nivel": "mid",
+      "capítulo": "Martech",
+      "responsabilidades": [
+        "Modelado de datos",
+        "Dashboards ROI",
+        "Definición de métricas"
+      ],
+      "habilidades_requeridas": [
+        "S-ANALYTICS",
+        "S-SQLPY",
+        "S-DATA",
+        "S-ABTEST"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-CRT-LEAD",
+      "título": "Creative Director",
+      "nivel": "lead",
+      "capítulo": "Creative",
+      "responsabilidades": [
+        "Línea creativa y estándares",
+        "Storytelling de casos",
+        "Supervisión de campañas"
+      ],
+      "habilidades_requeridas": [
+        "S-STORY",
+        "S-COPY",
+        "S-BRAND",
+        "S-GENAI"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-DSN-SR",
+      "título": "Senior Brand/UI Designer",
+      "nivel": "senior",
+      "capítulo": "Design",
+      "responsabilidades": [
+        "Sistemas de identidad",
+        "Guías visuales",
+        "UI para microapps"
+      ],
+      "habilidades_requeridas": [
+        "S-BRAND",
+        "S-UIUX",
+        "S-FIGMA",
+        "S-GENAI"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-PERF-SPEC",
+      "título": "Performance Media Specialist",
+      "nivel": "senior",
+      "capítulo": "Performance",
+      "responsabilidades": [
+        "Planificación y optimización",
+        "Gestión de CAC/LTV",
+        "Experimentación A/B"
+      ],
+      "habilidades_requeridas": [
+        "S-ADS-GA",
+        "S-ADS-META",
+        "S-ABTEST",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-SEO-SEM",
+      "título": "SEO/SEM Manager",
+      "nivel": "senior",
+      "capítulo": "Performance",
+      "responsabilidades": [
+        "SEO técnico y contenidos",
+        "SEM full-funnel",
+        "Reporting de crecimiento"
+      ],
+      "habilidades_requeridas": [
+        "S-SEO",
+        "S-ADS-GA",
+        "S-ANALYTICS",
+        "S-COPY"
+      ],
+      "dedicación_esperada": "40h/semana"
+    },
+    {
+      "id": "R-SMM",
+      "título": "Social Media Strategist",
+      "nivel": "mid",
+      "capítulo": "Influency",
+      "responsabilidades": [
+        "Estrategia por canal",
+        "Calendario editorial",
+        "Coordinación con performance"
+      ],
+      "habilidades_requeridas": [
+        "S-SOCIAL",
+        "S-COPY",
+        "S-EMAIL",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "40h/semana"
     }
   ],
   "skills": [
@@ -84,11 +247,169 @@
       "id": "S-OKR",
       "nombre": "OKRs y Roadmapping",
       "categoría": "Estrategia",
+      "descripcion": "Definición y gestión de objetivos y resultados clave",
       "peso": 5,
-      "herramientas_asociadas": [
-        "Miro",
-        "ClickUp"
-      ]
+      "herramientas_asociadas": ["Miro", "ClickUp"]
+    },
+    {
+      "id": "S-ANALISIS",
+      "nombre": "Análisis Estratégico",
+      "categoría": "Estrategia",
+      "descripcion": "Análisis de mercado, competencia y oportunidades de negocio",
+      "peso": 5,
+      "herramientas_asociadas": ["Excel", "PowerBI"]
+    },
+    {
+      "id": "S-STAKE",
+      "nombre": "Stakeholder Management",
+      "categoría": "Estrategia",
+      "descripcion": "Gestión y alineamiento de stakeholders clave",
+      "peso": 4,
+      "herramientas_asociadas": ["PowerPoint", "Miro"]
+    },
+    {
+      "id": "S-PM",
+      "nombre": "Project Management",
+      "categoría": "Gestión",
+      "descripcion": "Gestión de proyectos y metodologías ágiles",
+      "peso": 4,
+      "herramientas_asociadas": ["Jira", "Asana", "ClickUp"]
+    },
+    {
+      "id": "S-ANALYTICS",
+      "nombre": "Analytics y Métricas",
+      "categoría": "Datos",
+      "descripcion": "Análisis de datos, KPIs y métricas de negocio",
+      "peso": 5,
+      "herramientas_asociadas": ["Google Analytics", "Looker", "PowerBI"]
+    },
+    {
+      "id": "S-CRM",
+      "nombre": "CRM Management",
+      "categoría": "Martech",
+      "descripcion": "Gestión y administración de plataformas CRM",
+      "peso": 5,
+      "herramientas_asociadas": ["HubSpot", "Salesforce"]
+    },
+    {
+      "id": "S-AUTOM",
+      "nombre": "Automatización",
+      "categoría": "Martech",
+      "descripcion": "Automatización de procesos y workflows",
+      "peso": 4,
+      "herramientas_asociadas": ["n8n", "Zapier", "Make"]
+    },
+    {
+      "id": "S-DATA",
+      "nombre": "Data Management",
+      "categoría": "Datos",
+      "descripcion": "Gestión, modelado y gobernanza de datos",
+      "peso": 5,
+      "herramientas_asociadas": ["SQL", "Python", "dbt"]
+    },
+    {
+      "id": "S-SQLPY",
+      "nombre": "SQL & Python",
+      "categoría": "Desarrollo",
+      "descripcion": "Programación en SQL y Python para análisis de datos",
+      "peso": 5,
+      "herramientas_asociadas": ["PostgreSQL", "Python", "Jupyter"]
+    },
+    {
+      "id": "S-EMAIL",
+      "nombre": "Email Marketing",
+      "categoría": "Marketing",
+      "descripcion": "Estrategia y ejecución de campañas de email marketing",
+      "peso": 3,
+      "herramientas_asociadas": ["HubSpot", "Mailchimp", "SendGrid"]
+    },
+    {
+      "id": "S-STORY",
+      "nombre": "Storytelling",
+      "categoría": "Creatividad",
+      "descripcion": "Narrativa y storytelling para marcas",
+      "peso": 5,
+      "herramientas_asociadas": ["PowerPoint", "Keynote"]
+    },
+    {
+      "id": "S-COPY",
+      "nombre": "Copywriting",
+      "categoría": "Creatividad",
+      "descripcion": "Redacción creativa y persuasiva",
+      "peso": 4,
+      "herramientas_asociadas": ["Google Docs", "Notion"]
+    },
+    {
+      "id": "S-BRAND",
+      "nombre": "Branding",
+      "categoría": "Diseño",
+      "descripcion": "Diseño y gestión de identidad de marca",
+      "peso": 5,
+      "herramientas_asociadas": ["Adobe Illustrator", "Figma"]
+    },
+    {
+      "id": "S-GENAI",
+      "nombre": "IA Generativa",
+      "categoría": "Tecnología",
+      "descripcion": "Uso de herramientas de inteligencia artificial generativa",
+      "peso": 3,
+      "herramientas_asociadas": ["ChatGPT", "Midjourney", "DALL-E"]
+    },
+    {
+      "id": "S-UIUX",
+      "nombre": "UI/UX Design",
+      "categoría": "Diseño",
+      "descripcion": "Diseño de interfaces y experiencia de usuario",
+      "peso": 5,
+      "herramientas_asociadas": ["Figma", "Sketch", "Adobe XD"]
+    },
+    {
+      "id": "S-FIGMA",
+      "nombre": "Figma",
+      "categoría": "Herramientas",
+      "descripcion": "Dominio de Figma para diseño colaborativo",
+      "peso": 4,
+      "herramientas_asociadas": ["Figma", "FigJam"]
+    },
+    {
+      "id": "S-ADS-GA",
+      "nombre": "Google Ads",
+      "categoría": "Performance",
+      "descripcion": "Gestión y optimización de campañas en Google Ads",
+      "peso": 5,
+      "herramientas_asociadas": ["Google Ads", "Google Analytics"]
+    },
+    {
+      "id": "S-ADS-META",
+      "nombre": "Meta Ads",
+      "categoría": "Performance",
+      "descripcion": "Gestión y optimización de campañas en Meta (Facebook/Instagram)",
+      "peso": 5,
+      "herramientas_asociadas": ["Meta Ads Manager", "Meta Business Suite"]
+    },
+    {
+      "id": "S-ABTEST",
+      "nombre": "A/B Testing",
+      "categoría": "Experimentación",
+      "descripcion": "Diseño y análisis de tests A/B y experimentación",
+      "peso": 4,
+      "herramientas_asociadas": ["Optimizely", "VWO", "Google Optimize"]
+    },
+    {
+      "id": "S-SEO",
+      "nombre": "SEO",
+      "categoría": "Performance",
+      "descripcion": "Optimización para motores de búsqueda",
+      "peso": 5,
+      "herramientas_asociadas": ["SEMrush", "Ahrefs", "Google Search Console"]
+    },
+    {
+      "id": "S-SOCIAL",
+      "nombre": "Social Media",
+      "categoría": "Marketing",
+      "descripcion": "Estrategia y gestión de redes sociales",
+      "peso": 4,
+      "herramientas_asociadas": ["Hootsuite", "Buffer", "Meta Business Suite"]
     }
   ]
 }

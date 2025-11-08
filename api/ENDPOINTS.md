@@ -154,6 +154,44 @@ GET /api/v1/company/vision
 GET /api/v1/company/dashboard
 ```
 
+### Chapters and Skills
+```http
+GET /api/v1/company/chapters-and-skills
+```
+**Description:** Get all available chapters and skills in the company
+
+**Response:**
+```json
+{
+  "chapters": {
+    "total": 6,
+    "items": [
+      {
+        "name": "Strategy",
+        "description": "Definición de visión, posicionamiento, propuesta de valor...",
+        "role_templates": ["R-STR-LEAD", "R-STR-SR", "R-PM"]
+      }
+    ]
+  },
+  "skills": {
+    "total": 20,
+    "items": [
+      {
+        "id": "S-OKR",
+        "name": "OKRs y Roadmapping",
+        "category": "Estrategia",
+        "weight": 5,
+        "tools": ["Miro", "ClickUp"]
+      }
+    ],
+    "by_category": {
+      "Estrategia": [...],
+      "Design": [...]
+    }
+  }
+}
+```
+
 ---
 
 ## 📋 HR Forms
