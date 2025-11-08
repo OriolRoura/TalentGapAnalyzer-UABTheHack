@@ -31,20 +31,32 @@ class DataLoader:
     def __init__(self):
         self.data_store = DataStore()
         self.base_path = Path(__file__).parent.parent.parent / "dataSet" / "talent-gap-analyzer-main"
+        print(f"📁 Data path: {self.base_path}")
+        print(f"📁 Path exists: {self.base_path.exists()}")
     
     def load_all_data(self):
         """Load all data from CSV and JSON files"""
-        try:
-            self.load_employees()
-            self.load_org_config()
-            self.load_vision()
-            print(f"✅ Loaded {len(self.data_store.employees)} employees")
-            print(f"✅ Loaded {len(self.data_store.roles)} roles")
-            print(f"✅ Loaded {len(self.data_store.chapters)} chapters")
-            print(f"✅ Loaded {len(self.data_store.skills)} skills")
-        except Exception as e:
-            print(f"❌ Error loading data: {e}")
-            raise
+        print("=" * 50)
+        print("📊 Starting data load...")
+        print("=" * 50)
+        
+        self.load_employees()
+        print(f"✅ Loaded {len(self.data_store.employees)} employees")
+        
+        self.load_org_config()
+        print(f"✅ Loaded {len(self.data_store.chapters)} chapters")
+        print(f"✅ Loaded {len(self.data_store.skills)} skills")
+        
+        self.load_vision()
+        print(f"✅ Loaded {len(self.data_store.roles)} roles")
+        
+        print("=" * 50)
+        print(f"✅ Data loading complete!")
+        print(f"   - {len(self.data_store.employees)} employees")
+        print(f"   - {len(self.data_store.roles)} roles")
+        print(f"   - {len(self.data_store.chapters)} chapters")
+        print(f"   - {len(self.data_store.skills)} skills")
+        print("=" * 50)
     
     def load_employees(self):
         """Load employees from CSV file"""
@@ -64,6 +76,11 @@ class DataLoader:
                 dedicacion = json.loads(row['dedicación_actual'].replace("'", '"'))
                 ambiciones_data = json.loads(row['ambiciones'].replace("'", '"'))
                 metadata_data = json.loads(row['metadata'].replace("'", '"'))
+                
+                # Normalize field names (Spanish with accents -> English without)
+                # Handle ambiciones data
+                if 'nivel_aspiración' in ambiciones_data:
+                    ambiciones_data['nivel_aspiracion'] = ambiciones_data.pop('nivel_aspiración')
                 
                 # Create employee object
                 employee = Employee(
@@ -105,35 +122,48 @@ class DataLoader:
         # Load chapters
         if 'chapters' in config:
             for chapter_data in config['chapters']:
+                # Normalize field names
+                if 'descripción' in chapter_data:
+                    chapter_data['descripcion'] = chapter_data.pop('descripción')
+                
                 chapter = Chapter(**chapter_data)
                 self.data_store.chapters[chapter.nombre] = chapter
         
         # Load skills
         if 'skills' in config:
             for skill_data in config['skills']:
+                # Normalize field names
+                if 'categoría' in skill_data:
+                    skill_data['categoria'] = skill_data.pop('categoría')
+                
                 skill = Skill(**skill_data)
                 self.data_store.skills[skill.id] = skill
         
         # Load roles from config
         if 'roles' in config:
             for role_data in config['roles']:
-                # Map Spanish fields to model fields
-                role = Role(
-                    id=role_data.get('id', ''),
-                    titulo=role_data.get('título', ''),
-                    nivel=role_data.get('nivel', 'mid'),
-                    capitulo=role_data.get('capítulo', role_data.get('capitulo', '')),
-                    responsabilidades=role_data.get('responsabilidades', []),
-                    habilidades_requeridas=role_data.get('habilidades_requeridas', []),
-                    dedicacion_esperada=role_data.get('dedicación_esperada', '40h/semana'),
-                    inicio_estimado='0m',
-                    objetivos_asociados=[]
-                )
+                # Normalize field names (Spanish with accents -> English without)
+                normalized_role = {
+                    'id': role_data.get('id', ''),
+                    'titulo': role_data.get('título', role_data.get('titulo', '')),
+                    'nivel': role_data.get('nivel', 'mid').lower(),  # Normalize to lowercase
+                    'capitulo': role_data.get('capítulo', role_data.get('capitulo', '')),
+                    'responsabilidades': role_data.get('responsabilidades', []),
+                    'habilidades_requeridas': role_data.get('habilidades_requeridas', []),
+                    'dedicacion_esperada': role_data.get('dedicación_esperada', role_data.get('dedicacion_esperada', '40h/semana')),
+                    'inicio_estimado': '0m',
+                    'objetivos_asociados': []
+                }
+                
+                role = Role(**normalized_role)
                 self.data_store.roles[role.id] = role
     
     def load_vision(self):
         """Load future vision from JSON"""
         vision_path = self.base_path / "vision_futura.json"
+        
+        print(f"📄 Looking for vision file: {vision_path}")
+        print(f"📄 File exists: {vision_path.exists()}")
         
         if not vision_path.exists():
             print(f"⚠️  Vision file not found: {vision_path}")
@@ -145,22 +175,39 @@ class DataLoader:
         # Load roles from vision
         if 'roles_necesarios' in self.data_store.vision_data:
             for role_data in self.data_store.vision_data['roles_necesarios']:
-                role = Role(
-                    id=role_data.get('id', ''),
-                    titulo=role_data.get('título', ''),
-                    nivel=role_data.get('nivel', 'mid'),
-                    capitulo=role_data.get('capítulo', role_data.get('capitulo', '')),
-                    modalidad=role_data.get('modalidad', 'FT'),
-                    cantidad=role_data.get('cantidad', 1),
-                    inicio_estimado=role_data.get('inicio_estimado', '0m'),
-                    objetivos_asociados=role_data.get('objetivos_asociados', []),
-                    responsabilidades=[],
-                    habilidades_requeridas=[],
-                    dedicacion_esperada='40h/semana'
-                )
-                # Don't overwrite if already exists from org_config
-                if role.id not in self.data_store.roles:
-                    self.data_store.roles[role.id] = role
+                try:
+                    # Normalize field names
+                    modalidad = role_data.get('modalidad', 'FT')
+                    # Handle non-standard modalidad values
+                    if modalidad not in ['FT', 'PT', 'Freelance']:
+                        modalidad = 'Freelance'  # Default fractional/other to Freelance
+                    
+                    cantidad = role_data.get('cantidad', 1)
+                    # Handle fractional cantidad (round up)
+                    if isinstance(cantidad, float):
+                        cantidad = max(1, int(cantidad) if cantidad >= 1 else 1)
+                    
+                    normalized_role = {
+                        'id': role_data.get('id', ''),
+                        'titulo': role_data.get('título', role_data.get('titulo', '')),
+                        'nivel': role_data.get('nivel', 'mid').lower(),  # Normalize to lowercase
+                        'capitulo': role_data.get('capítulo', role_data.get('capitulo', '')),
+                        'modalidad': modalidad,
+                        'cantidad': int(cantidad),
+                        'inicio_estimado': role_data.get('inicio_estimado', '0m'),
+                        'objetivos_asociados': role_data.get('objetivos_asociados', []),
+                        'responsabilidades': [],
+                        'habilidades_requeridas': [],
+                        'dedicacion_esperada': '40h/semana'
+                    }
+                    
+                    role = Role(**normalized_role)
+                    # Don't overwrite if already exists from org_config
+                    if role.id not in self.data_store.roles:
+                        self.data_store.roles[role.id] = role
+                except Exception as e:
+                    print(f"⚠️  Error loading role {role_data.get('id', 'unknown')}: {e}")
+                    continue
     
     def get_employees(self) -> Dict[int, Employee]:
         """Get all employees"""

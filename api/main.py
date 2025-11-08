@@ -8,10 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from routes import employees, roles, company, hr_forms, health
-from services.data_loader import DataLoader
-
-# Initialize data loader
-data_loader = DataLoader()
+from services.data_loader import data_loader  # Use the global instance
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -59,4 +56,4 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
