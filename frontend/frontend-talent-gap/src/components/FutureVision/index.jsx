@@ -1,6 +1,6 @@
 import React from 'react';
 import { FutureVisionForm } from './FutureVisionForm';
-import { SkillBottleneck } from './SkillBottleneck';
+import { SkillBottleneck } from './bottleneck/SkillBottleneck';
 
 const FutureVision = () => {
   return (
