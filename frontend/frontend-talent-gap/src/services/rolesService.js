@@ -6,7 +6,7 @@ import { get } from './index';
  */
 export const getRoles = async () => {
   try {
-    const response = await get('roles');
+    const response = await get('/roles/');
     // Extraemos solo los títulos de los roles
     return response.roles.map(role => role.titulo);
   } catch (error) {

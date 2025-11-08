@@ -6,7 +6,7 @@ import { get } from './index';
  */
 export const getSkills = async () => {
   try {
-    const response = await get('skills');
+    const response = await get('/skills');
     // Devolvemos el array completo de skills con sus propiedades
     return response.skills.map(skill => ({
       id: skill.id,

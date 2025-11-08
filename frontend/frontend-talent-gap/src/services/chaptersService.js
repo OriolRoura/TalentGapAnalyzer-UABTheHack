@@ -6,10 +6,16 @@ import { get } from './index';
  */
 export const getChapters = async () => {
   try {
-    const response = await get('company/chapters/');
-    // Asumimos que la respuesta tiene una estructura similar: { total, chapters: [...] }
-    // Si la estructura es diferente, ajustaremos según la respuesta real
-    return response.chapters || response;
+    const response = await get('/company/chapters');
+    // La respuesta contiene objetos con {name, description, employee_count, etc}
+    // Extraemos solo los nombres
+    if (Array.isArray(response.chapters)) {
+      return response.chapters.map(chapter => chapter.name);
+    }
+    if (Array.isArray(response)) {
+      return response.map(chapter => chapter.name);
+    }
+    return response;
   } catch (error) {
     console.error('Error fetching chapters:', error);
     // Fallback a capítulos por defecto

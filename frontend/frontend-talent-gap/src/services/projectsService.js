@@ -6,10 +6,22 @@ import { get } from './index';
  */
 export const getProjects = async () => {
   try {
-    const response = await get('company/projects/');
-    // Asumimos que la respuesta tiene una estructura similar: { total, projects: [...] }
-    // Si la estructura es diferente, ajustaremos según la respuesta real
-    return response.projects || response;
+    const response = await get('/company/projects');
+    // La respuesta puede contener objetos, extraemos solo los nombres
+    if (Array.isArray(response.projects)) {
+      // Si los projects son objetos, extraemos el campo 'name' o 'nombre'
+      if (typeof response.projects[0] === 'object') {
+        return response.projects.map(project => project.name || project.nombre);
+      }
+      return response.projects;
+    }
+    if (Array.isArray(response)) {
+      if (typeof response[0] === 'object') {
+        return response.map(project => project.name || project.nombre);
+      }
+      return response;
+    }
+    return response;
   } catch (error) {
     console.error('Error fetching projects:', error);
     // Fallback a proyectos por defecto (basados en talento_actual.csv)
