@@ -1,0 +1,193 @@
+{
+  "roles": [
+    {
+      "id": "R-STR-LEAD",
+      "titulo": "Head of Strategy",
+      "nivel": "lead",
+      "capitulo": "Strategy",
+      "responsabilidades": [
+        "Definir visión y prioridades estratégicas (OKRs)",
+        "Alinear roadmap de capítulos con objetivos de negocio",
+        "Dirigir discovery y workshops ejecutivos"
+      ],
+      "habilidades_requeridas": [
+        "S-OKR",
+        "S-ANALISIS",
+        "S-STAKE"
+      ],
+      "dedicacion_esperada": "30-40h/semana",
+      "empleados_actuales": [1001]
+    },
+    {
+      "id": "R-PM",
+      "titulo": "Project Manager",
+      "nivel": "mid",
+      "capitulo": "Strategy",
+      "responsabilidades": [
+        "Planificación de sprints",
+        "Seguimiento de riesgos",
+        "Coordinación de entregables"
+      ],
+      "habilidades_requeridas": [
+        "S-PM",
+        "S-STAKE",
+        "S-ANALISIS",
+        "S-OKR"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1002]
+    },
+    {
+      "id": "R-MTX-ARCH",
+      "titulo": "Martech Architect",
+      "nivel": "lead",
+      "capitulo": "Martech",
+      "responsabilidades": [
+        "Arquitectura CRM/CDP",
+        "Integraciones n8n/HubSpot",
+        "Gobernanza de datos"
+      ],
+      "habilidades_requeridas": [
+        "S-CRM",
+        "S-AUTOM",
+        "S-DATA",
+        "S-SQLPY"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1003]
+    },
+    {
+      "id": "R-CRM-ADMIN",
+      "titulo": "CRM Admin (HubSpot)",
+      "nivel": "mid",
+      "capitulo": "Martech",
+      "responsabilidades": [
+        "Pipelines y propiedades",
+        "Workflows y scoring",
+        "Calidad de datos"
+      ],
+      "habilidades_requeridas": [
+        "S-CRM",
+        "S-AUTOM",
+        "S-EMAIL",
+        "S-ANALYTICS"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1004]
+    },
+    {
+      "id": "R-DATA-ANL",
+      "titulo": "Data Analyst",
+      "nivel": "mid",
+      "capitulo": "Martech",
+      "responsabilidades": [
+        "Modelado de datos",
+        "Dashboards ROI",
+        "Definición de métricas"
+      ],
+      "habilidades_requeridas": [
+        "S-ANALYTICS",
+        "S-SQLPY",
+        "S-DATA",
+        "S-ABTEST"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1005]
+    },
+    {
+      "id": "R-CRT-LEAD",
+      "titulo": "Creative Director",
+      "nivel": "lead",
+      "capitulo": "Creative",
+      "responsabilidades": [
+        "Línea creativa y estándares",
+        "Storytelling de casos",
+        "Supervisión de campañas"
+      ],
+      "habilidades_requeridas": [
+        "S-STORY",
+        "S-COPY",
+        "S-BRAND",
+        "S-GENAI"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1006]
+    },
+    {
+      "id": "R-DSN-SR",
+      "titulo": "Senior Brand/UI Designer",
+      "nivel": "senior",
+      "capitulo": "Design",
+      "responsabilidades": [
+        "Sistemas de identidad",
+        "Guías visuales",
+        "UI para microapps"
+      ],
+      "habilidades_requeridas": [
+        "S-BRAND",
+        "S-UIUX",
+        "S-FIGMA",
+        "S-GENAI"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1007]
+    },
+    {
+      "id": "R-PERF-SPEC",
+      "titulo": "Performance Media Specialist",
+      "nivel": "senior",
+      "capitulo": "Performance",
+      "responsabilidades": [
+        "Planificación y optimización",
+        "Gestión de CAC/LTV",
+        "Experimentación A/B"
+      ],
+      "habilidades_requeridas": [
+        "S-ADS-GA",
+        "S-ADS-META",
+        "S-ABTEST",
+        "S-ANALYTICS"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1008]
+    },
+    {
+      "id": "R-SEO-SEM",
+      "titulo": "SEO/SEM Manager",
+      "nivel": "senior",
+      "capitulo": "Performance",
+      "responsabilidades": [
+        "SEO técnico y contenidos",
+        "SEM full-funnel",
+        "Reporting de crecimiento"
+      ],
+      "habilidades_requeridas": [
+        "S-SEO",
+        "S-ADS-GA",
+        "S-ANALYTICS",
+        "S-COPY"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1009]
+    },
+    {
+      "id": "R-SMM",
+      "titulo": "Social Media Strategist",
+      "nivel": "mid",
+      "capitulo": "Influency",
+      "responsabilidades": [
+        "Estrategia por canal",
+        "Calendario editorial",
+        "Coordinación con performance"
+      ],
+      "habilidades_requeridas": [
+        "S-SOCIAL",
+        "S-COPY",
+        "S-EMAIL",
+        "S-ANALYTICS"
+      ],
+      "dedicacion_esperada": "40h/semana",
+      "empleados_actuales": [1010]
+    }
+  ]
+}

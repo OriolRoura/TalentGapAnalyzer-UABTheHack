@@ -18,7 +18,9 @@ class DataStore:
     """In-memory data store for the application"""
     def __init__(self):
         self.employees: Dict[int, Employee] = {}
-        self.roles: Dict[str, Role] = {}
+        self.roles: Dict[str, Role] = {}  # All roles (backward compatibility)
+        self.current_roles: Dict[str, Role] = {}  # Roles actuales con empleados
+        self.future_roles: Dict[str, Role] = {}  # Roles necesarios para el futuro
         self.chapters: Dict[str, Chapter] = {}
         self.skills: Dict[str, Skill] = {}
         self.projects: Dict[str, Dict] = {}  # Company projects
@@ -49,15 +51,24 @@ class DataLoader:
         
         self.load_org_config()
         print(f"✅ Loaded {len(self.data_store.chapters)} chapters")
+        
+        self.load_skills()
         print(f"✅ Loaded {len(self.data_store.skills)} skills")
         
-        self.load_vision()
-        print(f"✅ Loaded {len(self.data_store.roles)} roles")
+        self.load_current_roles()
+        print(f"✅ Loaded {len(self.data_store.current_roles)} current roles")
+        
+        self.load_future_roles()
+        print(f"✅ Loaded {len(self.data_store.future_roles)} future roles")
+        
+        # For backward compatibility, combine roles
+        self.data_store.roles = {**self.data_store.current_roles, **self.data_store.future_roles}
         
         print("=" * 50)
         print(f"✅ Data loading complete!")
         print(f"   - {len(self.data_store.employees)} employees")
-        print(f"   - {len(self.data_store.roles)} roles")
+        print(f"   - {len(self.data_store.current_roles)} current roles")
+        print(f"   - {len(self.data_store.future_roles)} future roles")
         print(f"   - {len(self.data_store.chapters)} chapters")
         print(f"   - {len(self.data_store.skills)} skills")
         print(f"   - {len(self.data_store.projects)} projects")
@@ -179,6 +190,103 @@ class DataLoader:
                 role = Role(**normalized_role)
                 self.data_store.roles[role.id] = role
     
+    def load_skills(self):
+        """Load skills from skills.json file"""
+        skills_path = self.base_path / "skills.json"
+        
+        if not skills_path.exists():
+            print(f"⚠️  Skills file not found: {skills_path}")
+            return
+        
+        with open(skills_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # Load skills - overwrite any from org_config
+        if 'skills' in data:
+            for skill_data in data['skills']:
+                skill = Skill(**skill_data)
+                self.data_store.skills[skill.id] = skill
+    
+    def load_current_roles(self):
+        """Load current roles from current_roles.json file"""
+        roles_path = self.base_path / "current_roles.json"
+        
+        if not roles_path.exists():
+            print(f"⚠️  Current roles file not found: {roles_path}")
+            return
+        
+        with open(roles_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # Load current roles
+        if 'roles' in data:
+            for role_data in data['roles']:
+                try:
+                    # Normalize field names and create Role
+                    normalized_role = {
+                        'id': role_data.get('id', ''),
+                        'titulo': role_data.get('titulo', ''),
+                        'nivel': role_data.get('nivel', 'mid').lower(),
+                        'capitulo': role_data.get('capitulo', ''),
+                        'modalidad': 'FT',  # Default for current roles
+                        'cantidad': 1,
+                        'inicio_estimado': '0m',  # Already started
+                        'responsabilidades': role_data.get('responsabilidades', []),
+                        'habilidades_requeridas': role_data.get('habilidades_requeridas', []),
+                        'objetivos_asociados': [],
+                        'dedicacion_esperada': role_data.get('dedicacion_esperada', '40h/semana')
+                    }
+                    
+                    role = Role(**normalized_role)
+                    self.data_store.current_roles[role.id] = role
+                except Exception as e:
+                    print(f"⚠️  Error loading current role {role_data.get('id', 'unknown')}: {e}")
+                    continue
+    
+    def load_future_roles(self):
+        """Load future roles from future_roles.json file"""
+        roles_path = self.base_path / "future_roles.json"
+        
+        if not roles_path.exists():
+            print(f"⚠️  Future roles file not found: {roles_path}")
+            return
+        
+        with open(roles_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # Load future roles
+        if 'roles_necesarios' in data:
+            for role_data in data['roles_necesarios']:
+                try:
+                    # Normalize field names
+                    modalidad = role_data.get('modalidad', 'FT')
+                    if modalidad not in ['FT', 'PT', 'Freelance']:
+                        modalidad = 'Freelance'
+                    
+                    cantidad = role_data.get('cantidad', 1)
+                    if isinstance(cantidad, float):
+                        cantidad = max(1, int(cantidad) if cantidad >= 1 else 1)
+                    
+                    normalized_role = {
+                        'id': role_data.get('id', ''),
+                        'titulo': role_data.get('titulo', ''),
+                        'nivel': role_data.get('nivel', 'mid').lower(),
+                        'capitulo': role_data.get('capitulo', ''),
+                        'modalidad': modalidad,
+                        'cantidad': int(cantidad),
+                        'inicio_estimado': role_data.get('inicio_estimado', '0m'),
+                        'objetivos_asociados': role_data.get('objetivos_asociados', []),
+                        'responsabilidades': [],
+                        'habilidades_requeridas': [],
+                        'dedicacion_esperada': '40h/semana'
+                    }
+                    
+                    role = Role(**normalized_role)
+                    self.data_store.future_roles[role.id] = role
+                except Exception as e:
+                    print(f"⚠️  Error loading future role {role_data.get('id', 'unknown')}: {e}")
+                    continue
+    
     def load_vision(self):
         """Load future vision from JSON"""
         vision_path = self.base_path / "vision_futura.json"
@@ -269,6 +377,27 @@ class DataLoader:
         """Add new role"""
         self.data_store.roles[role.id] = role
         return role
+    
+    def get_skills(self) -> Dict[str, Skill]:
+        """Get all skills"""
+        return self.data_store.skills
+    
+    def get_skill(self, skill_id: str) -> Optional[Skill]:
+        """Get skill by ID"""
+        return self.data_store.skills.get(skill_id)
+    
+    def add_skill(self, skill: Skill) -> Skill:
+        """Add new skill"""
+        self.data_store.skills[skill.id] = skill
+        return skill
+    
+    def get_current_roles(self) -> Dict[str, Role]:
+        """Get all current roles"""
+        return self.data_store.current_roles
+    
+    def get_future_roles(self) -> Dict[str, Role]:
+        """Get all future roles"""
+        return self.data_store.future_roles
     
     def update_role(self, role_id: str, role: Role) -> Optional[Role]:
         """Update existing role"""

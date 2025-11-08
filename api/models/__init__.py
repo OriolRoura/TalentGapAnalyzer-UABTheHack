@@ -17,6 +17,7 @@ from models.role import (
     Chapter,
     Skill,
     SkillCreate,
+    SkillListResponse,
     SeniorityLevel,
     Modality
 )
@@ -59,6 +60,7 @@ __all__ = [
     "Chapter",
     "Skill",
     "SkillCreate",
+    "SkillListResponse",
     "SeniorityLevel",
     "Modality",
     # HR Forms

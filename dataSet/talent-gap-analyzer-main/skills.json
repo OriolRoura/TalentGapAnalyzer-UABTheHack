@@ -1,0 +1,172 @@
+{
+  "skills": [
+    {
+      "id": "S-OKR",
+      "nombre": "OKRs y Roadmapping",
+      "categoria": "Estrategia",
+      "descripcion": "Definición y gestión de objetivos y resultados clave",
+      "peso": 5,
+      "herramientas_asociadas": ["Miro", "ClickUp"]
+    },
+    {
+      "id": "S-ANALISIS",
+      "nombre": "Análisis Estratégico",
+      "categoria": "Estrategia",
+      "descripcion": "Análisis de mercado, competencia y oportunidades de negocio",
+      "peso": 5,
+      "herramientas_asociadas": ["Excel", "PowerBI"]
+    },
+    {
+      "id": "S-STAKE",
+      "nombre": "Stakeholder Management",
+      "categoria": "Estrategia",
+      "descripcion": "Gestión y alineamiento de stakeholders clave",
+      "peso": 4,
+      "herramientas_asociadas": ["PowerPoint", "Miro"]
+    },
+    {
+      "id": "S-PM",
+      "nombre": "Project Management",
+      "categoria": "Gestión",
+      "descripcion": "Gestión de proyectos y metodologías ágiles",
+      "peso": 4,
+      "herramientas_asociadas": ["Jira", "Asana", "ClickUp"]
+    },
+    {
+      "id": "S-ANALYTICS",
+      "nombre": "Analytics y Métricas",
+      "categoria": "Datos",
+      "descripcion": "Análisis de datos, KPIs y métricas de negocio",
+      "peso": 5,
+      "herramientas_asociadas": ["Google Analytics", "Looker", "PowerBI"]
+    },
+    {
+      "id": "S-CRM",
+      "nombre": "CRM Management",
+      "categoria": "Martech",
+      "descripcion": "Gestión y administración de plataformas CRM",
+      "peso": 5,
+      "herramientas_asociadas": ["HubSpot", "Salesforce"]
+    },
+    {
+      "id": "S-AUTOM",
+      "nombre": "Automatización",
+      "categoria": "Martech",
+      "descripcion": "Automatización de procesos y workflows",
+      "peso": 4,
+      "herramientas_asociadas": ["n8n", "Zapier", "Make"]
+    },
+    {
+      "id": "S-DATA",
+      "nombre": "Data Management",
+      "categoria": "Datos",
+      "descripcion": "Gestión, modelado y gobernanza de datos",
+      "peso": 5,
+      "herramientas_asociadas": ["SQL", "Python", "dbt"]
+    },
+    {
+      "id": "S-SQLPY",
+      "nombre": "SQL & Python",
+      "categoria": "Desarrollo",
+      "descripcion": "Programación en SQL y Python para análisis de datos",
+      "peso": 5,
+      "herramientas_asociadas": ["PostgreSQL", "Python", "Jupyter"]
+    },
+    {
+      "id": "S-EMAIL",
+      "nombre": "Email Marketing",
+      "categoria": "Marketing",
+      "descripcion": "Estrategia y ejecución de campañas de email marketing",
+      "peso": 3,
+      "herramientas_asociadas": ["HubSpot", "Mailchimp", "SendGrid"]
+    },
+    {
+      "id": "S-STORY",
+      "nombre": "Storytelling",
+      "categoria": "Creatividad",
+      "descripcion": "Narrativa y storytelling para marcas",
+      "peso": 5,
+      "herramientas_asociadas": ["PowerPoint", "Keynote"]
+    },
+    {
+      "id": "S-COPY",
+      "nombre": "Copywriting",
+      "categoria": "Creatividad",
+      "descripcion": "Redacción creativa y persuasiva",
+      "peso": 4,
+      "herramientas_asociadas": ["Google Docs", "Notion"]
+    },
+    {
+      "id": "S-BRAND",
+      "nombre": "Branding",
+      "categoria": "Diseño",
+      "descripcion": "Diseño y gestión de identidad de marca",
+      "peso": 5,
+      "herramientas_asociadas": ["Adobe Illustrator", "Figma"]
+    },
+    {
+      "id": "S-GENAI",
+      "nombre": "IA Generativa",
+      "categoria": "Tecnología",
+      "descripcion": "Uso de herramientas de inteligencia artificial generativa",
+      "peso": 3,
+      "herramientas_asociadas": ["ChatGPT", "Midjourney", "DALL-E"]
+    },
+    {
+      "id": "S-UIUX",
+      "nombre": "UI/UX Design",
+      "categoria": "Diseño",
+      "descripcion": "Diseño de interfaces y experiencia de usuario",
+      "peso": 5,
+      "herramientas_asociadas": ["Figma", "Sketch", "Adobe XD"]
+    },
+    {
+      "id": "S-FIGMA",
+      "nombre": "Figma",
+      "categoria": "Herramientas",
+      "descripcion": "Dominio de Figma para diseño colaborativo",
+      "peso": 4,
+      "herramientas_asociadas": ["Figma", "FigJam"]
+    },
+    {
+      "id": "S-ADS-GA",
+      "nombre": "Google Ads",
+      "categoria": "Performance",
+      "descripcion": "Gestión y optimización de campañas en Google Ads",
+      "peso": 5,
+      "herramientas_asociadas": ["Google Ads", "Google Analytics"]
+    },
+    {
+      "id": "S-ADS-META",
+      "nombre": "Meta Ads",
+      "categoria": "Performance",
+      "descripcion": "Gestión y optimización de campañas en Meta (Facebook/Instagram)",
+      "peso": 5,
+      "herramientas_asociadas": ["Meta Ads Manager", "Meta Business Suite"]
+    },
+    {
+      "id": "S-ABTEST",
+      "nombre": "A/B Testing",
+      "categoria": "Experimentación",
+      "descripcion": "Diseño y análisis de tests A/B y experimentación",
+      "peso": 4,
+      "herramientas_asociadas": ["Optimizely", "VWO", "Google Optimize"]
+    },
+    {
+      "id": "S-SEO",
+      "nombre": "SEO",
+      "categoria": "Performance",
+      "descripcion": "Optimización para motores de búsqueda",
+      "peso": 5,
+      "herramientas_asociadas": ["SEMrush", "Ahrefs", "Google Search Console"]
+    },
+    {
+      "id": "S-SOCIAL",
+      "nombre": "Social Media",
+      "categoria": "Marketing",
+      "descripcion": "Estrategia y gestión de redes sociales",
+      "peso": 4,
+      "herramientas_asociadas": ["Hootsuite", "Buffer", "Meta Business Suite"]
+    }
+  ]
+}

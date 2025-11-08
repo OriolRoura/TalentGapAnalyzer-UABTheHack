@@ -19,6 +19,49 @@ from services.data_loader import data_loader
 router = APIRouter()
 
 
+@router.get("/current", response_model=RoleListResponse)
+async def get_current_roles(
+    chapter: Optional[str] = Query(None, description="Filter by chapter"),
+    nivel: Optional[str] = Query(None, description="Filter by seniority level")
+):
+    """Get list of current roles (roles with employees currently assigned)"""
+    roles = data_loader.get_current_roles()
+    
+    # Apply filters
+    filtered = list(roles.values())
+    if chapter:
+        filtered = [r for r in filtered if r.capitulo.lower() == chapter.lower()]
+    if nivel:
+        filtered = [r for r in filtered if r.nivel.lower() == nivel.lower()]
+    
+    return RoleListResponse(
+        total=len(filtered),
+        roles=filtered
+    )
+
+
+@router.get("/future", response_model=RoleListResponse)
+async def get_future_roles(
+    chapter: Optional[str] = Query(None, description="Filter by chapter"),
+    nivel: Optional[str] = Query(None, description="Filter by seniority level"),
+    estado: Optional[str] = Query(None, description="Filter by estado (cubierto/pendiente)")
+):
+    """Get list of future roles (roles needed according to vision_futura)"""
+    roles = data_loader.get_future_roles()
+    
+    # Apply filters
+    filtered = list(roles.values())
+    if chapter:
+        filtered = [r for r in filtered if r.capitulo.lower() == chapter.lower()]
+    if nivel:
+        filtered = [r for r in filtered if r.nivel.lower() == nivel.lower()]
+    
+    return RoleListResponse(
+        total=len(filtered),
+        roles=filtered
+    )
+
+
 @router.get("/", response_model=RoleListResponse)
 async def get_roles(
     chapter: Optional[str] = Query(None, description="Filter by chapter"),
@@ -26,7 +69,7 @@ async def get_roles(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=300)
 ):
-    """Get list of all roles with optional filters"""
+    """Get list of all roles (current + future) with optional filters"""
     roles = data_loader.get_roles()
     
     # Apply filters

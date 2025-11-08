@@ -119,6 +119,7 @@ class Skill(BaseModel):
     id: str
     nombre: str
     categoria: str
+    descripcion: Optional[str] = Field(default="", description="Skill description")
     peso: int = Field(default=1, ge=1, le=10)
     herramientas_asociadas: List[str] = Field(default_factory=list)
 
@@ -127,5 +128,12 @@ class SkillCreate(BaseModel):
     """Model for creating a new skill"""
     nombre: str
     categoria: str
-    peso: int = 1
+    descripcion: Optional[str] = ""
+    peso: int = Field(default=1, ge=1, le=10)
     herramientas_asociadas: List[str] = Field(default_factory=list)
+
+
+class SkillListResponse(BaseModel):
+    """Response model for skill list"""
+    total: int
+    skills: List[Skill]

@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from routes import employees, roles, company, hr_forms, health
+from routes import employees, roles, company, hr_forms, health, skills
 from services.data_loader import data_loader  # Use the global instance
 
 @asynccontextmanager
@@ -43,6 +43,7 @@ app.include_router(health.router, prefix="/api/v1", tags=["Health"])
 app.include_router(company.router, prefix="/api/v1/company", tags=["Company"])
 app.include_router(employees.router, prefix="/api/v1/employees", tags=["Employees"])
 app.include_router(roles.router, prefix="/api/v1/roles", tags=["Roles"])
+app.include_router(skills.router, tags=["Skills"])
 app.include_router(hr_forms.router, prefix="/api/v1/hr", tags=["HR Forms"])
 
 @app.get("/")

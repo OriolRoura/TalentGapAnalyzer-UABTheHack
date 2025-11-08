@@ -1,0 +1,184 @@
+{
+  "roles_necesarios": [
+    {
+      "id": "R-STR-LEAD",
+      "titulo": "Head of Strategy",
+      "nivel": "lead",
+      "capitulo": "Strategy",
+      "modalidad": "FT",
+      "cantidad": 1,
+      "inicio_estimado": "0-3m",
+      "objetivos_asociados": [
+        "OKRs y gobierno",
+        "Propuesta de valor y pricing",
+        "Playbooks ejecutivos"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-PM",
+      "titulo": "Project Manager",
+      "nivel": "mid",
+      "capitulo": "Strategy",
+      "modalidad": "FT",
+      "cantidad": 1,
+      "inicio_estimado": "0-6m",
+      "objetivos_asociados": [
+        "PMO básica",
+        "Capacidad y riesgos",
+        "SLA/QA de entregables"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-MTX-ARCH",
+      "titulo": "Martech Architect",
+      "nivel": "lead",
+      "capitulo": "Martech",
+      "modalidad": "FT",
+      "cantidad": 1,
+      "inicio_estimado": "0-6m",
+      "objetivos_asociados": [
+        "Arquitectura CRM/CDP",
+        "Automatizaciones n8n",
+        "Privacidad y gobernanza"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-CRM-ADMIN",
+      "titulo": "CRM Admin (HubSpot)",
+      "nivel": "mid",
+      "capitulo": "Martech",
+      "modalidad": "PT",
+      "cantidad": 1,
+      "inicio_estimado": "3-6m",
+      "objetivos_asociados": [
+        "Pipelines y propiedades",
+        "Workflows y scoring",
+        "Calidad de datos"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-DATA-ANL",
+      "titulo": "Data Analyst",
+      "nivel": "mid",
+      "capitulo": "Martech",
+      "modalidad": "PT",
+      "cantidad": 1,
+      "inicio_estimado": "6-12m",
+      "objetivos_asociados": [
+        "Modelos de atribución",
+        "Dashboards de ROI",
+        "Definición de métricas"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-CRT-LEAD",
+      "titulo": "Creative Director",
+      "nivel": "lead",
+      "capitulo": "Creative",
+      "modalidad": "Fractional",
+      "cantidad": 0.5,
+      "inicio_estimado": "6-12m",
+      "objetivos_asociados": [
+        "Narrativa y estándares",
+        "Activos para GTM",
+        "Storytelling de casos"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-DSN-SR",
+      "titulo": "Senior Brand/UI Designer",
+      "nivel": "senior",
+      "capitulo": "Design",
+      "modalidad": "FT",
+      "cantidad": 1,
+      "inicio_estimado": "6-12m",
+      "objetivos_asociados": [
+        "Sistemas de identidad",
+        "UI para microapps",
+        "Guías y componentes"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-PERF-SPEC",
+      "titulo": "Performance Media Specialist",
+      "nivel": "senior",
+      "capitulo": "Performance",
+      "modalidad": "PT",
+      "cantidad": 1,
+      "inicio_estimado": "6-12m",
+      "objetivos_asociados": [
+        "CAC/LTV",
+        "A/B testing",
+        "Escalado de campañas"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-SEO-SEM",
+      "titulo": "SEO/SEM Manager",
+      "nivel": "senior",
+      "capitulo": "Performance",
+      "modalidad": "PT",
+      "cantidad": 1,
+      "inicio_estimado": "12-18m",
+      "objetivos_asociados": [
+        "SEO técnico y contenidos",
+        "SEM full-funnel",
+        "Reporting de crecimiento"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-SMM",
+      "titulo": "Social Media Strategist",
+      "nivel": "mid",
+      "capitulo": "Influency",
+      "modalidad": "PT",
+      "cantidad": 1,
+      "inicio_estimado": "12-18m",
+      "objetivos_asociados": [
+        "Calendario editorial",
+        "Engagement y comunidad",
+        "Coordinación con performance"
+      ],
+      "estado": "cubierto"
+    },
+    {
+      "id": "R-INF-MGR",
+      "titulo": "Influency Manager",
+      "nivel": "mid",
+      "capitulo": "Influency",
+      "modalidad": "PT",
+      "cantidad": 1,
+      "inicio_estimado": "12-18m",
+      "objetivos_asociados": [
+        "Ecosistema de creadores",
+        "Activaciones",
+        "Medición orgánica"
+      ],
+      "estado": "pendiente"
+    },
+    {
+      "id": "R-STR-SR",
+      "titulo": "Senior Strategy Consultant",
+      "nivel": "senior",
+      "capitulo": "Strategy",
+      "modalidad": "FT",
+      "cantidad": 1,
+      "inicio_estimado": "12-24m",
+      "objetivos_asociados": [
+        "Discovery avanzado",
+        "Casos de negocio",
+        "Operar rituales de gobierno"
+      ],
+      "estado": "pendiente"
+    }
+  ]
+}
