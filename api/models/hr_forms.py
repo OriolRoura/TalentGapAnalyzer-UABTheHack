@@ -93,24 +93,40 @@ class HREmployeeAmbitionsSubmit(BaseModel):
 
 
 class HREmployeeDedicationSubmit(BaseModel):
-    """Dedication data for employee submission"""
-    proyecto_actual: str
-    porcentaje_dedicacion: int = Field(..., ge=0, le=100)
-    horas_semana: int = Field(..., ge=0)
+    """
+    Dedication data for employee submission.
+    Use GET /company/projects to retrieve available company projects.
+    """
+    proyecto_actual: str = Field(
+        ..., 
+        description="Name of the project. Use GET /company/projects to see available options."
+    )
+    porcentaje_dedicacion: int = Field(..., ge=0, le=100, description="Percentage of time dedicated to this project")
+    horas_semana: int = Field(..., ge=0, description="Hours per week dedicated to this project")
 
 
 class HREmployeeSubmitForm(BaseModel):
-    """Form for submitting complete employee profile"""
+    """
+    Form for submitting complete employee profile.
+    
+    To get available options for form fields, use these endpoints:
+    - GET /company/projects - Get list of current company projects
+    - GET /company/chapters - Get list of chapters
+    - GET /roles - Get available roles and skills
+    """
     employee_id: Optional[str] = None
     nombre: str
     email: EmailStr
-    chapter: str
+    chapter: str = Field(..., description="Employee's chapter. Use GET /company/chapters for available options.")
     seniority: str
     modalidad: str
     skills: List[HREmployeeSkillSubmit]
     responsabilidades: List[str]
     ambiciones: HREmployeeAmbitionsSubmit
-    dedicacion: HREmployeeDedicationSubmit
+    dedicacion: HREmployeeDedicationSubmit = Field(
+        ..., 
+        description="Current dedication. Use GET /company/projects to see available projects."
+    )
 
 
 class HREmployeeSubmitResponse(BaseModel):

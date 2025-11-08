@@ -9,7 +9,9 @@ from models.company import (
     CompanyStatus,
     CompanyHealthCheck,
     CompanyConfig,
-    Organization
+    Organization,
+    CompanyProject,
+    CompanyProjectsResponse
 )
 from services.data_loader import data_loader
 from services.validation_service import ValidationService
@@ -126,6 +128,49 @@ async def get_chapters_summary():
         "total_chapters": len(chapter_summary),
         "chapters": chapter_summary
     }
+
+
+@router.get("/projects", response_model=CompanyProjectsResponse)
+async def get_company_projects():
+    """
+    Get all company projects from the master projects list,
+    enriched with current employee dedication data.
+    This endpoint is useful for HR forms to show available projects when
+    inputting or updating talent profiles.
+    """
+    from datetime import datetime
+    
+    projects_data = data_loader.get_company_projects()
+    
+    # Convert to CompanyProject models
+    projects = [
+        CompanyProject(
+            id=data['id'],
+            name=data['name'],
+            description=data.get('description'),
+            type=data.get('type'),
+            status=data.get('status', 'active'),
+            priority=data.get('priority', 'medium'),
+            estimated_duration=data.get('estimated_duration'),
+            metadata=data.get('metadata'),
+            total_employees=data['total_employees'],
+            avg_dedication_percentage=data['avg_dedication_percentage'],
+            employees=data['employees']
+        )
+        for data in projects_data.values()
+    ]
+    
+    # Sort by priority first, then by number of employees
+    priority_order = {'critical': 0, 'high': 1, 'medium': 2, 'low': 3}
+    projects.sort(
+        key=lambda x: (priority_order.get(x.priority, 2), -x.total_employees)
+    )
+    
+    return CompanyProjectsResponse(
+        projects=projects,
+        total_projects=len(projects),
+        last_updated=datetime.now().isoformat()
+    )
 
 
 @router.get("/dashboard")

@@ -37,7 +37,9 @@ from models.company import (
     CompanyConfig,
     CompanyStatus,
     CompanyHealthCheck,
-    GapCalculationWeights
+    GapCalculationWeights,
+    CompanyProject,
+    CompanyProjectsResponse
 )
 
 __all__ = [
@@ -76,4 +78,6 @@ __all__ = [
     "CompanyStatus",
     "CompanyHealthCheck",
     "GapCalculationWeights",
+    "CompanyProject",
+    "CompanyProjectsResponse",
 ]

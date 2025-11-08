@@ -71,3 +71,26 @@ class CompanyHealthCheck(BaseModel):
     data_quality_score: float = Field(..., ge=0, le=100)
     missing_data: Dict[str, List[str]]
     recommendations: List[str]
+
+
+class CompanyProject(BaseModel):
+    """Company project information"""
+    id: str
+    name: str
+    description: Optional[str] = None
+    type: Optional[str] = None  # client_project, internal_project, internal_operations, marketing
+    status: str = "active"  # active, paused, completed
+    priority: str = "medium"  # low, medium, high, critical
+    estimated_duration: Optional[str] = None
+    metadata: Optional[Dict] = None
+    # Stats populated from employee data
+    total_employees: int = 0
+    avg_dedication_percentage: float = 0.0
+    employees: List[str] = Field(default_factory=list)
+
+
+class CompanyProjectsResponse(BaseModel):
+    """Response with all company projects"""
+    projects: List[CompanyProject]
+    total_projects: int
+    last_updated: str

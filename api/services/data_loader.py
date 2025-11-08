@@ -21,6 +21,7 @@ class DataStore:
         self.roles: Dict[str, Role] = {}
         self.chapters: Dict[str, Chapter] = {}
         self.skills: Dict[str, Skill] = {}
+        self.projects: Dict[str, Dict] = {}  # Company projects
         self.organization: Optional[Organization] = None
         self.vision_data: Optional[Dict] = None
 
@@ -40,6 +41,9 @@ class DataLoader:
         print("📊 Starting data load...")
         print("=" * 50)
         
+        self.load_projects()
+        print(f"✅ Loaded {len(self.data_store.projects)} projects")
+        
         self.load_employees()
         print(f"✅ Loaded {len(self.data_store.employees)} employees")
         
@@ -56,7 +60,24 @@ class DataLoader:
         print(f"   - {len(self.data_store.roles)} roles")
         print(f"   - {len(self.data_store.chapters)} chapters")
         print(f"   - {len(self.data_store.skills)} skills")
+        print(f"   - {len(self.data_store.projects)} projects")
         print("=" * 50)
+    
+    def load_projects(self):
+        """Load company projects from JSON file"""
+        projects_path = self.base_path / "company_projects.json"
+        
+        if not projects_path.exists():
+            print(f"⚠️  Projects file not found: {projects_path}")
+            return
+        
+        with open(projects_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        for project in data.get('projects', []):
+            project_id = project.get('id')
+            if project_id:
+                self.data_store.projects[project_id] = project
     
     def load_employees(self):
         """Load employees from CSV file"""
@@ -262,6 +283,54 @@ class DataLoader:
             del self.data_store.roles[role_id]
             return True
         return False
+    
+    def get_company_projects(self) -> Dict[str, Dict]:
+        """
+        Get company projects from JSON file and enrich with employee dedication data
+        Returns a dict with project id as key and enriched data as value
+        """
+        # Start with projects from JSON file
+        projects = {}
+        for project_id, project_data in self.data_store.projects.items():
+            projects[project_id] = {
+                **project_data,
+                'total_employees': 0,
+                'total_dedication': 0,
+                'employees': []
+            }
+        
+        # Enrich with employee data
+        # Map project names to IDs for matching
+        name_to_id_map = {
+            project['name']: project_id 
+            for project_id, project in self.data_store.projects.items()
+        }
+        
+        for employee in self.data_store.employees.values():
+            if not employee.dedicacion_actual:
+                continue
+            
+            # Each employee has dedicacion_actual as dict: {"Project": percentage}
+            for project_name, dedication_percentage in employee.dedicacion_actual.items():
+                # Find matching project by name
+                project_id = name_to_id_map.get(project_name)
+                
+                if project_id and project_id in projects:
+                    projects[project_id]['total_employees'] += 1
+                    projects[project_id]['total_dedication'] += dedication_percentage
+                    projects[project_id]['employees'].append(employee.nombre)
+        
+        # Calculate average dedication percentage for each project
+        for project_data in projects.values():
+            if project_data['total_employees'] > 0:
+                project_data['avg_dedication_percentage'] = round(
+                    project_data['total_dedication'] / project_data['total_employees'], 
+                    2
+                )
+            else:
+                project_data['avg_dedication_percentage'] = 0.0
+        
+        return projects
 
 
 # Global instance
