@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "analysis_timestamp": "2025-11-08T19:50:43.807805",
+    "analysis_timestamp": "2025-11-08T20:31:13.251635",
     "total_employees": 10,
     "total_roles": 10,
     "total_skills": 21,
@@ -3132,71 +3132,243 @@
     },
     "bottlenecks": [
       {
-        "skill_id": "S-DATA",
-        "skill_name": "Data",
-        "gap_percentage": 80.0,
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
         "affected_roles": [
+          "R-CRM-ADMIN",
+          "R-DATA-ANL",
+          "R-STR-LEAD",
           "R-MTX-ARCH",
-          "R-DATA-ANL"
+          "R-PERF-SPEC",
+          "R-PM",
+          "R-SEO-SEM",
+          "R-SMM"
         ],
-        "blocked_transitions": 16,
-        "bottleneck_impact": 4.0,
-        "priority_level": "HIGH",
-        "demanda_proyectada": 5,
-        "capacidad_actual": 1,
-        "employees_without_skill": 8,
-        "roles_requiring_skill": 2,
-        "descripcion": "Arquitectura de datos limitada para objetivos analíticos"
+        "blocked_transitions": 24,
+        "bottleneck_impact": 9.6,
+        "priority_level": 0.24
       },
       {
-        "skill_id": "S-ANALISIS",
-        "skill_name": "Analisis",
-        "gap_percentage": 75.0,
+        "skill_id": "S-STAKE",
+        "skill_name": "Stakeholder Management",
+        "gap_percentage": 76.66666666666667,
+        "affected_roles": [
+          "R-CRT-LEAD",
+          "R-STR-LEAD",
+          "R-PM"
+        ],
+        "blocked_transitions": 23,
+        "bottleneck_impact": 9.2,
+        "priority_level": 0.36800000000000005
+      },
+      {
+        "skill_id": "S-OKR",
+        "skill_name": "OKRs y Roadmapping",
+        "gap_percentage": 90.0,
         "affected_roles": [
           "R-STR-LEAD",
-          "R-STR-SR"
+          "R-PM"
+        ],
+        "blocked_transitions": 18,
+        "bottleneck_impact": 9.0,
+        "priority_level": 0.36000000000000004
+      },
+      {
+        "skill_id": "S-CRM",
+        "skill_name": "CRM y Customer Data",
+        "gap_percentage": 80.0,
+        "affected_roles": [
+          "R-CRM-ADMIN",
+          "R-MTX-ARCH"
         ],
         "blocked_transitions": 16,
+        "bottleneck_impact": 8.0,
+        "priority_level": 0.32000000000000006
+      },
+      {
+        "skill_id": "S-DATA",
+        "skill_name": "Arquitectura de Datos",
+        "gap_percentage": 80.0,
+        "affected_roles": [
+          "R-DATA-ANL",
+          "R-MTX-ARCH"
+        ],
+        "blocked_transitions": 16,
+        "bottleneck_impact": 8.0,
+        "priority_level": 0.32000000000000006
+      },
+      {
+        "skill_id": "S-SQLPY",
+        "skill_name": "SQL y Python",
+        "gap_percentage": 80.0,
+        "affected_roles": [
+          "R-DATA-ANL",
+          "R-MTX-ARCH"
+        ],
+        "blocked_transitions": 16,
+        "bottleneck_impact": 8.0,
+        "priority_level": 0.32000000000000006
+      },
+      {
+        "skill_id": "S-ADS-GA",
+        "skill_name": "Google Ads y Analytics",
+        "gap_percentage": 80.0,
+        "affected_roles": [
+          "R-PERF-SPEC",
+          "R-SEO-SEM"
+        ],
+        "blocked_transitions": 16,
+        "bottleneck_impact": 6.4,
+        "priority_level": 0.25600000000000006
+      },
+      {
+        "skill_id": "S-AUTOM",
+        "skill_name": "Automatización y Workflows",
+        "gap_percentage": 80.0,
+        "affected_roles": [
+          "R-CRM-ADMIN",
+          "R-MTX-ARCH"
+        ],
+        "blocked_transitions": 16,
+        "bottleneck_impact": 6.4,
+        "priority_level": 0.25600000000000006
+      },
+      {
+        "skill_id": "S-BRAND",
+        "skill_name": "Branding y Identidad",
+        "gap_percentage": 80.0,
+        "affected_roles": [
+          "R-CRT-LEAD",
+          "R-DSN-SR"
+        ],
+        "blocked_transitions": 16,
+        "bottleneck_impact": 6.4,
+        "priority_level": 0.25600000000000006
+      },
+      {
+        "skill_id": "S-PM",
+        "skill_name": "Project Management",
+        "gap_percentage": 80.0,
+        "affected_roles": [
+          "R-STR-LEAD",
+          "R-PM"
+        ],
+        "blocked_transitions": 16,
+        "bottleneck_impact": 6.4,
+        "priority_level": 0.25600000000000006
+      },
+      {
+        "skill_id": "S-ABTEST",
+        "skill_name": "A/B Testing y Experimentación",
+        "gap_percentage": 75.0,
+        "affected_roles": [
+          "R-DATA-ANL",
+          "R-PERF-SPEC"
+        ],
+        "blocked_transitions": 15,
         "bottleneck_impact": 6.0,
-        "priority_level": "HIGH",
-        "demanda_proyectada": 8,
-        "capacidad_actual": 2,
-        "employees_without_skill": 8,
-        "roles_requiring_skill": 2,
-        "descripcion": "Análisis estratégico requerido para múltiples roles de liderazgo"
+        "priority_level": 0.24000000000000005
+      },
+      {
+        "skill_id": "S-COPY",
+        "skill_name": "Copywriting y Contenido",
+        "gap_percentage": 70.0,
+        "affected_roles": [
+          "R-CRT-LEAD",
+          "R-SMM"
+        ],
+        "blocked_transitions": 14,
+        "bottleneck_impact": 5.6,
+        "priority_level": 0.22399999999999998
       },
       {
         "skill_id": "S-UIUX",
-        "skill_name": "Uiux",
-        "gap_percentage": 75.0,
+        "skill_name": "UI/UX Design",
+        "gap_percentage": 90.0,
         "affected_roles": [
           "R-DSN-SR"
         ],
         "blocked_transitions": 9,
-        "bottleneck_impact": 3.0,
-        "priority_level": "HIGH",
-        "demanda_proyectada": 4,
-        "capacidad_actual": 1,
-        "employees_without_skill": 9,
-        "roles_requiring_skill": 1,
-        "descripcion": "Design skills escasos para crecimiento de productos digitales"
+        "bottleneck_impact": 4.5,
+        "priority_level": 0.18000000000000002
       },
       {
-        "skill_id": "S-CRM",
-        "skill_name": "Crm",
-        "gap_percentage": 66.66666666666666,
+        "skill_id": "S-ANALISIS",
+        "skill_name": "Análisis Estratégico",
+        "gap_percentage": 80.0,
         "affected_roles": [
-          "R-MTX-ARCH",
+          "R-STR-LEAD"
+        ],
+        "blocked_transitions": 8,
+        "bottleneck_impact": 4.0,
+        "priority_level": 0.16000000000000003
+      },
+      {
+        "skill_id": "S-ADS-META",
+        "skill_name": "Meta Ads (Facebook/Instagram)",
+        "gap_percentage": 90.0,
+        "affected_roles": [
+          "R-PERF-SPEC"
+        ],
+        "blocked_transitions": 9,
+        "bottleneck_impact": 3.6,
+        "priority_level": 0.14400000000000002
+      },
+      {
+        "skill_id": "S-FIGMA",
+        "skill_name": "Diseño en Figma",
+        "gap_percentage": 90.0,
+        "affected_roles": [
+          "R-DSN-SR"
+        ],
+        "blocked_transitions": 9,
+        "bottleneck_impact": 3.6,
+        "priority_level": 0.14400000000000002
+      },
+      {
+        "skill_id": "S-SEO",
+        "skill_name": "SEO y Posicionamiento",
+        "gap_percentage": 90.0,
+        "affected_roles": [
+          "R-SEO-SEM"
+        ],
+        "blocked_transitions": 9,
+        "bottleneck_impact": 3.6,
+        "priority_level": 0.14400000000000002
+      },
+      {
+        "skill_id": "S-SOCIAL",
+        "skill_name": "Social Media Strategy",
+        "gap_percentage": 90.0,
+        "affected_roles": [
+          "R-SMM"
+        ],
+        "blocked_transitions": 9,
+        "bottleneck_impact": 3.6,
+        "priority_level": 0.14400000000000002
+      },
+      {
+        "skill_id": "S-STORY",
+        "skill_name": "Storytelling y Narrativa",
+        "gap_percentage": 90.0,
+        "affected_roles": [
+          "R-CRT-LEAD"
+        ],
+        "blocked_transitions": 9,
+        "bottleneck_impact": 3.6,
+        "priority_level": 0.14400000000000002
+      },
+      {
+        "skill_id": "S-EMAIL",
+        "skill_name": "Email Marketing",
+        "gap_percentage": 70.0,
+        "affected_roles": [
           "R-CRM-ADMIN"
         ],
-        "blocked_transitions": 16,
-        "bottleneck_impact": 3.9999999999999996,
-        "priority_level": "HIGH",
-        "demanda_proyectada": 6,
-        "capacidad_actual": 2,
-        "employees_without_skill": 8,
-        "roles_requiring_skill": 2,
-        "descripcion": "Expertise en CRM crítico para roles Martech y RevOps"
+        "blocked_transitions": 7,
+        "bottleneck_impact": 2.1,
+        "priority_level": 0.084
       }
     ],
     "training_roi": {
@@ -3445,9 +3617,9 @@
   "recommendations": {
     "strategic": {
       "immediate_actions": [
-        "Urgente: Programa intensivo de Data (16 transiciones bloqueadas)",
-        "Urgente: Programa intensivo de Analisis (16 transiciones bloqueadas)",
-        "Urgente: Programa intensivo de Uiux (9 transiciones bloqueadas)"
+        "Urgente: Programa intensivo de Analítica y Métricas (24 transiciones bloqueadas)",
+        "Urgente: Programa intensivo de Stakeholder Management (23 transiciones bloqueadas)",
+        "Urgente: Programa intensivo de OKRs y Roadmapping (18 transiciones bloqueadas)"
       ],
       "short_term_investments": [],
       "long_term_strategy": [
@@ -3467,32 +3639,34 @@
       "training_programs": [],
       "hiring_priorities": [
         {
-          "skill_required": "Data",
+          "skill_required": "Stakeholder Management",
           "urgency_level": "HIGH",
           "roles_blocked": [
-            "R-MTX-ARCH",
-            "R-DATA-ANL"
+            "R-CRT-LEAD",
+            "R-STR-LEAD",
+            "R-PM"
           ],
           "recommended_level": "Senior/Expert",
           "hiring_timeline": "1-2 meses",
           "budget_impact": "HIGH"
         },
         {
-          "skill_required": "Analisis",
+          "skill_required": "OKRs y Roadmapping",
           "urgency_level": "HIGH",
           "roles_blocked": [
             "R-STR-LEAD",
-            "R-STR-SR"
+            "R-PM"
           ],
           "recommended_level": "Senior/Expert",
           "hiring_timeline": "1-2 meses",
           "budget_impact": "HIGH"
         },
         {
-          "skill_required": "Uiux",
+          "skill_required": "CRM y Customer Data",
           "urgency_level": "HIGH",
           "roles_blocked": [
-            "R-DSN-SR"
+            "R-CRM-ADMIN",
+            "R-MTX-ARCH"
           ],
           "recommended_level": "Senior/Expert",
           "hiring_timeline": "1-2 meses",
@@ -3528,12 +3702,12 @@
     "employees_analyzed": 10,
     "roles_analyzed": 10,
     "ready_transitions": 3,
-    "critical_bottlenecks": 4,
+    "critical_bottlenecks": 19,
     "chapters_needing_attention": 5,
     "key_insights": [
       "Readiness rate: 11.1% of analyzed transitions are ready",
-      "Critical bottlenecks: 4 skills blocking multiple transitions",
-      "Investment priority: Data"
+      "Critical bottlenecks: 19 skills blocking multiple transitions",
+      "Investment priority: Analítica y Métricas"
     ],
     "next_steps": [
       "Review individual development plans for high-potential employees",

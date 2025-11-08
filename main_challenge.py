@@ -415,7 +415,10 @@ class TalentGapAnalyzer:
                 org_config = json.load(f)
             
             roles_necesarios = vision_data.get('roles_necesarios', [])
-            roles_data = org_config.get('roles', {})
+            roles_list = org_config.get('roles', [])
+            
+            # Convertir lista de roles a diccionario para acceso rápido
+            roles_data = {role['id']: role for role in roles_list}
             
             # 1. CALCULAR DEMANDA: Contar skills requeridos en roles futuros
             skill_demand = defaultdict(int)
@@ -427,9 +430,10 @@ class TalentGapAnalyzer:
                 
                 if role_id in roles_data:
                     role_info = roles_data[role_id]
-                    required_skills = role_info.get('skills_requeridas', {})
+                    required_skills = role_info.get('habilidades_requeridas', [])
                     
-                    for skill_id, level in required_skills.items():
+                    # required_skills es una lista ["S-CRM", "S-ANALYTICS"], no un dict
+                    for skill_id in required_skills:
                         skill_demand[skill_id] += cantidad
                         if role_id not in skill_to_roles[skill_id]:
                             skill_to_roles[skill_id].append(role_id)
@@ -1051,12 +1055,12 @@ class TalentGapAnalyzer:
         Returns:
             Título del rol o el ID si no se encuentra
         """
-        # Buscar primero en org_config
+        # Buscar primero en org_config (que es una lista)
         if self.org_config:
-            roles = self.org_config.get('roles', {})
-            if role_id in roles:
-                role_info = roles[role_id]
-                return role_info.get('titulo', role_info.get('title', role_id))
+            roles_list = self.org_config.get('roles', [])
+            for role in roles_list:
+                if role.get('id') == role_id:
+                    return role.get('título', role.get('title', role_id))
         
         # Buscar en vision_futura roles_necesarios
         if self.vision_futura:

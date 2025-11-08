@@ -1,0 +1,482 @@
+{
+  "R-CRM-ADMIN": {
+    "role_id": "R-CRM-ADMIN",
+    "role_title": "CRM Admin (HubSpot)",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-CRM",
+        "skill_name": "CRM y Customer Data",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-AUTOM",
+        "skill_name": "Automatización y Workflows",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-EMAIL",
+        "skill_name": "Email Marketing",
+        "gap_percentage": 70.0,
+        "blocked_transitions": 7,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 4,
+    "highest_gap": 80.0,
+    "total_blocked_transitions": 63
+  },
+  "R-DATA-ANL": {
+    "role_id": "R-DATA-ANL",
+    "role_title": "Data Analyst",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-DATA",
+        "skill_name": "Arquitectura de Datos",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-SQLPY",
+        "skill_name": "SQL y Python",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ABTEST",
+        "skill_name": "A/B Testing y Experimentación",
+        "gap_percentage": 75.0,
+        "blocked_transitions": 15,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 4,
+    "highest_gap": 80.0,
+    "total_blocked_transitions": 71
+  },
+  "R-STR-LEAD": {
+    "role_id": "R-STR-LEAD",
+    "role_title": "Head of Strategy",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-OKR",
+        "skill_name": "OKRs y Roadmapping",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 18,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-PM",
+        "skill_name": "Project Management",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALISIS",
+        "skill_name": "Análisis Estratégico",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 8,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stakeholder Management",
+        "gap_percentage": 76.66666666666667,
+        "blocked_transitions": 23,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 5,
+    "highest_gap": 90.0,
+    "total_blocked_transitions": 89
+  },
+  "R-MTX-ARCH": {
+    "role_id": "R-MTX-ARCH",
+    "role_title": "Martech Architect",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-CRM",
+        "skill_name": "CRM y Customer Data",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-DATA",
+        "skill_name": "Arquitectura de Datos",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-SQLPY",
+        "skill_name": "SQL y Python",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-AUTOM",
+        "skill_name": "Automatización y Workflows",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 5,
+    "highest_gap": 80.0,
+    "total_blocked_transitions": 88
+  },
+  "R-PERF-SPEC": {
+    "role_id": "R-PERF-SPEC",
+    "role_title": "Performance Media Specialist",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-ADS-META",
+        "skill_name": "Meta Ads (Facebook/Instagram)",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 9,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ADS-GA",
+        "skill_name": "Google Ads y Analytics",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ABTEST",
+        "skill_name": "A/B Testing y Experimentación",
+        "gap_percentage": 75.0,
+        "blocked_transitions": 15,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 4,
+    "highest_gap": 90.0,
+    "total_blocked_transitions": 64
+  },
+  "R-PM": {
+    "role_id": "R-PM",
+    "role_title": "Project Manager",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-OKR",
+        "skill_name": "OKRs y Roadmapping",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 18,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-PM",
+        "skill_name": "Project Management",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stakeholder Management",
+        "gap_percentage": 76.66666666666667,
+        "blocked_transitions": 23,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 4,
+    "highest_gap": 90.0,
+    "total_blocked_transitions": 81
+  },
+  "R-SEO-SEM": {
+    "role_id": "R-SEO-SEM",
+    "role_title": "SEO/SEM Manager",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-SEO",
+        "skill_name": "SEO y Posicionamiento",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 9,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ADS-GA",
+        "skill_name": "Google Ads y Analytics",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 3,
+    "highest_gap": 90.0,
+    "total_blocked_transitions": 49
+  },
+  "R-SMM": {
+    "role_id": "R-SMM",
+    "role_title": "Social Media Strategist",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-SOCIAL",
+        "skill_name": "Social Media Strategy",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 9,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-COPY",
+        "skill_name": "Copywriting y Contenido",
+        "gap_percentage": 70.0,
+        "blocked_transitions": 14,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analítica y Métricas",
+        "gap_percentage": 30.0,
+        "blocked_transitions": 24,
+        "priority": "LOW",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 3,
+    "highest_gap": 90.0,
+    "total_blocked_transitions": 47
+  },
+  "R-CRT-LEAD": {
+    "role_id": "R-CRT-LEAD",
+    "role_title": "Creative Director",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-STORY",
+        "skill_name": "Storytelling y Narrativa",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 9,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-BRAND",
+        "skill_name": "Branding y Identidad",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stakeholder Management",
+        "gap_percentage": 76.66666666666667,
+        "blocked_transitions": 23,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-COPY",
+        "skill_name": "Copywriting y Contenido",
+        "gap_percentage": 70.0,
+        "blocked_transitions": 14,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 4,
+    "highest_gap": 90.0,
+    "total_blocked_transitions": 62
+  },
+  "R-DSN-SR": {
+    "role_id": "R-DSN-SR",
+    "role_title": "Senior Brand/UI Designer",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-UIUX",
+        "skill_name": "UI/UX Design",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 9,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-FIGMA",
+        "skill_name": "Diseño en Figma",
+        "gap_percentage": 90.0,
+        "blocked_transitions": 9,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      },
+      {
+        "skill_id": "S-BRAND",
+        "skill_name": "Branding y Identidad",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 0,
+        "demanda_proyectada": 0,
+        "capacidad_actual": 0
+      }
+    ],
+    "total_bottlenecks": 3,
+    "highest_gap": 90.0,
+    "total_blocked_transitions": 34
+  }
+}
