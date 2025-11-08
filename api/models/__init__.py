@@ -21,17 +21,16 @@ from models.role import (
     Modality
 )
 from models.hr_forms import (
-    HREmployeeSkillForm,
-    HREmployeeEvaluationForm,
-    HRProjectDedicationForm,
-    HRBulkProjectDedication,
-    HRNewEmployeeForm,
     HRRoleDefinitionForm,
     HRGapAnalysisRequest,
     HRGapAnalysisResponse,
     EmployeeSkillGap,
-    HRBulkSkillUpdate,
-    HRValidationResponse
+    HRValidationResponse,
+    HREmployeeSubmitForm,
+    HREmployeeSubmitResponse,
+    HREmployeeSkillSubmit,
+    HREmployeeAmbitionsSubmit,
+    HREmployeeDedicationSubmit
 )
 from models.company import (
     Organization,
@@ -61,17 +60,16 @@ __all__ = [
     "SeniorityLevel",
     "Modality",
     # HR Forms
-    "HREmployeeSkillForm",
-    "HREmployeeEvaluationForm",
-    "HRProjectDedicationForm",
-    "HRBulkProjectDedication",
-    "HRNewEmployeeForm",
     "HRRoleDefinitionForm",
     "HRGapAnalysisRequest",
     "HRGapAnalysisResponse",
     "EmployeeSkillGap",
-    "HRBulkSkillUpdate",
     "HRValidationResponse",
+    "HREmployeeSubmitForm",
+    "HREmployeeSubmitResponse",
+    "HREmployeeSkillSubmit",
+    "HREmployeeAmbitionsSubmit",
+    "HREmployeeDedicationSubmit",
     # Company models
     "Organization",
     "CompanyConfig",

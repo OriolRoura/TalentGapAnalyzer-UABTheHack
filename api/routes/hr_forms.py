@@ -4,24 +4,19 @@ Endpoints for HR department to input data and request gap analysis
 """
 
 from fastapi import APIRouter, HTTPException, BackgroundTasks
-from typing import List
 from datetime import datetime
 import uuid
 
 from models.hr_forms import (
-    HREmployeeSkillForm,
-    HREmployeeEvaluationForm,
-    HRProjectDedicationForm,
-    HRBulkProjectDedication,
-    HRNewEmployeeForm,
     HRRoleDefinitionForm,
     HRGapAnalysisRequest,
     HRGapAnalysisResponse,
-    HRBulkSkillUpdate,
-    HRValidationResponse
+    HRValidationResponse,
+    HREmployeeSubmitForm,
+    HREmployeeSubmitResponse
 )
 from models.employee import Employee, EmployeeCreate, Ambitions, Metadata
-from models.role import Role, RoleCreate, SeniorityLevel
+from models.role import Role, RoleCreate
 from services.data_loader import data_loader
 from services.validation_service import ValidationService
 from services.gap_service import GapAnalysisService
@@ -29,156 +24,105 @@ from services.gap_service import GapAnalysisService
 router = APIRouter()
 
 
-@router.post("/employee/new", response_model=Employee, status_code=201)
-async def submit_new_employee_form(form: HRNewEmployeeForm):
+@router.post("/employee/submit", response_model=HREmployeeSubmitResponse, status_code=200)
+async def submit_employee_profile(form: HREmployeeSubmitForm):
     """
-    HR form to add a new employee to the system
+    HR form to submit complete employee profile
     """
     employees = data_loader.get_employees()
     
-    # Generate new ID
-    new_id = max(employees.keys()) + 1 if employees else 1001
+    # Convert employee_id to int
+    try:
+        employee_id = int(form.employee_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail=f"Invalid employee_id: {form.employee_id}")
     
-    # Build skills dictionary
-    skills_dict = {skill.skill_id: skill.current_level for skill in form.initial_skills}
-    
-    # Create employee
-    employee_data = EmployeeCreate(
-        nombre=form.nombre,
-        email=form.email,
-        chapter=form.chapter,
-        rol_actual=form.rol_actual,
-        manager=form.manager,
-        antiguedad="0m",
-        habilidades=skills_dict,
-        responsabilidades_actuales=[],
-        dedicacion_actual=form.initial_dedication if form.initial_dedication else {"Unassigned": 100},
-        ambiciones=Ambitions(
-            especialidades_preferidas=[],
-            nivel_aspiracion="junior"
-        ),
-        metadata=Metadata(
-            performance_rating="B",
-            retention_risk="Baja",
-            trayectoria=f"Joined on {form.start_date}"
-        )
-    )
-    
-    employee = Employee(
-        id_empleado=new_id,
-        **employee_data.model_dump()
-    )
-    
-    # Validate
-    is_valid, errors = ValidationService.validate_employee_dedication(employee)
-    if not is_valid:
-        raise HTTPException(status_code=400, detail={"errors": errors})
-    
-    # Add to store
-    data_loader.add_employee(employee)
-    
-    return employee
-
-
-@router.post("/employee/{employee_id}/skills", status_code=200)
-async def submit_employee_skills(employee_id: int, skills: List[HREmployeeSkillForm]):
-    """
-    HR form to update employee skills
-    """
+    # Check if employee exists
     employee = data_loader.get_employee(employee_id)
     
-    if not employee:
-        raise HTTPException(status_code=404, detail=f"Employee {employee_id} not found")
+    # Build skills dictionary from submitted skills
+    skills_dict = {}
+    for skill in form.skills:
+        # Use skill name as key (you may want to map this to skill_id in production)
+        skills_dict[skill.nombre] = skill.nivel
     
-    # Update skills
-    for skill in skills:
-        if skill.employee_id != employee_id:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Skill form employee_id {skill.employee_id} does not match URL employee_id {employee_id}"
+    # Build dedication dictionary
+    dedication_dict = {
+        form.dedicacion.proyecto_actual: form.dedicacion.porcentaje_dedicacion
+    }
+    
+    if employee:
+        # Update existing employee
+        employee.nombre = form.nombre
+        employee.email = form.email
+        employee.chapter = form.chapter
+        employee.rol_actual = form.seniority
+        employee.habilidades = skills_dict
+        employee.responsabilidades_actuales = form.responsabilidades
+        employee.dedicacion_actual = dedication_dict
+        
+        # Update ambitions
+        employee.ambiciones.especialidades_preferidas = form.ambiciones.especialidades_preferidas
+        employee.ambiciones.nivel_aspiracion = form.ambiciones.nivel_aspiracion
+        
+        # Update metadata if it has additional fields (you can extend this)
+        if not hasattr(employee, 'metadata') or employee.metadata is None:
+            employee.metadata = Metadata(
+                performance_rating="B",
+                retention_risk="Baja",
+                trayectoria=""
             )
-        employee.habilidades[skill.skill_id] = skill.current_level
-    
-    # Validate skill levels
-    is_valid, errors = ValidationService.validate_skill_levels(employee)
-    if not is_valid:
-        raise HTTPException(status_code=400, detail={"errors": errors})
-    
-    # Update in store
-    data_loader.update_employee(employee_id, employee)
-    
-    return {
-        "employee_id": employee_id,
-        "skills_updated": len(skills),
-        "message": "Skills updated successfully"
-    }
-
-
-@router.post("/employee/{employee_id}/evaluation", status_code=200)
-async def submit_employee_evaluation(employee_id: int, evaluation: HREmployeeEvaluationForm):
-    """
-    HR form to submit employee evaluation
-    """
-    employee = data_loader.get_employee(employee_id)
-    
-    if not employee:
-        raise HTTPException(status_code=404, detail=f"Employee {employee_id} not found")
-    
-    if evaluation.employee_id != employee_id:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Evaluation employee_id {evaluation.employee_id} does not match URL employee_id {employee_id}"
+        
+        # Update in store
+        data_loader.update_employee(employee_id, employee)
+        message = "Employee profile updated successfully"
+    else:
+        # Create new employee
+        employee_data = EmployeeCreate(
+            nombre=form.nombre,
+            email=form.email,
+            chapter=form.chapter,
+            rol_actual=form.seniority,
+            manager="N/A",
+            antiguedad="0m",
+            habilidades=skills_dict,
+            responsabilidades_actuales=form.responsabilidades,
+            dedicacion_actual=dedication_dict,
+            ambiciones=Ambitions(
+                especialidades_preferidas=form.ambiciones.especialidades_preferidas,
+                nivel_aspiracion=form.ambiciones.nivel_aspiracion
+            ),
+            metadata=Metadata(
+                performance_rating="B",
+                retention_risk="Baja",
+                trayectoria=f"Submitted on {datetime.now().date().isoformat()}"
+            )
         )
-    
-    # Update employee metadata and ambitions
-    employee.metadata.performance_rating = evaluation.performance_rating
-    employee.metadata.retention_risk = evaluation.retention_risk
-    
-    employee.ambiciones.especialidades_preferidas = evaluation.career_aspirations
-    employee.ambiciones.nivel_aspiracion = evaluation.desired_seniority.value
-    
-    # Update in store
-    data_loader.update_employee(employee_id, employee)
-    
-    return {
-        "employee_id": employee_id,
-        "evaluation_date": evaluation.evaluation_date.isoformat(),
-        "message": "Evaluation submitted successfully"
-    }
-
-
-@router.post("/employee/{employee_id}/dedication", status_code=200)
-async def submit_project_dedication(employee_id: int, dedication: HRBulkProjectDedication):
-    """
-    HR form to update employee project dedication
-    """
-    employee = data_loader.get_employee(employee_id)
-    
-    if not employee:
-        raise HTTPException(status_code=404, detail=f"Employee {employee_id} not found")
-    
-    if dedication.employee_id != employee_id:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Dedication employee_id {dedication.employee_id} does not match URL employee_id {employee_id}"
+        
+        employee = Employee(
+            id_empleado=employee_id,
+            **employee_data.model_dump()
         )
-    
-    # Update dedication
-    employee.dedicacion_actual = dedication.dedications
+        
+        # Add to store
+        data_loader.add_employee(employee)
+        message = "Employee profile submitted successfully"
     
     # Validate
-    is_valid, errors = ValidationService.validate_employee_dedication(employee)
-    if not is_valid:
-        raise HTTPException(status_code=400, detail={"errors": errors})
+    is_valid, ded_errors = ValidationService.validate_employee_dedication(employee)
+    dedication_valid = is_valid and len(ded_errors) == 0
     
-    # Update in store
-    data_loader.update_employee(employee_id, employee)
+    is_valid_skills, skill_errors = ValidationService.validate_skill_levels(employee)
     
-    return {
-        "employee_id": employee_id,
-        "effective_date": dedication.effective_date.isoformat(),
-        "message": "Dedication updated successfully"
-    }
+    return HREmployeeSubmitResponse(
+        status="success",
+        message=message,
+        employee_id=form.employee_id,
+        validation={
+            "skills_count": len(form.skills),
+            "dedication_valid": dedication_valid
+        }
+    )
 
 
 @router.post("/role/define", response_model=Role, status_code=201)
@@ -221,45 +165,6 @@ async def submit_role_definition(form: HRRoleDefinitionForm):
     data_loader.add_role(role)
     
     return role
-
-
-@router.post("/skills/bulk-update", status_code=200)
-async def bulk_update_skills(bulk_update: HRBulkSkillUpdate):
-    """
-    HR form to update skills for multiple employees at once
-    """
-    updated_employees = []
-    errors = []
-    
-    for skill_form in bulk_update.updates:
-        employee = data_loader.get_employee(skill_form.employee_id)
-        
-        if not employee:
-            errors.append(f"Employee {skill_form.employee_id} not found")
-            continue
-        
-        # Update skill
-        employee.habilidades[skill_form.skill_id] = skill_form.current_level
-        
-        # Validate
-        is_valid, val_errors = ValidationService.validate_skill_levels(employee)
-        if not is_valid:
-            errors.extend(val_errors)
-            continue
-        
-        # Update in store
-        data_loader.update_employee(skill_form.employee_id, employee)
-        updated_employees.append(skill_form.employee_id)
-    
-    return {
-        "total_updates": len(bulk_update.updates),
-        "successful": len(updated_employees),
-        "failed": len(errors),
-        "updated_employees": updated_employees,
-        "errors": errors,
-        "updated_by": bulk_update.updated_by,
-        "reason": bulk_update.update_reason
-    }
 
 
 @router.post("/analysis/request", response_model=HRGapAnalysisResponse)

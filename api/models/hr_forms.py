@@ -4,73 +4,9 @@ For collecting data from HR department to feed into gap analysis
 """
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 from datetime import date
 from models.role import SeniorityLevel
-
-
-class HREmployeeSkillForm(BaseModel):
-    """Form for HR to input employee skills"""
-    employee_id: int
-    skill_id: str
-    skill_name: str
-    current_level: int = Field(..., ge=0, le=10, description="Current proficiency 0-10")
-    evidence_url: Optional[str] = None
-    last_assessment_date: Optional[date] = None
-    notes: Optional[str] = None
-
-
-class HREmployeeEvaluationForm(BaseModel):
-    """Form for HR to input employee evaluation data"""
-    employee_id: int
-    evaluation_date: date
-    performance_rating: str = Field(..., description="A, A-, B+, B, C")
-    retention_risk: str = Field(..., description="Baja, Media, Alta")
-    career_aspirations: List[str] = Field(default_factory=list)
-    desired_seniority: SeniorityLevel
-    strengths: List[str] = Field(default_factory=list)
-    areas_for_improvement: List[str] = Field(default_factory=list)
-    training_completed: List[str] = Field(default_factory=list)
-    manager_comments: Optional[str] = None
-
-
-class HRProjectDedicationForm(BaseModel):
-    """Form for HR to input project dedication"""
-    employee_id: int
-    project_name: str
-    dedication_percentage: int = Field(..., ge=0, le=100)
-    start_date: date
-    end_date: Optional[date] = None
-    role_in_project: str
-
-
-class HRBulkProjectDedication(BaseModel):
-    """Form for updating all dedications for an employee"""
-    employee_id: int
-    dedications: Dict[str, int] = Field(..., description="Project name to percentage mapping")
-    effective_date: date
-
-    @field_validator('dedications')
-    @classmethod
-    def validate_dedication_sum(cls, v):
-        """Validate that dedication percentages sum to 100"""
-        total = sum(v.values())
-        if total != 100:
-            raise ValueError(f"Dedication percentages must sum to 100%, got {total}%")
-        return v
-
-
-class HRNewEmployeeForm(BaseModel):
-    """Form for HR to add a new employee"""
-    nombre: str
-    email: EmailStr
-    chapter: str
-    rol_actual: str
-    manager: Optional[str] = None
-    start_date: date
-    contract_type: str = Field(..., description="FT, PT, Freelance")
-    initial_skills: List[HREmployeeSkillForm] = Field(default_factory=list)
-    initial_dedication: Dict[str, int] = Field(default_factory=dict)
 
 
 class HRRoleDefinitionForm(BaseModel):
@@ -133,16 +69,53 @@ class EmployeeSkillGap(BaseModel):
     recommendations: List[str] = Field(default_factory=list)
 
 
-class HRBulkSkillUpdate(BaseModel):
-    """Form for bulk updating skills for multiple employees"""
-    updates: List[HREmployeeSkillForm]
-    update_reason: str
-    updated_by: str
-
-
 class HRValidationResponse(BaseModel):
     """Response for validation checks"""
     is_valid: bool
     errors: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)
     summary: Optional[Dict] = None
+
+
+class HREmployeeSkillSubmit(BaseModel):
+    """Skill data for employee submission"""
+    nombre: str
+    nivel: int = Field(..., ge=0, le=10)
+    experiencia_años: int = Field(..., ge=0)
+
+
+class HREmployeeAmbitionsSubmit(BaseModel):
+    """Ambitions data for employee submission"""
+    especialidades_preferidas: List[str] = Field(default_factory=list)
+    nivel_aspiracion: str
+    interes_liderazgo: bool = False
+    areas_interes: List[str] = Field(default_factory=list)
+
+
+class HREmployeeDedicationSubmit(BaseModel):
+    """Dedication data for employee submission"""
+    proyecto_actual: str
+    porcentaje_dedicacion: int = Field(..., ge=0, le=100)
+    horas_semana: int = Field(..., ge=0)
+
+
+class HREmployeeSubmitForm(BaseModel):
+    """Form for submitting complete employee profile"""
+    employee_id: str
+    nombre: str
+    email: EmailStr
+    chapter: str
+    seniority: str
+    modalidad: str
+    skills: List[HREmployeeSkillSubmit]
+    responsabilidades: List[str]
+    ambiciones: HREmployeeAmbitionsSubmit
+    dedicacion: HREmployeeDedicationSubmit
+
+
+class HREmployeeSubmitResponse(BaseModel):
+    """Response for employee submission"""
+    status: str
+    message: str
+    employee_id: str
+    validation: Dict[str, Any]
