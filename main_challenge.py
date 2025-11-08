@@ -1,39 +1,3 @@
-#!/usr/bin/env python3
-"""
-🎯 TALENT GAP ANALYZER - UAB THE HACK 2025
-===================================================
-
-NIVEL 1: MVP - Análisis de Brechas Básico 🟢
-
-Implementación completa del algoritmo de talent gap analysis según especificaciones del challenge:
-- Pipeline de limpieza y validación de datos
-- Algoritmo de cálculo de gaps (50% skills, 25% responsabilidades, 15% ambiciones, 10% dedicación)  
-- Clasificación en bandas: READY, READY_WITH_SUPPORT, NEAR, FAR, NOT_VIABLE
-- Matriz de gaps por empleado con reproducibilidad garantizada
-- Reportería básica con visualizaciones de distribución
-- Procesamiento optimizado para hasta 300 empleados en <30 minutos
-
-Criterios de Éxito UAB The Hack:
-✅ Pipeline procesa correctamente datos de entrada
-✅ Cálculos de gap son reproducibles (mismo input = mismo output)
-✅ Reportes generados en < 30 minutos para 300 empleados
-✅ Exactitud del algoritmo validada contra casos de prueba
-✅ Clasificación correcta en bandas de readiness
-✅ Matriz de compatibilidad completa generada
-
-Challenge Requirements Output:
-1. 📊 EXECUTIVE SUMMARY - Overall readiness, critical gaps, key insights
-2. 🏆 GAP MATRIX - Empleado x Rol compatibility matrix con scores reproducibles
-3. 📋 BANDA CLASSIFICATION - Distribución READY/READY_WITH_SUPPORT/NEAR/FAR/NOT_VIABLE
-4. 🚨 BOTTLENECK ANALYSIS - Skills críticos que bloquean múltiples transiciones
-5. 📈 PERFORMANCE METRICS - Tiempo de procesamiento, exactitud, reproducibilidad
-6. 💾 EXPORT ARTIFACTS - CSV/JSON outputs para validación externa
-
-Autor: Algorithm Team - UAB The Hack 2025
-Challenge: Quether Consulting - Talent Gap Analyzer
-Tiempo objetivo: < 30 minutos para 300 empleados
-"""
-
 import json
 import pandas as pd
 import numpy as np
@@ -48,7 +12,6 @@ from collections import defaultdict, Counter
 # Agregar el directorio algorithm al path
 sys.path.append(str(Path(__file__).parent))
 
-from algorithm import TalentGapAlgorithm
 from algorithm.models import SkillLevel, GapBand
 
 class TalentGapAnalyzer:
