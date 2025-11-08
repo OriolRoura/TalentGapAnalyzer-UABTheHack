@@ -69,11 +69,11 @@ const Dashboard = () => {
 
   if (matrixEmployee) {
     return (
-      <div className="p-4 bg-gray-50 min-h-screen">
-        <div className="max-w-7xl mx-auto">
+      <div class="p-4 bg-gray-50 min-h-screen">
+        <div class="max-w-7xl mx-auto">
           <button
             onClick={handleCloseDetail}
-            className="flex items-center font-semibold mb-6 p-3 px-4 rounded-lg bg-white shadow-md border border-gray-200 hover:bg-gray-100 transition duration-150"
+            class="flex items-center font-semibold mb-6 p-3 px-4 rounded-lg bg-white shadow-md border border-gray-200 hover:bg-gray-100 transition duration-150"
           >
             Volver al listado
           </button>
@@ -85,11 +85,11 @@ const Dashboard = () => {
 
   if (selectedEmployee) {
     return (
-      <div className="p-4 bg-gray-50 min-h-screen">
-        <div className="max-w-4xl mx-auto">
+      <div class="p-4 bg-gray-50 min-h-screen">
+        <div class="max-w-4xl mx-auto">
           <button
             onClick={handleCloseDetail}
-            className="flex items-center font-semibold mb-6 p-3 px-4 rounded-lg bg-white shadow-md border border-gray-200 hover:bg-gray-100 transition duration-150"
+            class="flex items-center font-semibold mb-6 p-3 px-4 rounded-lg bg-white shadow-md border border-gray-200 hover:bg-gray-100 transition duration-150"
           >
             Volver al listado
           </button>
@@ -101,7 +101,7 @@ const Dashboard = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div class="flex justify-center items-center min-h-screen">
         <LoadingSpinner loadText="Cargando empleados..."/>
       </div>
     );
@@ -109,12 +109,12 @@ const Dashboard = () => {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center p-6 bg-red-50 rounded-lg border border-red-200">
-          <p className="text-red-800 text-lg font-medium">{error}</p>
+      <div class="flex justify-center items-center min-h-screen">
+        <div class="text-center p-6 bg-red-50 rounded-lg border border-red-200">
+          <p class="text-red-800 text-lg font-medium">{error}</p>
           <button 
             onClick={() => window.location.reload()} 
-            className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+            class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
           >
             Reintentar
           </button>
@@ -124,45 +124,51 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="relative w-full p-4">
-      <div className="sticky top-0 bg-white z-10 pb-4 border-b border-gray-300">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="mb-5 text-black text-2xl font-bold sm:text-3xl sm:tracking-tight text-center w-full">
-            Resumen del talento actual
-          </h2>
-          <div className="absolute top-4 right-4 text-right text-xl font-medium text-gray-700">
-            Empleados: <span className="text-indigo-600 font-bold">{filteredEmployees.length}</span>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-white rounded-lg shadow-sm">
+          <div className="sticky top-0 bg-white z-10 p-6 border-b border-gray-200 rounded-t-lg">
+            <div className="relative flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+                Resumen del talento actual
+              </h2>
+              <div className="text-right text-lg font-medium text-gray-700">
+                Empleados: <span className="text-indigo-600 font-bold">{filteredEmployees.length}</span>
+              </div>
+            </div>
 
-        <div className="flex justify-left">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={onEmployeeSearch}
-            className="w-full md:w-1/2 border-2 border-gray-300 rounded-lg p-3 pl-4 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
-            placeholder="Busca un empleado por nombre..."
-          />
-        </div>
-      </div>
-
-      <div className="mt-8">
-        {filteredEmployees.length === 0 ? (
-          <p className="text-center text-gray-500 mt-12 text-lg">
-            No se encontraron empleados. Intenta con otra búsqueda.
-          </p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-            {filteredEmployees.map((emp) => (
-              <EmployeeCard
-                key={emp.id_empleado}
-                employee={emp}
-                onSelectEmployee={handleSelectEmployee} // For general card click (optional)
-                onSecondaryAction={handleViewMatrix}   // For the "Ver matriz" button
+            <div className="w-full max-w-2xl">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={onEmployeeSearch}
+                className="w-full border-2 border-gray-300 rounded-lg p-3 pl-4 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
+                placeholder="Busca un empleado por nombre..."
               />
-            ))}
+            </div>
           </div>
-        )}
+
+          <div className="p-6">
+            {filteredEmployees.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">
+                  No se encontraron empleados. Intenta con otra búsqueda.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredEmployees.map((emp) => (
+                  <EmployeeCard
+                    key={emp.id_empleado}
+                    employee={emp}
+                    onSelectEmployee={handleSelectEmployee}
+                    onSecondaryAction={handleViewMatrix}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -139,9 +139,8 @@ const GapMatrix = ({ data }) => {
                 </p>
             </header>
 
-            {/* THE COMPATIBILITY MATRIX TABLE */}
-            <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
+            {/* Card Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <thead className="bg-gray-50 sticky top-0">
                         <tr>
                             <th
