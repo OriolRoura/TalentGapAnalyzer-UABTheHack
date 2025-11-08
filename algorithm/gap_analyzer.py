@@ -205,8 +205,6 @@ class GapAnalyzer:
         employees_dict = {emp.id: emp for emp in employees}
         
         # Analizar gaps para cada rol
-        debug_info = []  # Para debugging
-        
         for role_id, role in roles_catalog.items():
             # Obtener candidatos para este rol ordenados por score
             candidates_results = compatibility_matrix.get_role_candidates(role_id)
@@ -216,15 +214,6 @@ class GapAnalyzer:
                 result for result in candidates_results
                 if result.overall_score >= score_threshold
             ]
-            
-            # DEBUG: Guardar info de todos los roles
-            debug_info.append({
-                'role_id': role_id,
-                'role_title': role.titulo,
-                'total_candidates': len(candidates_results),
-                'viable_candidates': len(viable_candidates),
-                'skills_required': len(role.habilidades_requeridas)
-            })
             
             # Si no hay candidatos viables, reportar TODOS los skills como gaps críticos
             if not viable_candidates:
@@ -247,8 +236,6 @@ class GapAnalyzer:
                             'candidates_details': [],
                             'no_viable_candidates': True  # Flag especial
                         })
-                    
-                    debug_info[-1]['gaps_found'] = len(required_skills_list)
                 
                 continue
             
@@ -311,9 +298,6 @@ class GapAnalyzer:
                     reverse=True
                 )
                 
-                # DEBUG: Agregar info de gaps encontrados en este rol
-                debug_info[-1]['gaps_found'] = len(sorted_gaps)
-                
                 for skill_id, gap_info in sorted_gaps:
                     critical_gaps.append({
                         'role_id': role_id,
@@ -335,22 +319,6 @@ class GapAnalyzer:
         
         # Ordenar por criticidad descendente
         critical_gaps.sort(key=lambda x: x['criticality_score'], reverse=True)
-        
-        # DEBUG: Mostrar info de todos los roles analizados
-        print("\n" + "="*80)
-        print("🔍 DEBUG: ANÁLISIS DE TODOS LOS ROLES")
-        print("="*80)
-        for info in debug_info:
-            status = "✅" if info['viable_candidates'] > 0 else "❌"
-            gaps_str = f"Gaps: {info.get('gaps_found', 0):2d}" if 'gaps_found' in info else "Gaps:  0 (todos skills OK)"
-            print(f"{status} {info['role_title'][:35]:<35} | Viables: {info['viable_candidates']:2d} | Skills req: {info['skills_required']:2d} | {gaps_str}")
-        
-        print(f"\n📊 RESUMEN:")
-        print(f"  Roles analizados: {len(debug_info)}")
-        print(f"  Roles con candidatos viables: {sum(1 for i in debug_info if i['viable_candidates'] > 0)}")
-        print(f"  Roles con gaps detectados: {sum(1 for i in debug_info if i.get('gaps_found', 0) > 0)}")
-        print(f"  Total critical gaps (skills): {len(critical_gaps)}")
-        print("="*80 + "\n")
         
         return critical_gaps
     

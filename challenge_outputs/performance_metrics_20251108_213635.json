@@ -1,0 +1,14 @@
+{
+  "performance": {
+    "data_loading_time": 0.005877971649169922,
+    "algorithm_time": 0.003609895706176758
+  },
+  "validation": {
+    "total_employees": 10,
+    "errors": [],
+    "warnings": [],
+    "validation_time": 0.0006220340728759766
+  },
+  "timestamp": "20251108_213635",
+  "challenge_level": "NIVEL_1_MVP"
+}

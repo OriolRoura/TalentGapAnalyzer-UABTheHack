@@ -629,9 +629,11 @@ class TalentGapAnalyzer:
             print(f"   • Best Match Score: {max(all_scores):.3f}")
             print(f"   • Worst Match Score: {min(all_scores):.3f}")
         
-        # Top 10 matches para validación
-        print(f"\n🏆 TOP 10 EMPLOYEE-ROLE MATCHES (for validation):")
-        all_matches = []
+        # Top 5 matches POR ROL para validación
+        print(f"\n🏆 TOP 5 EMPLOYEE MATCHES PER ROLE (for validation):")
+        
+        # Agrupar matches por rol
+        matches_by_role = defaultdict(list)
         
         # Procesar lista de resultados de compatibilidad
         for item in compatibility_matrix:
@@ -643,18 +645,26 @@ class TalentGapAnalyzer:
                 role_id = item.get('role_id', 'Unknown')
                 role_title = item.get('role_title', role_id)
                 
-                all_matches.append({
+                matches_by_role[role_id].append({
+                    'role_title': role_title,
                     'employee': emp_name,
-                    'role': role_title,
                     'score': score,
                     'band': band
                 })
-                
-        all_matches.sort(key=lambda x: x['score'], reverse=True)
         
-        for i, match in enumerate(all_matches[:10], 1):
-            print(f"   {i:2d}. {match['employee']} → {match['role']}: "
-                  f"{match['score']:.3f} ({match['band']})")
+        # Ordenar matches dentro de cada rol y mostrar top 5
+        for role_id in sorted(matches_by_role.keys()):
+            matches = matches_by_role[role_id]
+            matches.sort(key=lambda x: x['score'], reverse=True)
+            
+            role_title = matches[0]['role_title'] if matches else role_id
+            print(f"\n   📌 {role_title}:")
+            
+            for i, match in enumerate(matches[:5], 1):
+                print(f"      {i}. {match['employee']}: {match['score']:.3f} ({match['band']})")
+            
+            if len(matches) > 5:
+                print(f"      ... ({len(matches) - 5} more candidates)")
             
         print()
         

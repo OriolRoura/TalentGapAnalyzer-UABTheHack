@@ -1,0 +1,98 @@
+{
+  "R-PM": {
+    "role_id": "R-PM",
+    "role_title": "Project Manager",
+    "critical_gaps": [
+      {
+        "skill_id": "S-PM",
+        "skill_name": "Pm",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0
+      },
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stake",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analytics",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0
+      },
+      {
+        "skill_id": "S-OKR",
+        "skill_name": "Okr",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0
+      }
+    ],
+    "total_gaps": 4,
+    "highest_priority": "CRÍTICA"
+  },
+  "R-SMM": {
+    "role_id": "R-SMM",
+    "role_title": "Social Media Strategist",
+    "critical_gaps": [
+      {
+        "skill_id": "S-SOCIAL",
+        "skill_name": "Social",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0
+      },
+      {
+        "skill_id": "S-COPY",
+        "skill_name": "Copy",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analytics",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0
+      }
+    ],
+    "total_gaps": 3,
+    "highest_priority": "CRÍTICA"
+  },
+  "R-CRT-LEAD": {
+    "role_id": "R-CRT-LEAD",
+    "role_title": "Creative Director",
+    "critical_gaps": [
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stake",
+        "avg_gap_percentage": 66.66666666666666,
+        "candidates_affected": 1,
+        "total_viable_candidates": 1,
+        "priority": "CRÍTICA",
+        "criticality_score": 66.66666666666666
+      }
+    ],
+    "total_gaps": 1,
+    "highest_priority": "CRÍTICA"
+  }
+}
