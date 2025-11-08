@@ -6,7 +6,6 @@ import Dashboard from "./components/Dashboard";
 import Forms from "./components/Forms";
 import FutureVision from "./components/FutureVision";
 
-
 import './App.css'
 
 function App() {

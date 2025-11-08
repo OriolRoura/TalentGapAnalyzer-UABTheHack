@@ -1,5 +1,16 @@
+import React from 'react';
+import { FutureVisionForm } from './FutureVisionForm';
+import { SkillBottleneck } from './bottleneck/SkillBottleneck';
+
 const FutureVision = () => {
-  return <h1 class="text-2xl text-red-600">FUTUREe!!</h1>;
-}
+  return (
+    <div className="container mx-auto p-6 max-w-[1400px]">
+      <div className="space-y-6">
+        <FutureVisionForm />
+        <SkillBottleneck />
+      </div>
+    </div>
+  );
+};
 
 export default FutureVision;

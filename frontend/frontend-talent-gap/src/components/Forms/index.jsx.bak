@@ -1,0 +1,516 @@
+import React from 'react';
+import { EmployeeForm } from './EmployeeForm';
+import './forms.css';
+
+const Forms = () => {
+
+  useEffect(() => {
+    // mock fetch roles (taken from dataset examples)
+    const mockRoles = [
+      'Head of Strategy',
+      'Project Manager',
+      'Martech Architect',
+      'CRM Admin (HubSpot)',
+      'Data Analyst',
+      'Creative Director',
+      'Senior Brand/UI Designer',
+      'Performance Media Specialist',
+      'SEO/SEM Manager',
+      'Social Media Strategist',
+    ];
+    setRoles(mockRoles);
+    if (!rol_actual) setRolActual(mockRoles[0]);
+
+    // mock chapters and skills (these will come from API later)
+    const mockChapters = [
+      'Strategy',
+      'Creative',
+      'Design',
+      'Influency',
+      'Performance',
+      'Martech',
+    ];
+    setChapters(mockChapters);
+  if (!chapter) setChapter(mockChapters[0]);
+
+    const mockSkills = [
+      { id: 'S-OKR', nombre: 'OKRs y Roadmapping' },
+      { id: 'S-ANALISIS', nombre: 'Análisis estratégico' },
+      { id: 'S-STAKE', nombre: 'Stakeholder management' },
+      { id: 'S-PM', nombre: 'Project management' },
+      { id: 'S-ANALYTICS', nombre: 'Analytics' },
+      { id: 'S-CRM', nombre: 'CRM' },
+      { id: 'S-AUTOM', nombre: 'Automatización' },
+      { id: 'S-DATA', nombre: 'Data engineering' },
+      { id: 'S-SQLPY', nombre: 'SQL/Python' },
+      { id: 'S-EMAIL', nombre: 'Email marketing' },
+      { id: 'S-ADS-GA', nombre: 'Ads & GA' },
+      { id: 'S-ADS-META', nombre: 'Ads Meta' },
+      { id: 'S-ABTEST', nombre: 'A/B Testing' },
+      { id: 'S-STORY', nombre: 'Storytelling' },
+      { id: 'S-COPY', nombre: 'Copywriting' },
+      { id: 'S-BRAND', nombre: 'Brand' },
+      { id: 'S-UIUX', nombre: 'UI/UX' },
+      { id: 'S-FIGMA', nombre: 'Figma' },
+      { id: 'S-GENAI', nombre: 'Generative AI' },
+      { id: 'S-SOCIAL', nombre: 'Social' },
+    ];
+    setSkills(mockSkills);
+  }, []);
+  const [manager, setManager] = useState('');
+  const [antiguedad, setAntiguedad] = useState(0); // number of months (always append 'm')
+
+  // habilidades: list of { code, level } -> to be converted to object { code: level }
+  const [habilidadesRows, setHabilidadesRows] = useState([{ code: 'S-', level: 0 }]);
+  const [newHabilidadCode, setNewHabilidadCode] = useState('');
+  const [newHabilidadLevel, setNewHabilidadLevel] = useState(5);
+
+  // responsabilidades_actuales are derived from role templates; not collected here
+
+  // dedicación_actual: list of { project, percent }
+  // available dedication projects (mocked from CSV examples)
+  const dedAvailableProjects = [
+    'Royal',
+    'Arquimbau',
+    'Quether GTM',
+    'I+D',
+    'Internal Ops',
+    'Events',
+  ];
+
+  // selected dedicacion rows mapping to percent
+  const [dedicacionRows, setDedicacionRows] = useState([]); // { project, percent }
+  const [dedicationSelect, setDedicationSelect] = useState(''); // free-typing combobox (datalist)
+
+  // ambiciones: prefered specialties (as rows with percent) and nivel_aspiración
+  const [nivelAspiracion, setNivelAspiracion] = useState('');
+
+  // available specialties (mock)
+  const especialidadesAvailable = [
+    'Data Analysis',
+    'Frontend',
+    'Backend',
+    'UX/UI',
+    'SEO',
+    'Performance',
+    'CRM',
+    'Strategy',
+  ];
+
+  // selected specialties as rows { name, percent }
+  const [especialidadesRows, setEspecialidadesRows] = useState([]);
+  const [especialidadSelect, setEspecialidadSelect] = useState(''); // datalist input
+  const [especialidadesError, setEspecialidadesError] = useState(null);
+
+  // structured metadata object (based on CSV examples)
+  const [metadataObj, setMetadataObj] = useState({
+    performance_rating: '',
+    retention_risk: '',
+    trayectoria: '',
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [dedicationError, setDedicationError] = useState(null);
+
+  // helpers for rows
+  function updateHabilidad(i, key, value) {
+    setHabilidadesRows((prev) => {
+      const copy = [...prev];
+      copy[i] = { ...copy[i], [key]: value };
+      return copy;
+    });
+  }
+  function addHabilidad() {
+    setHabilidadesRows((p) => [...p, { code: '', level: 0 }]);
+  }
+  function addHabilidadFromSelector() {
+    const code = newHabilidadCode && newHabilidadCode.trim();
+    if (!code) return;
+    setHabilidadesRows((p) => [...p, { code, level: Math.max(0, Math.min(10, Number(newHabilidadLevel || 0))) }]);
+    setNewHabilidadCode('');
+    setNewHabilidadLevel(5);
+  }
+  function removeHabilidad(i) {
+    setHabilidadesRows((p) => p.filter((_, idx) => idx !== i));
+  }
+
+  // responsabilidades are derived from the selected role; not editable here
+
+  function updateDedicacion(i, key, value) {
+    setDedicacionRows((p) => {
+      const copy = [...p];
+      // If updating percent, clamp so total never exceeds 100
+      if (key === 'percent') {
+        const otherSum = copy.reduce((s, r, idx) => (idx === i ? s : s + Number(r.percent || 0)), 0);
+        const maxAllowed = Math.max(0, 100 - otherSum);
+        const newVal = Math.max(0, Math.min(maxAllowed, Number(value || 0)));
+        copy[i] = { ...copy[i], percent: newVal };
+      } else {
+        copy[i] = { ...copy[i], [key]: value };
+      }
+      return copy;
+    });
+  }
+  function addDedicacion() {
+    setDedicacionRows((p) => [...p, { project: '', percent: 0 }]);
+  }
+  function removeDedicacion(i) {
+    setDedicacionRows((p) => p.filter((_, idx) => idx !== i));
+  }
+
+  function updateEspecialidadRow(i, key, value) {
+    setEspecialidadesRows((p) => {
+      const copy = [...p];
+      if (key === 'percent') {
+        const otherSum = copy.reduce((s, r, idx) => (idx === i ? s : s + Number(r.percent || 0)), 0);
+        const maxAllowed = Math.max(0, 100 - otherSum);
+        const newVal = Math.max(0, Math.min(maxAllowed, Number(value || 0)));
+        copy[i] = { ...copy[i], percent: newVal };
+      } else {
+        copy[i] = { ...copy[i], [key]: value };
+      }
+      return copy;
+    });
+  }
+  function addEspecialidadRow(name) {
+    setEspecialidadesRows((p) => [...p, { name: name || '', percent: 0 }]);
+  }
+  function removeEspecialidadRow(i) {
+    setEspecialidadesRows((p) => p.filter((_, idx) => idx !== i));
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    setSubmitting(true);
+    setMessage(null);
+
+    // Build habilidades object { "S-OKR": 9, ... } and clamp levels to 0-10
+    const habilidadesObj = {};
+    habilidadesRows.forEach((r) => {
+      if (r.code && r.code.trim()) {
+        const lvl = Math.max(0, Math.min(10, Number(r.level || 0)));
+        habilidadesObj[r.code] = lvl;
+      }
+    });
+
+  // responsabilidades are derived from role templates; omitted from payload
+
+    // dedicación object { project: percent }
+    const dedicacionObj = {};
+    dedicacionRows.forEach((d) => {
+      if (d.project && d.project.trim()) {
+        dedicacionObj[d.project] = Number(d.percent) || 0;
+      }
+    });
+
+    // validate dedication sums to 100 if any selected
+    const totalDed = dedicacionRows.reduce((s, r) => s + Number(r.percent || 0), 0);
+    if (dedicacionRows.length > 0 && totalDed !== 100) {
+      setDedicationError('Total dedicación must sum to 100% (currently ' + totalDed + '%)');
+      setSubmitting(false);
+      return;
+    }
+    setDedicationError(null);
+
+    // build ambiciones especialidades as object { name: percent }
+    const especialidadesObj = {};
+    especialidadesRows.forEach((r) => {
+      if (r.name && r.name.trim()) {
+        especialidadesObj[r.name] = Number(r.percent) || 0;
+      }
+    });
+    const totalEsp = especialidadesRows.reduce((s, r) => s + Number(r.percent || 0), 0);
+    if (especialidadesRows.length > 0 && totalEsp !== 100) {
+      setEspecialidadesError('Total especialidades must sum to 100% (currently ' + totalEsp + '%)');
+      setSubmitting(false);
+      return;
+    }
+    setEspecialidadesError(null);
+
+    const ambicionesObj = {
+      especialidades_preferidas: especialidadesObj,
+      "nivel_aspiración": nivelAspiracion,
+    };
+
+    // Assemble payload matching CSV columns (except id if user prefers)
+    const payload = {
+      nombre,
+      email,
+      chapter,
+      rol_actual,
+      manager,
+  'antigüedad': `${antiguedad}m`,
+      habilidades: JSON.stringify(habilidadesObj),
+  // responsabilidades_actuales omitted (driven by role template)
+      'dedicación_actual': JSON.stringify(dedicacionObj),
+      ambiciones: JSON.stringify(ambicionesObj),
+      metadata: JSON.stringify(metadataObj),
+    };
+
+    try {
+      await submitForm(payload);
+      setMessage({ type: 'success', text: 'CSV-like line submitted (except id).' });
+    } catch (err) {
+      console.error(err);
+      setMessage({ type: 'error', text: err?.message || 'Submit failed' });
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="forms-container forms-root">
+      <div className="main-card form-card">
+        <h2 className="form-title">Nuevo usuario</h2>
+        <form onSubmit={onSubmit} className="form">
+        <div className="form-row-3">
+          <div className="form-field">
+            <label className="label">Nombre</label>
+            <input value={nombre} onChange={(e) => setNombre(e.target.value)} className="input" required />
+          </div>
+          <div className="form-field">
+            <label className="label">Email</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input" required />
+          </div>
+          <div className="form-field">
+           <label className="label">Capítulo</label>
+            <select value={chapter} onChange={(e) => setChapter(e.target.value)} className="select">
+              <option value=""></option>
+              {chapters.map((c) => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+        </div>
+        <div className="form-row-3">
+          <div className="form-field">
+            <label className="label">Rol actual</label>
+            <select value={rol_actual} onChange={(e) => setRolActual(e.target.value)} className="select">
+              {roles.map((r) => (
+                <option key={r} value={r}>{r}</option>
+              ))}
+            </select>
+          </div>
+          <div className="form-field">
+            <label className="label">Gerente</label>
+            <input value={manager} onChange={(e) => setManager(e.target.value)} className="input" />
+          </div>
+          <div className="form-field">
+            <label className="label">Antigüedad (months)</label>
+            <div className="field-row">
+              <div className="value-col"><input type="number" min={0} value={antiguedad} onChange={(e) => setAntiguedad(Number(e.target.value || 0))} className="input-number" /></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-row-1">
+          <div className="form-field">
+            <div className="card-section">
+              <div className="form-row-2">
+                <div>
+                  <label className="label">performance_rating</label>
+                  <select value={metadataObj.performance_rating} onChange={(e) => setMetadataObj((m) => ({ ...m, performance_rating: e.target.value }))} className="select">
+                    <option value="">-- select rating --</option>
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B">B</option>
+                    <option value="B-">B-</option>
+                    <option value="C+">C+</option>
+                    <option value="C">C</option>
+                    <option value="C-">C-</option>
+                    <option value="D+">D+</option>
+                    <option value="D">D</option>
+                    <option value="D-">D-</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="label">retention_risk</label>
+                  <select value={metadataObj.retention_risk} onChange={(e) => setMetadataObj((m) => ({ ...m, retention_risk: e.target.value }))} className="select">
+                    <option value="">-- select risk --</option>
+                    <option value="Baja">Low (Baja)</option>
+                    <option value="Media">Medium (Media)</option>
+                    <option value="Alta">High (Alta)</option>
+                  </select>
+                </div>
+              </div>
+              <div className="thin-sep" />
+              <div>
+                <label className="label">trayectoria</label>
+                <input value={metadataObj.trayectoria} onChange={(e) => setMetadataObj((m) => ({ ...m, trayectoria: e.target.value }))} className="input" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <fieldset className="form-card">
+          <legend className="legend form-legend">Habilidades</legend>
+          <div className="card-section">
+            <div className="habilidades-top">
+              <select value={newHabilidadCode} onChange={(e) => setNewHabilidadCode(e.target.value)} className="select">
+                <option value="">-- select skill to add --</option>
+                {skills.map((s) => (
+                  <option key={s.id} value={s.id}>{s.nombre} ({s.id})</option>
+                ))}
+              </select>
+              <input type="number" min={0} max={10} value={newHabilidadLevel} onChange={(e) => setNewHabilidadLevel(Number(e.target.value || 0))} className="input-number" />
+              <button type="button" onClick={addHabilidadFromSelector} className="btn btn-add">Add habilidad</button>
+            </div>
+            <div className="thin-sep" />
+            <div className="habilidades-list">
+              {habilidadesRows.map((h, idx) => (
+                <div key={idx} className="form-row-3-small mb-05">
+                  <div className="form-field">
+                    <label className="label">Habilidad</label>
+                    <select value={h.code} onChange={(e) => updateHabilidad(idx, 'code', e.target.value)} className="select">
+                      <option value="">-- select skill --</option>
+                      {skills.map((s) => (
+                        <option key={s.id} value={s.id}>{s.nombre} ({s.id})</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-field">
+                    <label className="label">Nivel (0-10)</label>
+                    <input type="number" min={0} max={10} value={h.level} onChange={(e) => updateHabilidad(idx, 'level', Math.max(0, Math.min(10, Number(e.target.value || 0))))} className="input" />
+                  </div>
+                  <div className="form-field align-end">
+                    <button type="button" onClick={() => removeHabilidad(idx)} className="btn btn-remove">Remove</button>
+                  </div>
+                </div>
+              ))}
+              {habilidadesRows.length === 0 && (
+                <div className="mt-05">
+                  <button type="button" onClick={addHabilidad} className="btn btn-add">Add habilidad</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </fieldset>
+
+        {/* Responsabilidades are derived from role templates and are not edited in the form */}
+
+        <fieldset className="form-card">
+          <legend className="legend form-legend">Dedicación actual</legend>
+          <div className="center card-section">
+            <div className="flex-gap-sm">
+              <input list="projects" value={dedicationSelect} onChange={(e) => setDedicationSelect(e.target.value)} className="input" />
+              <datalist id="projects">
+                {dedAvailableProjects.map((p) => <option key={p} value={p} />)}
+              </datalist>
+              <button type="button" onClick={() => {
+                const v = dedicationSelect && dedicationSelect.trim();
+                const total = dedicacionRows.reduce((s, r) => s + Number(r.percent || 0), 0);
+                const remaining = Math.max(0, 100 - total);
+                if (!v) return;
+                if (remaining <= 0) {
+                  setDedicationError('No remaining dedicación available (100% reached)');
+                  return;
+                }
+                if (!dedicacionRows.find((r) => r.project === v)) {
+                  setDedicacionRows((p) => [...p, { project: v, percent: 0 }]);
+                  setDedicationError(null);
+                }
+                setDedicationSelect('');
+              }} className="btn btn-add">Add</button>
+            </div>
+          </div>
+          <div className="thin-sep" />
+
+          {dedicacionRows.length > 0 && (
+            <div className="mt-05">
+              {dedicacionRows.map((d, idx) => {
+                const otherSum = dedicacionRows.reduce((s, r, j) => (j === idx ? s : s + Number(r.percent || 0)), 0);
+                const maxAllowed = Math.max(0, 100 - otherSum);
+                return (
+                  <div key={d.project} className="field-row">
+                    <div className="label-col">{d.project}</div>
+                    <div className="value-col"><input type="number" min={0} max={maxAllowed} value={d.percent} onChange={(e) => updateDedicacion(idx, 'percent', e.target.value)} className="input-number" /></div>
+                    <div className="small-muted">max {maxAllowed}%</div>
+                    <button type="button" onClick={() => removeDedicacion(idx)} className="btn btn-remove">Remove</button>
+                  </div>
+                );
+              })}
+              <div className="small-muted">Total: {dedicacionRows.reduce((s, r) => s + Number(r.percent || 0), 0)}% — Remaining: {Math.max(0, 100 - dedicacionRows.reduce((s, r) => s + Number(r.percent || 0), 0))}%</div>
+              {dedicationError && <div className="error-text">{dedicationError}</div>}
+            </div>
+          )}
+        </fieldset>
+
+        <fieldset className="form-card">
+          <legend className="legend form-legend">Ambiciones</legend>
+          <div className="ambiciones-grid">
+            <div className="aspiracion">
+              <label className="label">nivel_aspiración</label>
+              <input list="nivelOptions" value={nivelAspiracion} onChange={(e) => setNivelAspiracion(e.target.value)} className="input" />
+              <datalist id="nivelOptions">
+                <option value="Individual Contributor" />
+                <option value="Senior" />
+                <option value="Team Lead" />
+                <option value="Manager" />
+                <option value="Director" />
+                <option value="VP" />
+              </datalist>
+            </div>
+            <div className="especialidades-column">
+              <div className="card-section">
+                <label className="label">Add specialty (or type)</label>
+                <div className="flex-gap-sm">
+                  <input list="especialidades" value={especialidadSelect} onChange={(e) => setEspecialidadSelect(e.target.value)} className="input" />
+                  <datalist id="especialidades">
+                    {especialidadesAvailable.map((s) => <option key={s} value={s} />)}
+                  </datalist>
+                  <button type="button" onClick={() => {
+                    const v = especialidadSelect && especialidadSelect.trim();
+                    const total = especialidadesRows.reduce((s, r) => s + Number(r.percent || 0), 0);
+                    const remaining = Math.max(0, 100 - total);
+                    if (!v) return;
+                    if (remaining <= 0) {
+                      setEspecialidadesError('No remaining especialidades available (100% reached)');
+                      return;
+                    }
+                    if (!especialidadesRows.find((r) => r.name === v)) {
+                      addEspecialidadRow(v);
+                      setEspecialidadesError(null);
+                    }
+                    setEspecialidadSelect('');
+                  }} className="btn btn-add">Add</button>
+                </div>
+              </div>
+              <div className="thin-sep" />
+              <div>
+                {especialidadesRows.length > 0 && (
+                  <div className="mt-05">
+                    {especialidadesRows.map((es, idx) => {
+                      const otherSum = especialidadesRows.reduce((s, r, j) => (j === idx ? s : s + Number(r.percent || 0)), 0);
+                      const maxAllowed = Math.max(0, 100 - otherSum);
+                      return (
+                        <div key={idx} className="field-row">
+                          <div className="label-col">{es.name}</div>
+                          <div className="value-col"><input type="number" min={0} max={maxAllowed} value={es.percent} onChange={(e) => updateEspecialidadRow(idx, 'percent', e.target.value)} className="input-number" /></div>
+                          <div className="small-muted">max {maxAllowed}%</div>
+                          <button type="button" onClick={() => removeEspecialidadRow(idx)} className="btn btn-remove">Remove</button>
+                        </div>
+                      );
+                    })}
+                    {especialidadesError && <div className="error-text">{especialidadesError}</div>}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <div className="form-actions">
+          <button type="submit" disabled={submitting} className="btn btn-primary">{submitting ? 'Submitting...' : 'Submit CSV line'}</button>
+        </div>
+        </form>
+      </div>
+
+      {message && (
+        <div className={`message ${message.type === 'success' ? 'message-success' : 'message-error'}`}>{message.text}</div>
+      )}
+    </div>
+  );
+};
+
+export default Forms;
