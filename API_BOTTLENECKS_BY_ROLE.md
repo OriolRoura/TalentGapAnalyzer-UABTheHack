@@ -1,26 +1,34 @@
-# API de Bottlenecks por Rol
+# API de Critical Gaps por Rol
 
 ## 📋 Descripción
 
-Este endpoint permite consultar los bottlenecks críticos que afectan a un rol específico, facilitando la toma de decisiones sobre inversiones en formación y contratación.
+Este endpoint permite consultar los **critical gaps** (vacíos críticos de skills) que afectan a un rol específico. Identifica qué skills faltan en los mejores candidatos internos para cada rol, facilitando decisiones sobre formación y contratación.
+
+## 🎯 Concepto Actualizado
+
+El análisis de **Critical Gaps** identifica dos tipos de problemas:
+
+1. **Gaps en candidatos viables**: Skills que faltan o están por debajo del nivel requerido en empleados con potencial (score ≥ 0.5) para el rol
+2. **Sin candidatos viables**: Roles donde ningún empleado alcanza el score mínimo (requiere hiring externo)
 
 ---
 
-## 🔍 Endpoint: GET /api/roles/{role_id}/bottlenecks
+## 🔍 Endpoint: GET /api/roles/{role_id}/critical-gaps
 
 ### Request
 
 **Método**: `GET`
 
-**URL**: `/api/roles/{role_id}/bottlenecks`
+**URL**: `/api/roles/{role_id}/critical-gaps`
 
 **Parámetros de URL**:
 - `role_id` (string, requerido): ID del rol a consultar
-  - Ejemplos: `R-STR-LEAD`, `R-MTX-ARCH`, `R-DATA-ANL`
+  - Ejemplos: `R-CRT-LEAD`, `R-PM`, `R-SMM`, `R-DATA-ANL`
 
 **Query Parameters** (opcionales):
-- `priority` (string): Filtrar por prioridad (`HIGH`, `MEDIUM`, `LOW`)
+- `priority` (string): Filtrar por prioridad (`CRÍTICA`, `ALTA`, `MEDIA`, `BAJA`)
 - `min_gap` (float): Gap mínimo para incluir (0-100)
+- `include_candidates_details` (boolean): Incluir detalles de candidatos afectados (default: true)
 
 ### Response
 
@@ -30,47 +38,68 @@ Este endpoint permite consultar los bottlenecks críticos que afectan a un rol e
 
 ```json
 {
-  "role_id": "R-MTX-ARCH",
-  "role_title": "Martech Architect",
-  "critical_bottlenecks": [
+  "role_id": "R-CRT-LEAD",
+  "role_title": "Creative Director",
+  "critical_gaps": [
     {
-      "skill_id": "S-DATA",
-      "skill_name": "Data",
-      "gap_percentage": 80.0,
-      "blocked_transitions": 16,
-      "priority": "HIGH",
-      "employees_without_skill": 8,
-      "demanda_proyectada": 5,
-      "capacidad_actual": 1
-    },
-    {
-      "skill_id": "S-CRM",
-      "skill_name": "Crm",
-      "gap_percentage": 66.67,
-      "blocked_transitions": 16,
-      "priority": "HIGH",
-      "employees_without_skill": 8,
-      "demanda_proyectada": 6,
-      "capacidad_actual": 2
+      "skill_id": "S-STAKE",
+      "skill_name": "Stake",
+      "avg_gap_percentage": 66.66666666666666,
+      "candidates_affected": 1,
+      "total_viable_candidates": 1,
+      "priority": "CRÍTICA",
+      "criticality_score": 66.66666666666666,
+      "no_viable_candidates": false,
+      "candidates_details": [
+        {
+          "employee_id": "1006",
+          "employee_name": "Adrián López",
+          "current_level": "novato",
+          "required_level": "avanzado",
+          "gap_percentage": 66.66666666666666,
+          "overall_score": 0.5473611111111112
+        }
+      ]
     }
   ],
-  "total_bottlenecks": 2,
-  "highest_gap": 80.0,
-  "total_blocked_transitions": 32,
-  "recommendations": [
+  "total_gaps": 1,
+  "highest_priority": "CRÍTICA"
+}
+```
+
+#### Response cuando NO hay candidatos viables:
+
+```json
+{
+  "role_id": "R-PM",
+  "role_title": "Project Manager",
+  "critical_gaps": [
     {
-      "action": "TRAINING_PRIORITY",
-      "skill_id": "S-DATA",
-      "reason": "80% gap blocking 16 transitions",
-      "impact": "HIGH"
+      "skill_id": "S-PM",
+      "skill_name": "Pm",
+      "avg_gap_percentage": 100.0,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "priority": "CRÍTICA",
+      "criticality_score": 100.0,
+      "no_viable_candidates": true,
+      "candidates_details": []
     },
     {
-      "action": "EXTERNAL_HIRING",
-      "skill_id": "S-DATA",
-      "reason": "Only 1 employee has this critical skill",
-      "impact": "HIGH"
+      "skill_id": "S-STAKE",
+      "skill_name": "Stake",
+      "avg_gap_percentage": 100.0,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "priority": "CRÍTICA",
+      "criticality_score": 100.0,
+      "no_viable_candidates": true,
+      "candidates_details": []
     }
-  ]
+  ],
+  "total_gaps": 2,
+  "highest_priority": "CRÍTICA",
+  "recommendation": "⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo"
 }
 ```
 
@@ -78,56 +107,129 @@ Este endpoint permite consultar los bottlenecks críticos que afectan a un rol e
 
 ## 📊 Ejemplos de Uso
 
-### Ejemplo 1: Consultar bottlenecks de "Martech Architect"
+### Ejemplo 1: Rol con candidatos viables pero con gaps
 
 **Request**:
 ```bash
-GET /api/roles/R-MTX-ARCH/bottlenecks
+GET /api/roles/R-CRT-LEAD/critical-gaps
 ```
 
 **Response**:
 ```json
 {
-  "role_id": "R-MTX-ARCH",
-  "role_title": "Martech Architect",
-  "critical_bottlenecks": [
+  "role_id": "R-CRT-LEAD",
+  "role_title": "Creative Director",
+  "critical_gaps": [
     {
-      "skill_id": "S-DATA",
-      "skill_name": "Data",
-      "gap_percentage": 80.0,
-      "blocked_transitions": 16,
-      "priority": "HIGH",
-      "employees_without_skill": 8,
-      "demanda_proyectada": 5,
-      "capacidad_actual": 1
-    },
-    {
-      "skill_id": "S-CRM",
-      "skill_name": "Crm",
-      "gap_percentage": 66.67,
-      "blocked_transitions": 16,
-      "priority": "HIGH"
+      "skill_id": "S-STAKE",
+      "skill_name": "Stake",
+      "avg_gap_percentage": 66.67,
+      "candidates_affected": 1,
+      "total_viable_candidates": 1,
+      "priority": "CRÍTICA",
+      "criticality_score": 66.67,
+      "no_viable_candidates": false,
+      "candidates_details": [
+        {
+          "employee_id": "1006",
+          "employee_name": "Adrián López",
+          "current_level": "novato",
+          "required_level": "avanzado",
+          "gap_percentage": 66.67,
+          "overall_score": 0.547
+        }
+      ]
     }
   ],
-  "total_bottlenecks": 2,
-  "highest_gap": 80.0,
-  "total_blocked_transitions": 32
+  "total_gaps": 1,
+  "highest_priority": "CRÍTICA"
 }
 ```
 
 **Interpretación**:
-- El rol **Martech Architect** tiene **2 bottlenecks críticos**
-- El bottleneck más grave es **S-DATA** con un gap del **80%**
-- Hay **8 empleados** que no tienen el skill S-DATA
-- Esto está bloqueando **16 transiciones** potenciales a este rol
+- ✅ Hay **1 candidato viable** para Creative Director (Adrián López)
+- 🔴 Le falta el skill **Stakeholder Management** al nivel requerido
+- 📊 Gap del **66.7%**: tiene nivel "novato" pero necesita "avanzado"
+- 💡 **Acción recomendada**: Formación en Stakeholder Management para Adrián López
 
 ---
 
-### Ejemplo 2: Consultar bottlenecks de "Data Analyst"
+### Ejemplo 2: Rol SIN candidatos viables (requiere hiring)
 
 **Request**:
 ```bash
-GET /api/roles/R-DATA-ANL/bottlenecks
+GET /api/roles/R-PM/critical-gaps
+```
+
+**Response**:
+```json
+{
+  "role_id": "R-PM",
+  "role_title": "Project Manager",
+  "critical_gaps": [
+    {
+      "skill_id": "S-PM",
+      "skill_name": "Pm",
+      "avg_gap_percentage": 100.0,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "priority": "CRÍTICA",
+      "criticality_score": 100.0,
+      "no_viable_candidates": true,
+      "candidates_details": []
+    },
+    {
+      "skill_id": "S-STAKE",
+      "skill_name": "Stake",
+      "avg_gap_percentage": 100.0,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "priority": "CRÍTICA",
+      "criticality_score": 100.0,
+      "no_viable_candidates": true,
+      "candidates_details": []
+    },
+    {
+      "skill_id": "S-ANALYTICS",
+      "skill_name": "Analytics",
+      "avg_gap_percentage": 100.0,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "priority": "CRÍTICA",
+      "criticality_score": 100.0,
+      "no_viable_candidates": true,
+      "candidates_details": []
+    },
+    {
+      "skill_id": "S-OKR",
+      "skill_name": "Okr",
+      "avg_gap_percentage": 100.0,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "priority": "CRÍTICA",
+      "criticality_score": 100.0,
+      "no_viable_candidates": true,
+      "candidates_details": []
+    }
+  ],
+  "total_gaps": 4,
+  "highest_priority": "CRÍTICA",
+  "recommendation": "⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo"
+}
+```
+
+**Interpretación**:
+- ❌ **Ningún empleado** tiene score ≥ 0.5 para Project Manager
+- 🔴 Gaps del **100%** en todos los skills requeridos
+- 💡 **Acción recomendada**: Contratar externamente - no hay talento interno preparado
+
+---
+
+### Ejemplo 3: Rol sin gaps (candidatos completamente preparados)
+
+**Request**:
+```bash
+GET /api/roles/R-DATA-ANL/critical-gaps
 ```
 
 **Response**:
@@ -135,68 +237,24 @@ GET /api/roles/R-DATA-ANL/bottlenecks
 {
   "role_id": "R-DATA-ANL",
   "role_title": "Data Analyst",
-  "critical_bottlenecks": [
-    {
-      "skill_id": "S-DATA",
-      "skill_name": "Data",
-      "gap_percentage": 80.0,
-      "blocked_transitions": 16,
-      "priority": "HIGH",
-      "employees_without_skill": 8,
-      "demanda_proyectada": 5,
-      "capacidad_actual": 1
-    }
-  ],
-  "total_bottlenecks": 1,
-  "highest_gap": 80.0,
-  "total_blocked_transitions": 16
+  "critical_gaps": [],
+  "total_gaps": 0,
+  "highest_priority": null,
+  "message": "✅ Todos los candidatos viables tienen los skills requeridos"
 }
 ```
 
 **Interpretación**:
-- Solo **1 bottleneck crítico**: S-DATA
-- Gap del **80%** (muy crítico)
-- **16 transiciones bloqueadas**
+- ✅ Los candidatos para Data Analyst tienen **todos los skills al nivel requerido**
+- 💡 **Acción recomendada**: Ninguna acción de formación necesaria para este rol
 
 ---
 
-### Ejemplo 3: Consultar bottlenecks de "Head of Strategy"
+### Ejemplo 4: Filtrar por prioridad CRÍTICA
 
 **Request**:
 ```bash
-GET /api/roles/R-STR-LEAD/bottlenecks
-```
-
-**Response**:
-```json
-{
-  "role_id": "R-STR-LEAD",
-  "role_title": "Head of Strategy",
-  "critical_bottlenecks": [
-    {
-      "skill_id": "S-ANALISIS",
-      "skill_name": "Analisis",
-      "gap_percentage": 75.0,
-      "blocked_transitions": 16,
-      "priority": "HIGH",
-      "employees_without_skill": 8,
-      "demanda_proyectada": 8,
-      "capacidad_actual": 2
-    }
-  ],
-  "total_bottlenecks": 1,
-  "highest_gap": 75.0,
-  "total_blocked_transitions": 16
-}
-```
-
----
-
-### Ejemplo 4: Filtrar por prioridad HIGH
-
-**Request**:
-```bash
-GET /api/roles/R-MTX-ARCH/bottlenecks?priority=HIGH
+GET /api/roles/R-PM/critical-gaps?priority=CRÍTICA
 ```
 
 **Response**:
@@ -219,6 +277,28 @@ GET /api/roles/R-MTX-ARCH/bottlenecks?priority=HIGH
     }
   ],
   "total_bottlenecks": 2
+```json
+{
+  "role_id": "R-PM",
+  "role_title": "Project Manager",
+  "critical_gaps": [
+    {
+      "skill_id": "S-PM",
+      "skill_name": "Pm",
+      "avg_gap_percentage": 100.0,
+      "priority": "CRÍTICA",
+      "no_viable_candidates": true
+    },
+    {
+      "skill_id": "S-STAKE",
+      "skill_name": "Stake",
+      "avg_gap_percentage": 100.0,
+      "priority": "CRÍTICA",
+      "no_viable_candidates": true
+    }
+  ],
+  "total_gaps": 2,
+  "filtered_out": 2
 }
 ```
 
@@ -228,24 +308,24 @@ GET /api/roles/R-MTX-ARCH/bottlenecks?priority=HIGH
 
 **Request**:
 ```bash
-GET /api/roles/R-MTX-ARCH/bottlenecks?min_gap=70
+GET /api/roles/R-CRT-LEAD/critical-gaps?min_gap=50
 ```
 
 **Response**:
 ```json
 {
-  "role_id": "R-MTX-ARCH",
-  "role_title": "Martech Architect",
-  "critical_bottlenecks": [
+  "role_id": "R-CRT-LEAD",
+  "role_title": "Creative Director",
+  "critical_gaps": [
     {
-      "skill_id": "S-DATA",
-      "skill_name": "Data",
-      "gap_percentage": 80.0,
-      "priority": "HIGH"
+      "skill_id": "S-STAKE",
+      "skill_name": "Stake",
+      "avg_gap_percentage": 66.67,
+      "priority": "CRÍTICA"
     }
   ],
-  "total_bottlenecks": 1,
-  "filtered_out": 1
+  "total_gaps": 1,
+  "filtered_out": 0
 }
 ```
 
@@ -256,78 +336,397 @@ GET /api/roles/R-MTX-ARCH/bottlenecks?min_gap=70
 ### 1. Dashboard de Rol
 ```javascript
 // Frontend muestra página de detalle de un rol
-const roleId = 'R-MTX-ARCH';
-const response = await fetch(`/api/roles/${roleId}/bottlenecks`);
+const roleId = 'R-CRT-LEAD';
+const response = await fetch(`/api/roles/${roleId}/critical-gaps`);
 const data = await response.json();
 
 // Mostrar:
-// - Título del rol: "Martech Architect"
-// - Total bottlenecks: 2
-// - Gap más alto: 80%
-// - Lista de skills críticos: S-DATA, S-CRM
+// - Título del rol: "Creative Director"
+// - Total gaps: 1
+// - Gap más alto: 66.7%
+// - Candidatos viables: 1
+// - Skills faltantes: Stakeholder Management
 ```
 
-### 2. Planificación de Formación
+### 2. Identificar roles que requieren hiring externo
 ```javascript
-// Obtener bottlenecks de todos los roles estratégicos
-const strategicRoles = ['R-STR-LEAD', 'R-MTX-ARCH', 'R-DATA-ANL'];
+// Obtener gaps de todos los roles en visión futura
+const futureRoles = ['R-PM', 'R-SMM', 'R-CRT-LEAD', 'R-DATA-ANL'];
 
-const bottlenecks = await Promise.all(
-  strategicRoles.map(roleId => 
-    fetch(`/api/roles/${roleId}/bottlenecks?priority=HIGH`)
+const gapsData = await Promise.all(
+  futureRoles.map(roleId => 
+    fetch(`/api/roles/${roleId}/critical-gaps`)
       .then(r => r.json())
   )
 );
 
-// Consolidar skills críticos para priorizar inversión en formación
-const criticalSkills = new Set();
-bottlenecks.forEach(role => {
-  role.critical_bottlenecks.forEach(b => {
-    criticalSkills.add(b.skill_id);
-  });
+// Identificar roles sin candidatos viables
+const rolesNeedingHiring = gapsData.filter(role => 
+  role.critical_gaps.some(gap => gap.no_viable_candidates)
+);
+
+console.log('🚨 Roles que requieren hiring externo:');
+rolesNeedingHiring.forEach(role => {
+  console.log(`  • ${role.role_title} (${role.total_gaps} skills faltantes)`);
 });
 
-console.log('Skills a desarrollar:', Array.from(criticalSkills));
-// Output: ['S-DATA', 'S-CRM', 'S-ANALISIS']
+// Output:
+// 🚨 Roles que requieren hiring externo:
+//   • Project Manager (4 skills faltantes)
+//   • Social Media Strategist (3 skills faltantes)
 ```
 
-### 3. Recomendaciones de Contratación
+### 3. Planificación de formación para candidatos viables
 ```javascript
-// Para un rol con múltiples bottlenecks, priorizar contratación externa
-const response = await fetch('/api/roles/R-MTX-ARCH/bottlenecks');
+// Para roles CON candidatos viables, identificar necesidades de formación
+const response = await fetch('/api/roles/R-CRT-LEAD/critical-gaps');
 const data = await response.json();
 
-if (data.total_bottlenecks > 1 && data.highest_gap > 70) {
-  console.log(`⚠️ RECOMENDACIÓN: Contratar externamente para ${data.role_title}`);
-  console.log(`Razón: ${data.total_bottlenecks} bottlenecks críticos`);
-  console.log(`Gap más alto: ${data.highest_gap}%`);
+if (data.total_gaps > 0 && !data.critical_gaps[0].no_viable_candidates) {
+  console.log(`📚 Plan de formación para ${data.role_title}:`);
+  
+  data.critical_gaps.forEach(gap => {
+    console.log(`\n  Skill: ${gap.skill_name}`);
+    console.log(`  Gap: ${gap.avg_gap_percentage.toFixed(1)}%`);
+    
+    gap.candidates_details.forEach(candidate => {
+      console.log(`    • ${candidate.employee_name}: ${candidate.current_level} → ${candidate.required_level}`);
+    });
+  });
+}
+
+// Output:
+// 📚 Plan de formación para Creative Director:
+//   Skill: Stakeholder Management
+//   Gap: 66.7%
+//     • Adrián López: novato → avanzado
+```
+
+---
+
+## 📈 Fuente de Datos
+
+### Archivo JSON Generado
+
+Los datos provienen del archivo:
+```
+challenge_outputs/critical_gaps_by_role_{timestamp}.json
+```
+
+**Estructura del archivo**:
+```json
+{
+  "R-CRT-LEAD": {
+    "role_id": "R-CRT-LEAD",
+    "role_title": "Creative Director",
+    "critical_gaps": [
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stake",
+        "avg_gap_percentage": 66.67,
+        "candidates_affected": 1,
+        "total_viable_candidates": 1,
+        "priority": "CRÍTICA",
+        "criticality_score": 66.67
+      }
+    ],
+    "total_gaps": 1,
+    "highest_priority": "CRÍTICA"
+  },
+  "R-PM": {
+    "role_id": "R-PM",
+    "role_title": "Project Manager",
+    "critical_gaps": [
+      {
+        "skill_id": "S-PM",
+        "skill_name": "Pm",
+        "avg_gap_percentage": 100.0,
+        "candidates_affected": 0,
+        "total_viable_candidates": 0,
+        "priority": "CRÍTICA",
+        "criticality_score": 100.0,
+        "no_viable_candidates": true
+      }
+    ],
+    "total_gaps": 4,
+    "highest_priority": "CRÍTICA"
+  }
 }
 ```
 
 ---
 
-## 📈 Datos Disponibles por Rol
+## � Implementación Backend
 
-### Todos los Roles con Bottlenecks
-
-| Role ID | Role Title | Total Bottlenecks | Highest Gap | Blocked Transitions |
-|---------|-----------|-------------------|-------------|---------------------|
-| R-MTX-ARCH | Martech Architect | 2 | 80.0% | 32 |
-| R-DATA-ANL | Data Analyst | 1 | 80.0% | 16 |
-| R-STR-LEAD | Head of Strategy | 1 | 75.0% | 16 |
-| R-STR-SR | Senior Strategy Consultant | 1 | 75.0% | 16 |
-| R-DSN-SR | Senior Brand/UI Designer | 1 | 75.0% | 9 |
-| R-CRM-ADMIN | CRM Admin (HubSpot) | 1 | 66.7% | 16 |
-
----
-
-## 🔧 Implementación Backend
-
-### Endpoint Flask/FastAPI Example
+### Endpoint Flask Example
 
 ```python
 from flask import Flask, jsonify, request
 import json
+from pathlib import Path
+
+app = Flask(__name__)
+
+def load_critical_gaps():
+    """Carga el archivo más reciente de critical gaps."""
+    output_dir = Path("challenge_outputs")
+    gap_files = sorted(output_dir.glob("critical_gaps_by_role_*.json"), reverse=True)
+    
+    if not gap_files:
+        return {}
+    
+    with open(gap_files[0], 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+@app.route('/api/roles/<role_id>/critical-gaps', methods=['GET'])
+def get_role_critical_gaps(role_id):
+    """
+    Obtiene los critical gaps de un rol específico.
+    
+    Query params:
+    - priority: filtrar por prioridad (CRÍTICA, ALTA, MEDIA, BAJA)
+    - min_gap: gap mínimo (0-100)
+    - include_candidates_details: incluir detalles de candidatos (default: true)
+    """
+    # Cargar datos
+    all_gaps = load_critical_gaps()
+    
+    # Buscar rol
+    if role_id not in all_gaps:
+        return jsonify({
+            "error": "Role not found",
+            "role_id": role_id
+        }), 404
+    
+    role_data = all_gaps[role_id]
+    
+    # Aplicar filtros
+    priority_filter = request.args.get('priority')
+    min_gap_filter = request.args.get('min_gap', type=float)
+    include_details = request.args.get('include_candidates_details', 'true').lower() == 'true'
+    
+    gaps = role_data['critical_gaps']
+    
+    if priority_filter:
+        gaps = [g for g in gaps if g['priority'] == priority_filter.upper()]
+    
+    if min_gap_filter:
+        gaps = [g for g in gaps if g['avg_gap_percentage'] >= min_gap_filter]
+    
+    # Remover detalles de candidatos si no se requieren
+    if not include_details:
+        for gap in gaps:
+            gap.pop('candidates_details', None)
+    
+    # Construir response
+    response = {
+        "role_id": role_data['role_id'],
+        "role_title": role_data['role_title'],
+        "critical_gaps": gaps,
+        "total_gaps": len(gaps),
+        "highest_priority": role_data.get('highest_priority')
+    }
+    
+    # Mensaje especial para roles sin candidatos viables
+    if gaps and all(g.get('no_viable_candidates', False) for g in gaps):
+        response['recommendation'] = "⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo"
+    
+    # Mensaje para roles sin gaps
+    if len(gaps) == 0 and role_data['total_gaps'] == 0:
+        response['message'] = "✅ Todos los candidatos viables tienen los skills requeridos"
+    
+    return jsonify(response)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### Endpoint FastAPI Example
+
+```python
+from fastapi import FastAPI, Query, HTTPException
+from typing import Optional, List
+import json
+from pathlib import Path
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class CandidateDetail(BaseModel):
+    employee_id: str
+    employee_name: str
+    current_level: str
+    required_level: str
+    gap_percentage: float
+    overall_score: float
+
+class CriticalGap(BaseModel):
+    skill_id: str
+    skill_name: str
+    avg_gap_percentage: float
+    candidates_affected: int
+    total_viable_candidates: int
+    priority: str
+    criticality_score: float
+    no_viable_candidates: Optional[bool] = False
+    candidates_details: Optional[List[CandidateDetail]] = []
+
+class RoleCriticalGapsResponse(BaseModel):
+    role_id: str
+    role_title: str
+    critical_gaps: List[CriticalGap]
+    total_gaps: int
+    highest_priority: Optional[str]
+    recommendation: Optional[str] = None
+    message: Optional[str] = None
+
+def load_critical_gaps():
+    """Carga el archivo más reciente de critical gaps."""
+    output_dir = Path("challenge_outputs")
+    gap_files = sorted(output_dir.glob("critical_gaps_by_role_*.json"), reverse=True)
+    
+    if not gap_files:
+        return {}
+    
+    with open(gap_files[0], 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+@app.get("/api/roles/{role_id}/critical-gaps", response_model=RoleCriticalGapsResponse)
+async def get_role_critical_gaps(
+    role_id: str,
+    priority: Optional[str] = Query(None, description="Filtrar por prioridad"),
+    min_gap: Optional[float] = Query(None, ge=0, le=100, description="Gap mínimo"),
+    include_candidates_details: bool = Query(True, description="Incluir detalles de candidatos")
+):
+    """
+    Obtiene los critical gaps de un rol específico.
+    
+    - **role_id**: ID del rol (e.g., R-CRT-LEAD, R-PM)
+    - **priority**: Filtrar por prioridad (CRÍTICA, ALTA, MEDIA, BAJA)
+    - **min_gap**: Gap mínimo para incluir (0-100)
+    - **include_candidates_details**: Incluir detalles de candidatos
+    """
+    # Cargar datos
+    all_gaps = load_critical_gaps()
+    
+    # Buscar rol
+    if role_id not in all_gaps:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Role {role_id} not found"
+        )
+    
+    role_data = all_gaps[role_id]
+    
+    # Aplicar filtros
+    gaps = role_data['critical_gaps']
+    
+    if priority:
+        gaps = [g for g in gaps if g['priority'] == priority.upper()]
+    
+    if min_gap is not None:
+        gaps = [g for g in gaps if g['avg_gap_percentage'] >= min_gap]
+    
+    # Remover detalles de candidatos si no se requieren
+    if not include_candidates_details:
+        for gap in gaps:
+            gap.pop('candidates_details', None)
+    
+    # Construir response
+    response = {
+        "role_id": role_data['role_id'],
+        "role_title": role_data['role_title'],
+        "critical_gaps": gaps,
+        "total_gaps": len(gaps),
+        "highest_priority": role_data.get('highest_priority')
+    }
+    
+    # Mensaje especial para roles sin candidatos viables
+    if gaps and all(g.get('no_viable_candidates', False) for g in gaps):
+        response['recommendation'] = "⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo"
+    
+    # Mensaje para roles sin gaps
+    if len(gaps) == 0 and role_data['total_gaps'] == 0:
+        response['message'] = "✅ Todos los candidatos viables tienen los skills requeridos"
+    
+    return response
+```
+
+---
+
+## 🔑 Campos Clave
+
+### CriticalGap Object
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `skill_id` | string | ID del skill faltante (e.g., "S-STAKE") |
+| `skill_name` | string | Nombre legible del skill (e.g., "Stake") |
+| `avg_gap_percentage` | float | Gap promedio en % (0-100) |
+| `candidates_affected` | int | Número de candidatos afectados |
+| `total_viable_candidates` | int | Total de candidatos viables para el rol |
+| `priority` | string | CRÍTICA, ALTA, MEDIA, BAJA |
+| `criticality_score` | float | Score de criticidad (usado para ordenar) |
+| `no_viable_candidates` | boolean | true si el rol no tiene candidatos viables |
+| `candidates_details` | array | Detalles de cada candidato afectado |
+
+### CandidateDetail Object
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `employee_id` | string | ID del empleado |
+| `employee_name` | string | Nombre del empleado |
+| `current_level` | string | Nivel actual del skill (novato, junior, etc.) |
+| `required_level` | string | Nivel requerido (avanzado, senior, etc.) |
+| `gap_percentage` | float | Gap individual del candidato (%) |
+| `overall_score` | float | Score general del candidato para el rol (0-1) |
+
+---
+
+## � Notas de Implementación
+
+### Score Threshold
+
+- El análisis considera **candidatos viables** aquellos con `overall_score ≥ 0.5`
+- Candidatos con score < 0.5 no se consideran en el análisis de gaps
+
+### Nivel Requerido por Defecto
+
+- Si no se especifica, todos los skills se asumen al nivel **AVANZADO** (0.75)
+
+### Prioridades
+
+- **CRÍTICA**: gap ≥ 60% o sin candidatos viables
+- **ALTA**: gap ≥ 40%
+- **MEDIA**: gap ≥ 20%
+- **BAJA**: gap < 20%
+
+### Actualización de Datos
+
+- Los datos se generan al ejecutar `main_challenge.py`
+- Se guarda un timestamp en el nombre del archivo
+- La API siempre lee el archivo más reciente
+
+---
+
+## ✅ Testing
+
+```bash
+# Test 1: Rol con gaps
+curl http://localhost:5000/api/roles/R-CRT-LEAD/critical-gaps
+
+# Test 2: Rol sin candidatos viables
+curl http://localhost:5000/api/roles/R-PM/critical-gaps
+
+# Test 3: Filtrar por prioridad
+curl http://localhost:5000/api/roles/R-PM/critical-gaps?priority=CRÍTICA
+
+# Test 4: Sin detalles de candidatos
+curl http://localhost:5000/api/roles/R-CRT-LEAD/critical-gaps?include_candidates_details=false
+
+# Test 5: Gap mínimo
+curl http://localhost:5000/api/roles/R-CRT-LEAD/critical-gaps?min_gap=50
+```
 
 app = Flask(__name__)
 

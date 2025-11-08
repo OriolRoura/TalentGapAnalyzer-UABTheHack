@@ -157,9 +157,11 @@ class TalentGapAlgorithm:
             self.chapters_catalog
         )
         
+        # Cambiar a análisis de vacíos críticos por rol
         bottlenecks = self.gap_analyzer.identify_bottleneck_skills(
-            skill_gaps, 
-            list(self.employees.values())  # Pasar empleados para cálculo real
+            self.compatibility_matrix,
+            self.roles_catalog,
+            list(self.employees.values())
         )
         training_roi = self.gap_analyzer.calculate_training_roi(skill_gaps)
         
@@ -498,7 +500,8 @@ class TalentGapAlgorithm:
         total_possible_matches = sum(len(candidates) for candidates in role_rankings.values())
         readiness_rate = (total_ready_matches / total_possible_matches * 100) if total_possible_matches > 0 else 0
         
-        critical_bottlenecks = [b for b in bottlenecks if b['gap_percentage'] > 50]
+        # Filtrar bottlenecks críticos (ahora usan avg_gap_percentage)
+        critical_bottlenecks = [b for b in bottlenecks if b.get('avg_gap_percentage', 0) > 50]
         
         return {
             'overall_readiness': f"{readiness_rate:.1f}%",

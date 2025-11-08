@@ -1,0 +1,19 @@
+{
+  "R-CRT-LEAD": {
+    "role_id": "R-CRT-LEAD",
+    "role_title": "Creative Director",
+    "critical_gaps": [
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stake",
+        "avg_gap_percentage": 66.66666666666666,
+        "candidates_affected": 1,
+        "total_viable_candidates": 1,
+        "priority": "CRÍTICA",
+        "criticality_score": 66.66666666666666
+      }
+    ],
+    "total_gaps": 1,
+    "highest_priority": "CRÍTICA"
+  }
+}

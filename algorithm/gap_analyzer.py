@@ -175,48 +175,209 @@ class GapAnalyzer:
         return chapter_analysis
     
     def identify_bottleneck_skills(self,
-                                 skill_gaps: Dict[str, Dict],
+                                 compatibility_matrix: 'CompatibilityMatrix',
+                                 roles_catalog: Dict,
                                  employees: List[Employee] = None,
-                                 threshold_percentage: float = 20.0) -> List[Dict]:
+                                 score_threshold: float = 0.5) -> List[Dict]:
         """
-        Identifica skills que actúan como bottlenecks organizacionales.
+        Identifica VACÍOS CRÍTICOS por rol: skills faltantes en los mejores candidatos.
+        
+        Este es el análisis correcto de bottlenecks:
+        - Para cada rol, encuentra candidatos con score > threshold
+        - Identifica qué skills requeridos les faltan
+        - Calcula el % de gap de cada skill
+        - Prioriza según criticidad (% gap × candidatos afectados)
         
         Args:
-            skill_gaps: Resultado de analyze_skill_gaps
-            employees: Lista de empleados para cálculos reales
-            threshold_percentage: % mínimo de gap para considerar bottleneck
+            compatibility_matrix: Objeto CompatibilityMatrix con resultados
+            roles_catalog: Catálogo de roles con skills requeridos
+            employees: Lista de empleados
+            score_threshold: Score mínimo para considerar candidato viable (default: 0.5)
             
         Returns:
-            Lista de skills bottleneck ordenados por impacto
+            Lista de vacíos críticos por rol
         """
-        # Guardar empleados como atributo temporal para uso en vision_bottlenecks
-        self.employees = employees or []
+        critical_gaps = []
         
-        bottlenecks = []
+        # Obtener empleados si no se proporcionaron
+        if not employees:
+            employees = []
+        employees_dict = {emp.id: emp for emp in employees}
         
-        # Usar datos de skill_gaps que ya tienen role_ids calculados correctamente
-        for skill_id, analysis in skill_gaps.items():
-            if analysis['gap_percentage'] >= threshold_percentage:
-                bottleneck_impact = (
-                    analysis['gap_percentage'] * 
-                    analysis['skill_weight'] * 
-                    analysis['required_in_roles']
-                ) / 100.0
+        # Analizar gaps para cada rol
+        debug_info = []  # Para debugging
+        
+        for role_id, role in roles_catalog.items():
+            # Obtener candidatos para este rol ordenados por score
+            candidates_results = compatibility_matrix.get_role_candidates(role_id)
+            
+            # Filtrar solo candidatos viables (score > threshold)
+            viable_candidates = [
+                result for result in candidates_results
+                if result.overall_score >= score_threshold
+            ]
+            
+            # DEBUG: Guardar info de todos los roles
+            debug_info.append({
+                'role_id': role_id,
+                'role_title': role.titulo,
+                'total_candidates': len(candidates_results),
+                'viable_candidates': len(viable_candidates),
+                'skills_required': len(role.habilidades_requeridas)
+            })
+            
+            # Si no hay candidatos viables, reportar TODOS los skills como gaps críticos
+            if not viable_candidates:
+                required_skills_list = role.habilidades_requeridas
                 
-                bottlenecks.append({
-                    'skill_id': skill_id,
-                    'skill_name': analysis['skill_name'],
-                    'gap_percentage': analysis['gap_percentage'],
-                    'affected_roles': analysis.get('role_ids', []),  # ✅ Esta es la lista de IDs
-                    'blocked_transitions': analysis['blocked_transitions'],
-                    'bottleneck_impact': bottleneck_impact,
-                    'priority_level': analysis['priority_level']
-                })
+                # Solo reportar si el rol tiene skills requeridos
+                if required_skills_list:
+                    for skill_id in required_skills_list:
+                        critical_gaps.append({
+                            'role_id': role_id,
+                            'role_title': role.titulo,
+                            'skill_id': skill_id,
+                            'skill_name': self._get_skill_name(skill_id),
+                            'avg_gap_percentage': 100.0,  # Gap total - nadie viable
+                            'candidates_affected': 0,
+                            'total_viable_candidates': 0,
+                            'affected_ratio': 1.0,
+                            'criticality_score': 100.0,  # Máxima criticidad
+                            'priority': 'CRÍTICA',
+                            'candidates_details': [],
+                            'no_viable_candidates': True  # Flag especial
+                        })
+                    
+                    debug_info[-1]['gaps_found'] = len(required_skills_list)
+                
+                continue
+            
+            required_skills_list = role.habilidades_requeridas  # List[skill_id]
+            
+            # Analizar cada skill requerido
+            # Asumimos nivel AVANZADO como requerido (0.75)
+            required_level_default = SkillLevel.AVANZADO
+            
+            skill_gaps_in_role = {}
+            
+            for skill_id in required_skills_list:
+                candidates_missing_skill = []
+                total_gap_percentage = 0
+                
+                for result in viable_candidates:
+                    employee_id = result.employee_id
+                    employee = employees_dict.get(employee_id)
+                    
+                    if not employee:
+                        continue
+                    
+                    current_level = employee.get_skill_level(skill_id)
+                    
+                    # Calcular gap individual
+                    required_value = required_level_default.numeric_value
+                    current_value = current_level.numeric_value
+                    
+                    if current_value < required_value:
+                        gap_pct = ((required_value - current_value) / required_value) * 100
+                        total_gap_percentage += gap_pct
+                        candidates_missing_skill.append({
+                            'employee_id': employee_id,
+                            'employee_name': employee.nombre,
+                            'current_level': current_level.value,
+                            'required_level': required_level_default.value,
+                            'gap_percentage': gap_pct,
+                            'overall_score': result.overall_score
+                        })
+                
+                # Si hay candidatos con gap en este skill, es un vacío crítico
+                if candidates_missing_skill:
+                    avg_gap = total_gap_percentage / len(candidates_missing_skill)
+                    affected_ratio = len(candidates_missing_skill) / len(viable_candidates)
+                    
+                    skill_gaps_in_role[skill_id] = {
+                        'avg_gap_percentage': avg_gap,
+                        'candidates_affected': len(candidates_missing_skill),
+                        'total_candidates': len(viable_candidates),
+                        'affected_ratio': affected_ratio,
+                        'candidates_details': candidates_missing_skill
+                    }
+            
+            # Agregar vacíos críticos de este rol
+            if skill_gaps_in_role:
+                # Ordenar skills por criticidad (gap × ratio de afectados)
+                sorted_gaps = sorted(
+                    skill_gaps_in_role.items(),
+                    key=lambda x: x[1]['avg_gap_percentage'] * x[1]['affected_ratio'],
+                    reverse=True
+                )
+                
+                # DEBUG: Agregar info de gaps encontrados en este rol
+                debug_info[-1]['gaps_found'] = len(sorted_gaps)
+                
+                for skill_id, gap_info in sorted_gaps:
+                    critical_gaps.append({
+                        'role_id': role_id,
+                        'role_title': role.titulo,
+                        'skill_id': skill_id,
+                        'skill_name': self._get_skill_name(skill_id),
+                        'avg_gap_percentage': gap_info['avg_gap_percentage'],
+                        'candidates_affected': gap_info['candidates_affected'],
+                        'total_viable_candidates': gap_info['total_candidates'],
+                        'affected_ratio': gap_info['affected_ratio'],
+                        'criticality_score': gap_info['avg_gap_percentage'] * gap_info['affected_ratio'],
+                        'priority': self._calculate_priority(
+                            gap_info['avg_gap_percentage'],
+                            gap_info['affected_ratio'],
+                            gap_info['total_candidates']
+                        ),
+                        'candidates_details': gap_info['candidates_details']
+                    })
         
-        # Ordenar por impacto descendente
-        bottlenecks.sort(key=lambda x: x['bottleneck_impact'], reverse=True)
+        # Ordenar por criticidad descendente
+        critical_gaps.sort(key=lambda x: x['criticality_score'], reverse=True)
         
-        return bottlenecks
+        # DEBUG: Mostrar info de todos los roles analizados
+        print("\n" + "="*80)
+        print("🔍 DEBUG: ANÁLISIS DE TODOS LOS ROLES")
+        print("="*80)
+        for info in debug_info:
+            status = "✅" if info['viable_candidates'] > 0 else "❌"
+            gaps_str = f"Gaps: {info.get('gaps_found', 0):2d}" if 'gaps_found' in info else "Gaps:  0 (todos skills OK)"
+            print(f"{status} {info['role_title'][:35]:<35} | Viables: {info['viable_candidates']:2d} | Skills req: {info['skills_required']:2d} | {gaps_str}")
+        
+        print(f"\n📊 RESUMEN:")
+        print(f"  Roles analizados: {len(debug_info)}")
+        print(f"  Roles con candidatos viables: {sum(1 for i in debug_info if i['viable_candidates'] > 0)}")
+        print(f"  Roles con gaps detectados: {sum(1 for i in debug_info if i.get('gaps_found', 0) > 0)}")
+        print(f"  Total critical gaps (skills): {len(critical_gaps)}")
+        print("="*80 + "\n")
+        
+        return critical_gaps
+    
+    def _get_skill_name(self, skill_id: str) -> str:
+        """Obtiene el nombre legible de un skill."""
+        # Convertir S-ANALISIS → Análisis, S-CRM → CRM, etc.
+        return skill_id.replace('S-', '').replace('-', ' ').title()
+    
+    def _calculate_priority(self, gap_pct: float, affected_ratio: float, total_candidates: int) -> str:
+        """
+        Calcula la prioridad de un vacío crítico.
+        
+        CRÍTICA: Gap alto + muchos candidatos afectados + pocos candidatos totales
+        ALTA: Gap alto o muchos candidatos afectados
+        MEDIA: Gap moderado
+        BAJA: Gap bajo
+        """
+        criticality = gap_pct * affected_ratio
+        
+        if criticality > 60 and total_candidates <= 2:
+            return 'CRÍTICA'
+        elif criticality > 50 or (gap_pct > 70):
+            return 'ALTA'
+        elif criticality > 30:
+            return 'MEDIA'
+        else:
+            return 'BAJA'
     
     def calculate_training_roi(self,
                              skill_gaps: Dict[str, Dict],
@@ -296,9 +457,12 @@ class GapAnalyzer:
         # Acciones inmediatas (bottlenecks críticos)
         critical_bottlenecks = [b for b in bottlenecks[:3]]  # Top 3
         for bottleneck in critical_bottlenecks:
+            affected = bottleneck.get('candidates_affected', 0)
+            total = bottleneck.get('total_viable_candidates', 0)
+            role_title = bottleneck.get('role_title', 'Unknown')
             recommendations['immediate_actions'].append(
-                f"Urgente: Programa intensivo de {bottleneck['skill_name']} "
-                f"({bottleneck['blocked_transitions']} transiciones bloqueadas)"
+                f"Urgente: {role_title} - {bottleneck['skill_name']} "
+                f"({affected}/{total} candidatos viables afectados)"
             )
         
         # Inversiones a corto plazo (skills con alto ROI)

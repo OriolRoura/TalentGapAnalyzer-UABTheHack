@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>API de Critical Gaps por Rol</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension zhuangtongfa.material-theme */
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body {
+  box-sizing: border-box;
+  min-width: 200px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote {
+  background-color: initial;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  color: initial;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body code {
+  color: inherit;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre code {
+  color: initial;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body code > div, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body code > div, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body code > div, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body code > div {
+  background: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table td {
+  border: 1px solid rgba(171, 178, 191, 0.5) !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body.showEditorSelection .code-active-line:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body.showEditorSelection .code-active-line:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body.showEditorSelection .code-active-line:before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body.showEditorSelection .code-active-line:before {
+  border-left: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body.showEditorSelection .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body.showEditorSelection .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body.showEditorSelection .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body.showEditorSelection .code-line:hover:before {
+  border-left: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body.showEditorSelection .code-line .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body.showEditorSelection .code-line .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body.showEditorSelection .code-line .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body.showEditorSelection .code-line .code-line:hover:before {
+  border-left: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* Generated from 'node_modules/github-markdown-css/github-markdown.css' */
+@font-face {
+  font-family: octicons-link;
+  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format("woff");
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  color: rgb(171, 178, 191);
+  line-height: 1.5;
+  word-wrap: break-word;
+  background: #282c34;
+  padding-top: 20px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c {
+  color: #6a737d;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s .pl-v {
+  color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-en {
+  color: #6f42c1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s .pl-s1 {
+  color: #24292e;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ent, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ent, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ent, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ent {
+  color: #22863a;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-k, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-k, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-k, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-k {
+  color: #d73a49;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-sra, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-sra, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-sra, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-sra {
+  color: #032f62;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-smw, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-smw, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-smw, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-smw {
+  color: #e36209;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-bu, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-bu, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-bu, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-bu {
+  color: #b31d28;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ii, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ii, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ii, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ii {
+  color: #fafbfc;
+  background-color: #b31d28;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c2 {
+  color: #fafbfc;
+  background-color: #d73a49;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c2::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c2::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c2::before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c2::before {
+  content: "^M";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-cce {
+  font-weight: bold;
+  color: #22863a;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ml, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ml, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ml, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ml {
+  color: #735c0f;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ms, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ms, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ms, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ms {
+  font-weight: bold;
+  color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mi, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mi, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mi, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mi {
+  font-style: italic;
+  color: #24292e;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mb, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mb, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mb, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mb {
+  font-weight: bold;
+  color: #24292e;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-md, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-md, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-md, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-md {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mi1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mi1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mi1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mi1 {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mc, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mc, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mc, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mc {
+  color: #e36209;
+  background-color: #ffebda;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mi2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mi2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mi2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mi2 {
+  color: #f6f8fa;
+  background-color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mdr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mdr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mdr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mdr {
+  font-weight: bold;
+  color: #6f42c1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ba, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ba, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ba, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ba {
+  color: #586069;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sg, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sg, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sg, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sg {
+  color: #959da5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-corl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-corl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-corl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-corl {
+  text-decoration: underline;
+  color: #032f62;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .octicon {
+  display: inline-block;
+  vertical-align: text-top;
+  fill: currentColor;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a {
+  background-color: transparent;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:hover {
+  outline-width: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body strong {
+  font-weight: inherit;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body strong {
+  font-weight: bolder;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 {
+  margin: 0.67em 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img {
+  border-style: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body input {
+  font: inherit;
+  margin: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body input {
+  overflow: visible;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body [type=checkbox], .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body [type=checkbox], .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body [type=checkbox], .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body [type=checkbox] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body *, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body *, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body *, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body * {
+  box-sizing: border-box;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body input {
+  font-family: inherit;
+  line-height: inherit;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a {
+  color: #528bff;
+  text-decoration: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:hover {
+  text-decoration: underline;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body strong {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr::before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr::before {
+  display: table;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr::after, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body th {
+  padding: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote {
+  margin: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ol {
+  list-style-type: lower-roman;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dd {
+  margin-left: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .octicon {
+  vertical-align: text-bottom;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-0, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-0, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-0, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-0 {
+  padding-left: 0 !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-1 {
+  padding-left: 4px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-2 {
+  padding-left: 8px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-3 {
+  padding-left: 16px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-4 {
+  padding-left: 24px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-5 {
+  padding-left: 32px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-6 {
+  padding-left: 40px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body::before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body::before {
+  display: table;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body::after, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body > *:first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body > *:first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body > *:first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body > *:first-child {
+  margin-top: 0 !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body > *:last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body > *:last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body > *:last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body > *:last-child {
+  margin-bottom: 0 !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:not([href]), .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:not([href]), .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:not([href]), .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .anchor {
+  float: left;
+  padding-right: 4px;
+  margin-left: -20px;
+  line-height: 1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .anchor:focus, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .anchor:focus, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .anchor:focus, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .anchor:focus {
+  outline: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote {
+  /* padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5; */
+  padding: 8.5px 17px;
+  margin: 1.5em 0;
+  color: #7c879c;
+  border-color: #4b5362;
+  border-width: 4px;
+  border-left: 5px solid #4b5362;
+  background: transparent;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote > :first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote > :first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote > :first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote > :first-child {
+  margin-top: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote > :last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote > :last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote > :last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #c6cbd1;
+  border-bottom-color: #959da5;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgb(240, 240, 240);
+  border-bottom: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 .octicon-link {
+  color: #1b1f23;
+  vertical-align: middle;
+  visibility: hidden;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6:hover .anchor {
+  text-decoration: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 {
+  padding-bottom: 0.3em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2 {
+  padding-bottom: 0.3em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  color: #6a737d;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol {
+  padding-left: 2em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body li, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body li, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body li, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body li {
+  word-wrap: break-all;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body li > p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body li > p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body li > p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body li > p {
+  margin-top: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body li + li, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body li + li, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body li + li, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body li + li {
+  margin-top: 0.25em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl {
+  padding: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl dt, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl dt, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl dt, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-style: italic;
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl dd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table th {
+  font-weight: 700;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table td {
+  padding: 6px 13px;
+  /* border: 1px solid #dfe2e5; */
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img {
+  max-width: 100%;
+  box-sizing: content-box;
+  display: inline-block;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img[align=right], .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img[align=right], .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img[align=right], .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img[align=right] {
+  padding-left: 20px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img[align=left], .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img[align=left], .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img[align=left], .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img[align=left] {
+  padding-right: 20px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  background-color: #3a3f4b;
+  border-radius: 3px;
+  color: white;
+  margin: 0 1px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  word-wrap: normal;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre > code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre > code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre > code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre > code {
+  padding: 0;
+  margin: 0;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .highlight, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .highlight, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .highlight, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .highlight {
+  margin-bottom: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  padding: 16px;
+  overflow: auto;
+  line-height: 1.45;
+  /* background-color: #f6f8fa; */
+  border-radius: 3px;
+  background-color: #31363f;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+  color: rgb(171, 178, 191);
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .full-commit .btn-outline:not(:disabled):hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .full-commit .btn-outline:not(:disabled):hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .full-commit .btn-outline:not(:disabled):hover, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .full-commit .btn-outline:not(:disabled):hover {
+  color: #005cc5;
+  border-color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #d1d5da;
+  border-bottom-color: #c6cbd1;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #c6cbd1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body :checked + .radio-label, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body :checked + .radio-label, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body :checked + .radio-label, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body :checked + .radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .task-list-item {
+  list-style-type: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .task-list-item + .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .task-list-item + .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .task-list-item + .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .task-list-item + .task-list-item {
+  margin-top: 3px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .task-list-item input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .task-list-item input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .task-list-item input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  border-bottom-color: #eee;
+}
+
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #abb2bf;
+  background: #282c34;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-quote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-quote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-quote, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-formula, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-formula, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-formula, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-formula {
+  color: #c678dd;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-subst, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-subst, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-subst, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-subst {
+  color: #e06c75;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-literal, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-literal, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-literal, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-literal {
+  color: #56b6c2;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-meta-string, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-meta-string, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-meta-string, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-meta-string {
+  color: #98c379;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-class .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-class .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-class .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-class .hljs-title {
+  color: #e6c07b;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-number, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-number, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-number, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-number {
+  color: #d19a66;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-title {
+  color: #61aeee;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-emphasis, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-emphasis, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-emphasis, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-emphasis {
+  font-style: italic;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-strong {
+  font-weight: bold;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="api-de-critical-gaps-por-rol">API de Critical Gaps por Rol</h1>
+<h2 id="-descripción">📋 Descripción</h2>
+<p>Este endpoint permite consultar los <strong>critical gaps</strong> (vacíos críticos de skills) que afectan a un rol específico. Identifica qué skills faltan en los mejores candidatos internos para cada rol, facilitando decisiones sobre formación y contratación.</p>
+<h2 id="-concepto-actualizado">🎯 Concepto Actualizado</h2>
+<p>El análisis de <strong>Critical Gaps</strong> identifica dos tipos de problemas:</p>
+<ol>
+<li><strong>Gaps en candidatos viables</strong>: Skills que faltan o están por debajo del nivel requerido en empleados con potencial (score ≥ 0.5) para el rol</li>
+<li><strong>Sin candidatos viables</strong>: Roles donde ningún empleado alcanza el score mínimo (requiere hiring externo)</li>
+</ol>
+<hr>
+<h2 id="-endpoint-get-apirolesrole_idcritical-gaps">🔍 Endpoint: GET /api/roles/{role_id}/critical-gaps</h2>
+<h3 id="request">Request</h3>
+<p><strong>Método</strong>: <code>GET</code></p>
+<p><strong>URL</strong>: <code>/api/roles/{role_id}/critical-gaps</code></p>
+<p><strong>Parámetros de URL</strong>:</p>
+<ul>
+<li><code>role_id</code> (string, requerido): ID del rol a consultar
+<ul>
+<li>Ejemplos: <code>R-CRT-LEAD</code>, <code>R-PM</code>, <code>R-SMM</code>, <code>R-DATA-ANL</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Query Parameters</strong> (opcionales):</p>
+<ul>
+<li><code>priority</code> (string): Filtrar por prioridad (<code>CRÍTICA</code>, <code>ALTA</code>, <code>MEDIA</code>, <code>BAJA</code>)</li>
+<li><code>min_gap</code> (float): Gap mínimo para incluir (0-100)</li>
+<li><code>include_candidates_details</code> (boolean): Incluir detalles de candidatos afectados (default: true)</li>
+</ul>
+<h3 id="response">Response</h3>
+<p><strong>Status Code</strong>: <code>200 OK</code></p>
+<p><strong>Response Body</strong>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-CRT-LEAD&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Creative Director&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-STAKE&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Stake&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.66666666666666</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.66666666666666</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;employee_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1006&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;employee_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adrián López&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;current_level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;novato&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;required_level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;avanzado&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.66666666666666</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;overall_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.5473611111111112</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;highest_priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h4 id="response-cuando-no-hay-candidatos-viables">Response cuando NO hay candidatos viables:</h4>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-PM&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Project Manager&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-PM&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Pm&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-STAKE&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Stake&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;highest_priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;recommendation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<hr>
+<h2 id="-ejemplos-de-uso">📊 Ejemplos de Uso</h2>
+<h3 id="ejemplo-1-rol-con-candidatos-viables-pero-con-gaps">Ejemplo 1: Rol con candidatos viables pero con gaps</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-bash">GET /api/roles/R-CRT-LEAD/critical-gaps
+</code></pre>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-CRT-LEAD&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Creative Director&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-STAKE&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Stake&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.67</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.67</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;employee_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1006&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;employee_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adrián López&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;current_level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;novato&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;required_level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;avanzado&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.67</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;overall_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.547</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;highest_priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><strong>Interpretación</strong>:</p>
+<ul>
+<li>✅ Hay <strong>1 candidato viable</strong> para Creative Director (Adrián López)</li>
+<li>🔴 Le falta el skill <strong>Stakeholder Management</strong> al nivel requerido</li>
+<li>📊 Gap del <strong>66.7%</strong>: tiene nivel &quot;novato&quot; pero necesita &quot;avanzado&quot;</li>
+<li>💡 <strong>Acción recomendada</strong>: Formación en Stakeholder Management para Adrián López</li>
+</ul>
+<hr>
+<h3 id="ejemplo-2-rol-sin-candidatos-viables-requiere-hiring">Ejemplo 2: Rol SIN candidatos viables (requiere hiring)</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-bash">GET /api/roles/R-PM/critical-gaps
+</code></pre>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-PM&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Project Manager&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-PM&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Pm&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-STAKE&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Stake&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-ANALYTICS&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Analytics&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-OKR&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Okr&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;candidates_details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;highest_priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;recommendation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><strong>Interpretación</strong>:</p>
+<ul>
+<li>❌ <strong>Ningún empleado</strong> tiene score ≥ 0.5 para Project Manager</li>
+<li>🔴 Gaps del <strong>100%</strong> en todos los skills requeridos</li>
+<li>💡 <strong>Acción recomendada</strong>: Contratar externamente - no hay talento interno preparado</li>
+</ul>
+<hr>
+<h3 id="ejemplo-3-rol-sin-gaps-candidatos-completamente-preparados">Ejemplo 3: Rol sin gaps (candidatos completamente preparados)</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-bash">GET /api/roles/R-DATA-ANL/critical-gaps
+</code></pre>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-DATA-ANL&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Data Analyst&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;highest_priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">null</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;✅ Todos los candidatos viables tienen los skills requeridos&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><strong>Interpretación</strong>:</p>
+<ul>
+<li>✅ Los candidatos para Data Analyst tienen <strong>todos los skills al nivel requerido</strong></li>
+<li>💡 <strong>Acción recomendada</strong>: Ninguna acción de formación necesaria para este rol</li>
+</ul>
+<hr>
+<h3 id="ejemplo-4-filtrar-por-prioridad-crítica">Ejemplo 4: Filtrar por prioridad CRÍTICA</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-bash">GET /api/roles/R-PM/critical-gaps?priority=CRÍTICA
+</code></pre>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-MTX-ARCH&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Martech Architect&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_bottlenecks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-DATA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Data&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">80.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HIGH&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-CRM&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Crm&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.67</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HIGH&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_bottlenecks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span>
+```json
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-PM&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Project Manager&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-PM&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Pm&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-STAKE&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Stake&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;filtered_out&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<hr>
+<h3 id="ejemplo-5-filtrar-por-gap-mínimo">Ejemplo 5: Filtrar por gap mínimo</h3>
+<p><strong>Request</strong>:</p>
+<pre><code class="language-bash">GET /api/roles/R-CRT-LEAD/critical-gaps?min_gap=50
+</code></pre>
+<p><strong>Response</strong>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-CRT-LEAD&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Creative Director&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-STAKE&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Stake&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.67</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;filtered_out&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<hr>
+<h2 id="-casos-de-uso">🎯 Casos de Uso</h2>
+<h3 id="1-dashboard-de-rol">1. Dashboard de Rol</h3>
+<pre><code class="language-javascript"><span class="hljs-comment">// Frontend muestra página de detalle de un rol</span>
+<span class="hljs-keyword">const</span> roleId = <span class="hljs-string">&#x27;R-CRT-LEAD&#x27;</span>;
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`/api/roles/<span class="hljs-subst">${roleId}</span>/critical-gaps`</span>);
+<span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+
+<span class="hljs-comment">// Mostrar:</span>
+<span class="hljs-comment">// - Título del rol: &quot;Creative Director&quot;</span>
+<span class="hljs-comment">// - Total gaps: 1</span>
+<span class="hljs-comment">// - Gap más alto: 66.7%</span>
+<span class="hljs-comment">// - Candidatos viables: 1</span>
+<span class="hljs-comment">// - Skills faltantes: Stakeholder Management</span>
+</code></pre>
+<h3 id="2-identificar-roles-que-requieren-hiring-externo">2. Identificar roles que requieren hiring externo</h3>
+<pre><code class="language-javascript"><span class="hljs-comment">// Obtener gaps de todos los roles en visión futura</span>
+<span class="hljs-keyword">const</span> futureRoles = [<span class="hljs-string">&#x27;R-PM&#x27;</span>, <span class="hljs-string">&#x27;R-SMM&#x27;</span>, <span class="hljs-string">&#x27;R-CRT-LEAD&#x27;</span>, <span class="hljs-string">&#x27;R-DATA-ANL&#x27;</span>];
+
+<span class="hljs-keyword">const</span> gapsData = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(
+  futureRoles.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">roleId</span> =&gt;</span> 
+    <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`/api/roles/<span class="hljs-subst">${roleId}</span>/critical-gaps`</span>)
+      .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.<span class="hljs-title function_">json</span>())
+  )
+);
+
+<span class="hljs-comment">// Identificar roles sin candidatos viables</span>
+<span class="hljs-keyword">const</span> rolesNeedingHiring = gapsData.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">role</span> =&gt;</span> 
+  role.<span class="hljs-property">critical_gaps</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">gap</span> =&gt;</span> gap.<span class="hljs-property">no_viable_candidates</span>)
+);
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;🚨 Roles que requieren hiring externo:&#x27;</span>);
+rolesNeedingHiring.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">role</span> =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  • <span class="hljs-subst">${role.role_title}</span> (<span class="hljs-subst">${role.total_gaps}</span> skills faltantes)`</span>);
+});
+
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// 🚨 Roles que requieren hiring externo:</span>
+<span class="hljs-comment">//   • Project Manager (4 skills faltantes)</span>
+<span class="hljs-comment">//   • Social Media Strategist (3 skills faltantes)</span>
+</code></pre>
+<h3 id="3-planificación-de-formación-para-candidatos-viables">3. Planificación de formación para candidatos viables</h3>
+<pre><code class="language-javascript"><span class="hljs-comment">// Para roles CON candidatos viables, identificar necesidades de formación</span>
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/roles/R-CRT-LEAD/critical-gaps&#x27;</span>);
+<span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+
+<span class="hljs-keyword">if</span> (data.<span class="hljs-property">total_gaps</span> &gt; <span class="hljs-number">0</span> &amp;&amp; !data.<span class="hljs-property">critical_gaps</span>[<span class="hljs-number">0</span>].<span class="hljs-property">no_viable_candidates</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`📚 Plan de formación para <span class="hljs-subst">${data.role_title}</span>:`</span>);
+  
+  data.<span class="hljs-property">critical_gaps</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">gap</span> =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`\n  Skill: <span class="hljs-subst">${gap.skill_name}</span>`</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  Gap: <span class="hljs-subst">${gap.avg_gap_percentage.toFixed(<span class="hljs-number">1</span>)}</span>%`</span>);
+    
+    gap.<span class="hljs-property">candidates_details</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">candidate</span> =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`    • <span class="hljs-subst">${candidate.employee_name}</span>: <span class="hljs-subst">${candidate.current_level}</span> → <span class="hljs-subst">${candidate.required_level}</span>`</span>);
+    });
+  });
+}
+
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// 📚 Plan de formación para Creative Director:</span>
+<span class="hljs-comment">//   Skill: Stakeholder Management</span>
+<span class="hljs-comment">//   Gap: 66.7%</span>
+<span class="hljs-comment">//     • Adrián López: novato → avanzado</span>
+</code></pre>
+<hr>
+<h2 id="-fuente-de-datos">📈 Fuente de Datos</h2>
+<h3 id="archivo-json-generado">Archivo JSON Generado</h3>
+<p>Los datos provienen del archivo:</p>
+<pre><code>challenge_outputs/critical_gaps_by_role_{timestamp}.json
+</code></pre>
+<p><strong>Estructura del archivo</strong>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;R-CRT-LEAD&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-CRT-LEAD&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Creative Director&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-STAKE&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Stake&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.67</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">66.67</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;highest_priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;R-PM&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;role_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;R-PM&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;role_title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Project Manager&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;critical_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;skill_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;S-PM&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;skill_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Pm&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;avg_gap_percentage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;candidates_affected&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;total_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;criticality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100.0</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;no_viable_candidates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;total_gaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;highest_priority&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CRÍTICA&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<hr>
+<h2 id="-implementación-backend">� Implementación Backend</h2>
+<h3 id="endpoint-flask-example">Endpoint Flask Example</h3>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, jsonify, request
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+app = Flask(__name__)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">load_critical_gaps</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Carga el archivo más reciente de critical gaps.&quot;&quot;&quot;</span>
+    output_dir = Path(<span class="hljs-string">&quot;challenge_outputs&quot;</span>)
+    gap_files = <span class="hljs-built_in">sorted</span>(output_dir.glob(<span class="hljs-string">&quot;critical_gaps_by_role_*.json&quot;</span>), reverse=<span class="hljs-literal">True</span>)
+    
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> gap_files:
+        <span class="hljs-keyword">return</span> {}
+    
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(gap_files[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        <span class="hljs-keyword">return</span> json.load(f)
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/api/roles/&lt;role_id&gt;/critical-gaps&#x27;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_role_critical_gaps</span>(<span class="hljs-params">role_id</span>):
+    <span class="hljs-string">&quot;&quot;&quot;
+    Obtiene los critical gaps de un rol específico.
+    
+    Query params:
+    - priority: filtrar por prioridad (CRÍTICA, ALTA, MEDIA, BAJA)
+    - min_gap: gap mínimo (0-100)
+    - include_candidates_details: incluir detalles de candidatos (default: true)
+    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># Cargar datos</span>
+    all_gaps = load_critical_gaps()
+    
+    <span class="hljs-comment"># Buscar rol</span>
+    <span class="hljs-keyword">if</span> role_id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> all_gaps:
+        <span class="hljs-keyword">return</span> jsonify({
+            <span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-string">&quot;Role not found&quot;</span>,
+            <span class="hljs-string">&quot;role_id&quot;</span>: role_id
+        }), <span class="hljs-number">404</span>
+    
+    role_data = all_gaps[role_id]
+    
+    <span class="hljs-comment"># Aplicar filtros</span>
+    priority_filter = request.args.get(<span class="hljs-string">&#x27;priority&#x27;</span>)
+    min_gap_filter = request.args.get(<span class="hljs-string">&#x27;min_gap&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>)
+    include_details = request.args.get(<span class="hljs-string">&#x27;include_candidates_details&#x27;</span>, <span class="hljs-string">&#x27;true&#x27;</span>).lower() == <span class="hljs-string">&#x27;true&#x27;</span>
+    
+    gaps = role_data[<span class="hljs-string">&#x27;critical_gaps&#x27;</span>]
+    
+    <span class="hljs-keyword">if</span> priority_filter:
+        gaps = [g <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> gaps <span class="hljs-keyword">if</span> g[<span class="hljs-string">&#x27;priority&#x27;</span>] == priority_filter.upper()]
+    
+    <span class="hljs-keyword">if</span> min_gap_filter:
+        gaps = [g <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> gaps <span class="hljs-keyword">if</span> g[<span class="hljs-string">&#x27;avg_gap_percentage&#x27;</span>] &gt;= min_gap_filter]
+    
+    <span class="hljs-comment"># Remover detalles de candidatos si no se requieren</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> include_details:
+        <span class="hljs-keyword">for</span> gap <span class="hljs-keyword">in</span> gaps:
+            gap.pop(<span class="hljs-string">&#x27;candidates_details&#x27;</span>, <span class="hljs-literal">None</span>)
+    
+    <span class="hljs-comment"># Construir response</span>
+    response = {
+        <span class="hljs-string">&quot;role_id&quot;</span>: role_data[<span class="hljs-string">&#x27;role_id&#x27;</span>],
+        <span class="hljs-string">&quot;role_title&quot;</span>: role_data[<span class="hljs-string">&#x27;role_title&#x27;</span>],
+        <span class="hljs-string">&quot;critical_gaps&quot;</span>: gaps,
+        <span class="hljs-string">&quot;total_gaps&quot;</span>: <span class="hljs-built_in">len</span>(gaps),
+        <span class="hljs-string">&quot;highest_priority&quot;</span>: role_data.get(<span class="hljs-string">&#x27;highest_priority&#x27;</span>)
+    }
+    
+    <span class="hljs-comment"># Mensaje especial para roles sin candidatos viables</span>
+    <span class="hljs-keyword">if</span> gaps <span class="hljs-keyword">and</span> <span class="hljs-built_in">all</span>(g.get(<span class="hljs-string">&#x27;no_viable_candidates&#x27;</span>, <span class="hljs-literal">False</span>) <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> gaps):
+        response[<span class="hljs-string">&#x27;recommendation&#x27;</span>] = <span class="hljs-string">&quot;⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo&quot;</span>
+    
+    <span class="hljs-comment"># Mensaje para roles sin gaps</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(gaps) == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> role_data[<span class="hljs-string">&#x27;total_gaps&#x27;</span>] == <span class="hljs-number">0</span>:
+        response[<span class="hljs-string">&#x27;message&#x27;</span>] = <span class="hljs-string">&quot;✅ Todos los candidatos viables tienen los skills requeridos&quot;</span>
+    
+    <span class="hljs-keyword">return</span> jsonify(response)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    app.run(debug=<span class="hljs-literal">True</span>)
+</code></pre>
+<h3 id="endpoint-fastapi-example">Endpoint FastAPI Example</h3>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI, Query, HTTPException
+<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Optional</span>, <span class="hljs-type">List</span>
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+<span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel
+
+app = FastAPI()
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">CandidateDetail</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):
+    employee_id: <span class="hljs-built_in">str</span>
+    employee_name: <span class="hljs-built_in">str</span>
+    current_level: <span class="hljs-built_in">str</span>
+    required_level: <span class="hljs-built_in">str</span>
+    gap_percentage: <span class="hljs-built_in">float</span>
+    overall_score: <span class="hljs-built_in">float</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">CriticalGap</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):
+    skill_id: <span class="hljs-built_in">str</span>
+    skill_name: <span class="hljs-built_in">str</span>
+    avg_gap_percentage: <span class="hljs-built_in">float</span>
+    candidates_affected: <span class="hljs-built_in">int</span>
+    total_viable_candidates: <span class="hljs-built_in">int</span>
+    priority: <span class="hljs-built_in">str</span>
+    criticality_score: <span class="hljs-built_in">float</span>
+    no_viable_candidates: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">bool</span>] = <span class="hljs-literal">False</span>
+    candidates_details: <span class="hljs-type">Optional</span>[<span class="hljs-type">List</span>[CandidateDetail]] = []
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">RoleCriticalGapsResponse</span>(<span class="hljs-title class_ inherited__">BaseModel</span>):
+    role_id: <span class="hljs-built_in">str</span>
+    role_title: <span class="hljs-built_in">str</span>
+    critical_gaps: <span class="hljs-type">List</span>[CriticalGap]
+    total_gaps: <span class="hljs-built_in">int</span>
+    highest_priority: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">str</span>]
+    recommendation: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">str</span>] = <span class="hljs-literal">None</span>
+    message: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">str</span>] = <span class="hljs-literal">None</span>
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">load_critical_gaps</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Carga el archivo más reciente de critical gaps.&quot;&quot;&quot;</span>
+    output_dir = Path(<span class="hljs-string">&quot;challenge_outputs&quot;</span>)
+    gap_files = <span class="hljs-built_in">sorted</span>(output_dir.glob(<span class="hljs-string">&quot;critical_gaps_by_role_*.json&quot;</span>), reverse=<span class="hljs-literal">True</span>)
+    
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> gap_files:
+        <span class="hljs-keyword">return</span> {}
+    
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(gap_files[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        <span class="hljs-keyword">return</span> json.load(f)
+
+<span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/api/roles/{role_id}/critical-gaps&quot;</span>, response_model=RoleCriticalGapsResponse</span>)</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_role_critical_gaps</span>(<span class="hljs-params">
+    role_id: <span class="hljs-built_in">str</span>,
+    priority: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">str</span>] = Query(<span class="hljs-params"><span class="hljs-literal">None</span>, description=<span class="hljs-string">&quot;Filtrar por prioridad&quot;</span></span>),
+    min_gap: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">float</span>] = Query(<span class="hljs-params"><span class="hljs-literal">None</span>, ge=<span class="hljs-number">0</span>, le=<span class="hljs-number">100</span>, description=<span class="hljs-string">&quot;Gap mínimo&quot;</span></span>),
+    include_candidates_details: <span class="hljs-built_in">bool</span> = Query(<span class="hljs-params"><span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;Incluir detalles de candidatos&quot;</span></span>)
+</span>):
+    <span class="hljs-string">&quot;&quot;&quot;
+    Obtiene los critical gaps de un rol específico.
+    
+    - **role_id**: ID del rol (e.g., R-CRT-LEAD, R-PM)
+    - **priority**: Filtrar por prioridad (CRÍTICA, ALTA, MEDIA, BAJA)
+    - **min_gap**: Gap mínimo para incluir (0-100)
+    - **include_candidates_details**: Incluir detalles de candidatos
+    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># Cargar datos</span>
+    all_gaps = load_critical_gaps()
+    
+    <span class="hljs-comment"># Buscar rol</span>
+    <span class="hljs-keyword">if</span> role_id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> all_gaps:
+        <span class="hljs-keyword">raise</span> HTTPException(
+            status_code=<span class="hljs-number">404</span>,
+            detail=<span class="hljs-string">f&quot;Role <span class="hljs-subst">{role_id}</span> not found&quot;</span>
+        )
+    
+    role_data = all_gaps[role_id]
+    
+    <span class="hljs-comment"># Aplicar filtros</span>
+    gaps = role_data[<span class="hljs-string">&#x27;critical_gaps&#x27;</span>]
+    
+    <span class="hljs-keyword">if</span> priority:
+        gaps = [g <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> gaps <span class="hljs-keyword">if</span> g[<span class="hljs-string">&#x27;priority&#x27;</span>] == priority.upper()]
+    
+    <span class="hljs-keyword">if</span> min_gap <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
+        gaps = [g <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> gaps <span class="hljs-keyword">if</span> g[<span class="hljs-string">&#x27;avg_gap_percentage&#x27;</span>] &gt;= min_gap]
+    
+    <span class="hljs-comment"># Remover detalles de candidatos si no se requieren</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> include_candidates_details:
+        <span class="hljs-keyword">for</span> gap <span class="hljs-keyword">in</span> gaps:
+            gap.pop(<span class="hljs-string">&#x27;candidates_details&#x27;</span>, <span class="hljs-literal">None</span>)
+    
+    <span class="hljs-comment"># Construir response</span>
+    response = {
+        <span class="hljs-string">&quot;role_id&quot;</span>: role_data[<span class="hljs-string">&#x27;role_id&#x27;</span>],
+        <span class="hljs-string">&quot;role_title&quot;</span>: role_data[<span class="hljs-string">&#x27;role_title&#x27;</span>],
+        <span class="hljs-string">&quot;critical_gaps&quot;</span>: gaps,
+        <span class="hljs-string">&quot;total_gaps&quot;</span>: <span class="hljs-built_in">len</span>(gaps),
+        <span class="hljs-string">&quot;highest_priority&quot;</span>: role_data.get(<span class="hljs-string">&#x27;highest_priority&#x27;</span>)
+    }
+    
+    <span class="hljs-comment"># Mensaje especial para roles sin candidatos viables</span>
+    <span class="hljs-keyword">if</span> gaps <span class="hljs-keyword">and</span> <span class="hljs-built_in">all</span>(g.get(<span class="hljs-string">&#x27;no_viable_candidates&#x27;</span>, <span class="hljs-literal">False</span>) <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> gaps):
+        response[<span class="hljs-string">&#x27;recommendation&#x27;</span>] = <span class="hljs-string">&quot;⚠️ SIN CANDIDATOS VIABLES - Requiere hiring externo&quot;</span>
+    
+    <span class="hljs-comment"># Mensaje para roles sin gaps</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(gaps) == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> role_data[<span class="hljs-string">&#x27;total_gaps&#x27;</span>] == <span class="hljs-number">0</span>:
+        response[<span class="hljs-string">&#x27;message&#x27;</span>] = <span class="hljs-string">&quot;✅ Todos los candidatos viables tienen los skills requeridos&quot;</span>
+    
+    <span class="hljs-keyword">return</span> response
+</code></pre>
+<hr>
+<h2 id="-campos-clave">🔑 Campos Clave</h2>
+<h3 id="criticalgap-object">CriticalGap Object</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>skill_id</code></td>
+<td>string</td>
+<td>ID del skill faltante (e.g., &quot;S-STAKE&quot;)</td>
+</tr>
+<tr>
+<td><code>skill_name</code></td>
+<td>string</td>
+<td>Nombre legible del skill (e.g., &quot;Stake&quot;)</td>
+</tr>
+<tr>
+<td><code>avg_gap_percentage</code></td>
+<td>float</td>
+<td>Gap promedio en % (0-100)</td>
+</tr>
+<tr>
+<td><code>candidates_affected</code></td>
+<td>int</td>
+<td>Número de candidatos afectados</td>
+</tr>
+<tr>
+<td><code>total_viable_candidates</code></td>
+<td>int</td>
+<td>Total de candidatos viables para el rol</td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td>string</td>
+<td>CRÍTICA, ALTA, MEDIA, BAJA</td>
+</tr>
+<tr>
+<td><code>criticality_score</code></td>
+<td>float</td>
+<td>Score de criticidad (usado para ordenar)</td>
+</tr>
+<tr>
+<td><code>no_viable_candidates</code></td>
+<td>boolean</td>
+<td>true si el rol no tiene candidatos viables</td>
+</tr>
+<tr>
+<td><code>candidates_details</code></td>
+<td>array</td>
+<td>Detalles de cada candidato afectado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="candidatedetail-object">CandidateDetail Object</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>employee_id</code></td>
+<td>string</td>
+<td>ID del empleado</td>
+</tr>
+<tr>
+<td><code>employee_name</code></td>
+<td>string</td>
+<td>Nombre del empleado</td>
+</tr>
+<tr>
+<td><code>current_level</code></td>
+<td>string</td>
+<td>Nivel actual del skill (novato, junior, etc.)</td>
+</tr>
+<tr>
+<td><code>required_level</code></td>
+<td>string</td>
+<td>Nivel requerido (avanzado, senior, etc.)</td>
+</tr>
+<tr>
+<td><code>gap_percentage</code></td>
+<td>float</td>
+<td>Gap individual del candidato (%)</td>
+</tr>
+<tr>
+<td><code>overall_score</code></td>
+<td>float</td>
+<td>Score general del candidato para el rol (0-1)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="-notas-de-implementación">� Notas de Implementación</h2>
+<h3 id="score-threshold">Score Threshold</h3>
+<ul>
+<li>El análisis considera <strong>candidatos viables</strong> aquellos con <code>overall_score ≥ 0.5</code></li>
+<li>Candidatos con score &lt; 0.5 no se consideran en el análisis de gaps</li>
+</ul>
+<h3 id="nivel-requerido-por-defecto">Nivel Requerido por Defecto</h3>
+<ul>
+<li>Si no se especifica, todos los skills se asumen al nivel <strong>AVANZADO</strong> (0.75)</li>
+</ul>
+<h3 id="prioridades">Prioridades</h3>
+<ul>
+<li><strong>CRÍTICA</strong>: gap ≥ 60% o sin candidatos viables</li>
+<li><strong>ALTA</strong>: gap ≥ 40%</li>
+<li><strong>MEDIA</strong>: gap ≥ 20%</li>
+<li><strong>BAJA</strong>: gap &lt; 20%</li>
+</ul>
+<h3 id="actualización-de-datos">Actualización de Datos</h3>
+<ul>
+<li>Los datos se generan al ejecutar <code>main_challenge.py</code></li>
+<li>Se guarda un timestamp en el nombre del archivo</li>
+<li>La API siempre lee el archivo más reciente</li>
+</ul>
+<hr>
+<h2 id="-testing">✅ Testing</h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Test 1: Rol con gaps</span>
+curl http://localhost:5000/api/roles/R-CRT-LEAD/critical-gaps
+
+<span class="hljs-comment"># Test 2: Rol sin candidatos viables</span>
+curl http://localhost:5000/api/roles/R-PM/critical-gaps
+
+<span class="hljs-comment"># Test 3: Filtrar por prioridad</span>
+curl http://localhost:5000/api/roles/R-PM/critical-gaps?priority=CRÍTICA
+
+<span class="hljs-comment"># Test 4: Sin detalles de candidatos</span>
+curl http://localhost:5000/api/roles/R-CRT-LEAD/critical-gaps?include_candidates_details=<span class="hljs-literal">false</span>
+
+<span class="hljs-comment"># Test 5: Gap mínimo</span>
+curl http://localhost:5000/api/roles/R-CRT-LEAD/critical-gaps?min_gap=50
+</code></pre>
+<p>app = Flask(<strong>name</strong>)</p>
+<h1 id="cargar-datos-precalculados">Cargar datos precalculados</h1>
+<p>with open('challenge_outputs/bottlenecks_by_role_latest.json') as f:
+BOTTLENECKS_BY_ROLE = json.load(f)</p>
+<p>@app.route('/api/roles/&lt;role_id&gt;/bottlenecks', methods=['GET'])
+def get_role_bottlenecks(role_id):
+&quot;&quot;&quot;Obtiene bottlenecks críticos de un rol específico&quot;&quot;&quot;</p>
+<pre><code># Verificar que el rol existe
+if role_id not in BOTTLENECKS_BY_ROLE:
+    return jsonify({
+        'error': 'Role not found',
+        'role_id': role_id,
+        'available_roles': list(BOTTLENECKS_BY_ROLE.keys())
+    }), 404
+
+role_data = BOTTLENECKS_BY_ROLE[role_id]
+
+# Aplicar filtros opcionales
+priority = request.args.get('priority')
+min_gap = request.args.get('min_gap', type=float)
+
+bottlenecks = role_data['critical_bottlenecks']
+
+if priority:
+    bottlenecks = [b for b in bottlenecks if b['priority'] == priority]
+
+if min_gap:
+    bottlenecks = [b for b in bottlenecks if b['gap_percentage'] &gt;= min_gap]
+
+response = {
+    'role_id': role_data['role_id'],
+    'role_title': role_data['role_title'],
+    'critical_bottlenecks': bottlenecks,
+    'total_bottlenecks': len(bottlenecks),
+    'highest_gap': max([b['gap_percentage'] for b in bottlenecks]) if bottlenecks else 0,
+    'total_blocked_transitions': sum([b['blocked_transitions'] for b in bottlenecks])
+}
+
+return jsonify(response)
+</code></pre>
+<p>@app.route('/api/roles', methods=['GET'])
+def list_roles():
+&quot;&quot;&quot;Lista todos los roles con sus métricas de bottlenecks&quot;&quot;&quot;</p>
+<pre><code>summary = []
+for role_id, data in BOTTLENECKS_BY_ROLE.items():
+    summary.append({
+        'role_id': role_id,
+        'role_title': data['role_title'],
+        'total_bottlenecks': data['total_bottlenecks'],
+        'highest_gap': data['highest_gap'],
+        'total_blocked_transitions': data['total_blocked_transitions']
+    })
+
+# Ordenar por highest_gap descendente
+summary.sort(key=lambda x: x['highest_gap'], reverse=True)
+
+return jsonify({
+    'total_roles': len(summary),
+    'roles': summary
+})
+</code></pre>
+<p>if <strong>name</strong> == '<strong>main</strong>':
+app.run(debug=True)</p>
+<pre><code>
+---
+
+## 💡 Ventajas de Este Enfoque
+
+1. **Consulta por Rol**: Permite al frontend preguntar &quot;¿Qué le falta a este rol?&quot; en lugar de filtrar manualmente
+2. **Datos Precalculados**: El archivo JSON se genera una vez, las consultas son instantáneas
+3. **Flexible**: Soporta filtros por prioridad y gap mínimo
+4. **Accionable**: Cada bottleneck incluye métricas específicas (empleados sin skill, demanda proyectada)
+5. **Escalable**: Funciona igual para 10 roles o 100 roles
+
+---
+
+## 📝 Archivo Fuente
+
+Los datos se generan automáticamente en:
+</code></pre>
+<p>challenge_outputs/bottlenecks_by_role_{timestamp}.json</p>
+<pre><code>
+Puedes crear un symlink para tener siempre la última versión:
+```bash
+ln -sf bottlenecks_by_role_$(ls -t | grep bottlenecks_by_role | head -1) bottlenecks_by_role_latest.json
+</code></pre>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
