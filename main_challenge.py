@@ -416,7 +416,6 @@ class TalentGapAnalyzer:
             
             capacidad_requerida = vision_data.get('capacidad_requerida', {})
             skills_criticos = capacidad_requerida.get('skills_criticos', [])
-            bottlenecks_identificados = capacidad_requerida.get('bottlenecks_identificados', [])
             
             # Analizar skills actuales de empleados
             employee_skills = {}
@@ -458,15 +457,8 @@ class TalentGapAnalyzer:
                     roles_requiring_skill = skill_to_roles.get(skill_id, [])
                     blocked_transitions_real = employees_without_skill * len(roles_requiring_skill)
                     
-                    # Encontrar roles afectados desde bottlenecks_identificados
-                    affected_roles = []
-                    for bottleneck_area in bottlenecks_identificados:
-                        if skill_id in bottleneck_area.get('skills_afectados', []):
-                            affected_roles.extend(bottleneck_area.get('roles_bloqueados', []))
-                    
-                    # Si no hay datos en bottlenecks_identificados, usar del mapping
-                    if not affected_roles:
-                        affected_roles = roles_requiring_skill
+                    # Roles afectados: todos los roles que requieren este skill
+                    affected_roles = roles_requiring_skill
                     
                     bottlenecks.append({
                         'skill_id': skill_critico.get('skill_id', 'Unknown'),
@@ -487,8 +479,7 @@ class TalentGapAnalyzer:
             return {
                 'skill_gaps': skill_gaps,
                 'bottlenecks': bottlenecks,
-                'critical_skills': [b['skill_id'] for b in bottlenecks[:3]],
-                'bottlenecks_identificados': bottlenecks_identificados
+                'critical_skills': [b['skill_id'] for b in bottlenecks[:3]]
             }
             
         except Exception as e:

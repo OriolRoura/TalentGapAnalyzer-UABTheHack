@@ -1,0 +1,126 @@
+{
+  "R-MTX-ARCH": {
+    "role_id": "R-MTX-ARCH",
+    "role_title": "Martech Architect",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-DATA",
+        "skill_name": "Data",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 8,
+        "demanda_proyectada": 5,
+        "capacidad_actual": 1
+      },
+      {
+        "skill_id": "S-CRM",
+        "skill_name": "Crm",
+        "gap_percentage": 66.66666666666666,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 8,
+        "demanda_proyectada": 6,
+        "capacidad_actual": 2
+      }
+    ],
+    "total_bottlenecks": 2,
+    "highest_gap": 80.0,
+    "total_blocked_transitions": 32
+  },
+  "R-DATA-ANL": {
+    "role_id": "R-DATA-ANL",
+    "role_title": "Data Analyst",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-DATA",
+        "skill_name": "Data",
+        "gap_percentage": 80.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 8,
+        "demanda_proyectada": 5,
+        "capacidad_actual": 1
+      }
+    ],
+    "total_bottlenecks": 1,
+    "highest_gap": 80.0,
+    "total_blocked_transitions": 16
+  },
+  "R-STR-LEAD": {
+    "role_id": "R-STR-LEAD",
+    "role_title": "Head of Strategy",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-ANALISIS",
+        "skill_name": "Analisis",
+        "gap_percentage": 75.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 8,
+        "demanda_proyectada": 8,
+        "capacidad_actual": 2
+      }
+    ],
+    "total_bottlenecks": 1,
+    "highest_gap": 75.0,
+    "total_blocked_transitions": 16
+  },
+  "R-STR-SR": {
+    "role_id": "R-STR-SR",
+    "role_title": "Senior Strategy Consultant",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-ANALISIS",
+        "skill_name": "Analisis",
+        "gap_percentage": 75.0,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 8,
+        "demanda_proyectada": 8,
+        "capacidad_actual": 2
+      }
+    ],
+    "total_bottlenecks": 1,
+    "highest_gap": 75.0,
+    "total_blocked_transitions": 16
+  },
+  "R-DSN-SR": {
+    "role_id": "R-DSN-SR",
+    "role_title": "Senior Brand/UI Designer",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-UIUX",
+        "skill_name": "Uiux",
+        "gap_percentage": 75.0,
+        "blocked_transitions": 9,
+        "priority": "HIGH",
+        "employees_without_skill": 9,
+        "demanda_proyectada": 4,
+        "capacidad_actual": 1
+      }
+    ],
+    "total_bottlenecks": 1,
+    "highest_gap": 75.0,
+    "total_blocked_transitions": 9
+  },
+  "R-CRM-ADMIN": {
+    "role_id": "R-CRM-ADMIN",
+    "role_title": "CRM Admin (HubSpot)",
+    "critical_bottlenecks": [
+      {
+        "skill_id": "S-CRM",
+        "skill_name": "Crm",
+        "gap_percentage": 66.66666666666666,
+        "blocked_transitions": 16,
+        "priority": "HIGH",
+        "employees_without_skill": 8,
+        "demanda_proyectada": 6,
+        "capacidad_actual": 2
+      }
+    ],
+    "total_bottlenecks": 1,
+    "highest_gap": 66.66666666666666,
+    "total_blocked_transitions": 16
+  }
+}

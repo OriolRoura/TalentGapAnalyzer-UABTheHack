@@ -99,29 +99,6 @@
         "gap_critico": true,
         "descripcion": "Arquitectura de datos limitada para objetivos analíticos"
       }
-    ],
-    "bottlenecks_identificados": [
-      {
-        "area": "Liderazgo Estratégico",
-        "skills_afectados": ["S-ANALISIS", "S-STAKE", "S-OKR"],
-        "roles_bloqueados": ["R-STR-LEAD", "R-STR-SR"],
-        "impacto": "Alto - Bloquea crecimiento organizacional",
-        "tiempo_desarrollo": "12-18 meses"
-      },
-      {
-        "area": "Capacidad Técnica Martech",
-        "skills_afectados": ["S-CRM", "S-AUTOM", "S-DATA"],
-        "roles_bloqueados": ["R-MTX-ARCH", "R-DATA-ANL"],
-        "impacto": "Crítico - Limita delivery de productos digitales",
-        "tiempo_desarrollo": "6-12 meses"
-      },
-      {
-        "area": "Design y UX",
-        "skills_afectados": ["S-UIUX", "S-FIGMA"],
-        "roles_bloqueados": ["R-DSN-SR"],
-        "impacto": "Medio - Afecta calidad de microapps",
-        "tiempo_desarrollo": "3-6 meses"
-      }
     ]
   },
   "roles_necesarios": [
