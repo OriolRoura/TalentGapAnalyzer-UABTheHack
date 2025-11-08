@@ -10,7 +10,6 @@
       "descripción": "Definición de visión, posicionamiento, propuesta de valor, OKRs y gobierno operativo.",
       "role_templates": [
         "R-STR-LEAD",
-        "R-STR-SR",
         "R-PM"
       ]
     },
@@ -18,27 +17,21 @@
       "nombre": "Creative",
       "descripción": "Narrativa, campañas, copy y conceptos creativos alineados a la marca.",
       "role_templates": [
-        "R-CRT-LEAD",
-        "R-CRT-COPY",
-        "R-PM"
+        "R-CRT-LEAD"
       ]
     },
     {
       "nombre": "Design",
       "descripción": "Identidad visual, sistemas de diseño, UI y materiales de marca.",
       "role_templates": [
-        "R-DSN-SR",
-        "R-DSN-MID",
-        "R-PM"
+        "R-DSN-SR"
       ]
     },
     {
       "nombre": "Influency",
       "descripción": "Social media, KOLs/creators e influencia orgánica y pagada.",
       "role_templates": [
-        "R-INF-MGR",
-        "R-SMM",
-        "R-PM"
+        "R-SMM"
       ]
     },
     {
@@ -46,8 +39,7 @@
       "descripción": "Captación y crecimiento mediante canales de pago y SEO/SEM.",
       "role_templates": [
         "R-PERF-SPEC",
-        "R-SEO-SEM",
-        "R-PM"
+        "R-SEO-SEM"
       ]
     },
     {
@@ -56,30 +48,323 @@
       "role_templates": [
         "R-MTX-ARCH",
         "R-CRM-ADMIN",
-        "R-DATA-ANL",
-        "R-PM"
+        "R-DATA-ANL"
       ]
     }
   ],
   "roles": [
     {
+      "id": "R-CRM-ADMIN",
+      "título": "CRM Admin (HubSpot)",
+      "nivel": "Mid",
+      "responsabilidades": [
+        "Configurar pipelines y propiedades en HubSpot",
+        "Crear workflows y sistemas de scoring",
+        "Mantener calidad de datos del CRM"
+      ],
+      "habilidades_requeridas": [
+        "S-CRM",
+        "S-AUTOM",
+        "S-EMAIL",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-CRT-LEAD",
+      "título": "Creative Director",
+      "nivel": "Lead",
+      "responsabilidades": [
+        "Definir narrativa y estándares creativos",
+        "Crear activos para GTM y campañas",
+        "Desarrollar storytelling de casos de éxito"
+      ],
+      "habilidades_requeridas": [
+        "S-COPY",
+        "S-STORY",
+        "S-BRAND",
+        "S-STAKE"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-DATA-ANL",
+      "título": "Data Analyst",
+      "nivel": "Mid",
+      "responsabilidades": [
+        "Desarrollar modelos de atribución",
+        "Crear dashboards de ROI y métricas",
+        "Definir KPIs y sistemas de medición"
+      ],
+      "habilidades_requeridas": [
+        "S-DATA",
+        "S-ANALYTICS",
+        "S-SQLPY",
+        "S-ABTEST"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
       "id": "R-STR-LEAD",
       "título": "Head of Strategy",
       "nivel": "Lead",
       "responsabilidades": [
-        "Definir visión y prioridades estratégicas (OKRs).",
-        "Alinear roadmap de capítulos con objetivos de negocio.",
-        "Dirigir discovery y workshops ejecutivos."
+        "Definir visión y prioridades estratégicas (OKRs)",
+        "Alinear roadmap de capítulos con objetivos de negocio",
+        "Dirigir discovery y workshops ejecutivos"
       ],
       "habilidades_requeridas": [
         "S-OKR",
         "S-ANALISIS",
-        "S-STAKE"
+        "S-STAKE",
+        "S-PM",
+        "S-ANALYTICS"
       ],
-      "dedicación_esperada": "30-40h/semana"
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-MTX-ARCH",
+      "título": "Martech Architect",
+      "nivel": "Lead",
+      "responsabilidades": [
+        "Diseñar arquitectura CRM y CDP",
+        "Implementar automatizaciones con n8n/HubSpot",
+        "Gestionar gobernanza de datos y privacidad"
+      ],
+      "habilidades_requeridas": [
+        "S-CRM",
+        "S-AUTOM",
+        "S-DATA",
+        "S-SQLPY",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-PERF-SPEC",
+      "título": "Performance Media Specialist",
+      "nivel": "Mid",
+      "responsabilidades": [
+        "Gestionar campañas de performance media",
+        "Optimizar ROI en Google/Meta Ads",
+        "Implementar testing y experimentación"
+      ],
+      "habilidades_requeridas": [
+        "S-ADS-GA",
+        "S-ADS-META",
+        "S-ABTEST",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-PM",
+      "título": "Project Manager",
+      "nivel": "Mid",
+      "responsabilidades": [
+        "Planificar y coordinar proyectos multi-disciplinarios",
+        "Gestionar capacidad y riesgos del equipo",
+        "Establecer SLA y procesos de QA"
+      ],
+      "habilidades_requeridas": [
+        "S-PM",
+        "S-STAKE",
+        "S-ANALYTICS",
+        "S-OKR"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-SEO-SEM",
+      "título": "SEO/SEM Manager",
+      "nivel": "Mid",
+      "responsabilidades": [
+        "Desarrollar estrategias SEO y SEM",
+        "Optimizar captación orgánica y de pago",
+        "Analizar performance y oportunidades"
+      ],
+      "habilidades_requeridas": [
+        "S-SEO",
+        "S-ADS-GA",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-DSN-SR",
+      "título": "Senior Brand/UI Designer",
+      "nivel": "Senior",
+      "responsabilidades": [
+        "Diseñar sistemas de identidad visual",
+        "Crear interfaces UI/UX para microapps",
+        "Mantener guías de marca y design systems"
+      ],
+      "habilidades_requeridas": [
+        "S-UIUX",
+        "S-FIGMA",
+        "S-BRAND"
+      ],
+      "dedicación_esperada": "35-45h/semana"
+    },
+    {
+      "id": "R-SMM",
+      "título": "Social Media Strategist",
+      "nivel": "Mid",
+      "responsabilidades": [
+        "Crear estrategias de social media",
+        "Gestionar contenido y calendario editorial",
+        "Analizar engagement y métricas sociales"
+      ],
+      "habilidades_requeridas": [
+        "S-SOCIAL",
+        "S-COPY",
+        "S-ANALYTICS"
+      ],
+      "dedicación_esperada": "35-45h/semana"
     }
   ],
   "skills": [
+    {
+      "id": "S-ABTEST",
+      "nombre": "A/B Testing y Experimentación",
+      "categoría": "Performance",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Google Optimize",
+        "VWO",
+        "Hotjar"
+      ]
+    },
+    {
+      "id": "S-ADS-GA",
+      "nombre": "Google Ads y Analytics",
+      "categoría": "Performance",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Google Ads",
+        "GA4",
+        "GTM"
+      ]
+    },
+    {
+      "id": "S-ADS-META",
+      "nombre": "Meta Ads (Facebook/Instagram)",
+      "categoría": "Performance",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Meta Business Manager",
+        "Facebook Ads"
+      ]
+    },
+    {
+      "id": "S-ANALISIS",
+      "nombre": "Análisis Estratégico",
+      "categoría": "Estrategia",
+      "peso": 5,
+      "herramientas_asociadas": [
+        "Excel",
+        "PowerBI",
+        "Tableau"
+      ]
+    },
+    {
+      "id": "S-ANALYTICS",
+      "nombre": "Analítica y Métricas",
+      "categoría": "Data",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "GA4",
+        "Mixpanel",
+        "Amplitude"
+      ]
+    },
+    {
+      "id": "S-AUTOM",
+      "nombre": "Automatización y Workflows",
+      "categoría": "Martech",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "n8n",
+        "Zapier",
+        "Make"
+      ]
+    },
+    {
+      "id": "S-BRAND",
+      "nombre": "Branding y Identidad",
+      "categoría": "Creative",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Adobe Creative Suite",
+        "Figma"
+      ]
+    },
+    {
+      "id": "S-COPY",
+      "nombre": "Copywriting y Contenido",
+      "categoría": "Creative",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Notion",
+        "Grammarly",
+        "Hemingway"
+      ]
+    },
+    {
+      "id": "S-CRM",
+      "nombre": "CRM y Customer Data",
+      "categoría": "Martech",
+      "peso": 5,
+      "herramientas_asociadas": [
+        "HubSpot",
+        "Salesforce",
+        "Pipedrive"
+      ]
+    },
+    {
+      "id": "S-DATA",
+      "nombre": "Arquitectura de Datos",
+      "categoría": "Data",
+      "peso": 5,
+      "herramientas_asociadas": [
+        "SQL",
+        "Python",
+        "CDP"
+      ]
+    },
+    {
+      "id": "S-EMAIL",
+      "nombre": "Email Marketing",
+      "categoría": "Martech",
+      "peso": 3,
+      "herramientas_asociadas": [
+        "Mailchimp",
+        "HubSpot",
+        "SendGrid"
+      ]
+    },
+    {
+      "id": "S-FIGMA",
+      "nombre": "Diseño en Figma",
+      "categoría": "Design",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Figma",
+        "FigJam",
+        "Design Systems"
+      ]
+    },
+    {
+      "id": "S-GENAI",
+      "nombre": "Inteligencia Artificial Generativa",
+      "categoría": "Tech",
+      "peso": 3,
+      "herramientas_asociadas": [
+        "ChatGPT",
+        "Claude",
+        "Midjourney"
+      ]
+    },
     {
       "id": "S-OKR",
       "nombre": "OKRs y Roadmapping",
@@ -87,7 +372,83 @@
       "peso": 5,
       "herramientas_asociadas": [
         "Miro",
-        "ClickUp"
+        "ClickUp",
+        "Notion"
+      ]
+    },
+    {
+      "id": "S-PM",
+      "nombre": "Project Management",
+      "categoría": "Operations",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "ClickUp",
+        "Asana",
+        "Monday"
+      ]
+    },
+    {
+      "id": "S-SEO",
+      "nombre": "SEO y Posicionamiento",
+      "categoría": "Performance",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "SEMrush",
+        "Ahrefs",
+        "GSC"
+      ]
+    },
+    {
+      "id": "S-SOCIAL",
+      "nombre": "Social Media Strategy",
+      "categoría": "Influency",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Meta Business Suite",
+        "LinkedIn"
+      ]
+    },
+    {
+      "id": "S-SQLPY",
+      "nombre": "SQL y Python",
+      "categoría": "Data",
+      "peso": 5,
+      "herramientas_asociadas": [
+        "PostgreSQL",
+        "Python",
+        "Jupyter"
+      ]
+    },
+    {
+      "id": "S-STAKE",
+      "nombre": "Stakeholder Management",
+      "categoría": "Leadership",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Slack",
+        "Zoom",
+        "Presentation Tools"
+      ]
+    },
+    {
+      "id": "S-STORY",
+      "nombre": "Storytelling y Narrativa",
+      "categoría": "Creative",
+      "peso": 4,
+      "herramientas_asociadas": [
+        "Presentation Tools",
+        "Video Editing"
+      ]
+    },
+    {
+      "id": "S-UIUX",
+      "nombre": "UI/UX Design",
+      "categoría": "Design",
+      "peso": 5,
+      "herramientas_asociadas": [
+        "Figma",
+        "Adobe XD",
+        "Principle"
       ]
     }
   ]

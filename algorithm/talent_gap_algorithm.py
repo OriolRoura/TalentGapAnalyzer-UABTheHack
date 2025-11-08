@@ -109,6 +109,17 @@ class TalentGapAlgorithm:
         
         print("🚀 Starting full talent gap analysis...")
         
+        # Paso 0: Inicializar sistema de keywords dinámicas
+        print("🧠 Step 0: Learning keywords from data...")
+        try:
+            self.gap_calculator.initialize_dynamic_keywords(
+                list(self.employees.values()), 
+                list(self.roles_catalog.values())
+            )
+        except Exception as e:
+            print(f"⚠️  Warning: Could not initialize dynamic keywords ({e}), using fallback system")
+            # El sistema usará automáticamente el método fallback
+        
         # Paso 1: Calcular matriz de compatibilidad
         print("📊 Step 1: Calculating compatibility matrix...")
         self.compatibility_matrix = self._calculate_compatibility_matrix()
@@ -333,31 +344,32 @@ class TalentGapAlgorithm:
         return skills
     
     def _parse_roles_catalog(self) -> Dict[str, Role]:
-        """Parsea catálogo de roles desde vision_futura (roles necesarios futuros)."""
+        """Parsea catálogo de roles desde org_config.json (roles definidos en la organización)."""
         roles = {}
         
-        # Usar roles futuros de vision_futura en lugar de roles actuales
-        future_roles = self.vision_futura.get('roles_futuros', {})
-        if not future_roles and 'roles_necesarios' in self.vision_futura:
-            # Convertir de lista a diccionario si es necesario
-            future_roles = {role['id']: role for role in self.vision_futura['roles_necesarios']}
+        # Usar roles definidos en org_config.json
+        org_roles = self.org_config.get('roles', [])
         
-        for role_id, role_data in future_roles.items():
-            # Mapear habilidades según el rol (inferir desde responsabilidades si no están explícitas)
-            habilidades_requeridas = self._infer_skills_for_future_role(role_data)
-            
+        for role_data in org_roles:
             role = Role(
                 id=role_data['id'],
                 titulo=role_data.get('título', role_data.get('titulo', role_data['id'])),
                 nivel=role_data.get('nivel', 'Mid'),
-                chapter=role_data.get('capítulo', role_data.get('chapter', 'Unknown')),
-                habilidades_requeridas=habilidades_requeridas,
-                responsabilidades=role_data.get('objetivos_asociados', []),
-                dedicacion_esperada=f"{role_data.get('modalidad', 'FT')} - {role_data.get('cantidad', 1)} position(s)"
+                chapter=self._get_chapter_for_role(role_data['id']),
+                habilidades_requeridas=role_data.get('habilidades_requeridas', []),
+                responsabilidades=role_data.get('responsabilidades', []),
+                dedicacion_esperada=role_data.get('dedicación_esperada', '35-45h/semana')
             )
             roles[role.id] = role
         
         return roles
+    
+    def _get_chapter_for_role(self, role_id: str) -> str:
+        """Obtiene el chapter al que pertenece un rol basándose en org_config.json."""
+        for chapter in self.org_config.get('chapters', []):
+            if role_id in chapter.get('role_templates', []):
+                return chapter['nombre']
+        return 'Unknown'
     
     def _infer_skills_for_future_role(self, role_data: dict) -> List[str]:
         """Infiere las habilidades requeridas basado en el tipo de rol futuro."""

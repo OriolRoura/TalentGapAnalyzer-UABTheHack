@@ -13,6 +13,7 @@ from collections import defaultdict, Counter
 sys.path.append(str(Path(__file__).parent))
 
 from algorithm.models import SkillLevel, GapBand
+from algorithm.talent_gap_algorithm import TalentGapAlgorithm
 
 class TalentGapAnalyzer:
     """
