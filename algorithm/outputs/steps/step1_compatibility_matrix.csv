@@ -1,0 +1,11 @@
+employee_id,employee_name,role_id,role_title,overall_score,band,skills_score,responsibilities_score,ambitions_score,dedication_score,gaps_count
+1001,Jordi Casals,R-STR-LEAD,Head of Strategy,0.625,NEAR,1.0,0.2,0.5,0.0,2
+1002,Marta Soler,R-STR-LEAD,Head of Strategy,0.40192307692307694,FAR,0.6538461538461539,0.0,0.5,0.0,3
+1003,Pablo Reyes,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5
+1004,Núria Aguilera,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5
+1005,Marc Serra,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5
+1006,Adrián López,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5
+1007,Nerea Vidal,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5
+1008,Sergio Martín,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5
+1009,Laura Torres,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5
+1010,Claudia Riera,R-STR-LEAD,Head of Strategy,0.2,NOT_VIABLE,0.25,0.0,0.5,0.0,5

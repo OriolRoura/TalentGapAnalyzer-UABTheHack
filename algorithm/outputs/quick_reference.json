@@ -1,0 +1,22 @@
+{
+  "analysis_timestamp": "2025-11-08T15:40:23.595424",
+  "quick_stats": {
+    "total_employees": 10,
+    "total_roles": 1,
+    "overall_readiness": "0.0%",
+    "ready_transitions": 0,
+    "critical_bottlenecks": 3
+  },
+  "files_generated": [
+    "full_analysis_results.json",
+    "compatibility_matrix.csv",
+    "steps/step1_compatibility_matrix.json",
+    "steps/step1_compatibility_matrix.csv",
+    "steps/step2_rankings.json",
+    "steps/step3_optimization.json",
+    "steps/step4_gap_analysis.json",
+    "steps/step5_recommendations.json",
+    "steps/step6_executive_summary.json",
+    "STEPS_SUMMARY.md"
+  ]
+}

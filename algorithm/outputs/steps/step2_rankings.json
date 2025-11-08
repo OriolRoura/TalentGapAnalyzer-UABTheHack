@@ -1,0 +1,67 @@
+{
+  "step": 2,
+  "name": "Generating rankings",
+  "timestamp": "2025-11-08T15:40:23.595424",
+  "role_rankings": {
+    "R-STR-LEAD": [
+      {
+        "employee_id": "1001",
+        "overall_score": 0.625,
+        "band": "NEAR",
+        "detailed_gaps": [
+          "Gap significativo en responsabilidades similares",
+          "Gap en disponibilidad horaria"
+        ],
+        "component_scores": {
+          "skills": 1.0,
+          "responsibilities": 0.2,
+          "ambitions": 0.5,
+          "dedication": 0.0
+        }
+      },
+      {
+        "employee_id": "1002",
+        "overall_score": 0.40192307692307694,
+        "band": "FAR",
+        "detailed_gaps": [
+          "Skill gap: OKRs y Roadmapping (actual: intermedio)",
+          "Gap significativo en responsabilidades similares",
+          "Gap en disponibilidad horaria"
+        ],
+        "component_scores": {
+          "skills": 0.6538461538461539,
+          "responsibilities": 0.0,
+          "ambitions": 0.5,
+          "dedication": 0.0
+        }
+      }
+    ]
+  },
+  "career_paths": {
+    "1001": [
+      {
+        "role_id": "R-STR-LEAD",
+        "overall_score": 0.625,
+        "band": "NEAR",
+        "rank": 1
+      }
+    ],
+    "1002": [
+      {
+        "role_id": "R-STR-LEAD",
+        "overall_score": 0.40192307692307694,
+        "band": "FAR",
+        "rank": 1
+      }
+    ],
+    "1003": [],
+    "1004": [],
+    "1005": [],
+    "1006": [],
+    "1007": [],
+    "1008": [],
+    "1009": [],
+    "1010": []
+  },
+  "top_performers": []
+}
