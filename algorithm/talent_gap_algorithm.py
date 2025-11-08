@@ -157,7 +157,10 @@ class TalentGapAlgorithm:
             self.chapters_catalog
         )
         
-        bottlenecks = self.gap_analyzer.identify_bottleneck_skills(skill_gaps)
+        bottlenecks = self.gap_analyzer.identify_bottleneck_skills(
+            skill_gaps, 
+            list(self.employees.values())  # Pasar empleados para cálculo real
+        )
         training_roi = self.gap_analyzer.calculate_training_roi(skill_gaps)
         
         # Paso 5: Generar recomendaciones
