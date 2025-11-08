@@ -1,0 +1,298 @@
+{
+    "employee_id": 1002,
+    "employee_name": "Marta Soler",
+    "chapter": "Strategy",
+    "current_role": "Project Manager",
+    "role_matches": [
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-INF-MGR",
+            "role_title": "Influency Manager",
+            "overall_score": 0.8,
+            "band": "READY",
+            "skills_score": 1.0,
+            "responsibilities_score": 0.5,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Gap significativo en responsabilidades similares"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-STR-SR",
+            "role_title": "Senior Strategy Consultant",
+            "overall_score": 0.8,
+            "band": "READY",
+            "skills_score": 1.0,
+            "responsibilities_score": 0.5,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Gap significativo en responsabilidades similares"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-PM",
+            "role_title": "Project Manager",
+            "overall_score": 0.6402777777777777,
+            "band": "READY_WITH_SUPPORT",
+            "skills_score": 0.6805555555555554,
+            "responsibilities_score": 0.5,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: OKRs y Roadmapping (actual: intermedio)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: OKRs y Roadmapping (actual: intermedio)",
+                "Address gap: Gap significativo en responsabilidades similares"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-CRT-LEAD",
+            "role_title": "Creative Director",
+            "overall_score": 0.42500000000000004,
+            "band": "NEAR",
+            "skills_score": 0.25000000000000006,
+            "responsibilities_score": 0.5,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: Storytelling (actual: novato)",
+                "Skill gap: Copywriting (actual: novato)",
+                "Skill gap: Branding (actual: novato)",
+                "Skill gap: IA Generativa (actual: novato)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: Storytelling (actual: novato)",
+                "Address gap: Skill gap: Copywriting (actual: novato)",
+                "Address gap: Skill gap: Branding (actual: novato)"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-DSN-SR",
+            "role_title": "Senior Brand/UI Designer",
+            "overall_score": 0.42500000000000004,
+            "band": "NEAR",
+            "skills_score": 0.25000000000000006,
+            "responsibilities_score": 0.5,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: Branding (actual: novato)",
+                "Skill gap: UI/UX Design (actual: novato)",
+                "Skill gap: Figma (actual: novato)",
+                "Skill gap: IA Generativa (actual: novato)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: Branding (actual: novato)",
+                "Address gap: Skill gap: UI/UX Design (actual: novato)",
+                "Address gap: Skill gap: Figma (actual: novato)"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-STR-LEAD",
+            "role_title": "Head of Strategy",
+            "overall_score": 0.40535714285714297,
+            "band": "NEAR",
+            "skills_score": 0.6607142857142859,
+            "responsibilities_score": 0.0,
+            "ambitions_score": 0.5,
+            "dedication_score": 0.0,
+            "detailed_gaps": [
+                "Skill gap: OKRs y Roadmapping (actual: intermedio)",
+                "Gap significativo en responsabilidades similares",
+                "Gap en disponibilidad horaria"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: OKRs y Roadmapping (actual: intermedio)",
+                "Address gap: Gap significativo en responsabilidades similares",
+                "Address gap: Gap en disponibilidad horaria"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-SMM",
+            "role_title": "Social Media Strategist",
+            "overall_score": 0.3390625,
+            "band": "FAR",
+            "skills_score": 0.32812499999999994,
+            "responsibilities_score": 0.0,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: Social Media (actual: novato)",
+                "Skill gap: Copywriting (actual: novato)",
+                "Skill gap: Email Marketing (actual: novato)",
+                "Skill gap: Analytics y Métricas (actual: intermedio)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: Social Media (actual: novato)",
+                "Address gap: Skill gap: Copywriting (actual: novato)",
+                "Address gap: Skill gap: Email Marketing (actual: novato)"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-CRM-ADMIN",
+            "role_title": "CRM Admin (HubSpot)",
+            "overall_score": 0.3367647058823529,
+            "band": "FAR",
+            "skills_score": 0.3235294117647058,
+            "responsibilities_score": 0.0,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: CRM Management (actual: novato)",
+                "Skill gap: Automatización (actual: novato)",
+                "Skill gap: Email Marketing (actual: novato)",
+                "Skill gap: Analytics y Métricas (actual: intermedio)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: CRM Management (actual: novato)",
+                "Address gap: Skill gap: Automatización (actual: novato)",
+                "Address gap: Skill gap: Email Marketing (actual: novato)"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-DATA-ANL",
+            "role_title": "Data Analyst",
+            "overall_score": 0.3328947368421052,
+            "band": "FAR",
+            "skills_score": 0.31578947368421034,
+            "responsibilities_score": 0.0,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: Analytics y Métricas (actual: intermedio)",
+                "Skill gap: SQL & Python (actual: novato)",
+                "Skill gap: Data Management (actual: novato)",
+                "Skill gap: A/B Testing (actual: novato)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: Analytics y Métricas (actual: intermedio)",
+                "Address gap: Skill gap: SQL & Python (actual: novato)",
+                "Address gap: Skill gap: Data Management (actual: novato)"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-PERF-SPEC",
+            "role_title": "Performance Media Specialist",
+            "overall_score": 0.3328947368421052,
+            "band": "FAR",
+            "skills_score": 0.31578947368421034,
+            "responsibilities_score": 0.0,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: Google Ads (actual: novato)",
+                "Skill gap: Meta Ads (actual: novato)",
+                "Skill gap: A/B Testing (actual: novato)",
+                "Skill gap: Analytics y Métricas (actual: intermedio)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: Google Ads (actual: novato)",
+                "Address gap: Skill gap: Meta Ads (actual: novato)",
+                "Address gap: Skill gap: A/B Testing (actual: novato)"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-SEO-SEM",
+            "role_title": "SEO/SEM Manager",
+            "overall_score": 0.3328947368421052,
+            "band": "FAR",
+            "skills_score": 0.31578947368421034,
+            "responsibilities_score": 0.0,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: SEO (actual: novato)",
+                "Skill gap: Google Ads (actual: novato)",
+                "Skill gap: Analytics y Métricas (actual: intermedio)",
+                "Skill gap: Copywriting (actual: novato)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: SEO (actual: novato)",
+                "Address gap: Skill gap: Google Ads (actual: novato)",
+                "Address gap: Skill gap: Analytics y Métricas (actual: intermedio)"
+            ]
+        },
+        {
+            "employee_id": 1002,
+            "employee_name": "Marta Soler",
+            "role_id": "R-MTX-ARCH",
+            "role_title": "Martech Architect",
+            "overall_score": 0.3,
+            "band": "FAR",
+            "skills_score": 0.24999999999999994,
+            "responsibilities_score": 0.0,
+            "ambitions_score": 0.5,
+            "dedication_score": 1.0,
+            "detailed_gaps": [
+                "Skill gap: CRM Management (actual: novato)",
+                "Skill gap: Automatización (actual: novato)",
+                "Skill gap: Data Management (actual: novato)",
+                "Skill gap: SQL & Python (actual: novato)",
+                "Gap significativo en responsabilidades similares"
+            ],
+            "recommendations": [
+                "Address gap: Skill gap: CRM Management (actual: novato)",
+                "Address gap: Skill gap: Automatización (actual: novato)",
+                "Address gap: Skill gap: Data Management (actual: novato)"
+            ]
+        }
+    ],
+    "best_match": {
+        "employee_id": 1002,
+        "employee_name": "Marta Soler",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.8,
+        "band": "READY",
+        "skills_score": 1.0,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "detailed_gaps": [
+            "Gap significativo en responsabilidades similares"
+        ],
+        "recommendations": [
+            "Address gap: Gap significativo en responsabilidades similares"
+        ]
+    },
+    "ready_roles_count": 3,
+    "avg_compatibility_score": 0.4558455280869657
+}
