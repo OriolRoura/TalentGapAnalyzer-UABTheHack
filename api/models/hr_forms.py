@@ -101,7 +101,7 @@ class HREmployeeDedicationSubmit(BaseModel):
 
 class HREmployeeSubmitForm(BaseModel):
     """Form for submitting complete employee profile"""
-    employee_id: str
+    employee_id: Optional[str] = None
     nombre: str
     email: EmailStr
     chapter: str

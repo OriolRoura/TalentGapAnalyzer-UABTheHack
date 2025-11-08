@@ -27,18 +27,29 @@ router = APIRouter()
 @router.post("/employee/submit", response_model=HREmployeeSubmitResponse, status_code=200)
 async def submit_employee_profile(form: HREmployeeSubmitForm):
     """
-    HR form to submit complete employee profile
+    HR form to submit complete employee profile.
+    If employee_id is provided, updates existing employee.
+    If employee_id is not provided, creates a new employee with auto-generated ID.
     """
     employees = data_loader.get_employees()
     
-    # Convert employee_id to int
-    try:
-        employee_id = int(form.employee_id)
-    except ValueError:
-        raise HTTPException(status_code=400, detail=f"Invalid employee_id: {form.employee_id}")
-    
-    # Check if employee exists
-    employee = data_loader.get_employee(employee_id)
+    # Determine if we're creating or updating
+    if form.employee_id:
+        # Update existing employee
+        try:
+            employee_id = int(form.employee_id)
+        except ValueError:
+            raise HTTPException(status_code=400, detail=f"Invalid employee_id: {form.employee_id}")
+        
+        employee = data_loader.get_employee(employee_id)
+        if not employee:
+            raise HTTPException(status_code=404, detail=f"Employee {employee_id} not found")
+        is_new = False
+    else:
+        # Create new employee with auto-generated ID
+        employee_id = max(employees.keys()) + 1 if employees else 1001
+        employee = None
+        is_new = True
     
     # Build skills dictionary from submitted skills
     skills_dict = {}
@@ -51,32 +62,7 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
         form.dedicacion.proyecto_actual: form.dedicacion.porcentaje_dedicacion
     }
     
-    if employee:
-        # Update existing employee
-        employee.nombre = form.nombre
-        employee.email = form.email
-        employee.chapter = form.chapter
-        employee.rol_actual = form.seniority
-        employee.habilidades = skills_dict
-        employee.responsabilidades_actuales = form.responsabilidades
-        employee.dedicacion_actual = dedication_dict
-        
-        # Update ambitions
-        employee.ambiciones.especialidades_preferidas = form.ambiciones.especialidades_preferidas
-        employee.ambiciones.nivel_aspiracion = form.ambiciones.nivel_aspiracion
-        
-        # Update metadata if it has additional fields (you can extend this)
-        if not hasattr(employee, 'metadata') or employee.metadata is None:
-            employee.metadata = Metadata(
-                performance_rating="B",
-                retention_risk="Baja",
-                trayectoria=""
-            )
-        
-        # Update in store
-        data_loader.update_employee(employee_id, employee)
-        message = "Employee profile updated successfully"
-    else:
+    if is_new:
         # Create new employee
         employee_data = EmployeeCreate(
             nombre=form.nombre,
@@ -106,7 +92,32 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
         
         # Add to store
         data_loader.add_employee(employee)
-        message = "Employee profile submitted successfully"
+        message = "Employee profile created successfully"
+    else:
+        # Update existing employee
+        employee.nombre = form.nombre
+        employee.email = form.email
+        employee.chapter = form.chapter
+        employee.rol_actual = form.seniority
+        employee.habilidades = skills_dict
+        employee.responsabilidades_actuales = form.responsabilidades
+        employee.dedicacion_actual = dedication_dict
+        
+        # Update ambitions
+        employee.ambiciones.especialidades_preferidas = form.ambiciones.especialidades_preferidas
+        employee.ambiciones.nivel_aspiracion = form.ambiciones.nivel_aspiracion
+        
+        # Update metadata if it has additional fields (you can extend this)
+        if not hasattr(employee, 'metadata') or employee.metadata is None:
+            employee.metadata = Metadata(
+                performance_rating="B",
+                retention_risk="Baja",
+                trayectoria=""
+            )
+        
+        # Update in store
+        data_loader.update_employee(employee_id, employee)
+        message = "Employee profile updated successfully"
     
     # Validate
     is_valid, ded_errors = ValidationService.validate_employee_dedication(employee)
@@ -117,7 +128,7 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
     return HREmployeeSubmitResponse(
         status="success",
         message=message,
-        employee_id=form.employee_id,
+        employee_id=str(employee_id),
         validation={
             "skills_count": len(form.skills),
             "dedication_valid": dedication_valid
