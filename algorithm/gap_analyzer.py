@@ -225,56 +225,86 @@ class GapAnalyzer:
     
     def _identify_bottlenecks_from_vision(self) -> List[Dict]:
         """
-        Identifica bottlenecks basándose en vision_futura.json capacidad_requerida.
-        Calcula transiciones bloqueadas REALES desde la matriz de compatibilidad.
+        Identifica bottlenecks dinámicamente desde roles_necesarios y empleados actuales.
+        NO depende de datos precalculados - todo se calcula en tiempo real.
         """
         try:
             from pathlib import Path
             import json
             
+            # Cargar vision_futura para roles necesarios
             vision_path = Path("dataSet/talent-gap-analyzer-main/vision_futura.json")
             with open(vision_path, 'r', encoding='utf-8') as f:
                 vision_data = json.load(f)
             
-            capacidad_requerida = vision_data.get('capacidad_requerida', {})
-            skills_criticos = capacidad_requerida.get('skills_criticos', [])
+            # Cargar org_config para obtener skills requeridos por cada rol
+            config_path = Path("dataSet/talent-gap-analyzer-main/org_config.json")
+            with open(config_path, 'r', encoding='utf-8') as f:
+                org_config = json.load(f)
             
+            roles_necesarios = vision_data.get('roles_necesarios', [])
+            roles_data = org_config.get('roles', {})
+            
+            # 1. Calcular demanda proyectada por skill
+            # Contar cuántos roles futuros requieren cada skill
+            skill_demand = defaultdict(int)
+            skill_to_roles = defaultdict(list)
+            
+            for role_future in roles_necesarios:
+                role_id = role_future.get('id')
+                cantidad = role_future.get('cantidad', 1)
+                
+                # Obtener skills requeridos desde org_config
+                if role_id in roles_data:
+                    role_info = roles_data[role_id]
+                    required_skills = role_info.get('skills_requeridas', {})
+                    
+                    for skill_id, level in required_skills.items():
+                        skill_demand[skill_id] += cantidad
+                        if role_id not in skill_to_roles[skill_id]:
+                            skill_to_roles[skill_id].append(role_id)
+            
+            # 2. Calcular capacidad actual por skill
+            # Contar empleados actuales con cada skill
+            skill_capacity = defaultdict(int)
+            employees_by_skill = defaultdict(list)
+            
+            for emp in self.employees:
+                for skill_id in emp.skills.keys():
+                    # Solo contar si tienen nivel suficiente (no NOVATO)
+                    if emp.skills[skill_id] != SkillLevel.NOVATO:
+                        skill_capacity[skill_id] += 1
+                        employees_by_skill[skill_id].append(emp.id)
+            
+            # 3. Identificar bottlenecks (skills con gap > 30%)
             bottlenecks = []
-            for skill_critico in skills_criticos:
-                if skill_critico.get('gap_critico', False):
-                    skill_id = skill_critico['skill_id']
-                    demanda = skill_critico.get('demanda_proyectada', 0)
-                    capacidad = skill_critico.get('capacidad_actual', 0)
-                    
-                    gap_percentage = ((demanda - capacidad) / demanda * 100) if demanda > 0 else 0
-                    
-                    # Calcular transiciones bloqueadas REALES:
-                    # Contar empleados sin este skill × roles que lo requieren
-                    affected_roles = self._get_roles_requiring_skill(skill_id)
-                    
-                    # Contar cuántos empleados NO tienen este skill
-                    employees_without_skill = sum(
-                        1 for emp in self.employees 
-                        if skill_id not in emp.skills or 
-                        emp.skills.get(skill_id, SkillLevel.NOVATO) == SkillLevel.NOVATO
-                    )
-                    
-                    # Transiciones bloqueadas = empleados sin skill × roles que lo requieren
-                    blocked_transitions_real = employees_without_skill * len(affected_roles)
+            
+            for skill_id, demanda in skill_demand.items():
+                capacidad = skill_capacity.get(skill_id, 0)
+                
+                # Calcular gap
+                gap_percentage = ((demanda - capacidad) / demanda * 100) if demanda > 0 else 0
+                
+                # Solo incluir si hay gap significativo (> 30%)
+                if gap_percentage > 30:
+                    # Calcular transiciones bloqueadas
+                    employees_without_skill = len(self.employees) - len(employees_by_skill.get(skill_id, []))
+                    affected_roles = skill_to_roles[skill_id]
+                    blocked_transitions = employees_without_skill * len(affected_roles)
                     
                     bottlenecks.append({
                         'skill_id': skill_id,
                         'skill_name': skill_id.replace('S-', '').replace('-', ' ').title(),
                         'gap_percentage': gap_percentage,
                         'affected_roles': affected_roles,
-                        'blocked_transitions': blocked_transitions_real,  # CÁLCULO REAL
+                        'blocked_transitions': blocked_transitions,
                         'bottleneck_impact': gap_percentage * demanda / 100,
                         'priority_level': 'HIGH' if gap_percentage > 60 else 'MEDIUM',
-                        'demanda_proyectada': demanda,
+                        'demanda_proyectada': int(demanda),
                         'capacidad_actual': capacidad,
                         'employees_without_skill': employees_without_skill,
                         'roles_requiring_skill': len(affected_roles),
-                        'descripcion': skill_critico.get('descripcion', '')
+                        'descripcion': f'{len(affected_roles)} roles futuros requieren este skill'
                     })
             
             # Ordenar por gap_percentage descendente
@@ -283,20 +313,10 @@ class GapAnalyzer:
             return bottlenecks
             
         except Exception as e:
-            print(f"Warning: Could not load bottlenecks from vision_futura: {e}")
+            print(f"Warning: Could not calculate bottlenecks dynamically: {e}")
+            import traceback
+            traceback.print_exc()
             return []
-    
-    def _get_roles_requiring_skill(self, skill_id: str) -> List[str]:
-        """Helper para obtener roles que requieren un skill específico."""
-        # Mapeo básico skill -> roles (puede expandirse)
-        skill_to_roles = {
-            'S-ANALISIS': ['R-STR-LEAD', 'R-STR-SR'],
-            'S-CRM': ['R-MTX-ARCH', 'R-CRM-ADMIN'],
-            'S-UIUX': ['R-DSN-SR'],
-            'S-DATA': ['R-MTX-ARCH', 'R-DATA-ANL'],
-            'S-STAKE': ['R-STR-LEAD', 'R-PM'],
-        }
-        return skill_to_roles.get(skill_id, [])
     
     def calculate_training_roi(self,
                              skill_gaps: Dict[str, Dict],

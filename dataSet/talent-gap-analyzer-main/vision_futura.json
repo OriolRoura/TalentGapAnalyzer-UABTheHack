@@ -62,45 +62,6 @@
       ]
     }
   },
-  "capacidad_requerida": {
-    "skills_criticos": [
-      {
-        "skill_id": "S-ANALISIS",
-        "demanda_proyectada": 8,
-        "capacidad_actual": 2,
-        "gap_critico": true,
-        "descripcion": "Análisis estratégico requerido para múltiples roles de liderazgo"
-      },
-      {
-        "skill_id": "S-CRM",
-        "demanda_proyectada": 6,
-        "capacidad_actual": 2,
-        "gap_critico": true,
-        "descripcion": "Expertise en CRM crítico para roles Martech y RevOps"
-      },
-      {
-        "skill_id": "S-UIUX",
-        "demanda_proyectada": 4,
-        "capacidad_actual": 1,
-        "gap_critico": true,
-        "descripcion": "Design skills escasos para crecimiento de productos digitales"
-      },
-      {
-        "skill_id": "S-STAKE",
-        "demanda_proyectada": 7,
-        "capacidad_actual": 3,
-        "gap_critico": false,
-        "descripcion": "Stakeholder management necesario para roles senior"
-      },
-      {
-        "skill_id": "S-DATA",
-        "demanda_proyectada": 5,
-        "capacidad_actual": 1,
-        "gap_critico": true,
-        "descripcion": "Arquitectura de datos limitada para objetivos analíticos"
-      }
-    ]
-  },
   "roles_necesarios": [
     {
       "id": "R-STR-LEAD",
