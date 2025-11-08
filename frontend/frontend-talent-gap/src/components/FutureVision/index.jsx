@@ -1,30 +1,16 @@
-import { post, get } from '../../services';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { FutureVisionForm } from './FutureVisionForm';
+import { SkillBottleneck } from './SkillBottleneck';
 
 const FutureVision = () => {
-  const [employees, setEmployees] = useState();
-
-  const fetchEmployees = async () => {
-    const data = get("employees/")
-    if (data) setEmployees(data);
-  }
-
-  useEffect(() => {
-    console.log(employees);
-  }, [employees])
-
-
-
   return (
-    <div>
-      <button
-        onClick={fetchEmployees}
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Llista empleats
-      </button>
+    <div className="container mx-auto p-6 max-w-[1400px]">
+      <div className="space-y-6">
+        <FutureVisionForm />
+        <SkillBottleneck />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default FutureVision;
