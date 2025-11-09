@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { AlertTriangle, Users, ChevronDown, AlertCircle } from 'lucide-react';
+import OrganizationHeader from '../../OrganizationHeader';
 import { getAllEmployeesGapMatrix } from '../../../services/gapAnalysisService';
 import { transformGapDataToSkillBottleneck } from '../../../utils/gapDataTransformer';
 
@@ -224,16 +225,19 @@ export function SkillBottleneck() {
   const urgentSkills = sortedSkills.filter((s) => s.riskLevel === "urgent");
 
   return (
-    <div className="w-full">
-      {/* Header */}
-      <div className="border-b border-gray-200 bg-gradient-to-r from-red-50 to-white mb-8 rounded-lg shadow-sm">
-        <div className="p-6 text-center">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="p-2 bg-red-100 rounded-lg">
-              <AlertCircle className="h-6 w-6 text-red-600" />
+    <div className="min-h-screen bg-gray-50">
+      <OrganizationHeader />
+      
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="border-b border-gray-200 bg-gradient-to-r from-red-50 to-white mb-8 rounded-lg shadow-sm">
+          <div className="p-6 text-center">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="p-2 bg-red-100 rounded-lg">
+                <AlertCircle className="h-6 w-6 text-red-600" />
+              </div>
+              <h1 className="text-2xl font-bold text-gray-900">Critical Skill Voids</h1>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">Critical Skill Voids</h1>
-          </div>
           <p className="text-sm text-gray-600 leading-relaxed max-w-3xl mx-auto">
             Identify positions with critical skill shortages across your organization. Focus on roles where only a few people have
             the required expertise—these are your critical risk areas.
@@ -461,6 +465,7 @@ export function SkillBottleneck() {
             </div>
           </div>
         </Card>
+      </div>
       </div>
     </div>
   );

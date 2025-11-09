@@ -5065,3 +5065,81 @@
     "prompt_length": 7102
   }
 }
+{
+  "request_id": "REQ-20251109055655583462",
+  "timestamp": "2025-11-09T05:56:55.583481",
+  "provider": "google",
+  "endpoint": "generate_content_structured",
+  "method": "POST",
+  "model": "gemini-2.5-flash",
+  "prompt_length": 0,
+  "temperature": null,
+  "max_tokens": null,
+  "status": "success",
+  "response_length": 8239,
+  "input_tokens": 343,
+  "output_tokens": 1086,
+  "cost_usd": 0.00035152499999999994,
+  "duration_ms": 17295.36747932434,
+  "retry_count": 0,
+  "error_type": null,
+  "error_message": null,
+  "error_code": null,
+  "finish_reason": null,
+  "user_context": {
+    "temperature": 0.7,
+    "prompt_length": 1060
+  }
+}
+{
+  "request_id": "REQ-20251109055712882846",
+  "timestamp": "2025-11-09T05:57:12.882860",
+  "provider": "google",
+  "endpoint": "generate_content_structured",
+  "method": "POST",
+  "model": "gemini-2.5-flash",
+  "prompt_length": 0,
+  "temperature": null,
+  "max_tokens": null,
+  "status": "success",
+  "response_length": 4459,
+  "input_tokens": 375,
+  "output_tokens": 830,
+  "cost_usd": 0.000277125,
+  "duration_ms": 14641.043663024902,
+  "retry_count": 0,
+  "error_type": null,
+  "error_message": null,
+  "error_code": null,
+  "finish_reason": null,
+  "user_context": {
+    "temperature": 0.7,
+    "prompt_length": 1061
+  }
+}
+{
+  "request_id": "REQ-20251109055727708062",
+  "timestamp": "2025-11-09T05:57:27.708090",
+  "provider": "google",
+  "endpoint": "generate_content_structured",
+  "method": "POST",
+  "model": "gemini-2.5-flash",
+  "prompt_length": 0,
+  "temperature": null,
+  "max_tokens": null,
+  "status": "error",
+  "response_length": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "cost_usd": 0.0,
+  "duration_ms": 240560.89615821838,
+  "retry_count": 0,
+  "error_type": "ValidationError",
+  "error_message": "1 validation error for StructuredDevelopmentPlan\n  Invalid JSON: EOF while parsing a string at line 16 column 338432 [type=json_invalid, input_value='{\\n  \"title\": \"Plan de D... en ellos. La capacidad', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid",
+  "error_code": null,
+  "finish_reason": null,
+  "user_context": {
+    "temperature": 0.7,
+    "prompt_length": 1627
+  }
+}

@@ -420,8 +420,8 @@ class NarrativeGenerator:
             narrative=main_narrative,
             key_insights=key_insights,
             department_metrics=context['metrics']['by_chapter'],
-            critical_skill_gaps=context['critical_gaps']['skills'][:5],
-            critical_bottlenecks=context['critical_gaps']['bottlenecks'][:5],
+            critical_skill_gaps=context['critical_gaps']['skills'][:8],
+            critical_bottlenecks=context['critical_gaps']['bottlenecks'][:8],
             organizational_recommendations=narrative_data.get('org_recommendations', []),
             investment_priorities=narrative_data.get('investment_priorities', []),
             ai_metadata=main_narrative.ai_metadata
@@ -513,7 +513,7 @@ class NarrativeGenerator:
                     key=lambda x: x[1],
                     reverse=True
                 )[:5],
-                'critical_skill_gaps': critical_skills[:5]
+                'critical_skill_gaps': critical_skills[:8]
             },
             'gap_analysis_summary': {
                 'employees_analyzed': len(gap_results),

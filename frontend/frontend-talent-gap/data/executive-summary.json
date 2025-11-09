@@ -1,0 +1,321 @@
+{
+  "generated_at": "2025-11-09T05:39:16.253147",
+  "total_employees": 20,
+  "total_roles": 14,
+  "overall_readiness_score": 0.05,
+  "narrative": {
+    "id": "NAR-COMPANY-20251109053916",
+    "title": "Executive Summary - Talent Gap Analysis",
+    "scope": "company",
+    "scope_id": null,
+    "executive_summary": "La organización, una consultora de estrategia, innovación y transformación, se encuentra en un punto crítico de su evolución, buscando profesionalizarse, digitalizarse y crecer significativamente en los próximos 12-24 meses. Para ello, ha definido una visión ambiciosa con prioridades estratégicas centradas en la implantación de un CRM, el desarrollo de una PMO robusta, la productización de servicios y la contratación de perfiles clave. Estas iniciativas son fundamentales para alcanzar los objetivos de ingresos, margen operativo y clientes recurrentes.\n\nSin embargo, el análisis del talento actual revela un desafío significativo: solo el 5.0% del personal está listo para al menos un rol futuro, y no se identifica ningún candidato interno para 7 de los 8 roles futuros más críticos (ej. Project Manager, Head of Strategy, Social Media Strategist). Esta brecha de talento es transversal, afectando a capítulos clave como Estrategia, Martech y Performance, donde la preparación para roles futuros es del 0%. La falta de desarrollo interno en estas áreas puede comprometer seriamente la capacidad de la organización para ejecutar su estrategia de crecimiento.\n\nLos gaps de habilidades más críticos, como los de Project Manager, Social Media Strategist e Influency Manager, junto con los 'bottlenecks' en habilidades como 'PMO', 'Stakeholder Management' y 'Agile' (con un 100% de gap), representan un riesgo inminente para el progreso. Estos déficits no solo ralentizan las transformaciones en curso (oferta, comercial, operaciones, datos) sino que también pueden impedir la mitigación de riesgos clave como la complejidad operativa multi-proyecto y la escalabilidad sin pérdida de calidad. Abordar estas brechas de talento de manera proactiva y estratégica es indispensable para asegurar el cumplimiento de los hitos y KPIs objetivo a 12 y 24 meses.",
+    "key_insights": [
+      "La organización presenta una preparación interna extremadamente baja para roles futuros críticos (5.0% de personal listo para al menos un rol), con 0% de preparación en 7 de los 8 roles más estratégicos como Project Manager y Head of Strategy.",
+      "Existen 'skill bottlenecks' críticos en Project Management (PMO, Stakeholder, Agile) con un 100% de gap, que bloquean la capacidad de múltiples colaboradores para transicionar a roles clave y comprometen la implementación de la PMO.",
+      "Capítulos esenciales para la transformación digital y el crecimiento (Estrategia, Martech, Performance, Influency) muestran un 0% de preparación interna para sus respectivos roles futuros, evidenciando una brecha sistémica en el desarrollo de capacidades.",
+      "La falta de talento interno en roles como Project Manager y Martech Architect representa un riesgo directo y alto para la consecución de prioridades estratégicas críticas como la implantación del CRM y la PMO en los próximos 3-6 meses.",
+      "La capacidad de la organización para escalar procesos, productizar servicios y alcanzar los KPIs objetivo a 12 y 24 meses está en riesgo debido a la escasez de habilidades clave y la dependencia de perfiles seniors.",
+      "Se observa una desconexión entre la ambición de transformación de la oferta, comercial y operaciones, y la disponibilidad actual de talento interno con las competencias necesarias para ejecutar dichas transformaciones."
+    ],
+    "detailed_analysis": "El análisis detallado del pipeline de talento de la organización revela un desequilibrio significativo entre la visión estratégica ambiciosa y la preparación actual del personal. Con un total de 20 colaboradores y 12 roles futuros críticos identificados, la baja tasa de preparación del 5.0% (un solo colaborador con al menos un rol listo) es un indicador de un profundo gap de talento interno. Este desafío es particularmente agudo en 7 de los 8 roles futuros de mayor impacto, incluyendo Head of Strategy, Project Manager, Social Media Strategist y Data Analyst, para los cuales no se identifica ningún colaborador interno preparado. Los puntajes promedio de preparación para estos roles son consistentemente bajos, lo que subraya la necesidad de una intervención estratégica.\n\nLa distribución de la preparación por capítulos acentúa esta problemática. Departamentos fundamentales para la transformación y el crecimiento, como Estrategia, Martech, Performance e Influency, muestran un 0% de preparación para roles futuros, a pesar de que el puntaje promedio de preparación para estos capítulos no es el más bajo, lo que indica un potencial latente que no se traduce en 'readiness' completa. El capítulo de Diseño, con un 33.3% de preparación, es una excepción, pero no es suficiente para compensar las deficiencias generales. Este patrón sugiere que, si bien puede haber conocimientos parciales, faltan las competencias integrales para asumir responsabilidades futuras.\n\nLos cinco gaps de habilidades más críticos (Social Media Strategist, Project Manager, Influency Manager, Performance Media Specialist, SEO/SEM Manager) presentan brechas promedio de entre 67% y 72% en un número considerable de colaboradores. Esto indica una necesidad de desarrollo generalizado en estas áreas. Más preocupante aún son los 'bottlenecks' de habilidades identificados en Project Manager (PMO, Stakeholder, Agile) y Copywriter (Copy, Branding, CX), todos con un 100% de gap para los colaboradores afectados. Estos 'bottlenecks' no solo son habilidades técnicas, sino que son fundamentales para la ejecución de la estrategia de PMO con playbooks y QA, la productización de servicios y la gestión de la complejidad operativa. La ausencia de estas habilidades críticas en el personal existente frenará directamente la capacidad de la organización para implantar el CRM, lanzar microapps, paquetizar ofertas y, en última instancia, alcanzar los KPIs de ingresos y margen, exacerbando los riesgos de dependencia de perfiles seniors y capacidad de entrega versus ventas.",
+    "recommendations_summary": "Para mitigar los riesgos identificados y acelerar la consecución de las prioridades estratégicas, se recomienda una estrategia dual de talento. Primero, priorizar la contratación externa inmediata de perfiles clave como Project Manager y Martech Architect, que son bloqueantes para iniciativas críticas como la implantación de CRM y la PMO. Segundo, diseñar e implementar programas de upskilling y reskilling intensivos y dirigidos para el personal actual, enfocándose en las habilidades más críticas y los 'bottlenecks' identificados, como Project Management, Social Media y Data Analysis. Paralelamente, es crucial establecer una PMO funcional con el personal adecuado y procesos claros, y definir un marco de desarrollo de talento que mapee ambiciones individuales con necesidades organizacionales. Estas acciones deben ir de la mano con inversiones estratégicas en herramientas y certificaciones digitales que refuercen la capacidad de la organización para innovar y escalar.",
+    "supporting_data": {
+      "overall_readiness_score": 0.05,
+      "employees_analyzed": 20,
+      "employees_with_ready_roles": 1,
+      "by_chapter": {
+        "Strategy": {
+          "employees": 5,
+          "ready_employees": 0,
+          "readiness_rate": 0,
+          "avg_best_score": 0.455,
+          "avg_skills": 4.4
+        },
+        "Martech": {
+          "employees": 4,
+          "ready_employees": 0,
+          "readiness_rate": 0,
+          "avg_best_score": 0.495,
+          "avg_skills": 4.5
+        },
+        "Creative": {
+          "employees": 2,
+          "ready_employees": 0,
+          "readiness_rate": 0,
+          "avg_best_score": 0.375,
+          "avg_skills": 3
+        },
+        "Design": {
+          "employees": 3,
+          "ready_employees": 1,
+          "readiness_rate": 0.333,
+          "avg_best_score": 0.481,
+          "avg_skills": 3
+        },
+        "Performance": {
+          "employees": 3,
+          "ready_employees": 0,
+          "readiness_rate": 0,
+          "avg_best_score": 0.532,
+          "avg_skills": 3
+        },
+        "Influency": {
+          "employees": 3,
+          "ready_employees": 0,
+          "readiness_rate": 0,
+          "avg_best_score": 0.496,
+          "avg_skills": 2.6666666666666665
+        }
+      }
+    },
+    "trends_identified": [
+      "Tendencia hacia una alta dependencia de la contratación externa para cubrir roles estratégicos y operativos clave debido a la baja preparación interna.",
+      "Incremento en la necesidad de formación y desarrollo continuo en habilidades digitales y de gestión de proyectos, evidenciado por los amplios gaps de skills y bottlenecks.",
+      "Fuerte correlación entre los gaps de talento y los riesgos clave operacionales y estratégicos, indicando que el talento es un factor limitante directo para el crecimiento y la transformación.",
+      "La productización de servicios y microapps, junto con la implantación de un GTM unificado, está impulsando la demanda de roles y habilidades específicas en Martech, Project Management y Content Strategy.",
+      "Emergencia de la necesidad de una estructura de PMO robusta y procesos estandarizados para gestionar la creciente complejidad operativa y asegurar la calidad y el margen."
+    ],
+    "future_outlook": "La organización tiene una trayectoria clara hacia la profesionalización y el liderazgo en su nicho, con objetivos ambiciosos a 12 y 24 meses en ingresos, margen y clientes recurrentes. Sin embargo, la realización de esta visión futura depende críticamente de una gestión proactiva y estratégica del talento. La actual brecha de capacidades, si no se aborda con urgencia, podría retrasar significativamente la implantación de prioridades estratégicas y la consecución de los KPIs objetivo. A largo plazo, se requiere una cultura organizacional que fomente el aprendizaje continuo, la movilidad interna y la adaptabilidad a las nuevas tecnologías y metodologías. Esto implica no solo cubrir los gaps actuales, sino también anticipar las futuras necesidades de habilidades, especialmente en áreas como la IA aplicada y la analítica de datos. Una inversión sostenida en el desarrollo del personal y en la atracción de talento estratégico será fundamental para construir una organización resiliente, escalable y capaz de mantener su ventaja competitiva en un mercado en constante evolución.",
+    "tone": "executive",
+    "ai_metadata": {
+      "model_used": "gemini-2.5-flash",
+      "provider": "google",
+      "generated_at": "2025-11-09T05:39:16.253058",
+      "confidence_level": "high",
+      "reasoning_type": "generative",
+      "reasoning_trace": "Generated via structured output schema",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0,
+      "bias_check_passed": true,
+      "human_review_required": false
+    }
+  },
+  "key_insights": [
+    {
+      "insight_type": "opportunity",
+      "title": "Alta capacidad de movilidad interna",
+      "description": "El 40% de los empleados están READY o NEAR para roles de mayor responsabilidad",
+      "impact_level": "high",
+      "affected_employees": 8,
+      "affected_roles": [
+        "Varios roles senior"
+      ],
+      "strategic_recommendations": [
+        "Acelerar programas de desarrollo interno",
+        "Crear roles intermedios para facilitar progresión",
+        "Implementar mentoring estructurado"
+      ],
+      "urgency": "short_term",
+      "ai_metadata": {
+        "model_used": "rule-based",
+        "provider": "internal",
+        "generated_at": "2025-11-09T05:39:16.253120",
+        "confidence_level": "high",
+        "reasoning_type": "data_driven",
+        "reasoning_trace": "Based on gap analysis statistics",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0,
+        "bias_check_passed": true,
+        "human_review_required": false
+      }
+    }
+  ],
+  "department_metrics": {
+    "Strategy": {
+      "employees": 5,
+      "ready_employees": 0,
+      "readiness_rate": 0,
+      "avg_best_score": 0.455,
+      "avg_skills": 4.4
+    },
+    "Martech": {
+      "employees": 4,
+      "ready_employees": 0,
+      "readiness_rate": 0,
+      "avg_best_score": 0.495,
+      "avg_skills": 4.5
+    },
+    "Creative": {
+      "employees": 2,
+      "ready_employees": 0,
+      "readiness_rate": 0,
+      "avg_best_score": 0.375,
+      "avg_skills": 3
+    },
+    "Design": {
+      "employees": 3,
+      "ready_employees": 1,
+      "readiness_rate": 0.333,
+      "avg_best_score": 0.481,
+      "avg_skills": 3
+    },
+    "Performance": {
+      "employees": 3,
+      "ready_employees": 0,
+      "readiness_rate": 0,
+      "avg_best_score": 0.532,
+      "avg_skills": 3
+    },
+    "Influency": {
+      "employees": 3,
+      "ready_employees": 0,
+      "readiness_rate": 0,
+      "avg_best_score": 0.496,
+      "avg_skills": 2.6666666666666665
+    }
+  },
+  "critical_skill_gaps": [
+    {
+      "skill_name": "Social Media Strategist_skills",
+      "affected_employees": 14,
+      "avg_gap_score": 69.82,
+      "priority": "HIGH"
+    },
+    {
+      "skill_name": "Project Manager_skills",
+      "affected_employees": 12,
+      "avg_gap_score": 72.22,
+      "priority": "HIGH"
+    },
+    {
+      "skill_name": "Influency Manager_skills",
+      "affected_employees": 10,
+      "avg_gap_score": 71.36,
+      "priority": "HIGH"
+    },
+    {
+      "skill_name": "Performance Media Specialist_skills",
+      "affected_employees": 8,
+      "avg_gap_score": 67.61,
+      "priority": "HIGH"
+    },
+    {
+      "skill_name": "SEO/SEM Manager_skills",
+      "affected_employees": 3,
+      "avg_gap_score": 72.22,
+      "priority": "MEDIUM"
+    }
+  ],
+  "critical_bottlenecks": [
+    {
+      "type": "skill_gap",
+      "role_id": "R-PM",
+      "role_title": "Project Manager",
+      "skill_id": "S-PMO",
+      "skill_name": "Pmo",
+      "avg_gap_percentage": 100,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "criticality_score": 100,
+      "priority": "CRÍTICA",
+      "description": "Project Manager: Pmo - 0/0 candidates affected (100% gap)",
+      "no_viable_candidates": true
+    },
+    {
+      "type": "skill_gap",
+      "role_id": "R-PM",
+      "role_title": "Project Manager",
+      "skill_id": "S-STAKE",
+      "skill_name": "Stake",
+      "avg_gap_percentage": 100,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "criticality_score": 100,
+      "priority": "CRÍTICA",
+      "description": "Project Manager: Stake - 0/0 candidates affected (100% gap)",
+      "no_viable_candidates": true
+    },
+    {
+      "type": "skill_gap",
+      "role_id": "R-PM",
+      "role_title": "Project Manager",
+      "skill_id": "S-AGILE",
+      "skill_name": "Agile",
+      "avg_gap_percentage": 100,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "criticality_score": 100,
+      "priority": "CRÍTICA",
+      "description": "Project Manager: Agile - 0/0 candidates affected (100% gap)",
+      "no_viable_candidates": true
+    },
+    {
+      "type": "skill_gap",
+      "role_id": "R-CRT-COPY",
+      "role_title": "Copywriter",
+      "skill_id": "S-COPY",
+      "skill_name": "Copy",
+      "avg_gap_percentage": 100,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "criticality_score": 100,
+      "priority": "CRÍTICA",
+      "description": "Copywriter: Copy - 0/0 candidates affected (100% gap)",
+      "no_viable_candidates": true
+    },
+    {
+      "type": "skill_gap",
+      "role_id": "R-CRT-COPY",
+      "role_title": "Copywriter",
+      "skill_id": "S-BRANDING",
+      "skill_name": "Branding",
+      "avg_gap_percentage": 100,
+      "candidates_affected": 0,
+      "total_viable_candidates": 0,
+      "criticality_score": 100,
+      "priority": "CRÍTICA",
+      "description": "Copywriter: Branding - 0/0 candidates affected (100% gap)",
+      "no_viable_candidates": true
+    }
+  ],
+  "organizational_recommendations": [
+    "Implementar una estrategia de contratación de emergencia para los roles de Project Manager y Martech Architect en los próximos 3-6 meses, dada su criticidad para las prioridades de CRM y PMO.",
+    "Diseñar y lanzar un programa intensivo de desarrollo de habilidades centrado en los 'skill bottlenecks' de Project Management (PMO, Stakeholder Management, Agile) y los 5 principales gaps de habilidades, para capacitar al personal actual.",
+    "Establecer y dotar de personal a la PMO con playbooks y QA definidos, garantizando que el personal asignado tenga las competencias necesarias o reciba la formación acelerada requerida.",
+    "Integrar la evaluación de la 'readiness' para roles futuros y las ambiciones profesionales en los ciclos de revisión de desempeño, para identificar y desarrollar proactivamente el talento interno.",
+    "Invertir en programas de certificación (ej. HubSpot, GA4) y en la creación de una librería de plantillas y recursos internos para estandarizar procesos y elevar el nivel de competencia del personal en áreas clave.",
+    "Fomentar la participación en proyectos multifuncionales para desarrollar habilidades transversales y preparar al personal para la complejidad operativa multi-proyecto."
+  ],
+  "investment_priorities": [
+    {
+      "area": "Talent Acquisition (Project Manager, Martech Architect)",
+      "priority": "HIGH",
+      "rationale": "Estos roles son críticos y bloqueantes para las prioridades estratégicas de CRM y PMO, con 0% de preparación interna. La contratación externa es esencial para un impacto inmediato."
+    },
+    {
+      "area": "Learning & Development (Programas de Upskilling y Reskilling)",
+      "priority": "HIGH",
+      "rationale": "Necesario para abordar los amplios gaps de habilidades y los 'bottlenecks' críticos que afectan a múltiples colaboradores y limitan la capacidad operativa y de crecimiento."
+    },
+    {
+      "area": "Infraestructura y Herramientas de PMO",
+      "priority": "HIGH",
+      "rationale": "Fundamental para mitigar la complejidad operativa, asegurar la calidad de entrega, optimizar márgenes y estandarizar procesos, apoyando el escalado de la organización."
+    },
+    {
+      "area": "Certificaciones y R&D en IA Aplicada",
+      "priority": "MEDIUM",
+      "rationale": "Apoya la productización de servicios, la digitalización y la creación de una ventaja competitiva a largo plazo, alineándose con las prioridades deseables y la visión futura."
+    },
+    {
+      "area": "Sistema de Gestión de Talento y Planificación Sucesoria",
+      "priority": "MEDIUM",
+      "rationale": "Permitirá una identificación, desarrollo y retención de talento más estructurada, reduciendo la dependencia futura de contrataciones externas y construyendo un pipeline interno robusto."
+    }
+  ],
+  "ai_metadata": {
+    "model_used": "gemini-2.5-flash",
+    "provider": "google",
+    "generated_at": "2025-11-09T05:39:16.253058",
+    "confidence_level": "high",
+    "reasoning_type": "generative",
+    "reasoning_trace": "Generated via structured output schema",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0,
+    "bias_check_passed": true,
+    "human_review_required": false
+  }
+}

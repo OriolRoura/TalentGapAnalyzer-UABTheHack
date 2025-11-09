@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import futureJson from '../../../data/future_vision.json';
 import executiveSummary from '../../../data/executive-summary.json';
-import OrganizationHeader from '../OrganizationHeader';
 import { get } from '../../services';
 import { API_FUTURE_VISION } from '../../utils/constants';
 
@@ -36,18 +35,15 @@ const FutureVisionSummary = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <OrganizationHeader />
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* Organization Header */}
+      <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">{initialData.organization.nombre}</h1>
+        <p className="text-gray-600 mb-4">{initialData.organization.direccion}</p>
+        <p className="text-lg text-gray-700">{initialData.organization.descripcion}</p>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Company Info Card */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">{initialData.organization.nombre}</h1>
-          <p className="text-gray-600 mb-4">{initialData.organization.direccion}</p>
-          <p className="text-lg text-gray-700">{initialData.organization.descripcion}</p>
-        </div>
-
-        {/* Executive Summary Hero */}
+      {/* Executive Summary Hero */}
       <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-xl shadow-xl p-6 text-white mb-8">
         <h2 className="text-3xl font-bold mb-6 text-center">Análisis Ejecutivo de Talento</h2>
         <div className="grid grid-cols-4 gap-4 mb-6">
@@ -69,7 +65,7 @@ const FutureVisionSummary = () => {
           </div>
         </div>
         <div className="bg-white bg-opacity-10 rounded-lg p-4">
-          <p className="text-white text-sm leading-relaxed">{executiveSummary.narrative.executive_summary}</p>
+          <p className="text-white text-sm leading-relaxed">{executiveSummary.narrative.summary}</p>
         </div>
       </div>
 
@@ -352,7 +348,6 @@ const FutureVisionSummary = () => {
             </div>
           ))}
         </div>
-      </div>
       </div>
     </div>
   );

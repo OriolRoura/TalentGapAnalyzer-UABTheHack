@@ -3523,3 +3523,30 @@
   },
   "stack_trace": "Traceback (most recent call last):\n  File \"/home/brunomoya/development/hackuab2025/TalentGapAnalyzer-UABTheHack-1/api/services/ai_service.py\", line 526, in _generate_google\n    raise ValueError(f\"Google Gemini blocked response. Finish reason: {finish_reason}. Try with different prompt or use another provider.\")\nValueError: Google Gemini blocked response. Finish reason: 2. Try with different prompt or use another provider.\n"
 }
+{
+  "request_id": "REQ-20251109055727708062",
+  "timestamp": "2025-11-09T05:57:27.708090",
+  "provider": "google",
+  "endpoint": "generate_content_structured",
+  "method": "POST",
+  "model": "gemini-2.5-flash",
+  "prompt_length": 0,
+  "temperature": null,
+  "max_tokens": null,
+  "status": "error",
+  "response_length": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "cost_usd": 0.0,
+  "duration_ms": 240560.89615821838,
+  "retry_count": 0,
+  "error_type": "ValidationError",
+  "error_message": "1 validation error for StructuredDevelopmentPlan\n  Invalid JSON: EOF while parsing a string at line 16 column 338432 [type=json_invalid, input_value='{\\n  \"title\": \"Plan de D... en ellos. La capacidad', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid",
+  "error_code": null,
+  "finish_reason": null,
+  "user_context": {
+    "temperature": 0.7,
+    "prompt_length": 1627
+  },
+  "stack_trace": "Traceback (most recent call last):\n  File \"/home/brunomoya/development/hackuab2025/TalentGapAnalyzer-UABTheHack-1/api/services/ai_service.py\", line 773, in _generate_structured_google\n    validated_response = response_schema.model_validate_json(response.text)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/brunomoya/development/hackuab2025/TalentGapAnalyzer-UABTheHack-1/.venv/lib/python3.12/site-packages/pydantic/main.py\", line 766, in model_validate_json\n    return cls.__pydantic_validator__.validate_json(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npydantic_core._pydantic_core.ValidationError: 1 validation error for StructuredDevelopmentPlan\n  Invalid JSON: EOF while parsing a string at line 16 column 338432 [type=json_invalid, input_value='{\\n  \"title\": \"Plan de D... en ellos. La capacidad', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid\n"
+}
