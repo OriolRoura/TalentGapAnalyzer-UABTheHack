@@ -137,12 +137,12 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="w-full max-w-2xl">
+            <div className="w-1/4">
               <input
                 type="text"
                 value={searchTerm}
                 onChange={onEmployeeSearch}
-                className="w-full border-2 border-gray-300 rounded-lg p-3 pl-4 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
+                className="w-full border-2 justify-left border-gray-300 rounded-lg p-3 pl-4 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
                 placeholder="Busca un empleado por nombre..."
               />
             </div>
