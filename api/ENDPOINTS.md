@@ -154,6 +154,71 @@ GET /api/v1/company/vision
 GET /api/v1/company/dashboard
 ```
 
+### Bottlenecks By Role
+```http
+GET /api/v1/company/bottlenecks-by-role
+```
+**Description:** Analyze critical skill gaps from the perspective of each role. Returns which skills are missing in top candidates for each role.
+
+**Query Parameters:**
+- `role_id` (optional): Filter results for a specific role ID (e.g., "R-STR-LEAD")
+
+**Response (All roles):**
+```json
+{
+  "total_roles_analyzed": 5,
+  "bottlenecks_by_role": {
+    "R-STR-LEAD": {
+      "role_id": "R-STR-LEAD",
+      "role_title": "Head of Strategy",
+      "critical_gaps": [
+        {
+          "skill_id": "S-ANALISIS",
+          "skill_name": "Análisis Estratégico",
+          "avg_gap_percentage": 75.0,
+          "candidates_affected": 2,
+          "total_viable_candidates": 3,
+          "priority": "ALTA",
+          "criticality_score": 90.0,
+          "candidates_details": [
+            {
+              "employee_id": "1001",
+              "employee_name": "John Doe",
+              "current_level": 3,
+              "required_level": 7
+            }
+          ]
+        }
+      ],
+      "total_gaps": 3,
+      "highest_priority": "CRÍTICA"
+    }
+  },
+  "summary": {
+    "critical_roles": 2,
+    "high_priority_roles": 3,
+    "total_critical_gaps": 12
+  }
+}
+```
+
+**Response (Single role):**
+```http
+GET /api/v1/company/bottlenecks-by-role?role_id=R-STR-LEAD
+```
+```json
+{
+  "role_id": "R-STR-LEAD",
+  "role_data": {
+    "role_id": "R-STR-LEAD",
+    "role_title": "Head of Strategy",
+    "critical_gaps": [...],
+    "total_gaps": 3,
+    "highest_priority": "ALTA"
+  }
+}
+```
+
 ### Chapters and Skills
 ```http
 GET /api/v1/company/chapters-and-skills

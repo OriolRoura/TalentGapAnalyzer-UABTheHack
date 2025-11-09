@@ -485,3 +485,192 @@ class GapAnalysisService:
         print(f"   Avg compatibility: {avg_score:.3f}")
         
         return matrix
+    
+    @classmethod
+    def analyze_bottlenecks_by_role(cls) -> Dict[str, Dict]:
+        """
+        Analyzes critical skill gaps from the perspective of each role.
+        Groups gaps by role to facilitate role-specific queries.
+        
+        Returns:
+            Dict with structure:
+            {
+                "R-STR-LEAD": {
+                    "role_id": "R-STR-LEAD",
+                    "role_title": "Head of Strategy",
+                    "critical_gaps": [
+                        {
+                            "skill_id": "S-ANALISIS",
+                            "skill_name": "Análisis",
+                            "avg_gap_percentage": 75.0,
+                            "candidates_affected": 2,
+                            "total_viable_candidates": 3,
+                            "priority": "ALTA"
+                        }
+                    ],
+                    "total_gaps": 3,
+                    "highest_priority": "CRÍTICA"
+                }
+            }
+        """
+        from collections import defaultdict
+        
+        print("🔍 Analyzing critical bottlenecks by role...")
+        
+        employees = data_loader.get_employees()
+        roles = data_loader.get_roles()
+        
+        if not employees or not roles:
+            print("⚠️  No employees or roles data available")
+            return {}
+        
+        role_gaps_dict = defaultdict(list)
+        
+        # Analyze each role
+        for role_id, role in roles.items():
+            print(f"📊 Analyzing role: {role.titulo}")
+            
+            # Get required skills for this role
+            required_skills = role.habilidades_requeridas
+            
+            if not required_skills:
+                print(f"   ⚠️  No required skills defined for {role.titulo}")
+                continue
+            
+            # Analyze each employee against this role
+            viable_candidates = []
+            
+            for emp_id, employee in employees.items():
+                try:
+                    # Calculate gap for this employee-role pair
+                    gap_result = cls.calculate_gap(employee, role)
+                    
+                    # Only consider viable candidates (not NOT_VIABLE)
+                    if gap_result.classification != "NOT_VIABLE":
+                        viable_candidates.append({
+                            'employee_id': emp_id,
+                            'employee_name': employee.nombre,
+                            'gap_result': gap_result,
+                            'overall_gap': gap_result.overall_gap_score
+                        })
+                except Exception as e:
+                    print(f"   ✗ Error calculating gap for employee {emp_id}: {e}")
+                    continue
+            
+            # Sort candidates by gap (lower is better)
+            viable_candidates.sort(key=lambda x: x['overall_gap'])
+            
+            total_viable = len(viable_candidates)
+            print(f"   ✓ Found {total_viable} viable candidates")
+            
+            # Analyze skill gaps across top candidates (top 5 or all if less)
+            top_candidates = viable_candidates[:min(5, total_viable)]
+            
+            if not top_candidates:
+                print(f"   ⚠️  No viable candidates for {role.titulo}")
+                continue
+            
+            # Identify critical skills that are missing/weak in top candidates
+            skill_gap_analysis = defaultdict(lambda: {
+                'total_gap': 0,
+                'count': 0,
+                'candidates_affected': []
+            })
+            
+            for candidate in top_candidates:
+                gap_result = candidate['gap_result']
+                
+                # Analyze skill gaps from the gap_result
+                for skill_id in required_skills:
+                    # Check if employee has this skill
+                    employee_skill_level = None
+                    employee = employees[candidate['employee_id']]
+                    
+                    if skill_id in employee.habilidades:
+                        employee_skill_level = employee.habilidades[skill_id]
+                    
+                    # Calculate gap for this specific skill
+                    if employee_skill_level is None or employee_skill_level < 5:
+                        # Significant gap (no skill or low level)
+                        gap_percentage = 100 if employee_skill_level is None else (10 - employee_skill_level) * 10
+                        
+                        skill_gap_analysis[skill_id]['total_gap'] += gap_percentage
+                        skill_gap_analysis[skill_id]['count'] += 1
+                        skill_gap_analysis[skill_id]['candidates_affected'].append({
+                            'employee_id': candidate['employee_id'],
+                            'employee_name': candidate['employee_name'],
+                            'current_level': employee_skill_level if employee_skill_level is not None else 0,
+                            'required_level': 7  # Typical requirement
+                        })
+            
+            # Process skill gaps for this role
+            for skill_id, gap_data in skill_gap_analysis.items():
+                if gap_data['count'] == 0:
+                    continue
+                
+                avg_gap = gap_data['total_gap'] / gap_data['count']
+                candidates_affected = len(gap_data['candidates_affected'])
+                
+                # Determine priority based on gap and number of candidates affected
+                if avg_gap >= 80 or candidates_affected >= 4:
+                    priority = 'CRÍTICA'
+                    criticality_score = avg_gap * 1.5
+                elif avg_gap >= 60 or candidates_affected >= 3:
+                    priority = 'ALTA'
+                    criticality_score = avg_gap * 1.2
+                elif avg_gap >= 40 or candidates_affected >= 2:
+                    priority = 'MEDIA'
+                    criticality_score = avg_gap
+                else:
+                    priority = 'BAJA'
+                    criticality_score = avg_gap * 0.8
+                
+                # Get skill name - skills_data contains Skill objects, not dicts
+                skills_data = data_loader.get_skills()
+                skill_obj = skills_data.get(skill_id)
+                skill_name = skill_obj.nombre if skill_obj else skill_id
+                
+                role_gaps_dict[role_id].append({
+                    'skill_id': skill_id,
+                    'skill_name': skill_name,
+                    'avg_gap_percentage': round(avg_gap, 1),
+                    'candidates_affected': candidates_affected,
+                    'total_viable_candidates': total_viable,
+                    'priority': priority,
+                    'criticality_score': criticality_score,
+                    'candidates_details': gap_data['candidates_affected'][:3]  # Top 3
+                })
+        
+        # Build final result structure
+        result = {}
+        priority_order = ['CRÍTICA', 'ALTA', 'MEDIA', 'BAJA']
+        
+        for role_id, gaps in role_gaps_dict.items():
+            if not gaps:
+                continue
+            
+            # Sort by criticality
+            gaps.sort(key=lambda x: x['criticality_score'], reverse=True)
+            
+            # Determine highest priority
+            highest_priority = 'BAJA'
+            for gap in gaps:
+                gap_priority = gap.get('priority', 'MEDIA')
+                if priority_order.index(gap_priority) < priority_order.index(highest_priority):
+                    highest_priority = gap_priority
+            
+            # Get role title
+            role = roles.get(role_id)
+            role_title = role.titulo if role else role_id
+            
+            result[role_id] = {
+                'role_id': role_id,
+                'role_title': role_title,
+                'critical_gaps': gaps,
+                'total_gaps': len(gaps),
+                'highest_priority': highest_priority
+            }
+        
+        print(f"✅ Bottleneck analysis complete: {len(result)} roles with gaps identified")
+        
+        return result

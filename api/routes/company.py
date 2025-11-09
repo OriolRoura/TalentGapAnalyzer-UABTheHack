@@ -219,3 +219,72 @@ async def get_dashboard_data():
         "data_completeness": completeness,
         "avg_completeness": sum(completeness.values()) / len(completeness) if completeness else 0
     }
+
+
+@router.get("/bottlenecks-by-role")
+async def get_bottlenecks_by_role(role_id: str = None):
+    """
+    Analyze critical skill gaps from the perspective of each role.
+    Returns bottlenecks grouped by role, showing which skills are missing
+    in top candidates for each role.
+    
+    Args:
+        role_id: Optional. Filter results for a specific role ID.
+    
+    Returns:
+        Dict with role-specific gap analysis including:
+        - Critical skills missing in top candidates
+        - Priority levels for each gap
+        - Number of candidates affected
+        - Detailed candidate information
+    """
+    from services.gap_service import GapAnalysisService
+    
+    try:
+        # Get full bottleneck analysis
+        bottlenecks = GapAnalysisService.analyze_bottlenecks_by_role()
+        
+        if not bottlenecks:
+            return {
+                "message": "No critical bottlenecks identified",
+                "total_roles_analyzed": 0,
+                "bottlenecks_by_role": {}
+            }
+        
+        # Filter by role_id if provided
+        if role_id:
+            if role_id not in bottlenecks:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"No bottleneck data found for role: {role_id}"
+                )
+            
+            return {
+                "role_id": role_id,
+                "role_data": bottlenecks[role_id]
+            }
+        
+        # Return all bottlenecks
+        return {
+            "total_roles_analyzed": len(bottlenecks),
+            "bottlenecks_by_role": bottlenecks,
+            "summary": {
+                "critical_roles": len([
+                    r for r in bottlenecks.values() 
+                    if r['highest_priority'] == 'CRÍTICA'
+                ]),
+                "high_priority_roles": len([
+                    r for r in bottlenecks.values() 
+                    if r['highest_priority'] == 'ALTA'
+                ]),
+                "total_critical_gaps": sum(
+                    len(r['critical_gaps']) for r in bottlenecks.values()
+                )
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error analyzing bottlenecks: {str(e)}"
+        )
