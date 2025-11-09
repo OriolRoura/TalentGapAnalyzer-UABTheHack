@@ -1,0 +1,389 @@
+{
+    "total": 10,
+    "employees": [
+        {
+            "id_empleado": 1001,
+            "nombre": "Jordi Casals",
+            "email": "jordi.casals@quether.com",
+            "chapter": "Strategy",
+            "rol_actual": "Head of Strategy",
+            "manager": null,
+            "antiguedad": "24m",
+            "habilidades": {
+                "S-OKR": 9,
+                "S-ANALISIS": 9,
+                "S-STAKE": 8,
+                "S-PM": 8,
+                "S-ANALYTICS": 7
+            },
+            "responsabilidades_actuales": [
+                "OKRs y gobierno",
+                "Workshops C-level",
+                "Pricing y propuesta de valor"
+            ],
+            "dedicacion_actual": {
+                "Royal": 40,
+                "Arquimbau": 25,
+                "Quether GTM": 20,
+                "I+D": 15
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "Estrategia",
+                    "Pricing",
+                    "GTM"
+                ],
+                "nivel_aspiracion": "lead"
+            },
+            "metadata": {
+                "performance_rating": "A",
+                "retention_risk": "Baja",
+                "trayectoria": "Head of Strategy > Director Operaciones (12-24m)"
+            }
+        },
+        {
+            "id_empleado": 1002,
+            "nombre": "Marta Soler",
+            "email": "marta.soler@quether.com",
+            "chapter": "Strategy",
+            "rol_actual": "Project Manager",
+            "manager": "Jordi Casals",
+            "antiguedad": "2m",
+            "habilidades": {
+                "S-PM": 7,
+                "S-STAKE": 6,
+                "S-ANALISIS": 6,
+                "S-OKR": 5,
+                "S-ANALYTICS": 5
+            },
+            "responsabilidades_actuales": [
+                "Planificación de sprints",
+                "Seguimiento de riesgos",
+                "Coordinación de entregables"
+            ],
+            "dedicacion_actual": {
+                "Royal": 50,
+                "Arquimbau": 20,
+                "Internal Ops": 20,
+                "I+D": 10
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "PMO",
+                    "Operations"
+                ],
+                "nivel_aspiracion": "senior"
+            },
+            "metadata": {
+                "performance_rating": "B",
+                "retention_risk": "Baja",
+                "trayectoria": "Intern > PM Junior (6m)"
+            }
+        },
+        {
+            "id_empleado": 1003,
+            "nombre": "Pablo Reyes",
+            "email": "pablo.reyes@quether.com",
+            "chapter": "Martech",
+            "rol_actual": "Martech Architect",
+            "manager": "Jordi Casals",
+            "antiguedad": "8m",
+            "habilidades": {
+                "S-CRM": 9,
+                "S-AUTOM": 8,
+                "S-DATA": 8,
+                "S-SQLPY": 7,
+                "S-ANALYTICS": 7
+            },
+            "responsabilidades_actuales": [
+                "Arquitectura CRM/CDP",
+                "Integraciones n8n/HubSpot",
+                "Gobernanza de datos"
+            ],
+            "dedicacion_actual": {
+                "Arquimbau": 35,
+                "Royal": 25,
+                "I+D": 30,
+                "Internal Ops": 10
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "RevOps",
+                    "Automatización"
+                ],
+                "nivel_aspiracion": "lead"
+            },
+            "metadata": {
+                "performance_rating": "A",
+                "retention_risk": "Media",
+                "trayectoria": "Lead > Director Martech (12m)"
+            }
+        },
+        {
+            "id_empleado": 1004,
+            "nombre": "Núria Aguilera",
+            "email": "nuria.aguilera@quether.com",
+            "chapter": "Martech",
+            "rol_actual": "CRM Admin (HubSpot)",
+            "manager": "Pablo Reyes",
+            "antiguedad": "5m",
+            "habilidades": {
+                "S-CRM": 8,
+                "S-AUTOM": 7,
+                "S-EMAIL": 7,
+                "S-ANALYTICS": 6
+            },
+            "responsabilidades_actuales": [
+                "Pipelines y propiedades",
+                "Workflows y scoring",
+                "Calidad de datos"
+            ],
+            "dedicacion_actual": {
+                "Arquimbau": 60,
+                "Royal": 15,
+                "Internal Ops": 15,
+                "I+D": 10
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "CRM",
+                    "Automatización"
+                ],
+                "nivel_aspiracion": "senior"
+            },
+            "metadata": {
+                "performance_rating": "B+",
+                "retention_risk": "Baja",
+                "trayectoria": "Mid > Senior (9-12m)"
+            }
+        },
+        {
+            "id_empleado": 1005,
+            "nombre": "Marc Serra",
+            "email": "marc.serra@quether.com",
+            "chapter": "Martech",
+            "rol_actual": "Data Analyst",
+            "manager": "Pablo Reyes",
+            "antiguedad": "6m",
+            "habilidades": {
+                "S-ANALYTICS": 8,
+                "S-SQLPY": 8,
+                "S-DATA": 7,
+                "S-ABTEST": 6
+            },
+            "responsabilidades_actuales": [
+                "Modelado de datos",
+                "Dashboards ROI",
+                "Definición de métricas"
+            ],
+            "dedicacion_actual": {
+                "Royal": 30,
+                "Arquimbau": 30,
+                "Quether GTM": 10,
+                "I+D": 30
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "Atribución",
+                    "BI"
+                ],
+                "nivel_aspiracion": "senior"
+            },
+            "metadata": {
+                "performance_rating": "B",
+                "retention_risk": "Media",
+                "trayectoria": "Junior > Mid (6m)"
+            }
+        },
+        {
+            "id_empleado": 1006,
+            "nombre": "Adrián López",
+            "email": "adrian.lopez@quether.com",
+            "chapter": "Creative",
+            "rol_actual": "Creative Director",
+            "manager": "Jordi Casals",
+            "antiguedad": "14m",
+            "habilidades": {
+                "S-STORY": 9,
+                "S-COPY": 8,
+                "S-BRAND": 8,
+                "S-GENAI": 7
+            },
+            "responsabilidades_actuales": [
+                "Línea creativa y estándares",
+                "Storytelling de casos",
+                "Supervisión de campañas"
+            ],
+            "dedicacion_actual": {
+                "Royal": 45,
+                "Quether GTM": 25,
+                "Events": 10,
+                "I+D": 20
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "Brand Narrative",
+                    "Content"
+                ],
+                "nivel_aspiracion": "lead"
+            },
+            "metadata": {
+                "performance_rating": "A-",
+                "retention_risk": "Media",
+                "trayectoria": "Senior > Lead (6-9m)"
+            }
+        },
+        {
+            "id_empleado": 1007,
+            "nombre": "Nerea Vidal",
+            "email": "nerea.vidal@quether.com",
+            "chapter": "Design",
+            "rol_actual": "Senior Brand/UI Designer",
+            "manager": "Adrián López",
+            "antiguedad": "12m",
+            "habilidades": {
+                "S-BRAND": 9,
+                "S-UIUX": 8,
+                "S-FIGMA": 8,
+                "S-GENAI": 6
+            },
+            "responsabilidades_actuales": [
+                "Sistemas de identidad",
+                "Guías visuales",
+                "UI para microapps"
+            ],
+            "dedicacion_actual": {
+                "Royal": 50,
+                "Arquimbau": 15,
+                "Quether GTM": 15,
+                "I+D": 20
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "Design Systems",
+                    "UI"
+                ],
+                "nivel_aspiracion": "lead"
+            },
+            "metadata": {
+                "performance_rating": "A",
+                "retention_risk": "Baja",
+                "trayectoria": "Senior > Head of Design (12-18m)"
+            }
+        },
+        {
+            "id_empleado": 1008,
+            "nombre": "Sergio Martín",
+            "email": "sergio.martin@quether.com",
+            "chapter": "Performance",
+            "rol_actual": "Performance Media Specialist",
+            "manager": "Jordi Casals",
+            "antiguedad": "10m",
+            "habilidades": {
+                "S-ADS-GA": 9,
+                "S-ADS-META": 8,
+                "S-ABTEST": 8,
+                "S-ANALYTICS": 7
+            },
+            "responsabilidades_actuales": [
+                "Planificación y optimización",
+                "Gestión de CAC/LTV",
+                "Experimentación A/B"
+            ],
+            "dedicacion_actual": {
+                "Royal": 60,
+                "Arquimbau": 20,
+                "Quether GTM": 10,
+                "I+D": 10
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "Paid Media",
+                    "Experimentación"
+                ],
+                "nivel_aspiracion": "senior"
+            },
+            "metadata": {
+                "performance_rating": "B+",
+                "retention_risk": "Media",
+                "trayectoria": "Mid > Senior (6m)"
+            }
+        },
+        {
+            "id_empleado": 1009,
+            "nombre": "Laura Torres",
+            "email": "laura.torres@quether.com",
+            "chapter": "Performance",
+            "rol_actual": "SEO/SEM Manager",
+            "manager": "Sergio Martín",
+            "antiguedad": "9m",
+            "habilidades": {
+                "S-SEO": 8,
+                "S-ADS-GA": 7,
+                "S-ANALYTICS": 7,
+                "S-COPY": 6
+            },
+            "responsabilidades_actuales": [
+                "SEO técnico y contenidos",
+                "SEM full-funnel",
+                "Reporting de crecimiento"
+            ],
+            "dedicacion_actual": {
+                "Royal": 50,
+                "Arquimbau": 25,
+                "Quether GTM": 15,
+                "I+D": 10
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "SEO Técnico",
+                    "Content SEO"
+                ],
+                "nivel_aspiracion": "senior"
+            },
+            "metadata": {
+                "performance_rating": "B",
+                "retention_risk": "Baja",
+                "trayectoria": "Mid > Senior (9-12m)"
+            }
+        },
+        {
+            "id_empleado": 1010,
+            "nombre": "Claudia Riera",
+            "email": "claudia.riera@quether.com",
+            "chapter": "Influency",
+            "rol_actual": "Social Media Strategist",
+            "manager": "Adrián López",
+            "antiguedad": "7m",
+            "habilidades": {
+                "S-SOCIAL": 8,
+                "S-COPY": 7,
+                "S-EMAIL": 6,
+                "S-ANALYTICS": 6
+            },
+            "responsabilidades_actuales": [
+                "Estrategia por canal",
+                "Calendario editorial",
+                "Coordinación con performance"
+            ],
+            "dedicacion_actual": {
+                "Royal": 55,
+                "Arquimbau": 20,
+                "Quether GTM": 15,
+                "I+D": 10
+            },
+            "ambiciones": {
+                "especialidades_preferidas": [
+                    "Community",
+                    "Content"
+                ],
+                "nivel_aspiracion": "senior"
+            },
+            "metadata": {
+                "performance_rating": "B",
+                "retention_risk": "Media",
+                "trayectoria": "Junior > Mid (6m)"
+            }
+        }
+    ]
+}
