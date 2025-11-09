@@ -30,6 +30,9 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
     HR form to submit complete employee profile.
     If employee_id is provided, updates existing employee.
     If employee_id is not provided, creates a new employee with auto-generated ID.
+    
+    Note: Responsibilities are automatically loaded from the role definition (org_config.json)
+    based on the 'rol_actual' (role title) field. No need to provide them manually.
     """
     employees = data_loader.get_employees()
     
@@ -57,10 +60,16 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
         # Use skill name as key (you may want to map this to skill_id in production)
         skills_dict[skill.nombre] = skill.nivel
     
-    # Build dedication dictionary
-    dedication_dict = {
-        form.dedicacion.proyecto_actual: form.dedicacion.porcentaje_dedicacion
-    }
+    # Build dedication dictionary from multiple projects
+    dedication_dict = {}
+    for dedicacion in form.dedicacion_actual:
+        dedication_dict[dedicacion.proyecto_actual] = dedicacion.porcentaje_dedicacion
+    
+    # Get responsibilities from role definition based on rol_actual (role title)
+    responsibilities = data_loader.get_responsibilities_by_role_title(form.rol_actual)
+    if not responsibilities:
+        # If role not found, use empty list (will be a warning in validation)
+        responsibilities = []
     
     if is_new:
         # Create new employee
@@ -68,11 +77,11 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
             nombre=form.nombre,
             email=form.email,
             chapter=form.chapter,
-            rol_actual=form.seniority,
+            rol_actual=form.rol_actual,
             manager="N/A",
             antiguedad="0m",
             habilidades=skills_dict,
-            responsabilidades_actuales=form.responsabilidades,
+            responsabilidades_actuales=responsibilities,
             dedicacion_actual=dedication_dict,
             ambiciones=Ambitions(
                 especialidades_preferidas=form.ambiciones.especialidades_preferidas,
@@ -98,9 +107,10 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
         employee.nombre = form.nombre
         employee.email = form.email
         employee.chapter = form.chapter
-        employee.rol_actual = form.seniority
+        employee.rol_actual = form.rol_actual
         employee.habilidades = skills_dict
-        employee.responsabilidades_actuales = form.responsabilidades
+        # Update responsibilities from role definition (in case role changed)
+        employee.responsabilidades_actuales = responsibilities
         employee.dedicacion_actual = dedication_dict
         
         # Update ambitions
@@ -131,7 +141,11 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
         employee_id=str(employee_id),
         validation={
             "skills_count": len(form.skills),
-            "dedication_valid": dedication_valid
+            "dedication_valid": dedication_valid,
+            "dedication_projects_count": len(form.dedicacion_actual),
+            "skills_valid": is_valid_skills and len(skill_errors) == 0,
+            "responsibilities_loaded": len(responsibilities),
+            "responsibilities_loaded_from_role": form.rol_actual if responsibilities else None
         }
     )
 
@@ -327,8 +341,7 @@ async def validate_employee_data(employee_id: int):
     # Check completeness
     if not employee.habilidades:
         warnings.append("No skills defined")
-    if not employee.responsabilidades_actuales:
-        warnings.append("No responsibilities defined")
+    # Note: Responsibilities come from role definitions, not from employee form
     if not employee.manager or employee.manager == "N/A":
         warnings.append("No manager assigned")
     

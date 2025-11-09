@@ -24,3 +24,9 @@ httpx==0.26.0
 # CORS and security
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
+
+# AI and LLM Integration
+openai>=1.0.0
+anthropic>=0.7.0
+google-generativeai>=0.3.0
+tiktoken>=0.5.0  # Token counting for OpenAI

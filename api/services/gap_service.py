@@ -103,17 +103,27 @@ class GapAnalysisService:
         Returns:
             EmployeeSkillGap with scores and classification
         """
-        # Get gap calculator
-        calculator = cls._get_gap_calculator()
-        
-        # Override weights if provided
-        if weights:
-            calculator.weights = weights
-        
+        # Ensure algorithm models and skills catalog are loaded
+        _import_algorithm()
+        # If skills catalog is not built yet, build it (same logic as _get_gap_calculator)
+        if cls._skills_catalog is None:
+            skills_data = data_loader.get_skills()
+            cls._skills_catalog = {}
+            for skill_id, skill_data in skills_data.items():
+                algo_skill = ModelAdapter.api_skill_to_algo(skill_data)
+                cls._skills_catalog[skill_id] = algo_skill
+
+        # Create a fresh GapCalculator for each calculation to avoid state carry-over
+        calc_weights = weights if weights is not None else DEFAULT_WEIGHTS.copy()
+        calculator = GapCalculator(
+            skills_catalog=cls._skills_catalog,
+            weights=calc_weights
+        )
+
         # Convert API models to algorithm models
         algo_employee = ModelAdapter.api_employee_to_algo(employee)
         algo_role = ModelAdapter.api_role_to_algo(target_role, cls._skills_catalog)
-        
+
         # Calculate gap using Samya's algorithm
         gap_result = calculator.calculate_gap(algo_employee, algo_role)
         
@@ -342,3 +352,136 @@ class GapAnalysisService:
             recommendations.append(f"Consider cross-training in {target_role.capitulo} chapter")
         
         return recommendations[:5]  # Limit to top 5 recommendations
+    
+    @classmethod
+    def calculate_employee_gap_matrix(
+        cls,
+        employee_id: int,
+        weights: Dict[str, float] = None
+    ):
+        """
+        Calculate complete gap matrix for a single employee against all roles.
+        Similar to main_challenge.py matrix generation.
+        
+        Args:
+            employee_id: ID of the employee
+            weights: Custom algorithm weights (optional)
+        
+        Returns:
+            EmployeeGapMatrix with all role matches
+        """
+        from models.hr_forms import EmployeeGapMatrix, EmployeeGapMatrixRow
+        
+        # Get employee
+        employee = data_loader.get_employee(employee_id)
+        if not employee:
+            raise ValueError(f"Employee {employee_id} not found")
+        
+        # Get all roles
+        roles = data_loader.get_roles()
+        if not roles:
+            raise ValueError("No roles found in system")
+        
+        print(f"📊 Calculating gap matrix for employee {employee.nombre} ({employee_id})")
+        print(f"   Total roles to analyze: {len(roles)}")
+        
+        # Calculate gaps for all roles
+        role_matches = []
+        ready_count = 0
+        total_score = 0.0
+        
+        for role_id, role in roles.items():
+            try:
+                # Calculate gap using the service
+                gap_result = cls.calculate_gap(
+                    employee=employee,
+                    target_role=role,
+                    weights=weights
+                )
+                
+                # Convert gap percentages back to scores (0-1, higher is better)
+                # gap_result returns gaps (lower is better), we need scores (higher is better)
+                overall_score = (100 - gap_result.overall_gap_score) / 100.0
+                
+                # Get component scores - CORRECTLY extract from the gap_result
+                # gap_result.responsibilities_gap is already a gap percentage (0-100)
+                # We need to convert to score (0-1)
+                skills_score = overall_score  # Will be calculated from detailed components
+                responsibilities_score = (100 - gap_result.responsibilities_gap) / 100.0
+                ambitions_score = gap_result.ambitions_alignment / 100.0
+                dedication_score = gap_result.dedication_availability / 100.0
+                
+                # Note: skills_score is embedded in overall_score via the algorithm weights
+                # To extract it properly, we'd need to reverse the weighted calculation
+                # For now, we calculate it from the overall and other components
+                # overall = 0.5*skills + 0.25*resp + 0.15*ambitions + 0.10*dedication
+                # skills = (overall - 0.25*resp - 0.15*ambitions - 0.10*dedication) / 0.5
+                w = weights if weights else DEFAULT_WEIGHTS
+                skills_score = (overall_score - w['responsibilities']*responsibilities_score - 
+                               w['ambitions']*ambitions_score - w['dedication']*dedication_score) / w['skills']
+                # Clamp to valid range
+                skills_score = max(0.0, min(1.0, skills_score))
+                
+                # Extract detailed gaps
+                detailed_gaps = []
+                for gap_key, gap_data in gap_result.skill_gaps.items():
+                    if isinstance(gap_data, dict) and 'description' in gap_data:
+                        detailed_gaps.append(gap_data['description'])
+                
+                # Create matrix row
+                matrix_row = EmployeeGapMatrixRow(
+                    employee_id=employee_id,
+                    employee_name=employee.nombre,
+                    role_id=role_id,
+                    role_title=role.titulo,
+                    overall_score=overall_score,
+                    band=gap_result.classification,
+                    skills_score=skills_score,
+                    responsibilities_score=responsibilities_score,
+                    ambitions_score=ambitions_score,
+                    dedication_score=dedication_score,
+                    detailed_gaps=detailed_gaps,
+                    recommendations=gap_result.recommendations
+                )
+                
+                role_matches.append(matrix_row)
+                
+                # Count ready roles
+                if gap_result.classification in ["READY", "READY_WITH_SUPPORT"]:
+                    ready_count += 1
+                
+                total_score += overall_score
+                
+                print(f"   ✓ {role.titulo}: {overall_score:.3f} ({gap_result.classification})")
+                
+            except Exception as e:
+                print(f"   ✗ Error calculating gap for role {role_id}: {e}")
+                continue
+        
+        # Sort by score (highest first)
+        role_matches.sort(key=lambda x: x.overall_score, reverse=True)
+        
+        # Get best match
+        best_match = role_matches[0] if role_matches else None
+        
+        # Calculate average score
+        avg_score = total_score / len(role_matches) if role_matches else 0.0
+        
+        # Build matrix response
+        matrix = EmployeeGapMatrix(
+            employee_id=employee_id,
+            employee_name=employee.nombre,
+            chapter=employee.chapter,
+            current_role=employee.rol_actual,
+            role_matches=role_matches,
+            best_match=best_match,
+            ready_roles_count=ready_count,
+            avg_compatibility_score=avg_score
+        )
+        
+        print(f"✅ Matrix complete: {len(role_matches)} roles analyzed")
+        print(f"   Best match: {best_match.role_title} ({best_match.overall_score:.3f})") if best_match else None
+        print(f"   Ready roles: {ready_count}")
+        print(f"   Avg compatibility: {avg_score:.3f}")
+        
+        return matrix

@@ -17,6 +17,7 @@ El resultado es un score 0-1 donde 1 significa match perfecto.
 import re
 import numpy as np
 from typing import Dict, List, Set
+from collections import Counter
 from .models import (
     Employee, Role, Skill, SkillLevel, GapResult, GapBand,
     DEFAULT_WEIGHTS, DEFAULT_BAND_THRESHOLDS
@@ -44,12 +45,35 @@ class GapCalculator:
         self.weights = weights or DEFAULT_WEIGHTS.copy()
         self.band_thresholds = band_thresholds or DEFAULT_BAND_THRESHOLDS.copy()
         
+        # Cache para keywords extraídas dinámicamente
+        self._dynamic_keywords = None
+        self._stop_words = {
+            # Stop words en español e inglés
+            'el', 'la', 'de', 'que', 'y', 'a', 'en', 'un', 'es', 'se', 'no', 'te', 'lo', 'le', 'da', 'su', 'por', 'son',
+            'con', 'para', 'como', 'las', 'del', 'los', 'una', 'su', 'al', 'me', 'mi', 'tu', 'si', 'o', 'pero', 'sus',
+            'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'i', 'it', 'for', 'not', 'on', 'with', 'he',
+            'as', 'you', 'do', 'at', 'this', 'but', 'his', 'by', 'from', 'they', 'we', 'say', 'her', 'she', 'or',
+            'an', 'will', 'my', 'one', 'all', 'would', 'there', 'their', 'what', 'so', 'up', 'out', 'if', 'about',
+            'who', 'get', 'which', 'go', 'me', 'when', 'make', 'can', 'like', 'time', 'no', 'just', 'him', 'know',
+            'take', 'people', 'into', 'year', 'your', 'good', 'some', 'could', 'them', 'see', 'other', 'than', 'then',
+            'now', 'look', 'only', 'come', 'its', 'over', 'think', 'also', 'back', 'after', 'use', 'two', 'how', 'our',
+            'work', 'first', 'well', 'way', 'even', 'new', 'want', 'because', 'any', 'these', 'give', 'day', 'most', 'us'
+        }
+        
         # Validar que los pesos sumen 1.0
         total_weight = sum(self.weights.values())
         if abs(total_weight - 1.0) > 0.01:
             # Normalizar automáticamente
             for key in self.weights:
                 self.weights[key] /= total_weight
+    
+    def initialize_dynamic_keywords(self, employees: List[Employee], roles: List[Role]):
+        """
+        Inicializa el sistema de keywords dinámicas aprendiendo del corpus de datos.
+        Debe llamarse una vez antes de realizar cálculos de gaps.
+        """
+        self._dynamic_keywords = self.learn_keywords_from_data(employees, roles)
+        print(f"✅ Sistema de keywords inicializado con {len(self._dynamic_keywords)} términos relevantes")
     
     def calculate_gap(self, employee: Employee, role: Role) -> GapResult:
         """
@@ -177,30 +201,111 @@ class GapCalculator:
         
         return min(base_score + progression_bonus, 1.0)
     
+    def learn_keywords_from_data(self, employees: List[Employee], roles: List[Role], 
+                                min_frequency: int = 2, max_keywords: int = 100) -> Set[str]:
+        """
+        Aprende keywords dinámicamente del corpus de empleados y roles.
+        
+        Args:
+            employees: Lista de empleados para analizar
+            roles: Lista de roles para analizar  
+            min_frequency: Frecuencia mínima para considerar una palabra
+            max_keywords: Máximo número de keywords a extraer
+            
+        Returns:
+            Set de keywords relevantes extraídas automáticamente
+        """
+        # Recopilar todo el texto relevante
+        corpus = []
+        
+        # Texto de empleados actuales
+        for emp in employees:
+            corpus.extend(emp.responsabilidades_actuales)
+            corpus.extend(emp.ambiciones or [])
+            
+        # Texto de roles objetivo
+        for role in roles:
+            corpus.extend(role.responsabilidades)
+            corpus.append(role.titulo)
+            corpus.append(f"{role.nivel} {role.chapter}")
+        
+        # Texto del catálogo de skills
+        for skill in self.skills_catalog.values():
+            corpus.append(skill.nombre)
+            corpus.append(skill.categoria)
+            corpus.extend(skill.herramientas_asociadas)
+        
+        # Extraer y contar palabras significativas
+        word_counter = Counter()
+        
+        for text in corpus:
+            if not text:
+                continue
+                
+            # Limpiar y tokenizar
+            words = re.findall(r'\b[a-záéíóúüñ]{3,}\b', text.lower())
+            
+            for word in words:
+                # Filtrar stop words y palabras muy comunes
+                if (word not in self._stop_words and 
+                    len(word) >= 3 and 
+                    not word.isdigit()):
+                    word_counter[word] += 1
+        
+        # Seleccionar las keywords más frecuentes
+        top_keywords = [word for word, count in word_counter.most_common(max_keywords) 
+                       if count >= min_frequency]
+        
+        # Agregar keywords específicas del dominio que siempre queremos incluir
+        domain_keywords = {
+            'okr', 'okrs', 'crm', 'seo', 'sem', 'ui', 'ux', 'cdp', 'kol', 'cac', 'ltv',
+            'hubspot', 'figma', 'n8n', 'performance', 'growth', 'creative', 'design',
+            'strategy', 'martech', 'influencer', 'social', 'media', 'brand'
+        }
+        
+        # Combinar keywords aprendidas con dominio específico
+        all_keywords = set(top_keywords) | domain_keywords
+        
+        return all_keywords
+    
     def _extract_keywords(self, responsibilities: List[str]) -> Set[str]:
         """
         Extrae palabras clave importantes de una lista de responsabilidades.
+        Usa keywords aprendidas dinámicamente si están disponibles.
         """
-        # Palabras clave importantes en el contexto de Quether Consulting
-        important_keywords = {
-            'okr', 'okrs', 'estrategia', 'estratégica', 'estratégicas',
-            'análisis', 'analítica', 'datos', 'crm', 'automatización',
-            'campaign', 'campañas', 'creative', 'copy', 'narrativa',
-            'diseño', 'design', 'ui', 'visual', 'identidad',
-            'social', 'media', 'influencer', 'kol', 'creators',
-            'performance', 'seo', 'sem', 'growth', 'captación',
-            'workshop', 'discovery', 'roadmap', 'gobierno',
-            'cliente', 'clientes', 'proyecto', 'proyectos',
-            'lider', 'liderar', 'dirigir', 'gestión', 'management'
-        }
+        # Si no tenemos keywords dinámicas, usar fallback básico
+        if self._dynamic_keywords is None:
+            return self._extract_keywords_fallback(responsibilities)
         
         keywords = set()
         
         for resp in responsibilities:
             # Limpiar texto y extraer palabras
-            words = re.findall(r'\b\w{4,}\b', resp.lower())
+            words = re.findall(r'\b[a-záéíóúüñ]{3,}\b', resp.lower())
             for word in words:
-                if word in important_keywords:
+                if word in self._dynamic_keywords:
+                    keywords.add(word)
+        
+        return keywords
+    
+    def _extract_keywords_fallback(self, responsibilities: List[str]) -> Set[str]:
+        """
+        Método fallback para extraer keywords cuando no hay aprendizaje dinámico.
+        Usa un conjunto mínimo de keywords técnicas importantes.
+        """
+        # Keywords mínimas críticas para funcionamiento básico
+        critical_keywords = {
+            'okr', 'okrs', 'estrategia', 'análisis', 'datos', 'crm', 'automatización',
+            'creative', 'diseño', 'design', 'ui', 'ux', 'performance', 'seo', 'growth',
+            'social', 'media', 'cliente', 'proyecto', 'gestión', 'líder', 'management'
+        }
+        
+        keywords = set()
+        
+        for resp in responsibilities:
+            words = re.findall(r'\b\w{3,}\b', resp.lower())
+            for word in words:
+                if word in critical_keywords:
                     keywords.add(word)
         
         return keywords

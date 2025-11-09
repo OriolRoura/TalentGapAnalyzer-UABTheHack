@@ -223,8 +223,25 @@ class DataLoader:
                     if isinstance(cantidad, float):
                         cantidad = max(1, int(cantidad) if cantidad >= 1 else 1)
                     
+                    role_id = role_data.get('id', '')
+                    
+                    # Check if this role exists in current_roles (from org_config)
+                    # If so, inherit habilidades_requeridas and responsabilidades
+                    existing_role = self.data_store.current_roles.get(role_id)
+                    
+                    if existing_role:
+                        # Enrich from existing role definition
+                        habilidades_req = existing_role.habilidades_requeridas
+                        responsabilidades = existing_role.responsabilidades
+                        dedicacion = existing_role.dedicacion_esperada
+                    else:
+                        # New role not in current catalog
+                        habilidades_req = []
+                        responsabilidades = role_data.get('objetivos_asociados', [])
+                        dedicacion = '40h/semana'
+                    
                     normalized_role = {
-                        'id': role_data.get('id', ''),
+                        'id': role_id,
                         'titulo': role_data.get('título', role_data.get('titulo', '')),
                         'nivel': role_data.get('nivel', 'mid').lower(),  # Normalize to lowercase
                         'capitulo': role_data.get('capítulo', role_data.get('capitulo', '')),
@@ -232,9 +249,9 @@ class DataLoader:
                         'cantidad': int(cantidad),
                         'inicio_estimado': role_data.get('inicio_estimado', '0m'),
                         'objetivos_asociados': role_data.get('objetivos_asociados', []),
-                        'responsabilidades': [],
-                        'habilidades_requeridas': [],
-                        'dedicacion_esperada': '40h/semana'
+                        'responsabilidades': responsabilidades,
+                        'habilidades_requeridas': habilidades_req,
+                        'dedicacion_esperada': dedicacion
                     }
                     
                     role = Role(**normalized_role)
@@ -317,6 +334,25 @@ class DataLoader:
             del self.data_store.roles[role_id]
             return True
         return False
+    
+    def get_responsibilities_by_role_title(self, role_title: str) -> List[str]:
+        """
+        Get responsibilities for a role by its title (e.g., 'Senior Strategy Consultant')
+        Searches through all current and future roles
+        Returns empty list if role not found
+        """
+        # Search in current roles
+        for role in self.data_store.current_roles.values():
+            if role.titulo.lower() == role_title.lower():
+                return role.responsabilidades
+        
+        # Search in future roles
+        for role in self.data_store.future_roles.values():
+            if role.titulo.lower() == role_title.lower():
+                return role.responsabilidades
+        
+        # Not found
+        return []
     
     def get_company_projects(self) -> Dict[str, Dict]:
         """

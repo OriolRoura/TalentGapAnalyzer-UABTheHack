@@ -314,14 +314,16 @@ class RecommendationEngine:
         """Recomienda prioridades de contratación externa."""
         priorities = []
         
-        # Skills imposibles de desarrollar internamente
-        critical_bottlenecks = [b for b in bottlenecks if b['gap_percentage'] > 70]
+        # Skills críticos (ahora usan avg_gap_percentage)
+        critical_bottlenecks = [b for b in bottlenecks if b.get('avg_gap_percentage', 0) > 70]
         
         for bottleneck in critical_bottlenecks[:3]:  # Top 3
+            # Nueva estructura: role_id en lugar de affected_roles (que era lista)
+            role_title = bottleneck.get('role_title', 'Unknown')
             priorities.append({
                 'skill_required': bottleneck['skill_name'],
                 'urgency_level': 'HIGH',
-                'roles_blocked': bottleneck['affected_roles'],
+                'role_affected': role_title,  # Ahora es un rol específico
                 'recommended_level': 'Senior/Expert',
                 'hiring_timeline': '1-2 meses',
                 'budget_impact': 'HIGH'

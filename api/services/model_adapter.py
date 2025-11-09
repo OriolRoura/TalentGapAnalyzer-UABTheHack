@@ -65,26 +65,36 @@ class ModelAdapter:
         _import_algorithm_models()
         
         # Convert skills from Dict[str, int] to Dict[str, SkillLevel]
+        # Use same thresholds as main_challenge.py for consistency
         algo_skills = {}
         for skill_id, level in api_employee.habilidades.items():
             # Map numeric level (0-10) to SkillLevel enum
-            if level <= 2:
-                algo_skills[skill_id] = AlgoSkillLevel.NOVATO
-            elif level <= 5:
-                algo_skills[skill_id] = AlgoSkillLevel.INTERMEDIO
-            elif level <= 8:
-                algo_skills[skill_id] = AlgoSkillLevel.AVANZADO
-            else:
+            # Thresholds match main_challenge.py: >= 8: EXPERTO, >= 6: AVANZADO, >= 4: INTERMEDIO, < 4: NOVATO
+            if level >= 8:
                 algo_skills[skill_id] = AlgoSkillLevel.EXPERTO
+            elif level >= 6:
+                algo_skills[skill_id] = AlgoSkillLevel.AVANZADO
+            elif level >= 4:
+                algo_skills[skill_id] = AlgoSkillLevel.INTERMEDIO
+            else:
+                algo_skills[skill_id] = AlgoSkillLevel.NOVATO
         
-        # Extract ambitions
+        # Extract ambitions - match main_challenge.py format exactly
+        # Include especialidades_preferidas + "nivel {nivel_aspiracion}" if exists
         ambiciones = api_employee.ambiciones.especialidades_preferidas.copy()
+        if api_employee.ambiciones.nivel_aspiracion:
+            ambiciones.append(f"nivel {api_employee.ambiciones.nivel_aspiracion}")
         
         # Convert dedication dict to string format
-        # Example: {"Project A": 60, "Project B": 40} -> "40h/semana" (assuming full-time)
-        total_dedication = sum(api_employee.dedicacion_actual.values())
-        hours_per_week = int(total_dedication * 40 / 100)  # Assuming 100% = 40h/week
-        dedicacion_str = f"{hours_per_week}h/semana"
+        # main_challenge.py uses the raw CSV value which could be JSON string or "full-time"
+        # For now, convert dict to simple string representation
+        # Example: {"Project A": 60, "Project B": 40} -> "full-time" or similar
+        if api_employee.dedicacion_actual:
+            total_dedication = sum(api_employee.dedicacion_actual.values())
+            hours_per_week = int(total_dedication * 40 / 100)  # Assuming 100% = 40h/week
+            dedicacion_str = f"{hours_per_week}h/semana"
+        else:
+            dedicacion_str = "full-time"
         
         return AlgoEmployee(
             id=str(api_employee.id_empleado),

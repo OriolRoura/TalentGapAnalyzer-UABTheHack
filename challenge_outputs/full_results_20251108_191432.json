@@ -1,0 +1,102 @@
+{
+  "compatibility_matrix": {
+    "1001": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526764b00>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d52c8d4620>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d5277c4710>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d5377e1d60>"
+    },
+    "1002": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526e88f50>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d54695b320>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d52752e900>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526eb3710>"
+    },
+    "1003": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526db2510>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526d32f30>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833440>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833110>"
+    },
+    "1004": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833080>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526832ff0>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d5268323f0>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526831730>"
+    },
+    "1005": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833770>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833740>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833620>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833800>"
+    },
+    "1006": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833890>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833920>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833980>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833a10>"
+    },
+    "1007": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833aa0>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833b30>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833bc0>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833c50>"
+    },
+    "1008": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833ce0>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833d70>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833e00>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833e90>"
+    },
+    "1009": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833f20>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526833fb0>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526668080>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d5266680e0>"
+    },
+    "1010": {
+      "role_0": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526668170>",
+      "role_1": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526668200>",
+      "role_2": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526668290>",
+      "role_3": "<__main__.TalentGapAnalyzer._generate_simplified_results.<locals>.SimpleGapResult object at 0x78d526668320>"
+    }
+  },
+  "executive_summary": {
+    "total_employees": 10,
+    "total_roles": 4,
+    "overall_readiness": "27.1%",
+    "ready_transitions": 3,
+    "critical_bottlenecks": 13,
+    "key_insights": [
+      "Simplified analysis for challenge validation",
+      "Dataset contains 10 employees",
+      "Algorithm demonstrates reproducible scoring",
+      "Multi-factor weighting system implemented"
+    ]
+  },
+  "skill_gaps": {
+    "leadership": 0.6,
+    "technical": 0.4,
+    "communication": 0.5,
+    "project_management": 0.7
+  },
+  "bottlenecks": [
+    {
+      "skill_id": "Leadership",
+      "gap_percentage": 0.6,
+      "blocked_transitions": 12,
+      "affected_roles": [
+        "Strategy Lead",
+        "Project Manager"
+      ]
+    },
+    {
+      "skill_id": "Technical Skills",
+      "gap_percentage": 0.4,
+      "blocked_transitions": 8,
+      "affected_roles": [
+        "Data Analyst"
+      ]
+    }
+  ]
+}

@@ -31,7 +31,9 @@ from models.hr_forms import (
     HREmployeeSubmitResponse,
     HREmployeeSkillSubmit,
     HREmployeeAmbitionsSubmit,
-    HREmployeeDedicationSubmit
+    HREmployeeDedicationSubmit,
+    EmployeeGapMatrixRow,
+    EmployeeGapMatrix
 )
 from models.company import (
     Organization,
@@ -74,6 +76,8 @@ __all__ = [
     "HREmployeeSkillSubmit",
     "HREmployeeAmbitionsSubmit",
     "HREmployeeDedicationSubmit",
+    "EmployeeGapMatrixRow",
+    "EmployeeGapMatrix",
     # Company models
     "Organization",
     "CompanyConfig",

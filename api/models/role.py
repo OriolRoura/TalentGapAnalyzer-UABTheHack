@@ -12,6 +12,7 @@ class SeniorityLevel(str, Enum):
     """Seniority levels"""
     JUNIOR = "junior"
     MID = "mid"
+    MID_SENIOR = "mid-senior"
     SENIOR = "senior"
     LEAD = "lead"
 

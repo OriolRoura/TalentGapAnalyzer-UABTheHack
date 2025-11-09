@@ -24,7 +24,7 @@ class Dedication(BaseModel):
 class Ambitions(BaseModel):
     """Employee career ambitions"""
     especialidades_preferidas: List[str] = Field(default_factory=list)
-    nivel_aspiracion: str = Field(..., description="junior, mid, senior, lead")
+    nivel_aspiracion: str = Field(..., description="junior, mid, mid-senior, senior, lead")
 
 
 class Metadata(BaseModel):

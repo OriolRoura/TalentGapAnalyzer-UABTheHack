@@ -5,6 +5,13 @@ FastAPI application for managing company data, HR inputs, and feeding Samya's ga
 
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file FIRST
+env_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=env_path)
+print(f"🔧 Loading environment from: {env_path}")
+print(f"🔧 .env file exists: {env_path.exists()}")
 
 # Add PARENT directory to path (so we can import 'algorithm' as a package)
 # This is safer than adding algorithm directly as it won't shadow 'models'
@@ -16,7 +23,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from routes import employees, roles, company, hr_forms, health, skills
+from routes import employees, roles, company, hr_forms, health, skills, ai_insights, monitoring, cache
 from services.data_loader import data_loader  # Use the global instance
 
 @asynccontextmanager
@@ -54,6 +61,9 @@ app.include_router(employees.router, prefix="/api/v1/employees", tags=["Employee
 app.include_router(roles.router, prefix="/api/v1/roles", tags=["Roles"])
 app.include_router(skills.router, tags=["Skills"])
 app.include_router(hr_forms.router, prefix="/api/v1/hr", tags=["HR Forms"])
+app.include_router(ai_insights.router, tags=["AI Insights"])  # AI-generated content
+app.include_router(monitoring.router, tags=["Monitoring"])  # API monitoring and tracing
+app.include_router(cache.router, prefix="/api/v1/cache", tags=["Cache Management"])  # LLM cache management
 
 @app.get("/")
 async def root():
@@ -66,4 +76,4 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True, workers=4)

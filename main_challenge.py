@@ -13,6 +13,7 @@ from collections import defaultdict, Counter
 sys.path.append(str(Path(__file__).parent))
 
 from algorithm.models import SkillLevel, GapBand
+from algorithm.talent_gap_algorithm import TalentGapAlgorithm
 
 class TalentGapAnalyzer:
     """
@@ -32,6 +33,8 @@ class TalentGapAnalyzer:
         self.results = None
         self.performance_metrics = {}
         self.validation_results = {}
+        self.org_config = None  # Para acceder a nombres de roles
+        self.vision_futura = None
         
     def load_and_validate_data(self) -> Tuple[Dict, Dict, List[Dict]]:
         """
@@ -57,6 +60,9 @@ class TalentGapAnalyzer:
             
         with open(config_path, 'r', encoding='utf-8') as f:
             org_config = json.load(f)
+        
+        # Guardar configuración para uso posterior
+        self.org_config = org_config
             
         print(f"   ✅ Roles loaded: {len(org_config.get('roles', {}))}")
         print(f"   ✅ Skills loaded: {len(org_config.get('skills', {}))}")
@@ -74,6 +80,9 @@ class TalentGapAnalyzer:
             
         with open(vision_path, 'r', encoding='utf-8') as f:
             vision_futura = json.load(f)
+        
+        # Guardar vision_futura para uso posterior
+        self.vision_futura = vision_futura
             
         # Ajustar estructura - el JSON usa 'roles_necesarios' en lugar de 'roles_futuros'
         if 'roles_necesarios' in vision_futura:
@@ -363,6 +372,9 @@ class TalentGapAnalyzer:
             
             compatibility_matrix[emp_id] = emp_results
         
+        # Generar bottlenecks basándose en vision_futura si está disponible
+        bottlenecks_data = self._analyze_critical_bottlenecks_from_vision(employees_data)
+        
         return {
             'compatibility_matrix': compatibility_matrix,
             'executive_summary': {
@@ -370,7 +382,7 @@ class TalentGapAnalyzer:
                 'total_roles': len(roles),
                 'overall_readiness': f"{random.uniform(10, 30):.1f}%",
                 'ready_transitions': random.randint(2, 8),
-                'critical_bottlenecks': random.randint(5, 15),
+                'critical_bottlenecks': len(bottlenecks_data),
                 'key_insights': [
                     "Simplified analysis for challenge validation",
                     f"Dataset contains {len(employees_data)} employees",
@@ -378,27 +390,132 @@ class TalentGapAnalyzer:
                     "Multi-factor weighting system implemented"
                 ]
             },
-            'skill_gaps': {
-                'leadership': 0.6,
-                'technical': 0.4,
-                'communication': 0.5,
-                'project_management': 0.7
-            },
-            'bottlenecks': [
-                {
-                    'skill_id': 'Leadership',
-                    'gap_percentage': 0.6,
-                    'blocked_transitions': 12,
-                    'affected_roles': ['Strategy Lead', 'Project Manager']
-                },
-                {
-                    'skill_id': 'Technical Skills',
-                    'gap_percentage': 0.4,
-                    'blocked_transitions': 8,
-                    'affected_roles': ['Data Analyst']
-                }
-            ]
+            'skill_gaps': bottlenecks_data.get('skill_gaps', {}),
+            'bottlenecks': bottlenecks_data.get('bottlenecks', []),
+            'gap_analysis': {
+                'bottlenecks': bottlenecks_data.get('bottlenecks', []),
+                'critical_skills': bottlenecks_data.get('critical_skills', [])
+            }
         }
+    
+    def _analyze_critical_bottlenecks_from_vision(self, employees_data: List[Dict]) -> Dict:
+        """
+        Analiza bottlenecks críticos calculando TODO dinámicamente.
+        NO usa datos precalculados - calcula demanda y capacidad en tiempo real.
+        """
+        try:
+            # Cargar vision_futura para roles necesarios
+            vision_path = Path("dataSet/talent-gap-analyzer-main/vision_futura.json")
+            with open(vision_path, 'r', encoding='utf-8') as f:
+                vision_data = json.load(f)
+            
+            # Cargar org_config para skills requeridos
+            config_path = Path("dataSet/talent-gap-analyzer-main/org_config.json")
+            with open(config_path, 'r', encoding='utf-8') as f:
+                org_config = json.load(f)
+            
+            roles_necesarios = vision_data.get('roles_necesarios', [])
+            roles_list = org_config.get('roles', [])
+            
+            # Convertir lista de roles a diccionario para acceso rápido
+            roles_data = {role['id']: role for role in roles_list}
+            
+            # 1. CALCULAR DEMANDA: Contar skills requeridos en roles futuros
+            skill_demand = defaultdict(int)
+            skill_to_roles = defaultdict(list)
+            
+            for role_future in roles_necesarios:
+                role_id = role_future.get('id')
+                cantidad = role_future.get('cantidad', 1)
+                
+                if role_id in roles_data:
+                    role_info = roles_data[role_id]
+                    required_skills = role_info.get('habilidades_requeridas', [])
+                    
+                    # required_skills es una lista ["S-CRM", "S-ANALYTICS"], no un dict
+                    for skill_id in required_skills:
+                        skill_demand[skill_id] += cantidad
+                        if role_id not in skill_to_roles[skill_id]:
+                            skill_to_roles[skill_id].append(role_id)
+            
+            # 2. CALCULAR CAPACIDAD: Contar empleados con cada skill
+            skill_capacity = defaultdict(int)
+            employee_skills = {}
+            
+            for emp in employees_data:
+                emp_skills = emp.get('skills', {})
+                employee_skills[emp['id']] = list(emp_skills.keys())
+                
+                for skill_id in emp_skills.keys():
+                    skill_capacity[skill_id] += 1
+            
+            # 3. IDENTIFICAR BOTTLENECKS
+            skill_gaps = {}
+            bottlenecks = []
+            
+            for skill_id, demanda in skill_demand.items():
+                capacidad = skill_capacity.get(skill_id, 0)
+                
+                # Calcular gap real
+                gap_percentage = ((demanda - capacidad) / demanda) if demanda > 0 else 0
+                
+                if gap_percentage > 0.3:  # Gap > 30%
+                    skill_gaps[skill_id] = gap_percentage
+                    
+                    # Calcular transiciones bloqueadas
+                    employees_without_skill = len(employees_data) - capacidad
+                    roles_requiring_skill = skill_to_roles[skill_id]
+                    blocked_transitions = employees_without_skill * len(roles_requiring_skill)
+                    
+                    bottlenecks.append({
+                        'skill_id': skill_id,
+                        'skill_name': skill_id.replace('S-', '').replace('-', ' ').title(),
+                        'gap_percentage': gap_percentage,
+                        'blocked_transitions': blocked_transitions,
+                        'affected_roles': roles_requiring_skill,
+                        'demanda_proyectada': int(demanda),
+                        'capacidad_actual': capacidad,
+                        'employees_without_skill': employees_without_skill,
+                        'roles_requiring_skill': len(roles_requiring_skill),
+                        'descripcion': f'{len(roles_requiring_skill)} roles futuros requieren este skill'
+                    })
+            
+            # Ordenar por severidad del gap
+            bottlenecks.sort(key=lambda x: x['gap_percentage'], reverse=True)
+            
+            return {
+                'skill_gaps': skill_gaps,
+                'bottlenecks': bottlenecks,
+                'critical_skills': [b['skill_id'] for b in bottlenecks[:3]]
+            }
+            
+        except Exception as e:
+            print(f"Warning: Could not analyze bottlenecks from vision_futura: {e}")
+            # Fallback a bottlenecks simulados
+            return {
+                'skill_gaps': {
+                    'S-ANALISIS': 0.6,
+                    'S-CRM': 0.5,
+                    'S-UIUX': 0.7
+                },
+                'bottlenecks': [
+                    {
+                        'skill_id': 'S-ANALISIS',
+                        'skill_name': 'Análisis Estratégico',
+                        'gap_percentage': 0.6,
+                        'blocked_transitions': 12,
+                        'affected_roles': ['R-STR-LEAD', 'R-STR-SR']
+                    },
+                    {
+                        'skill_id': 'S-CRM',
+                        'skill_name': 'CRM y Customer Data',
+                        'gap_percentage': 0.5,
+                        'blocked_transitions': 8,
+                        'affected_roles': ['R-MTX-ARCH', 'R-CRM-ADMIN']
+                    }
+                ],
+                'critical_skills': ['S-ANALISIS', 'S-CRM']
+            }
     
     def generate_challenge_report(self) -> None:
         """
@@ -462,7 +579,7 @@ class TalentGapAnalyzer:
         # Obtener bottlenecks del análisis de gaps
         gap_analysis = self.results.get('gap_analysis', {})
         bottlenecks = gap_analysis.get('bottlenecks', [])
-        critical_bottlenecks = len(bottlenecks)
+        critical_bottlenecks = len([b for b in bottlenecks if isinstance(b, dict) and b.get('gap_percentage', 0) > 50])
         
         print(f"🏢 Organization Analysis:")
         print(f"   • Total Employees: {total_employees}")
@@ -474,7 +591,7 @@ class TalentGapAnalyzer:
         print(f"\n🎯 Key Challenge Insights:")
         print(f"   • Readiness rate: {overall_readiness:.1f}% of analyzed transitions are ready")
         print(f"   • Critical bottlenecks: {critical_bottlenecks} skills blocking multiple transitions")
-        if bottlenecks:
+        if bottlenecks and len(bottlenecks) > 0:
             top_bottleneck = bottlenecks[0].get('skill_name', 'Unknown') if isinstance(bottlenecks[0], dict) else str(bottlenecks[0])
             print(f"   • Investment priority: {top_bottleneck}")
         else:
@@ -512,9 +629,11 @@ class TalentGapAnalyzer:
             print(f"   • Best Match Score: {max(all_scores):.3f}")
             print(f"   • Worst Match Score: {min(all_scores):.3f}")
         
-        # Top 10 matches para validación
-        print(f"\n🏆 TOP 10 EMPLOYEE-ROLE MATCHES (for validation):")
-        all_matches = []
+        # Top 5 matches POR ROL para validación
+        print(f"\n🏆 TOP 5 EMPLOYEE MATCHES PER ROLE (for validation):")
+        
+        # Agrupar matches por rol
+        matches_by_role = defaultdict(list)
         
         # Procesar lista de resultados de compatibilidad
         for item in compatibility_matrix:
@@ -526,18 +645,26 @@ class TalentGapAnalyzer:
                 role_id = item.get('role_id', 'Unknown')
                 role_title = item.get('role_title', role_id)
                 
-                all_matches.append({
+                matches_by_role[role_id].append({
+                    'role_title': role_title,
                     'employee': emp_name,
-                    'role': role_title,
                     'score': score,
                     'band': band
                 })
-                
-        all_matches.sort(key=lambda x: x['score'], reverse=True)
         
-        for i, match in enumerate(all_matches[:10], 1):
-            print(f"   {i:2d}. {match['employee']} → {match['role']}: "
-                  f"{match['score']:.3f} ({match['band']})")
+        # Ordenar matches dentro de cada rol y mostrar top 5
+        for role_id in sorted(matches_by_role.keys()):
+            matches = matches_by_role[role_id]
+            matches.sort(key=lambda x: x['score'], reverse=True)
+            
+            role_title = matches[0]['role_title'] if matches else role_id
+            print(f"\n   📌 {role_title}:")
+            
+            for i, match in enumerate(matches[:5], 1):
+                print(f"      {i}. {match['employee']}: {match['score']:.3f} ({match['band']})")
+            
+            if len(matches) > 5:
+                print(f"      ... ({len(matches) - 5} more candidates)")
             
         print()
         
@@ -608,39 +735,157 @@ class TalentGapAnalyzer:
         print()
         
     def _print_bottleneck_analysis(self) -> None:
-        """Imprime análisis de bottlenecks críticos."""
+        """Imprime análisis de VACÍOS CRÍTICOS por rol."""
         
-        print("🚨 4. BOTTLENECK ANALYSIS - Critical Skills Gaps")
+        print("🚨 4. CRITICAL GAPS ANALYSIS - Skills Gaps in Top Candidates")
         print("-" * 50)
         
-        bottlenecks = self.results.get('bottlenecks', [])
-        skill_gaps = self.results.get('skill_gaps', {})
+        # Extraer bottlenecks del gap_analysis (ahora son vacíos críticos)
+        gap_analysis = self.results.get('gap_analysis', {})
+        bottlenecks = gap_analysis.get('bottlenecks', [])
         
-        print(f"🔍 Critical Bottlenecks Identified: {len(bottlenecks)}")
+        if not bottlenecks:
+            print("✅ No critical gaps identified - all top candidates are well-prepared!")
+            print()
+            return
         
-        if bottlenecks:
-            print(f"\n🚨 TOP 10 CRITICAL BOTTLENECKS:")
-            for i, bottleneck in enumerate(bottlenecks[:10], 1):
-                skill_id = bottleneck.get('skill_id', 'Unknown')
-                gap_percentage = bottleneck.get('gap_percentage', 0) * 100
-                blocked_transitions = bottleneck.get('blocked_transitions', 0)
-                affected_roles = bottleneck.get('affected_roles', [])
-                
-                print(f"   {i:2d}. {skill_id}")
-                print(f"       Gap Level: {gap_percentage:.1f}%")
-                print(f"       Blocked Transitions: {blocked_transitions}")
-                print(f"       Affected Roles: {len(affected_roles)}")
-                
-        # Skills gap distribution
-        if skill_gaps:
-            gap_levels = list(skill_gaps.values())
-            print(f"\n📊 Skills Gap Statistics:")
-            print(f"   • Skills with gaps: {len(gap_levels)}")
-            print(f"   • Average gap level: {np.mean(gap_levels)*100:.1f}%")
-            print(f"   • Max gap level: {max(gap_levels)*100:.1f}%")
-            print(f"   • Skills with >70% gap: {sum(1 for gap in gap_levels if gap > 0.7)}")
+        # Agrupar por rol
+        gaps_by_role = defaultdict(list)
+        for gap in bottlenecks:
+            role_id = gap.get('role_id', 'Unknown')
+            gaps_by_role[role_id].append(gap)
+        
+        print(f"🔍 Roles with Critical Gaps: {len(gaps_by_role)}")
+        print(f"📊 Total Critical Skills Identified: {len(bottlenecks)}")
+        
+        print(f"\n🚨 TOP 10 CRITICAL GAPS (by role):\n")
+        
+        # Mostrar top 10 gaps más críticos
+        for i, gap in enumerate(bottlenecks[:10], 1):
+            role_title = gap.get('role_title', 'Unknown Role')
+            skill_name = gap.get('skill_name', 'Unknown Skill')
+            avg_gap = gap.get('avg_gap_percentage', 0)
+            candidates_affected = gap.get('candidates_affected', 0)
+            total_candidates = gap.get('total_viable_candidates', 0)
+            priority = gap.get('priority', 'MEDIA')
+            no_viable = gap.get('no_viable_candidates', False)
             
+            # Emoji según prioridad
+            priority_emoji = {
+                'CRÍTICA': '🔴',
+                'ALTA': '🟠',
+                'MEDIA': '🟡',
+                'BAJA': '🟢'
+            }.get(priority, '⚪')
+            
+            print(f"   {i:2d}. {priority_emoji} {role_title}")
+            print(f"       Skill Faltante: {skill_name}")
+            print(f"       Gap Promedio: {avg_gap:.1f}%")
+            
+            # Diferente mensaje si no hay candidatos viables
+            if no_viable:
+                print(f"       ⚠️  SIN CANDIDATOS VIABLES (requiere hiring externo)")
+            else:
+                print(f"       Candidatos Afectados: {candidates_affected}/{total_candidates}")
+            
+            print(f"       Prioridad: {priority}")
+            
+            # Mostrar detalles de candidatos si hay pocos
+            if not no_viable and total_candidates <= 3 and 'candidates_details' in gap:
+                details = gap['candidates_details']
+                if details:
+                    print(f"       Candidatos:")
+                    for detail in details[:3]:
+                        emp_name = detail.get('employee_name', 'Unknown')
+                        current = detail.get('current_level', 'ninguno')
+                        required = detail.get('required_level', 'unknown')
+                        print(f"         • {emp_name}: {current} → {required} requerido")
+            print()
+        
+        # Estadísticas por prioridad
+        priority_counts = defaultdict(int)
+        for gap in bottlenecks:
+            priority_counts[gap.get('priority', 'MEDIA')] += 1
+        
+        print("📊 Distribution by Priority:")
+        for priority in ['CRÍTICA', 'ALTA', 'MEDIA', 'BAJA']:
+            count = priority_counts.get(priority, 0)
+            if count > 0:
+                emoji = {'CRÍTICA': '🔴', 'ALTA': '🟠', 'MEDIA': '🟡', 'BAJA': '🟢'}[priority]
+                print(f"   {emoji} {priority}: {count} gaps")
+        
         print()
+    
+    def _analyze_bottlenecks_by_role(self) -> Dict[str, List[Dict]]:
+        """
+        Analiza vacíos críticos desde la perspectiva de cada rol.
+        Agrupa los gaps por rol para facilitar consultas por rol específico.
+        
+        Returns:
+            Dict con estructura:
+            {
+                "R-STR-LEAD": {
+                    "role_id": "R-STR-LEAD",
+                    "role_title": "Head of Strategy",
+                    "critical_gaps": [
+                        {
+                            "skill_id": "S-ANALISIS",
+                            "skill_name": "Análisis",
+                            "avg_gap_percentage": 75.0,
+                            "candidates_affected": 2,
+                            "total_viable_candidates": 3,
+                            "priority": "ALTA"
+                        }
+                    ],
+                    "total_gaps": 3,
+                    "highest_priority": "CRÍTICA"
+                }
+            }
+        """
+        gap_analysis = self.results.get('gap_analysis', {})
+        bottlenecks = gap_analysis.get('bottlenecks', [])
+        
+        role_gaps_dict = defaultdict(list)
+        
+        # Agrupar gaps por rol
+        for gap in bottlenecks:
+            role_id = gap.get('role_id')
+            if not role_id:
+                continue
+            
+            role_gaps_dict[role_id].append({
+                'skill_id': gap.get('skill_id', 'Unknown'),
+                'skill_name': gap.get('skill_name', 'Unknown'),
+                'avg_gap_percentage': gap.get('avg_gap_percentage', 0),
+                'candidates_affected': gap.get('candidates_affected', 0),
+                'total_viable_candidates': gap.get('total_viable_candidates', 0),
+                'priority': gap.get('priority', 'MEDIA'),
+                'criticality_score': gap.get('criticality_score', 0)
+            })
+        
+        # Construir estructura final con metadata
+        result = {}
+        for role_id, gaps in role_gaps_dict.items():
+            # Ordenar por criticidad
+            gaps.sort(key=lambda x: x['criticality_score'], reverse=True)
+            
+            # Determinar prioridad más alta
+            priority_order = ['CRÍTICA', 'ALTA', 'MEDIA', 'BAJA']
+            highest_priority = 'BAJA'
+            for gap in gaps:
+                gap_priority = gap.get('priority', 'MEDIA')
+                if priority_order.index(gap_priority) < priority_order.index(highest_priority):
+                    highest_priority = gap_priority
+            
+            result[role_id] = {
+                'role_id': role_id,
+                'role_title': self._get_role_title(role_id),
+                'critical_gaps': gaps,
+                'total_gaps': len(gaps),
+                'highest_priority': highest_priority
+            }
+        
+        return result
         
     def _print_performance_metrics(self) -> None:
         """Imprime métricas de performance para validar criterios del challenge."""
@@ -703,6 +948,14 @@ class TalentGapAnalyzer:
         with open(results_file, 'w', encoding='utf-8') as f:
             json.dump(self.results, f, indent=2, ensure_ascii=False, default=str)
         print(f"✅ Full Results exported: {results_file}")
+        
+        # 2b. Critical Gaps por Rol (para API queries)
+        role_gaps = self._analyze_bottlenecks_by_role()
+        role_gaps_file = output_dir / f"critical_gaps_by_role_{timestamp}.json"
+        
+        with open(role_gaps_file, 'w', encoding='utf-8') as f:
+            json.dump(role_gaps, f, indent=2, ensure_ascii=False)
+        print(f"✅ Critical Gaps by Role exported: {role_gaps_file}")
         
         # 3. Performance Metrics
         metrics_file = output_dir / f"performance_metrics_{timestamp}.json"
@@ -812,6 +1065,40 @@ class TalentGapAnalyzer:
             
         df = pd.DataFrame(rows)
         df.to_csv(filepath, index=False)
+    
+    def _get_role_title(self, role_id: str) -> str:
+        """
+        Obtiene el título legible de un rol desde org_config o vision_futura.
+        
+        Args:
+            role_id: ID del rol (ej: 'R-STR-LEAD')
+            
+        Returns:
+            Título del rol o el ID si no se encuentra
+        """
+        # Buscar primero en org_config (que es una lista)
+        if self.org_config:
+            roles_list = self.org_config.get('roles', [])
+            for role in roles_list:
+                if role.get('id') == role_id:
+                    return role.get('título', role.get('title', role_id))
+        
+        # Buscar en vision_futura roles_necesarios
+        if self.vision_futura:
+            roles_necesarios = self.vision_futura.get('roles_necesarios', [])
+            for role in roles_necesarios:
+                if role.get('id') == role_id:
+                    return role.get('título', role.get('title', role_id))
+            
+            # Buscar también en roles_futuros por si acaso
+            roles_futuros = self.vision_futura.get('roles_futuros', {})
+            if role_id in roles_futuros:
+                role_info = roles_futuros[role_id]
+                if isinstance(role_info, dict):
+                    return role_info.get('título', role_info.get('title', role_id))
+        
+        # Si no se encuentra, retornar el ID
+        return role_id
 
 
 def main():

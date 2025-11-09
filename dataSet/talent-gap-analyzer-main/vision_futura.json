@@ -1,20 +1,20 @@
 {
   "organization": {
     "nombre": "Quether Consulting",
-    "direccion": "C/ Llull 321,08019 Barcelona,España",
-    "descripcion": "Consultora de estrategia,innovación y transformación para empresas medianas (3–50M€) que necesitan profesionalizarse,digitalizarse y crecer."
+    "direccion": "C/ Llull 321, 08019 Barcelona, España",
+    "descripcion": "Consultora de estrategia, innovación y transformación para empresas medianas (3–50M€) que necesitan profesionalizarse, digitalizarse y crecer."
   },
   "timeline": {
     "12_meses": {
       "hitos": [
-        "Estándar operativo: OKRs trimestrales,rituales y wiki en ClickUp.",
+        "Estándar operativo: OKRs trimestrales, rituales y wiki en ClickUp.",
         "Lanzar 2 microapps (MVP) integradas con CRM.",
         "Implantar CRM base y automatizaciones en 3–4 clientes.",
-        "Paquetizar 3 ofertas: Análisis Inicial,Plan de Transformación,Retainer CX/RevOps."
+        "Paquetizar 3 ofertas: Análisis Inicial, Plan de Transformación, Retainer CX/RevOps."
       ],
       "kpis_objetivo": {
         "ingresos_mensuales": 15000,
-        "margen_operativo": 0.2,
+        "margen_operativo": 0.20,
         "clientes_recurrentes": 6,
         "microapps_activas": 2,
         "nps": 60
@@ -29,7 +29,7 @@
       "hitos": [
         "Microapps v2 (GA) con billing y metadatos de uso.",
         "Playbooks de entrega por capítulo y QA formal.",
-        "Inbound estable (blog,casos,webinars) + outbound orquestado."
+        "Inbound estable (blog, casos, webinars) + outbound orquestado."
       ],
       "kpis_objetivo": {
         "ingresos_mensuales": 20000,
@@ -46,7 +46,7 @@
     "24_meses": {
       "hitos": [
         "Catálogo de 6 microapps y 5 paquetes de servicio productizados.",
-        "PMO madura con tableros de control (finanzas,carga y satisfacción).",
+        "PMO madura con tableros de control (finanzas, carga y satisfacción).",
         "Ecosistema de partners (tech/talento) con acuerdos marco."
       ],
       "kpis_objetivo": {
@@ -236,62 +236,38 @@
     {
       "área": "Oferta",
       "cambio": "Productizar servicios y microapps (catálogo estandarizado).",
-      "impacto_esperado": "Ventas repetibles y escalables,menor ciclo comercial.",
-      "kpis": [
-        "ARPA",
-        "Tasa de cierre",
-        "Tiempo de entrega"
-      ]
+      "impacto_esperado": "Ventas repetibles y escalables, menor ciclo comercial.",
+      "kpis": ["ARPA", "Tasa de cierre", "Tiempo de entrega"]
     },
     {
       "área": "Comercial",
       "cambio": "GTM unificado inbound+outbound y pipeline en CRM.",
-      "impacto_esperado": "Previsibilidad y mayor conversión MQL→SQL→Cliente.",
-      "kpis": [
-        "Lead_to_close",
-        "Win_rate",
-        "MRR"
-      ]
+      "impacto_esperado": "Previsibilidad y mayor conversión MQL→ SQL→ Cliente.",
+      "kpis": ["Lead_to_close", "Win_rate", "MRR"]
     },
     {
       "área": "Operaciones",
-      "cambio": "PMO con playbooks,SLAs y QA por capítulo.",
+      "cambio": "PMO con playbooks, SLAs y QA por capítulo.",
       "impacto_esperado": "Calidad consistente y mejor margen.",
-      "kpis": [
-        "Margen_operativo",
-        "Cumplimiento_SLA",
-        "Retrabajo"
-      ]
+      "kpis": ["Margen_operativo", "Cumplimiento_SLA", "Retrabajo"]
     },
     {
       "área": "Datos",
-      "cambio": "Definición de métricas,dashboards y atribución.",
+      "cambio": "Definición de métricas, dashboards y atribución.",
       "impacto_esperado": "Decisiones basadas en datos y optimización de CAC.",
-      "kpis": [
-        "CAC",
-        "LTV",
-        "Payback_period"
-      ]
+      "kpis": ["CAC", "LTV", "Payback_period"]
     },
     {
       "área": "Tecnología",
-      "cambio": "Arquitectura martech (CRM,automatización,IA) gobernada.",
+      "cambio": "Arquitectura martech (CRM, automatización, IA) gobernada.",
       "impacto_esperado": "Automatización y reducción de tareas manuales.",
-      "kpis": [
-        "Horas_automatizadas",
-        "Errores_por_proceso",
-        "Adopción_herramientas"
-      ]
+      "kpis": ["Horas_automatizadas", "Errores_por_proceso", "Adopción_herramientas"]
     },
     {
       "área": "Marca y Contenido",
-      "cambio": "Narrativa,casos de éxito y presencia en medios/eventos.",
+      "cambio": "Narrativa, casos de éxito y presencia en medios/eventos.",
       "impacto_esperado": "Más demanda cualificada y autoridad en el nicho.",
-      "kpis": [
-        "Tráfico_orgánico",
-        "Demostraciones_solicitadas",
-        "NPS_contenido"
-      ]
+      "kpis": ["Tráfico_orgánico", "Demostraciones_solicitadas", "NPS_contenido"]
     }
   ],
   "prioridades": {
@@ -300,7 +276,7 @@
       "PMO con playbooks y QA para asegurar calidad y margen.",
       "Productizar 3 paquetes de servicio y 2 microapps MVP.",
       "Contratación clave: PM y Martech Architect.",
-      "Tablero financiero operativo (ingresos,margen,carga,riesgos)."
+      "Tablero financiero operativo (ingresos, margen, carga, riesgos)."
     ],
     "deseable": [
       "Programa de contenidos y relaciones con partners.",

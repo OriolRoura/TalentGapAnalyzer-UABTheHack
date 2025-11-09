@@ -146,7 +146,7 @@ POST /hr/validate/employee/{employee_id}
 
 - **Dedicació**: Ha de sumar sempre 100%
 - **Skill Levels**: Entre 0-10
-- **Seniority Levels**: `junior`, `mid`, `senior`, `lead`, `principal`
+- **Seniority Levels**: `junior`, `mid`, `mid-senior`, `senior`, `lead`
 - **Performance Ratings**: `A`, `B`, `C`
 - **Retention Risk**: `Baja`, `Media`, `Alta`
 
