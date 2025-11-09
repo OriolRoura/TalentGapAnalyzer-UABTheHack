@@ -1,27 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { post, get } from '../../services';
-import { API_EMPLOYEE_MATRIX } from '../../utils/constants';
+import React, { useState, useMemo } from 'react';
+// import { post, get } from '../../services'; // Comentados ya que el mock está en el mismo archivo
+// import { API_GLOBAL_MATRIX, API_EMPLOYEE_MATRIX } from '../../utils/constants';
 import LoadingSpinner from '../LoadingSpinner';
+import fullGapMatrix from '../../../data/fullGapMatrix.json'; // Se asume que esta ruta es correcta
 
-// Color scale for compatibility scores
-const getScoreColor = (score) => {
-    if (score >= 0.8) return 'bg-green-500';
-    if (score >= 0.6) return 'bg-yellow-500';
-    if (score >= 0.4) return 'bg-orange-500';
-    return 'bg-red-500';
-};
-
-// Score cell component
-const ScoreCell = ({ score }) => {
-    const bgColor = getScoreColor(score);
-    return (
-        <div className={`w-20 h-12 ${bgColor} flex items-center justify-center text-white font-bold rounded-md m-1`}>
-            {(score * 100).toFixed(0)}%
-        </div>
-    );
-};
-
-// --- Constants for Styling ---
+// --- Constants for Styling (Manteniendo las originales) ---
 const BAND_STYLES = {
     'READY': {
         color: 'text-green-800',
@@ -34,7 +17,7 @@ const BAND_STYLES = {
         borderColor: 'border-yellow-600'
     },
     'NEAR': {
-        color: 'text-blue-800',
+        color: 'text-blue-800', // NEAR usa azul en el código original, lo mantengo.
         bg: 'bg-blue-100',
         borderColor: 'border-blue-600'
     },
@@ -50,220 +33,209 @@ const BAND_STYLES = {
     }
 };
 
-// --- Helper Component for Visual Score Bar ---
-// This provides the visual element crucial for a matrix-style comparison
-const ScoreBar = ({ score }) => {
-    const percentage = (score * 100).toFixed(1);
-    let barColor = 'bg-gray-400';
-    if (score >= 0.8) barColor = 'bg-green-500';
-    else if (score >= 0.6) barColor = 'bg-yellow-500';
-    else if (score >= 0.4) barColor = 'bg-blue-500';
-    else barColor = 'bg-red-500';
+// Color scale for compatibility scores (para usar en el ScoreCell para el background)
+const getScoreColor = (score) => {
+    if (score >= 0.8) return 'bg-green-500';
+    if (score >= 0.6) return 'bg-yellow-500';
+    if (score >= 0.4) return 'bg-orange-500'; // Usa orange en el original getScoreColor
+    return 'bg-red-500';
+};
 
+// --- Nuevo Componente para la Celda de Puntuación de la Matriz (Eje X/Y) ---
+const MatrixScoreCell = ({ score, band }) => {
+    if (score === undefined || band === undefined) {
+        return <div className="p-4 bg-gray-100 text-center text-xs text-gray-400">N/A</div>;
+    }
+
+    const colorClass = getScoreColor(score);
+    const percentage = (score * 100).toFixed(0);
+    
+    // Para simplificar la visualización de la matriz, la celda solo muestra el % y el color
     return (
-        <div className="flex flex-col items-end w-full">
-            <span className="text-sm font-bold font-mono mb-1">{percentage}%</span>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-                <div
-                    className={`h-2 rounded-full ${barColor} transition-all duration-500`}
-                    style={{ width: `${percentage}%` }}
-                ></div>
-            </div>
+        <div 
+            className={`p-2 h-14 w-16 flex items-center justify-center text-white text-sm font-bold rounded-md shadow-inner transition-all duration-300
+                       ${colorClass} hover:ring-2 hover:ring-opacity-50 ${colorClass.replace('500', '700')}`}
+            title={`Puntuación: ${percentage}%, Banda: ${band}`}
+        >
+            {percentage}%
         </div>
     );
 };
 
 // --- Main Component ---
-const GapMatrix = ({ data }) => {
-    const { id_empleado } = data;
+const GapMatrix = () => {
+    const [highlightedRole, setHighlightedRole] = useState(null); // Para resaltar el rol al pasar el ratón
 
-    const [matrixData, setMatrixData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    // 1. Procesar datos para obtener empleados y roles únicos (Ejes)
+    const { employees, uniqueRoles, matrixMap } = useMemo(() => {
+        const allMatrices = fullGapMatrix.matrices || [];
+        const employeesData = allMatrices.map(m => ({
+            id: m.employee_id,
+            name: m.employee_name,
+            role: m.current_role
+        }));
 
-    const path = API_EMPLOYEE_MATRIX.replace("{id}", id_empleado);
+        const roleTitles = new Set();
+        const scoreMap = new Map(); // Mapa de Mapas: employeeId -> (roleTitle -> matchData)
 
-    const fetchMatrix = async () => {
-        setIsLoading(true);
-        try {
-            const out = await get(path);
-            if (out) {
-                setMatrixData(out);
-            }
-        } catch (error) {
-            console.log("Error fetching matrix data:", error);
-            setMatrixData(null);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+        allMatrices.forEach(employeeMatrix => {
+            const employeeId = employeeMatrix.employee_id;
+            const roleMatches = employeeMatrix.role_matches || [];
+            
+            const employeeScores = new Map();
 
-    useEffect(() => {
-        if (id_empleado) {
-            fetchMatrix();
-        }
-    }, [id_empleado]);
+            roleMatches.forEach(match => {
+                const roleTitle = match.role_title;
+                roleTitles.add(roleTitle);
+                employeeScores.set(roleTitle, { 
+                    score: match.overall_score, 
+                    band: match.band 
+                });
+            });
+            scoreMap.set(employeeId, employeeScores);
+        });
 
-    // 1. Derive the final data variables
-    const employee_name = matrixData?.employee_name || data.employee_name;
-    const current_role = matrixData?.current_role || data.current_role;
-    const best_match = matrixData?.best_match;
+        const sortedRoles = Array.from(roleTitles).sort();
 
-    // 2. Sort the matches by score for rendering (Highest score first)
-    const sortedMatches = matrixData?.role_matches
-        ? [...matrixData.role_matches].sort((a, b) => b.overall_score - a.overall_score)
-        : null;
+        return {
+            employees: employeesData,
+            uniqueRoles: sortedRoles,
+            matrixMap: scoreMap
+        };
+    }, []);
 
-    if (isLoading) {
-        return <LoadingSpinner />;
-    }
-
-    if (!matrixData || !sortedMatches || sortedMatches.length === 0) {
+    if (!employees.length || !uniqueRoles.length) {
         return (
             <div className="p-6 bg-white shadow-xl rounded-xl text-center text-gray-500">
-                No se encontraron datos de matriz de compatibilidad para **{employee_name}**.
+                No se encontraron datos de empleados o roles.
             </div>
         );
     }
-
-    // Helper function to format metric score
-    const formatScore = (score) => (score * 100).toFixed(1) + '%';
-
+    
     return (
         <div className="p-6 bg-white shadow-xl rounded-xl">
             <header className="mb-6 border-b pb-4">
                 <h2 className="text-3xl font-bold text-gray-900">
-                    Matriz de Compatibilidad de Roles
+                    Matriz de Compatibilidad: Empleados vs. Roles
                 </h2>
-                <p className="text-lg text-gray-600">
-                    <span className="font-semibold">{employee_name}</span> (Rol Actual: {current_role})
-                </p>
+{/*                 <p className="text-lg text-gray-600 mt-2">
+                    Visualización de la compatibilidad de **{employees.length} empleados** con **{uniqueRoles.length} roles potenciales**.
+                </p> */}
             </header>
 
-            {/* Card Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <thead className="bg-gray-50 sticky top-0">
+            {/* Matrix Table Layout */}
+            <div className="overflow-x-auto overflow-y-auto max-h-[80vh] border rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                    <colgroup>
+                        <col className="w-[200px]" /> {/* Employee column width */}
+                        {uniqueRoles.map((_, index) => (
+                            <col key={index} className="w-[140px]" /> /* Role columns width */
+                        ))}
+                    </colgroup>
+                    <thead className="sticky top-0 bg-gray-50 z-10 shadow-sm">
                         <tr>
-                            <th
-                                scope="col"
-                                className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider min-w-[200px]"
+                            <th 
+                                scope="col" 
+                                className="sticky left-0 z-20 px-4 py-3 text-center text-sm font-bold text-gray-900 uppercase tracking-wider bg-white border-r min-w-[200px]"
                             >
-                                Rol Potencial
+                                Empleado / Rol
                             </th>
-                            <th
-                                scope="col"
-                                className="px-6 py-3 text-left text-xs font-bold text-gray-900 uppercase tracking-wider bg-indigo-100 min-w-[150px]"
-                            >
-                                Puntuación Total
-                            </th>
-                            <th
-                                scope="col"
-                                className="px-6 py-3 text-center text-xs font-bold text-gray-900 uppercase tracking-wider bg-indigo-100 min-w-[120px]"
-                            >
-                                Banda
-                            </th>
-                            <th
-                                scope="col"
-                                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                Skills
-                            </th>
-                            <th
-                                scope="col"
-                                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                Responsabilidades
-                            </th>
-                            <th
-                                scope="col"
-                                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                Ambiciones
-                            </th>
-                            <th
-                                scope="col"
-                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[250px]"
-                            >
-                                Gaps Clave y Recs
-                            </th>
+                            {/* Eje X: Roles Potenciales */}
+                            {uniqueRoles.map((roleTitle) => (
+                                <th
+                                    key={roleTitle}
+                                    scope="col"
+                                    className={`px-4 py-3 text-center text-sm font-medium text-gray-700 uppercase tracking-wider min-w-[140px] transition-colors duration-150 transform ${highlightedRole === roleTitle ? 'bg-indigo-100/70 border-b-2 border-indigo-500' : ''}`}
+                                    onMouseEnter={() => setHighlightedRole(roleTitle)}
+                                    onMouseLeave={() => setHighlightedRole(null)}
+                                >
+                                    <div className="transform -rotate-45 origin-left translate-y-8 translate-x-4 whitespace-nowrap font-semibold">
+                                        {roleTitle}
+                                    </div>
+                                </th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {sortedMatches.map((match) => {
-                            const bandKey = match.band.toUpperCase();
-                            const styles = BAND_STYLES[bandKey] || BAND_STYLES['default'];
-                            const isBestMatch = best_match && match.role_id === best_match.role_id;
-
+                        {/* Eje Y: Empleados */}
+                        {employees.map((employee, index) => {
+                            const employeeScores = matrixMap.get(employee.id) || new Map();
                             return (
-                                <tr
-                                    key={match.role_id}
-                                    className={`${isBestMatch ? 'bg-indigo-50/70' : 'hover:bg-gray-50'} transition duration-150`}
-                                >
-                                    {/* Role Title */}
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        <div className="flex items-center">
-                                            {isBestMatch && <span className="mr-2 text-indigo-600 text-lg" title="Mejor Coincidencia">⭐</span>}
-                                            {match.role_title}
-                                        </div>
+                                <tr key={employee.id} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-indigo-50 transition duration-150`}>
+                                    {/* Employee Title Cell */}
+                                    <td className="sticky left-0 z-10 px-4 py-3 whitespace-nowrap text-sm font-semibold text-gray-900 bg-white border-r">
+                                        <div className="font-bold text-sm truncate" title={employee.name}>{employee.name}</div>
                                     </td>
-
-                                    {/* Overall Score (Matrix Highlight) */}
-                                    <td className="px-6 py-3 text-sm font-semibold text-gray-900 bg-indigo-50">
-                                        <ScoreBar score={match.overall_score} />
-                                    </td>
-
-                                    {/* Band Tag (Matrix Highlight) */}
-                                    <td className="px-6 py-4 whitespace-nowrap text-center bg-indigo-50">
-                                        <span
-                                            className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                ${styles.bg} ${styles.color} border ${styles.borderColor}`}
-                                        >
-                                            {match.band.replace('_', ' ')}
-                                        </span>
-                                    </td>
-
-                                    {/* Skills Score */}
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center font-mono text-gray-700">
-                                        {formatScore(match.skills_score)}
-                                    </td>
-
-                                    {/* Responsibilities Score */}
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center font-mono text-gray-700">
-                                        {formatScore(match.responsibilities_score)}
-                                    </td>
-
-                                    {/* Ambitions Score */}
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center font-mono text-gray-700">
-                                        {formatScore(match.ambitions_score)}
-                                    </td>
-
-                                    {/* Gaps and Recommendations */}
-                                    <td className="px-6 py-4">
-                                        <ul className="list-disc list-inside text-xs text-gray-500 space-y-0.5">
-                                            {/* Display first gap in red */}
-                                            {match.detailed_gaps.length > 0 &&
-                                                <li className="text-red-500 truncate">
-                                                    {match.detailed_gaps[0]}
-                                                </li>
-                                            }
-                                            {/* Display first recommendation in blue */}
-                                            {match.recommendations.length > 0 &&
-                                                <li className="text-blue-600 truncate">
-                                                    {match.recommendations[0]}
-                                                </li>
-                                            }
-                                            {/* If there are more gaps, show a count */}
-                                            {match.detailed_gaps.length > 1 && (
-                                                <li className="text-gray-400">
-                                                    +{match.detailed_gaps.length - 1} gaps más...
-                                                </li>
-                                            )}
-                                        </ul>
-                                    </td>
+                                    
+                                    {/* Score Cells */}
+                                    {uniqueRoles.map((roleTitle) => {
+                                        const matchData = employeeScores.get(roleTitle);
+                                        const isHighlighted = highlightedRole === roleTitle;
+                                        
+                                        return (
+                                            <td 
+                                                key={roleTitle} 
+                                                className={`p-1.5 text-center transition-colors duration-150 ${isHighlighted ? 'bg-indigo-50/50' : ''}`}
+                                                onMouseEnter={() => setHighlightedRole(roleTitle)}
+                                                onMouseLeave={() => setHighlightedRole(null)}
+                                            >
+                                                <MatrixScoreCell 
+                                                    score={matchData?.score} 
+                                                    band={matchData?.band} 
+                                                />
+                                            </td>
+                                        );
+                                    })}
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Legend (Adaptada del código original) */}
+            <div className="mt-6 border-t pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Color Scale Legend (Copia del original) */}
+                    <div className="p-4 bg-gray-50 rounded-lg">
+                        <h3 className="text-sm font-semibold text-gray-700 mb-3">Escala de Compatibilidad (%)</h3>
+                        <div className="flex flex-wrap gap-4">
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 bg-green-500 rounded"></div>
+                                <span className="text-sm">≥ 80% (Excelente)</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 bg-yellow-500 rounded"></div>
+                                <span className="text-sm">≥ 60% (Bueno)</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                                <span className="text-sm">≥ 40% (Regular)</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 bg-red-500 rounded"></div>
+                                <span className="text-sm">{"< 40% (Bajo)"}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Band Summary (Adaptada del código original) */}
+                    <div className="p-4 bg-gray-50 rounded-lg">
+                        <h3 className="text-sm font-semibold text-gray-700 mb-3">Bandas de Compatibilidad</h3>
+                        <div className="grid grid-cols-2 gap-4">
+                            {Object.entries(BAND_STYLES).map(([band, style]) => (
+                                band !== 'default' && (
+                                    <div key={band} className={`px-3 py-2 rounded-md ${style.bg} ${style.color} border ${style.borderColor}`}>
+                                        <span className="text-xs font-semibold">{band.replace('_', ' ')}</span>
+                                    </div>
+                                )
+                            ))}
+                             <div className={`px-3 py-2 rounded-md ${BAND_STYLES['default'].bg} ${BAND_STYLES['default'].color} border ${BAND_STYLES['default'].borderColor}`}>
+                                <span className="text-xs font-semibold">N/A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

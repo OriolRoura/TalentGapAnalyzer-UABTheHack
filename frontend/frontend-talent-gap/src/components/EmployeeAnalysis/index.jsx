@@ -270,7 +270,7 @@ const EmployeeAnalysis = ({ data }) => {
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="bg-gray-50 p-4 rounded-lg">
                                     <p className="text-sm text-gray-500">Inversión Estimada</p>
-                                    <p className="text-xl font-bold text-gray-900">{fetchDevPlan.estimated_cost_eur.toLocaleString()}€</p>
+                                    <p className="text-xl font-bold text-gray-900">{fetchDevPlan.estimated_cost_eur ? fetchDevPlan.estimated_cost_eur.toLocaleString() : 0}€</p>
                                 </div>
                                 <div className="bg-gray-50 p-4 rounded-lg">
                                     <p className="text-sm text-gray-500">Horas Requeridas</p>
