@@ -79,7 +79,7 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
             chapter=form.chapter,
             rol_actual=form.rol_actual,
             manager="N/A",
-            antiguedad="0m",
+            antiguedad=form.antiguedad,
             habilidades=skills_dict,
             responsabilidades_actuales=responsibilities,
             dedicacion_actual=dedication_dict,
@@ -108,6 +108,7 @@ async def submit_employee_profile(form: HREmployeeSubmitForm):
         employee.email = form.email
         employee.chapter = form.chapter
         employee.rol_actual = form.rol_actual
+        employee.antiguedad = form.antiguedad
         employee.habilidades = skills_dict
         # Update responsibilities from role definition (in case role changed)
         employee.responsabilidades_actuales = responsibilities

@@ -44,6 +44,26 @@ from models.company import (
     CompanyProject,
     CompanyProjectsResponse
 )
+from models.ai_models import (
+    # Structured output schemas
+    RecommendationsOutput,
+    StructuredRecommendation,
+    StructuredActionItem,
+    StructuredNarrative,
+    StructuredDevelopmentPlan,
+    StructuredMilestone,
+    StructuredCompanyExecutiveSummary,
+    StructuredInvestmentPriority,
+    # Regular AI models
+    PersonalizedRecommendation,
+    DevelopmentPlan,
+    ActionItem,
+    AIMetadata,
+    RecommendationType,
+    EffortLevel,
+    ConfidenceLevel,
+    ReasoningType
+)
 
 __all__ = [
     # Employee models
@@ -73,6 +93,24 @@ __all__ = [
     "HRValidationResponse",
     "HREmployeeSubmitForm",
     "HREmployeeSubmitResponse",
+    # AI Models - Structured Schemas
+    "RecommendationsOutput",
+    "StructuredRecommendation",
+    "StructuredActionItem",
+    "StructuredNarrative",
+    "StructuredDevelopmentPlan",
+    "StructuredMilestone",
+    "StructuredCompanyExecutiveSummary",
+    "StructuredInvestmentPriority",
+    # AI Models - Regular
+    "PersonalizedRecommendation",
+    "DevelopmentPlan",
+    "ActionItem",
+    "AIMetadata",
+    "RecommendationType",
+    "EffortLevel",
+    "ConfidenceLevel",
+    "ReasoningType",
     "HREmployeeSkillSubmit",
     "HREmployeeAmbitionsSubmit",
     "HREmployeeDedicationSubmit",

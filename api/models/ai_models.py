@@ -17,6 +17,85 @@ from datetime import datetime
 from enum import Enum
 
 
+# ============================================================================
+# STRUCTURED OUTPUT MODELS (For Google Gemini native JSON)
+# ============================================================================
+
+class StructuredActionItem(BaseModel):
+    """Action item for structured output (simplified)."""
+    action: str = Field(description="Acción a tomar")
+    timeline: str = Field(description="Duración")
+    priority: str = Field(description="Prioridad: high, medium o low")
+
+
+class StructuredRecommendation(BaseModel):
+    """Single recommendation for Google structured output."""
+    title: str = Field(description="Título breve")
+    description: str = Field(description="Descripción de qué hacer")
+    rationale: str = Field(description="Por qué es relevante")
+    type: str = Field(description="Tipo de recomendación")
+    effort_level: str = Field(description="Esfuerzo: low, medium, high o very_high")
+    estimated_duration: str = Field(description="Duración estimada")
+    priority_score: float = Field(description="Score 0-1")
+    action_items: List[StructuredActionItem] = Field(description="Acciones concretas")
+
+
+class RecommendationsOutput(BaseModel):
+    """Schema for structured output from Google Gemini."""
+    recommendations: List[StructuredRecommendation] = Field(description="Lista de recomendaciones")
+
+
+class StructuredNarrative(BaseModel):
+    """Structured narrative output."""
+    title: str = Field(description="Título de la narrativa")
+    executive_summary: str = Field(description="Resumen ejecutivo breve")
+    current_situation: str = Field(description="Situación actual del empleado")
+    gap_analysis: str = Field(description="Análisis de gaps identificados")
+    opportunities: str = Field(description="Oportunidades de desarrollo")
+    challenges: str = Field(description="Desafíos a superar")
+    recommended_path: str = Field(description="Camino recomendado")
+    key_takeaways: List[str] = Field(description="Puntos clave (3-5 items)")
+
+
+class StructuredMilestone(BaseModel):
+    """Development milestone for structured output."""
+    month: int = Field(description="Mes del milestone")
+    milestone: str = Field(description="Descripción del milestone")
+    success_criteria: str = Field(description="Criterio de éxito")
+
+
+class StructuredDevelopmentPlan(BaseModel):
+    """Structured development plan output."""
+    title: str = Field(description="Título del plan")
+    overview: str = Field(description="Visión general del plan")
+    target_role: str = Field(description="Rol objetivo")
+    duration: str = Field(description="Duración total")
+    focus_areas: List[str] = Field(description="Áreas de enfoque principales")
+    milestones: List[StructuredMilestone] = Field(description="Milestones del plan")
+    resources_needed: List[str] = Field(description="Recursos necesarios")
+    success_metrics: List[str] = Field(description="Métricas de éxito")
+
+
+class StructuredInvestmentPriority(BaseModel):
+    """Investment priority for structured output."""
+    area: str = Field(description="Área de inversión")
+    priority: str = Field(description="Prioridad: HIGH, MEDIUM, LOW")
+    rationale: str = Field(description="Justificación de la inversión")
+
+
+class StructuredCompanyExecutiveSummary(BaseModel):
+    """Structured company executive summary output."""
+    title: str = Field(description="Título del executive summary")
+    executive_summary: str = Field(description="Resumen ejecutivo de alto nivel (3-4 párrafos)")
+    key_insights: List[str] = Field(description="Insights estratégicos críticos (4-6 items)")
+    detailed_analysis: str = Field(description="Análisis detallado del talent pipeline")
+    recommendations_summary: str = Field(description="Recomendaciones estratégicas prioritarias")
+    trends: List[str] = Field(description="Tendencias organizacionales identificadas")
+    future_outlook: str = Field(description="Perspectiva futura y recomendaciones de largo plazo")
+    org_recommendations: List[str] = Field(description="Recomendaciones organizacionales")
+    investment_priorities: List[StructuredInvestmentPriority] = Field(description="Prioridades de inversión")
+
+
 class ConfidenceLevel(str, Enum):
     """Nivel de confianza en la generación de IA."""
     HIGH = "high"

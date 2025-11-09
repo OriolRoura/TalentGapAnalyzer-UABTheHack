@@ -55,8 +55,8 @@ def get_ai_service() -> AIService:
                 detail="AI service not configured. Please set OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY, or PUBLICAI_API_KEY environment variable."
             )
         
-        # Determinar provider default (PublicAI first - no blocking issues)
-        default_provider = 'publicai' if has_publicai else ('openai' if has_openai else ('anthropic' if has_anthropic else 'google'))
+        # Determinar provider default (Google first - best cost/quality ratio, then PublicAI fallback)
+        default_provider = 'google' if has_google else ('publicai' if has_publicai else ('openai' if has_openai else 'anthropic'))
         
         _ai_service = AIService(
             max_cost_per_analysis_usd=0.10,

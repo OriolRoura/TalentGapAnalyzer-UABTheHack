@@ -165,6 +165,7 @@ class HREmployeeSubmitForm(BaseModel):
     rol_actual: str = Field(..., description="Current role/position name (e.g., 'Consultor de Estrategia', 'Project Manager'). Responsibilities will be loaded automatically from org_config.json based on this role title.")
     seniority: str = Field(..., description="Seniority level (e.g., 'Junior', 'Mid', 'Senior', 'Lead')")
     modalidad: str
+    antiguedad: str = Field(default="0m", description="Tenure/seniority in company (e.g., '24m' for 24 months, '6m' for 6 months)")
     skills: List[HREmployeeSkillSubmit]
     ambiciones: HREmployeeAmbitionsSubmit
     dedicacion_actual: List[HREmployeeDedicationSubmit] = Field(

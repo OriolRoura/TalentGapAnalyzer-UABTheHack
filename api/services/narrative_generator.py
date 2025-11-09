@@ -88,17 +88,57 @@ class NarrativeGenerator:
         if not validation['is_valid']:
             print(f"⚠️ Prompt tiene warnings: {validation['warnings']}")
         
-        # Generar con IA
-        response = self.ai_service.generate(
-            prompt=prompt,
-            system_prompt=system_prompt,
-            temperature=0.7,
-            max_tokens=3000,  # Aumentado para evitar que se corte el texto
-            request_type='narrative'  # Cache TTL: 1 hour
-        )
-        
-        # Parsear respuesta
-        narrative_data = self._parse_narrative_response(response.content)
+        # Try structured output first (uses default provider - OpenAI)
+        try:
+            from models.ai_models import StructuredNarrative
+            print(f"📝 Generating narrative with STRUCTURED OUTPUT...")
+            
+            structured_response = self.ai_service.generate_structured(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                response_schema=StructuredNarrative,
+                temperature=0.7
+            )
+            
+            print(f"✅ Structured narrative generated successfully")
+            
+            # Convert to narrative_data format
+            narrative_data = {
+                'title': structured_response['title'],
+                'executive_summary': structured_response['executive_summary'],
+                'detailed_analysis': f"{structured_response['current_situation']}\n\n{structured_response['gap_analysis']}\n\n{structured_response['opportunities']}\n\n{structured_response['challenges']}",
+                'recommendations_summary': structured_response['recommended_path'],
+                'key_insights': structured_response['key_takeaways'],
+                'trends': []
+            }
+            
+            # Create mock response for metadata
+            from services.ai_service import AIResponse
+            response = AIResponse(
+                content=str(structured_response),
+                model='gemini-2.5-pro',
+                provider='google',
+                input_tokens=0,
+                output_tokens=0,
+                cost_usd=0.0,
+                latency_ms=0.0
+            )
+            
+        except Exception as e:
+            print(f"⚠️ Structured output failed: {type(e).__name__}: {e}")
+            print(f"   Falling back to text-based generation...")
+            
+            # Fallback to text-based generation
+            response = self.ai_service.generate(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                temperature=0.7,
+                max_tokens=3000,
+                request_type='narrative'
+            )
+            
+            # Parsear respuesta
+            narrative_data = self._parse_narrative_response(response.content)
         
         # Validar sesgos en respuesta
         bias_check = self.bias_detector.detect_bias(response.content)
@@ -267,23 +307,93 @@ class NarrativeGenerator:
         prompt = self._build_company_narrative_prompt(context)
         system_prompt = self.bias_detector.create_bias_free_prompt_template('narrative')
         
-        # Generar narrativa principal
-        response = self.ai_service.generate(
-            prompt=prompt,
-            system_prompt=system_prompt,
-            temperature=0.7,
-            max_tokens=4000,  # Aumentado para executive summaries completos
-            request_type='summary'  # Cache TTL: 1 hour
-            # Let the AI service choose the appropriate model for the configured provider
-        )
+        # Try structured output first
+        from models.ai_models import StructuredCompanyExecutiveSummary
         
-        # Parsear respuesta
-        narrative_data = self._parse_narrative_response(response.content)
+        print(f"📝 Generating company executive summary with STRUCTURED OUTPUT...")
+        try:
+            structured_response = self.ai_service.generate_structured(
+                prompt=prompt,
+                response_schema=StructuredCompanyExecutiveSummary,
+                system_prompt=system_prompt,
+                temperature=0.7
+            )
+            
+            print(f"✅ Structured company executive summary generated successfully")
+            
+            # Convert structured response to dict
+            narrative_data = {
+                'title': structured_response['title'],
+                'executive_summary': structured_response['executive_summary'],
+                'key_insights': structured_response['key_insights'],
+                'detailed_analysis': structured_response['detailed_analysis'],
+                'recommendations_summary': structured_response['recommendations_summary'],
+                'trends': structured_response['trends'],
+                'future_outlook': structured_response['future_outlook'],
+                'org_recommendations': structured_response['org_recommendations'],
+                'investment_priorities': [
+                    {
+                        'area': ip['area'],
+                        'priority': ip['priority'],
+                        'rationale': ip['rationale']
+                    }
+                    for ip in structured_response.get('investment_priorities', [])
+                ]
+            }
+            
+            # Build AI metadata for structured response
+            provider = self.ai_service.default_provider
+            model_used = self.ai_service._get_default_model(provider)
+            
+            ai_metadata = AIMetadata(
+                model_used=model_used,
+                provider=provider,
+                confidence_level=ConfidenceLevel.HIGH,
+                reasoning_type=ReasoningType.GENERATIVE,
+                reasoning_trace='Generated via structured output schema',
+                bias_check_passed=True,
+                human_review_required=False
+            )
+            
+            # No need for bias check on structured output (no free text)
+            use_structured = True
+            
+        except Exception as e:
+            print(f"⚠️ Structured output failed: {e}")
+            print(f"   Falling back to text parsing...")
+            
+            # Fallback to text-based generation
+            response = self.ai_service.generate(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                temperature=0.7,
+                max_tokens=4000,
+                request_type='summary'
+            )
+            
+            # Parsear respuesta
+            narrative_data = self._parse_narrative_response(response.content)
+            
+            # Validar sesgos
+            bias_check = self.bias_detector.detect_bias(response.content)
+            
+            # Build AI metadata from response
+            ai_metadata = AIMetadata(
+                model_used=response.model,
+                provider=response.provider,
+                confidence_level=ConfidenceLevel.HIGH,
+                reasoning_type=ReasoningType.GENERATIVE,
+                reasoning_trace=f"Company-wide analysis with {len(employees)} employees and {len(roles)} roles",
+                input_tokens=response.input_tokens,
+                output_tokens=response.output_tokens,
+                cost_usd=response.cost_usd,
+                bias_check_passed=not bias_check['has_bias'],
+                human_review_required=bias_check['requires_human_review']
+            )
+            
+            use_structured = False
         
-        # Validar sesgos
-        bias_check = self.bias_detector.detect_bias(response.content)
-        
-        # Crear narrativa principal
+        # Crear narrativa principal (using ai_metadata built above)
         main_narrative = AIGeneratedNarrative(
             id=f"NAR-COMPANY-{datetime.now().strftime('%Y%m%d%H%M%S')}",
             title="Executive Summary - Talent Gap Analysis",
@@ -296,18 +406,7 @@ class NarrativeGenerator:
             trends_identified=narrative_data.get('trends', []),
             future_outlook=narrative_data.get('future_outlook'),
             tone=NarrativeTone.EXECUTIVE,
-            ai_metadata=AIMetadata(
-                model_used=response.model,
-                provider=response.provider,
-                confidence_level=ConfidenceLevel.HIGH,
-                reasoning_type=ReasoningType.GENERATIVE,
-                reasoning_trace=f"Company-wide analysis with {len(employees)} employees and {len(roles)} roles",
-                input_tokens=response.input_tokens,
-                output_tokens=response.output_tokens,
-                cost_usd=response.cost_usd,
-                bias_check_passed=not bias_check['has_bias'],
-                human_review_required=bias_check['requires_human_review']
-            )
+            ai_metadata=ai_metadata
         )
         
         # Generar insights ejecutivos

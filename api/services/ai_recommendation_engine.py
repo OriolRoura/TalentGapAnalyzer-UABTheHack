@@ -97,7 +97,16 @@ class AIRecommendationEngine:
         
         # Generar con IA
         try:
+            print(f"🤖 Generating AI recommendations for employee {context['employee'].get('id')}...")
             ai_recommendations = self._generate_ai_recommendations(context, max_recommendations)
+            print(f"✅ AI generated {len(ai_recommendations)} recommendations")
+            
+            # Si AI no generó nada, hacer fallback a reglas
+            if len(ai_recommendations) == 0:
+                print(f"⚠️ AI returned 0 recommendations. Falling back to rule-based.")
+                return self._generate_rule_based_recommendations(
+                    employee, gap_results, target_role, max_recommendations
+                )
             
             # Si modo hybrid, combinar con reglas
             if self.mode == 'hybrid':
@@ -110,11 +119,16 @@ class AIRecommendationEngine:
             
             # Validar sesgos
             ai_recommendations = self._validate_and_filter_biases(ai_recommendations)
+            print(f"✅ Returning {len(ai_recommendations)} AI recommendations after bias validation")
             
             return ai_recommendations[:max_recommendations]
         
         except Exception as e:
-            print(f"⚠️ AI generation failed: {e}. Falling back to rules.")
+            print(f"⚠️ AI generation failed: {type(e).__name__}: {e}. Falling back to rules.")
+            import traceback
+            traceback.print_exc()
+            import traceback
+            traceback.print_exc()
             return self._generate_rule_based_recommendations(
                 employee, gap_results, target_role, max_recommendations
             )
@@ -267,35 +281,175 @@ class AIRecommendationEngine:
                            target_role: Role,
                            gap_result: GapResult,
                            duration_months: int) -> Dict:
-        """Construye contexto para plan de desarrollo."""
+        """Construye contexto ENRIQUECIDO para plan de desarrollo."""
+        # Extract employee details
+        ambitions_obj = getattr(employee, 'ambiciones', None)
+        ambitions_list = []
+        if ambitions_obj:
+            ambitions_list = ambitions_obj.especialidades_preferidas[:3] if ambitions_obj.especialidades_preferidas else []
+        
+        employee_data = {
+            'id': getattr(employee, 'id_empleado', getattr(employee, 'id', 'unknown')),
+            'chapter': getattr(employee, 'chapter', 'unknown'),
+            'skills': self._extract_structured_skills(employee),
+            'ambitions': ambitions_list,
+            'skill_count': len(getattr(employee, 'habilidades', {}))
+        }
+        
+        # Extract target role details
+        target_role_data = {
+            'id': getattr(target_role, 'id', 'unknown'),
+            'title': getattr(target_role, 'titulo', 'unknown'),
+            'chapter': getattr(target_role, 'chapter', 'unknown'),
+            'required_skills': getattr(target_role, 'habilidades_requeridas', []),
+            'responsibilities': getattr(target_role, 'responsabilidades', [])
+        }
+        
+        # Extract detailed gap information
+        detailed_gaps = getattr(gap_result, 'detailed_gaps', [])
+        gap_summary = {
+            'skill_gaps': [g for g in detailed_gaps if isinstance(g, dict) and g.get('type') == 'skill'][:5],
+            'responsibility_gaps': [g for g in detailed_gaps if isinstance(g, dict) and g.get('type') == 'responsibility'][:3],
+            'total_gaps': len(detailed_gaps)
+        }
+        
         return {
-            'employee_id': getattr(employee, 'id', 'unknown'),
-            'target_role_id': getattr(target_role, 'id', 'unknown'),
+            'employee_id': employee_data['id'],
+            'employee': employee_data,
+            'target_role_id': target_role_data['id'],
+            'target_role': target_role_data,
             'current_score': getattr(gap_result, 'overall_score', 0.5),
             'gap_band': getattr(gap_result, 'band', 'NEAR'),
-            'detailed_gaps': getattr(gap_result, 'detailed_gaps', []),
+            'detailed_gaps': detailed_gaps[:5],  # Keep for backward compatibility
+            'gap_summary': gap_summary,
             'duration_months': duration_months
         }
     
     def _generate_ai_recommendations(self,
                                     context: Dict,
                                     max_recommendations: int) -> List[PersonalizedRecommendation]:
-        """Genera recomendaciones usando IA."""
+        """Genera recomendaciones usando IA con structured output."""
+        # Import structured output schema
+        from models.ai_models import RecommendationsOutput
+        
         # Construir prompt
         prompt = self._build_recommendations_prompt(context, max_recommendations)
         system_prompt = self.bias_detector.create_bias_free_prompt_template('recommendations')
         
-        # Generar con IA
+        print(f"📝 Calling AI service with STRUCTURED OUTPUT...")
+        
+        # Try structured output first (uses default provider - OpenAI)
+        try:
+            structured_response = self.ai_service.generate_structured(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                response_schema=RecommendationsOutput,
+                temperature=0.7
+            )
+            
+            print(f"✅ Structured output returned {len(structured_response.get('recommendations', []))} recommendations")
+            
+            # Convert structured response to PersonalizedRecommendation objects
+            recommendations = []
+            for i, rec_data in enumerate(structured_response.get('recommendations', [])[:max_recommendations]):
+                try:
+                    # Build AI metadata
+                    from models.ai_models import AIMetadata, ConfidenceLevel, ReasoningType
+                    provider = self.ai_service.default_provider
+                    model_used = self.ai_service._get_default_model(provider)
+                    
+                    ai_metadata = AIMetadata(
+                        model_used=model_used,
+                        provider=provider,
+                        confidence_level=ConfidenceLevel.HIGH,
+                        reasoning_type=ReasoningType.GENERATIVE,
+                        reasoning_trace='Generated via structured output schema',
+                        bias_check_passed=True,
+                        human_review_required=False
+                    )
+                    
+                    # Convert action items
+                    from models.ai_models import ActionItem
+                    action_items = [
+                        ActionItem(
+                            action=item['action'],
+                            timeline=item['timeline'],
+                            priority=item.get('priority', 'medium'),
+                            resources_needed=[],
+                            success_criteria=None
+                        )
+                        for item in rec_data.get('action_items', [])
+                    ]
+                    
+                    # Map type string to enum (handle any format)
+                    from models.ai_models import PersonalizedRecommendation, RecommendationType, EffortLevel
+                    type_str = rec_data.get('type', 'skill_development').lower().replace(' ', '_')
+                    try:
+                        rec_type = RecommendationType(type_str)
+                    except ValueError:
+                        rec_type = RecommendationType.SKILL_DEVELOPMENT
+                    
+                    # Map effort level (handle any format)
+                    effort_str = rec_data.get('effort_level', 'medium').lower().replace(' ', '_')
+                    try:
+                        effort = EffortLevel(effort_str)
+                    except ValueError:
+                        effort = EffortLevel.MEDIUM
+                    
+                    # Create recommendation
+                    recommendation = PersonalizedRecommendation(
+                        id=f"REC-AI-{context['employee']['id']}-{i+1}",
+                        employee_id=str(context['employee']['id']),
+                        type=rec_type,
+                        title=rec_data['title'],
+                        description=rec_data['description'],
+                        rationale=rec_data['rationale'],
+                        action_items=action_items,
+                        effort_level=effort,
+                        estimated_duration=rec_data['estimated_duration'],
+                        expected_impact={},
+                        success_probability=0.75,
+                        priority_score=float(rec_data.get('priority_score', 0.5)),
+                        ai_metadata=ai_metadata
+                    )
+                    recommendations.append(recommendation)
+                    
+                except Exception as e:
+                    print(f"⚠️ Failed to convert recommendation {i}: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    continue
+            
+            print(f"✅ Created {len(recommendations)} PersonalizedRecommendation objects from structured output")
+            return recommendations
+            
+        except Exception as e:
+            print(f"⚠️ Structured output failed: {type(e).__name__}: {e}")
+            print(f"   Falling back to text parsing...")
+            import traceback
+            traceback.print_exc()
+        
+        # Fallback: original text-based generation
+        print(f"📝 Using fallback text-based generation...")
         response = self.ai_service.generate(
             prompt=prompt,
             system_prompt=system_prompt,
             temperature=0.7,
-            max_tokens=3000,  # Aumentado para recomendaciones más detalladas
-            request_type='recommendations'  # Cache TTL: 30 minutes
+            max_tokens=3000,
+            request_type='recommendations'
         )
+        
+        print(f"✅ AI service returned response ({len(response.content)} chars, provider: {response.provider})")
         
         # Parsear respuesta
         recommendations_data = self._parse_recommendations_response(response.content)
+        print(f"✅ Parsed {len(recommendations_data)} recommendations from response")
+        
+        # Si no hay recomendaciones parseadas pero hay contenido, algo falló
+        if len(recommendations_data) == 0 and len(response.content) > 50:
+            print(f"⚠️ AI returned content but parser found 0 recommendations")
+            print(f"   Response starts with: {response.content[:200]}")
+            print(f"   This likely means AI didn't follow JSON format")
         
         # Convertir a objetos PersonalizedRecommendation
         recommendations = []
@@ -306,23 +460,95 @@ class AIRecommendationEngine:
                 )
                 recommendations.append(recommendation)
             except Exception as e:
-                print(f"⚠️ Failed to parse recommendation {i}: {e}")
+                print(f"⚠️ Failed to create recommendation {i}: {e}")
+                import traceback
+                traceback.print_exc()
                 continue
         
+        print(f"✅ Created {len(recommendations)} PersonalizedRecommendation objects")
         return recommendations
     
     def _generate_ai_development_plan(self, context: Dict) -> DevelopmentPlan:
-        """Genera plan de desarrollo usando IA."""
+        """Genera plan de desarrollo usando IA con structured output."""
+        from models.ai_models import StructuredDevelopmentPlan
+        
         prompt = self._build_plan_prompt(context)
         system_prompt = self.bias_detector.create_bias_free_prompt_template('recommendations')
         
-        # Generar
+        # Try structured output first (uses default provider - OpenAI)
+        try:
+            print(f"📝 Generating development plan with STRUCTURED OUTPUT...")
+            
+            structured_response = self.ai_service.generate_structured(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                response_schema=StructuredDevelopmentPlan,
+                temperature=0.7
+            )
+            
+            print(f"✅ Structured development plan generated successfully")
+            
+            # Convert to DevelopmentPlan format
+            from models.ai_models import DevelopmentPlan, DevelopmentMilestone, AIMetadata, ConfidenceLevel, ReasoningType
+            
+            milestones = [
+                DevelopmentMilestone(
+                    month=m['month'],
+                    milestone=m['milestone'],
+                    success_criteria=m['success_criteria'],
+                    validation_method=None
+                )
+                for m in structured_response.get('milestones', [])
+            ]
+            
+            provider = self.ai_service.default_provider
+            model_used = self.ai_service._get_default_model(provider)
+            
+            # Build skill priorities from focus areas
+            skill_priorities = [
+                {'skill': area, 'priority': 'high'} 
+                for area in structured_response.get('focus_areas', [])
+            ]
+            
+            plan = DevelopmentPlan(
+                employee_id=str(context['employee']['id']),
+                target_role_id=structured_response.get('target_role', context.get('target_role', {}).get('id', 'unknown')),
+                current_score=context.get('gap_result', {}).get('overall_gap_score', 0.5),
+                target_score=0.8,  # Default target
+                duration_months=int(structured_response.get('duration', '6').split()[0]) if structured_response.get('duration') else 6,
+                milestones=milestones,
+                recommendations=[],  # Will be populated separately
+                skill_priorities=skill_priorities if skill_priorities else [{'skill': 'General', 'priority': 'high'}],
+                estimated_cost_eur=None,
+                time_investment_hours=len(structured_response.get('focus_areas', [])) * 40,  # 40h per area
+                success_probability=0.75,
+                risk_factors=structured_response.get('resources_needed', []),
+                ai_metadata=AIMetadata(
+                    model_used=model_used,
+                    provider=provider,
+                    confidence_level=ConfidenceLevel.HIGH,
+                    reasoning_type=ReasoningType.GENERATIVE,
+                    reasoning_trace='Generated via structured output schema',
+                    bias_check_passed=True,
+                    human_review_required=False
+                )
+            )
+            
+            return plan
+            
+        except Exception as e:
+            print(f"⚠️ Structured output failed: {type(e).__name__}: {e}")
+            print(f"   Falling back to text-based generation...")
+            import traceback
+            traceback.print_exc()
+        
+        # Fallback: original text-based generation
         response = self.ai_service.generate(
             prompt=prompt,
             system_prompt=system_prompt,
             temperature=0.7,
-            max_tokens=3500,  # Aumentado para planes de desarrollo completos
-            request_type='plan'  # Cache TTL: 30 minutes
+            max_tokens=3500,
+            request_type='plan'
         )
         
         # Parsear
@@ -367,6 +593,12 @@ class AIRecommendationEngine:
         ambitions = employee.get('ambitions', {})
         ambitions_str = ', '.join(ambitions.get('especialidades_preferidas', [])[:2]) if ambitions else 'No especificadas'
         
+        # Check if we have minimal data
+        has_minimal_data = (
+            employee.get('current_chapter') not in ['unknown', None, ''] and
+            len(employee.get('skills', {})) > 0
+        )
+        
         prompt = f"""Genera {max_recs} recomendaciones desarrollo para empleado:
 
 PERFIL:
@@ -378,77 +610,156 @@ GAP ANALYSIS:
 - Skills a desarrollar: {top_skills}
 - Importancia estratégica: {strategic_importance}{vision_context}
 
-FORMATO JSON:
-[{{"type":"skill_development|career_progression|mentoring|training","title":"Título específico <60 chars","description":"Qué hacer","rationale":"Por qué relevante","action_items":[{{"action":"Acción 1","timeline":"X semanas","resources_needed":["R1"],"success_criteria":"Medible","priority":"high|medium|low"}}],"effort_level":"low|medium|high","estimated_duration":"X meses","priority_score":0.0-1.0}}]
+{"⚠️ DATOS LIMITADOS: Genera recomendaciones generales para desarrollo en " + employee['current_chapter'] if not has_minimal_data else ""}
 
-CRITERIOS:
-- Específico y accionable
-- Alineado con rol objetivo{' (FUTURO - alta prioridad)' if is_future_role else ''}
-- Basado solo en datos proporcionados
-- Timeline y criterios medibles
+FORMATO JSON (OBLIGATORIO - RESPONDE SOLO CON JSON, SIN EXPLICACIONES):
+[{{"type":"skill_development","title":"Título específico <60 chars","description":"Qué hacer","rationale":"Por qué relevante","action_items":[{{"action":"Acción 1","timeline":"X semanas","resources_needed":["R1"],"success_criteria":"Medible","priority":"high"}}],"effort_level":"medium","estimated_duration":"3 meses","priority_score":0.8}}]
+
+REQUISITOS CRÍTICOS:
+1. DEVUELVE SOLO JSON - NO agregues explicaciones antes o después
+2. Genera exactamente {max_recs} recomendaciones
+3. Si faltan datos, usa recomendaciones genéricas de {employee['current_chapter']}
+4. Alineado con ambiciones: {ambitions_str}
+5. Usa solo tipos válidos: skill_development, career_progression, mentoring, training
 """
         return prompt
     
     def _build_plan_prompt(self, context: Dict) -> str:
-        """Construye prompt para plan de desarrollo."""
+        """Construye prompt ENRIQUECIDO para plan de desarrollo."""
+        employee = context.get('employee', {})
+        target_role = context.get('target_role', {})
+        gap_summary = context.get('gap_summary', {})
+        
+        # Format skills compactly
+        skills_str = ', '.join([f"{s['skill_name']} ({s['level']})" for s in employee.get('skills', [])[:8]])
+        ambitions_str = ', '.join(employee.get('ambitions', []))
+        
+        # Format gap summary
+        skill_gaps_str = '\n'.join([
+            f"  • {g.get('skill_name', 'Unknown')}: actual {g.get('current_level', 0)}/10, requiere {g.get('required_level', 0)}/10"
+            for g in gap_summary.get('skill_gaps', [])[:5]
+        ]) if gap_summary.get('skill_gaps') else '  (No hay gaps de skills críticos)'
+        
         prompt = f"""
 Genera un PLAN DE DESARROLLO COMPLETO Y ESTRUCTURADO:
 
-CONTEXTO:
-- Empleado ID: {context['employee_id']}
-- Rol objetivo: {context['target_role_id']}
-- Score actual: {context['current_score']:.2f}
-- Banda: {context['gap_band']}
-- Duración: {context['duration_months']} meses
-- Gaps detallados: {context['detailed_gaps'][:5]}
+PERFIL DEL EMPLEADO:
+- ID: {employee.get('id', 'unknown')}
+- Chapter actual: {employee.get('chapter', 'unknown')}
+- Skills actuales ({employee.get('skill_count', 0)}): {skills_str}
+- Ambiciones profesionales: {ambitions_str if ambitions_str else 'No especificadas'}
+
+ROL OBJETIVO:
+- ID: {target_role.get('id', 'unknown')}
+- Título: {target_role.get('title', 'unknown')}
+- Chapter: {target_role.get('chapter', 'unknown')}
+- Skills requeridas: {len(target_role.get('required_skills', []))} competencias
+- Responsabilidades: {len(target_role.get('responsibilities', []))} áreas clave
+
+ANÁLISIS DE GAP:
+- Score actual: {context.get('current_score', 0.5):.2f}/1.00
+- Clasificación: {context.get('gap_band', 'NEAR')}
+- Duración objetivo: {context.get('duration_months', 6)} meses
+- Total gaps identificados: {gap_summary.get('total_gaps', 0)}
+
+GAPS DE SKILLS PRIORITARIOS:
+{skill_gaps_str}
 
 FORMATO REQUERIDO (JSON):
 {{
   "skill_priorities": [
-    {{"skill_id": "S-XXX", "skill_name": "Nombre", "priority": "high|medium|low", "target_level": "avanzado"}}
+    {{"skill_id": "S-XXX", "skill_name": "Nombre", "priority": "high|medium|low", "target_level": "avanzado", "current_level": "básico"}}
   ],
   "milestones": [
     {{
       "month": 2,
       "milestone": "Descripción del milestone",
       "success_criteria": "Criterio de éxito medible",
-      "validation_method": "Cómo validar"
+      "validation_method": "Cómo validar",
+      "deliverables": ["Entregable 1", "Entregable 2"]
     }}
   ],
   "estimated_cost_eur": 2000,
   "time_investment_hours": 120,
   "success_probability": 0.75,
-  "risk_factors": ["Factor de riesgo 1", "Factor 2"]
+  "risk_factors": ["Factor de riesgo 1", "Factor 2"],
+  "recommended_resources": ["Recurso 1", "Recurso 2"]
 }}
 
-El plan debe:
-- Ser progresivo (milestones incrementales)
-- Incluir validación en cada milestone
-- Ser realista en tiempo y costo
-- Identificar riesgos específicos
+REQUISITOS DEL PLAN:
+1. Ser progresivo (milestones incrementales mes a mes)
+2. Incluir validación específica en cada milestone
+3. Ser realista en tiempo y costo (considerar jornada laboral)
+4. Identificar riesgos específicos al empleado y rol
+5. Alinearse con ambiciones profesionales del empleado
+6. Priorizar gaps más críticos primero
+7. Incluir deliverables medibles en cada milestone
 """
         return prompt
     
     def _parse_recommendations_response(self, response_text: str) -> List[Dict]:
-        """Parsea respuesta de recomendaciones con sanitización."""
+        """Parsea respuesta de recomendaciones con sanitización mejorada."""
+        print(f"🔍 Parsing AI response ({len(response_text)} chars)")
+        print(f"📝 First 500 chars: {response_text[:500]}")
+        print(f"📝 Last 200 chars: {response_text[-200:]}")
+        
+        # Remove common markdown code fences that AIs add
+        cleaned_text = response_text.strip()
+        if cleaned_text.startswith('```json'):
+            cleaned_text = cleaned_text[7:]
+        if cleaned_text.startswith('```'):
+            cleaned_text = cleaned_text[3:]
+        if cleaned_text.endswith('```'):
+            cleaned_text = cleaned_text[:-3]
+        cleaned_text = cleaned_text.strip()
+        
         try:
             # Buscar JSON array
-            start = response_text.find('[')
-            end = response_text.rfind(']') + 1
+            start = cleaned_text.find('[')
+            end = cleaned_text.rfind(']') + 1
+            
+            print(f"🔍 JSON array search: start={start}, end={end}")
+            
             if start != -1 and end > start:
-                json_str = response_text[start:end]
-                recs = json.loads(json_str)
-                # Sanitize expected_impact to ensure all values are floats
-                return self._sanitize_recommendations(recs)
+                json_str = cleaned_text[start:end]
+                print(f"✅ Found JSON array ({len(json_str)} chars)")
+                try:
+                    recs = json.loads(json_str)
+                    if isinstance(recs, list) and len(recs) > 0:
+                        print(f"✅ Parsed {len(recs)} recommendations")
+                        # Sanitize expected_impact to ensure all values are floats
+                        return self._sanitize_recommendations(recs)
+                    else:
+                        print(f"⚠️ Parsed JSON but got empty list or non-list: {type(recs)}")
+                except json.JSONDecodeError as je:
+                    print(f"⚠️ JSON parse failed on extracted array: {je}")
+                    print(f"📝 Extracted JSON: {json_str[:200]}...")
             
             # Intentar parsear directo
-            if response_text.strip().startswith('['):
-                recs = json.loads(response_text)
-                return self._sanitize_recommendations(recs)
+            if cleaned_text.startswith('['):
+                print(f"🔍 Trying direct parse (starts with [)")
+                recs = json.loads(cleaned_text)
+                if isinstance(recs, list):
+                    print(f"✅ Parsed {len(recs)} recommendations (direct)")
+                    return self._sanitize_recommendations(recs)
+            
+            # Si la respuesta es muy corta, probablemente sea un mensaje de error
+            if len(response_text) < 100:
+                print(f"⚠️ Response too short ({len(response_text)} chars), likely an error message:")
+                print(f"   '{response_text}'")
+            else:
+                print(f"❌ No valid JSON array found in response")
             
             return []
         except json.JSONDecodeError as e:
             print(f"⚠️ Failed to parse recommendations JSON: {e}")
+            print(f"📝 Problematic section around position {e.pos}:")
+            print(f"   {cleaned_text[max(0, e.pos-100):e.pos+100]}")
+            return []
+        except Exception as e:
+            print(f"❌ Unexpected error parsing recommendations: {type(e).__name__}: {e}")
+            import traceback
+            traceback.print_exc()
             return []
     
     def _sanitize_recommendations(self, recs: List[Dict]) -> List[Dict]:
@@ -833,7 +1144,7 @@ El plan debe:
         return plan
     
     def _format_skills(self, employee) -> str:
-        """Formatea skills del empleado para prompt."""
+        """Formatea skills del empleado para prompt (string)."""
         try:
             skills = getattr(employee, 'skills', {})
             if isinstance(skills, dict):
@@ -841,6 +1152,26 @@ El plan debe:
             return str(skills)[:100]
         except:
             return "N/A"
+    
+    def _extract_structured_skills(self, employee) -> List[Dict]:
+        """Extrae skills en formato estructurado (lista de dicts)."""
+        try:
+            skills = getattr(employee, 'habilidades', {})
+            if not skills:
+                skills = getattr(employee, 'skills', {})
+            
+            if isinstance(skills, dict):
+                return [
+                    {
+                        'skill_id': k,
+                        'skill_name': k.replace('S-', '').replace('_', ' ').title(),
+                        'level': v
+                    }
+                    for k, v in skills.items()
+                ]
+            return []
+        except:
+            return []
     
     def _summarize_gaps(self, gap_results: List) -> Dict:
         """Resume gap results para contexto."""

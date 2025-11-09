@@ -44,9 +44,11 @@ except ImportError:
 
 try:
     import google.generativeai as genai
+    from google import genai as genai_sdk  # New SDK for structured output
     GOOGLE_AVAILABLE = True
 except ImportError:
     GOOGLE_AVAILABLE = False
+    genai_sdk = None
 
 try:
     import requests
@@ -57,12 +59,17 @@ except ImportError:
 
 # Constantes de costos (USD por 1M tokens)
 COST_TABLE = {
+    # OpenAI models
     'gpt-4': {'input': 30.0, 'output': 60.0},
     'gpt-4-turbo': {'input': 10.0, 'output': 30.0},
+    'gpt-4o': {'input': 2.50, 'output': 10.0},
+    'gpt-4o-mini': {'input': 0.150, 'output': 0.600},  # Best for structured outputs
     'gpt-3.5-turbo': {'input': 0.5, 'output': 1.5},
+    # Anthropic models
     'claude-3-opus': {'input': 15.0, 'output': 75.0},
     'claude-3-5-sonnet': {'input': 3.0, 'output': 15.0},
     'claude-3-sonnet': {'input': 3.0, 'output': 15.0},
+    # Google models
     'gemini-pro': {'input': 0.125, 'output': 0.375},
     'gemini-2.5-pro': {'input': 1.25, 'output': 5.0},
     'gemini-2.5-flash': {'input': 0.075, 'output': 0.30},
@@ -200,7 +207,7 @@ class AIService:
                  max_cost_per_analysis_usd: float = 0.10,
                  rate_limit_rpm: int = 60,
                  enable_cache: bool = True,
-                 default_provider: Literal['openai', 'anthropic', 'google', 'publicai'] = 'publicai'):
+                 default_provider: Literal['openai', 'anthropic', 'google', 'publicai'] = 'openai'):
         """
         Args:
             max_cost_per_analysis_usd: Costo máximo permitido por análisis
@@ -231,10 +238,9 @@ class AIService:
         self.google_client = None
         self.publicai_api_key = None
         
-        # OpenAI
+        # OpenAI (API 1.0+)
         if OPENAI_AVAILABLE and os.getenv('OPENAI_API_KEY'):
-            openai.api_key = os.getenv('OPENAI_API_KEY')
-            self.openai_client = openai
+            self.openai_client = openai.OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
             print("✅ OpenAI client initialized")
         
         # Anthropic
@@ -366,7 +372,8 @@ class AIService:
         except Exception as e:
             print(f"❌ Error with {provider}: {e}")
             # Intentar fallback (sin especificar modelo para que use defaults del provider)
-            response = self._generate_fallback(prompt, system_prompt, None, temperature, max_tokens)
+            # Skip the failed provider in fallback
+            response = self._generate_fallback(prompt, system_prompt, None, temperature, max_tokens, skip_provider=provider)
         
         # Calcular latencia
         latency_ms = (time.time() - start_time) * 1000
@@ -397,13 +404,14 @@ class AIService:
     
     def _generate_openai(self, prompt: str, system_prompt: Optional[str],
                         model: str, temperature: float, max_tokens: int) -> AIResponse:
-        """Genera usando OpenAI."""
+        """Genera usando OpenAI (API 1.0+)."""
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
         messages.append({"role": "user", "content": prompt})
         
-        response = self.openai_client.ChatCompletion.create(
+        # Use new OpenAI API (1.0+)
+        response = self.openai_client.chat.completions.create(
             model=model,
             messages=messages,
             temperature=temperature,
@@ -572,6 +580,253 @@ class AIService:
             latency_ms=duration_ms
         )
     
+    def generate_structured(self, prompt: str, system_prompt: Optional[str],
+                           response_schema: type, model: Optional[str] = None,
+                           provider: Optional[str] = None,
+                           temperature: float = 0.7) -> Dict:
+        """
+        Generate structured output using native JSON schema support.
+        Supports OpenAI (gpt-4o, gpt-4o-mini) and Google Gemini.
+        
+        Args:
+            prompt: User prompt
+            system_prompt: System instructions
+            response_schema: Pydantic model class for response schema
+            model: Specific model to use (optional, will use provider default)
+            provider: 'openai' or 'google' (optional, will use default_provider)
+            temperature: Generation temperature
+            
+        Returns:
+            Validated Pydantic model instance converted to dict
+        """
+        # Determine provider
+        provider = provider or self.default_provider
+        
+        # Route to appropriate provider
+        if provider == 'openai':
+            return self._generate_structured_openai(prompt, system_prompt, response_schema, model, temperature)
+        elif provider == 'google':
+            return self._generate_structured_google(prompt, system_prompt, response_schema, model, temperature)
+        else:
+            raise ValueError(f"Structured output not supported for provider: {provider}. Use 'openai' or 'google'.")
+    
+    def _generate_structured_openai(self, prompt: str, system_prompt: Optional[str],
+                                   response_schema: type, model: Optional[str],
+                                   temperature: float) -> Dict:
+        """Generate structured output using OpenAI's Structured Outputs feature."""
+        if not OPENAI_AVAILABLE or not self.openai_client:
+            raise ValueError("OpenAI client not available. Check OPENAI_API_KEY.")
+        
+        # Use gpt-4o-mini by default (best cost/performance for structured outputs)
+        model = model or 'gpt-4o-mini'
+        
+        tracer = get_tracer()
+        start_time = time.time()
+        
+        trace = tracer.start_trace(
+            provider="openai",
+            endpoint="chat_completions_structured",
+            model=model,
+            temperature=temperature,
+            prompt_length=len(prompt)
+        )
+        
+        try:
+            # Build messages
+            messages = []
+            if system_prompt:
+                messages.append({"role": "system", "content": system_prompt})
+            messages.append({"role": "user", "content": prompt})
+            
+            tracer.logger.info(
+                f"🤖 Generating STRUCTURED output from OpenAI\n"
+                f"   Model: {model}\n"
+                f"   Schema: {response_schema.__name__}\n"
+                f"   Prompt length: {len(prompt)} chars"
+            )
+            
+            # Generate with structured output (OpenAI Structured Outputs)
+            response = self.openai_client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=temperature,
+                response_format={
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": response_schema.__name__,
+                        "schema": response_schema.model_json_schema(),
+                        "strict": True
+                    }
+                }
+            )
+            
+            # Extract content
+            content = response.choices[0].message.content
+            
+            # Validate and parse response
+            validated_response = response_schema.model_validate_json(content)
+            
+            # Get actual tokens and cost
+            input_tokens = response.usage.prompt_tokens
+            output_tokens = response.usage.completion_tokens
+            cost = self._calculate_cost(model, input_tokens, output_tokens)
+            duration_ms = (time.time() - start_time) * 1000
+            
+            tracer.logger.info(
+                f"✅ STRUCTURED output generated successfully\n"
+                f"   Model: {model}\n"
+                f"   Response length: {len(content)} chars\n"
+                f"   Tokens: {input_tokens} + {output_tokens}\n"
+                f"   Cost: ${cost:.4f}\n"
+                f"   Duration: {duration_ms:.0f}ms"
+            )
+            
+            tracer.end_trace(
+                trace,
+                status="success",
+                duration_ms=duration_ms,
+                response_length=len(content),
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                cost_usd=cost
+            )
+            
+            # Track usage
+            ai_response = AIResponse(
+                content=content,
+                model=model,
+                provider='openai',
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                cost_usd=cost,
+                latency_ms=duration_ms
+            )
+            self.usage_stats.add_response(ai_response)
+            
+            return validated_response.model_dump()
+            
+        except Exception as e:
+            duration_ms = (time.time() - start_time) * 1000
+            trace.duration_ms = duration_ms
+            trace.error_type = type(e).__name__
+            trace.error_message = str(e)
+            
+            tracer.logger.error(
+                f"❌ OpenAI structured output generation FAILED\n"
+                f"   Model: {model}\n"
+                f"   Error: {type(e).__name__}: {str(e)}\n"
+                f"   Duration: {duration_ms:.0f}ms"
+            )
+            
+            tracer.end_trace(trace, status="error", duration_ms=duration_ms)
+            raise
+    
+    def _generate_structured_google(self, prompt: str, system_prompt: Optional[str],
+                                   response_schema: type, model: Optional[str],
+                                   temperature: float) -> Dict:
+        """Generate structured output using Google Gemini's native JSON schema support."""
+        if not GOOGLE_AVAILABLE or not genai_sdk:
+            raise ValueError("Google Gemini SDK not available. Install: pip install google-genai")
+        
+        # Use gemini-2.5-flash by default (faster and cheaper for structured outputs)
+        model = model or 'gemini-2.5-flash'
+        
+        tracer = get_tracer()
+        start_time = time.time()
+        
+        trace = tracer.start_trace(
+            provider="google",
+            endpoint="generate_content_structured",
+            model=model,
+            temperature=temperature,
+            prompt_length=len(prompt)
+        )
+        
+        try:
+            # Initialize client with API key
+            client = genai_sdk.Client(api_key=os.getenv('GOOGLE_API_KEY'))
+            
+            # Build full prompt
+            full_prompt = prompt
+            if system_prompt:
+                full_prompt = f"{system_prompt}\n\n{prompt}"
+            
+            tracer.logger.info(
+                f"🤖 Generating STRUCTURED output from Google Gemini\n"
+                f"   Model: {model}\n"
+                f"   Schema: {response_schema.__name__}\n"
+                f"   Prompt length: {len(full_prompt)} chars"
+            )
+            
+            # Generate with structured output
+            response = client.models.generate_content(
+                model=model,
+                contents=full_prompt,
+                config={
+                    "response_mime_type": "application/json",
+                    "response_json_schema": response_schema.model_json_schema(),
+                    "temperature": temperature,
+                }
+            )
+            
+            # Validate and parse response
+            validated_response = response_schema.model_validate_json(response.text)
+            
+            # Estimate tokens and cost
+            input_tokens = len(full_prompt.split()) * 1.3
+            output_tokens = len(response.text.split()) * 1.3
+            cost = self._calculate_cost(model, int(input_tokens), int(output_tokens))
+            duration_ms = (time.time() - start_time) * 1000
+            
+            tracer.logger.info(
+                f"✅ STRUCTURED output generated successfully\n"
+                f"   Model: {model}\n"
+                f"   Response length: {len(response.text)} chars\n"
+                f"   Estimated tokens: {int(input_tokens)} + {int(output_tokens)}\n"
+                f"   Cost: ${cost:.4f}\n"
+                f"   Duration: {duration_ms:.0f}ms"
+            )
+            
+            tracer.end_trace(
+                trace,
+                status="success",
+                duration_ms=duration_ms,
+                response_length=len(response.text),
+                input_tokens=int(input_tokens),
+                output_tokens=int(output_tokens),
+                cost_usd=cost
+            )
+            
+            # Track usage - create AIResponse for stats
+            ai_response = AIResponse(
+                content=response.text,
+                model=model,
+                provider='google',
+                input_tokens=int(input_tokens),
+                output_tokens=int(output_tokens),
+                cost_usd=cost,
+                latency_ms=duration_ms
+            )
+            self.usage_stats.add_response(ai_response)
+            
+            return validated_response.model_dump()
+            
+        except Exception as e:
+            duration_ms = (time.time() - start_time) * 1000
+            trace.duration_ms = duration_ms
+            trace.error_type = type(e).__name__
+            trace.error_message = str(e)
+            
+            tracer.logger.error(
+                f"❌ Structured output generation FAILED\n"
+                f"   Model: {model}\n"
+                f"   Error: {type(e).__name__}: {str(e)}\n"
+                f"   Duration: {duration_ms:.0f}ms"
+            )
+            
+            tracer.end_trace(trace, status="error", duration_ms=duration_ms)
+            raise
+    
     def _generate_publicai(self, prompt: str, system_prompt: Optional[str],
                           model: str, temperature: float, max_tokens: int) -> AIResponse:
         """Genera usando PublicAI (Salamandra/ALIA models)."""
@@ -675,24 +930,34 @@ class AIService:
             raise Exception(error_msg)
     
     def _generate_fallback(self, prompt: str, system_prompt: Optional[str],
-                          model: Optional[str], temperature: float, max_tokens: int) -> AIResponse:
+                          model: Optional[str], temperature: float, max_tokens: int,
+                          skip_provider: Optional[str] = None) -> AIResponse:
         """Intenta con providers alternativos en orden de preferencia."""
-        # PublicAI first (no blocking issues), then others
-        providers = ['publicai', 'openai', 'anthropic', 'google']
+        # OpenAI first (reliable, good structured outputs), then Google, PublicAI
+        providers = ['openai', 'google', 'publicai', 'anthropic']
+        
+        # Skip the provider that just failed
+        if skip_provider:
+            providers = [p for p in providers if p != skip_provider]
+            print(f"🔄 Fallback skipping failed provider: {skip_provider}")
         
         for provider in providers:
             try:
                 # Use default model for each provider
                 provider_model = self._get_default_model(provider) if not model else model
                 
-                if provider == 'publicai' and self.publicai_api_key:
-                    return self._generate_publicai(prompt, system_prompt, 'BSC-LT/ALIA-40b-instruct_Q8_0', temperature, max_tokens)
-                elif provider == 'openai' and self.openai_client:
-                    return self._generate_openai(prompt, system_prompt, 'gpt-3.5-turbo', temperature, max_tokens)
-                elif provider == 'anthropic' and self.anthropic_client:
-                    return self._generate_anthropic(prompt, system_prompt, 'claude-3-5-sonnet-20241022', temperature, max_tokens)
+                if provider == 'openai' and self.openai_client:
+                    print(f"🔄 Trying OpenAI fallback (gpt-4o-mini)...")
+                    return self._generate_openai(prompt, system_prompt, 'gpt-4o-mini', temperature, max_tokens)
                 elif provider == 'google' and self.google_client:
+                    print(f"🔄 Trying Google fallback (gemini-2.5-flash)...")
                     return self._generate_google(prompt, system_prompt, 'gemini-2.5-flash', temperature, max_tokens)
+                elif provider == 'publicai' and self.publicai_api_key:
+                    print(f"🔄 Trying PublicAI fallback...")
+                    return self._generate_publicai(prompt, system_prompt, 'BSC-LT/ALIA-40b-instruct_Q8_0', temperature, max_tokens)
+                elif provider == 'anthropic' and self.anthropic_client:
+                    print(f"🔄 Trying Anthropic fallback...")
+                    return self._generate_anthropic(prompt, system_prompt, 'claude-3-5-sonnet-20241022', temperature, max_tokens)
             except Exception as e:
                 print(f"⚠️ Fallback {provider} failed: {e}")
                 continue
@@ -702,12 +967,12 @@ class AIService:
     def _get_default_model(self, provider: str) -> str:
         """Obtiene modelo por defecto para un provider."""
         defaults = {
-            'openai': 'gpt-3.5-turbo',  # Más económico
+            'openai': 'gpt-4o-mini',  # Best cost/performance for structured outputs
             'anthropic': 'claude-3-5-sonnet-20241022',
-            'google': 'gemini-2.5-flash',  # Google Gemini 1.5 Flash (stable)
+            'google': 'gemini-2.5-flash',  # Fast and cheap for structured
             'publicai': 'BSC-LT/ALIA-40b-instruct_Q8_0'  # ALIA-40B for complex reasoning
         }
-        return defaults.get(provider, 'gpt-3.5-turbo')
+        return defaults.get(provider, 'gpt-4o-mini')
     
     def _calculate_cost(self, model: str, input_tokens: int, output_tokens: int) -> float:
         """Calcula costo de la request."""
