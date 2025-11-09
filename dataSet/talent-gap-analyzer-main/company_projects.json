@@ -1,0 +1,94 @@
+{
+  "projects": [
+    {
+      "id": "royal",
+      "name": "Royal",
+      "description": "Cliente Royal - Proyecto estratégico principal",
+      "type": "client_project",
+      "status": "active",
+      "priority": "high",
+      "estimated_duration": "long-term",
+      "metadata": {
+        "client_type": "external",
+        "industry": "consulting",
+        "start_date": "2023-Q1"
+      }
+    },
+    {
+      "id": "arquimbau",
+      "name": "Arquimbau",
+      "description": "Cliente Arquimbau - Proyecto de transformación digital",
+      "type": "client_project",
+      "status": "active",
+      "priority": "high",
+      "estimated_duration": "long-term",
+      "metadata": {
+        "client_type": "external",
+        "industry": "consulting",
+        "start_date": "2023-Q2"
+      }
+    },
+    {
+      "id": "quether_gtm",
+      "name": "Quether GTM",
+      "description": "Go-to-Market interno de Quether - Marketing y ventas",
+      "type": "internal_project",
+      "status": "active",
+      "priority": "medium",
+      "estimated_duration": "ongoing",
+      "metadata": {
+        "client_type": "internal",
+        "department": "marketing",
+        "focus": "growth"
+      }
+    },
+    {
+      "id": "i_d",
+      "name": "I+D",
+      "description": "Investigación y Desarrollo - Innovación y nuevos productos",
+      "type": "internal_project",
+      "status": "active",
+      "priority": "medium",
+      "estimated_duration": "ongoing",
+      "metadata": {
+        "client_type": "internal",
+        "department": "innovation",
+        "focus": "research"
+      }
+    },
+    {
+      "id": "internal_ops",
+      "name": "Internal Ops",
+      "description": "Operaciones internas - Gestión y administración",
+      "type": "internal_operations",
+      "status": "active",
+      "priority": "medium",
+      "estimated_duration": "ongoing",
+      "metadata": {
+        "client_type": "internal",
+        "department": "operations",
+        "focus": "efficiency"
+      }
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "description": "Eventos corporativos y de networking",
+      "type": "marketing",
+      "status": "active",
+      "priority": "low",
+      "estimated_duration": "ongoing",
+      "metadata": {
+        "client_type": "internal",
+        "department": "marketing",
+        "focus": "brand_awareness"
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-11-08",
+    "total_projects": 6,
+    "description": "Master list of company projects for talent allocation and HR forms"
+  }
+}

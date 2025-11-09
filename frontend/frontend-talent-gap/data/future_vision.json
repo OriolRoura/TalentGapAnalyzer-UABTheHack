@@ -14,7 +14,7 @@
       ],
       "kpis_objetivo": {
         "ingresos_mensuales": 15000,
-        "margen_operativo": 0.20,
+        "margen_operativo": 0.2,
         "clientes_recurrentes": 6,
         "microapps_activas": 2,
         "nps": 60
@@ -237,37 +237,61 @@
       "área": "Oferta",
       "cambio": "Productizar servicios y microapps (catálogo estandarizado).",
       "impacto_esperado": "Ventas repetibles y escalables, menor ciclo comercial.",
-      "kpis": ["ARPA", "Tasa de cierre", "Tiempo de entrega"]
+      "kpis": [
+        "ARPA",
+        "Tasa de cierre",
+        "Tiempo de entrega"
+      ]
     },
     {
       "área": "Comercial",
       "cambio": "GTM unificado inbound+outbound y pipeline en CRM.",
       "impacto_esperado": "Previsibilidad y mayor conversión MQL→ SQL→ Cliente.",
-      "kpis": ["Lead_to_close", "Win_rate", "MRR"]
+      "kpis": [
+        "Lead_to_close",
+        "Win_rate",
+        "MRR"
+      ]
     },
     {
       "área": "Operaciones",
       "cambio": "PMO con playbooks, SLAs y QA por capítulo.",
       "impacto_esperado": "Calidad consistente y mejor margen.",
-      "kpis": ["Margen_operativo", "Cumplimiento_SLA", "Retrabajo"]
+      "kpis": [
+        "Margen_operativo",
+        "Cumplimiento_SLA",
+        "Retrabajo"
+      ]
     },
     {
       "área": "Datos",
       "cambio": "Definición de métricas, dashboards y atribución.",
       "impacto_esperado": "Decisiones basadas en datos y optimización de CAC.",
-      "kpis": ["CAC", "LTV", "Payback_period"]
+      "kpis": [
+        "CAC",
+        "LTV",
+        "Payback_period"
+      ]
     },
     {
       "área": "Tecnología",
       "cambio": "Arquitectura martech (CRM, automatización, IA) gobernada.",
       "impacto_esperado": "Automatización y reducción de tareas manuales.",
-      "kpis": ["Horas_automatizadas", "Errores_por_proceso", "Adopción_herramientas"]
+      "kpis": [
+        "Horas_automatizadas",
+        "Errores_por_proceso",
+        "Adopción_herramientas"
+      ]
     },
     {
       "área": "Marca y Contenido",
       "cambio": "Narrativa, casos de éxito y presencia en medios/eventos.",
       "impacto_esperado": "Más demanda cualificada y autoridad en el nicho.",
-      "kpis": ["Tráfico_orgánico", "Demostraciones_solicitadas", "NPS_contenido"]
+      "kpis": [
+        "Tráfico_orgánico",
+        "Demostraciones_solicitadas",
+        "NPS_contenido"
+      ]
     }
   ],
   "prioridades": {

@@ -1,0 +1,101 @@
+employee_id,employee_name,role_id,role_title,overall_score,band,skills_score,responsibilities_score,ambitions_score,dedication_score
+1001,Jordi Casals,R-STR-LEAD,Head of Strategy,0.78,READY,1.0,1.0,0.2,0.0
+1001,Jordi Casals,R-PM,Project Manager,0.6,READY_WITH_SUPPORT,1.0,0.0,0.0,1.0
+1001,Jordi Casals,R-MTX-ARCH,Martech Architect,0.255,FAR,0.25,0.0,0.2,1.0
+1001,Jordi Casals,R-CRM-ADMIN,CRM Admin (HubSpot),0.2985,FAR,0.3971,0.0,0.0,1.0
+1001,Jordi Casals,R-DATA-ANL,Data Analyst,0.2908,FAR,0.3816,0.0,0.0,1.0
+1001,Jordi Casals,R-CRT-LEAD,Creative Director,0.255,FAR,0.25,0.0,0.2,1.0
+1001,Jordi Casals,R-DSN-SR,Senior Brand/UI Designer,0.225,FAR,0.25,0.0,0.0,1.0
+1001,Jordi Casals,R-PERF-SPEC,Performance Media Specialist,0.2908,FAR,0.3816,0.0,0.0,1.0
+1001,Jordi Casals,R-SEO-SEM,SEO/SEM Manager,0.2908,FAR,0.3816,0.0,0.0,1.0
+1001,Jordi Casals,R-SMM,Social Media Strategist,0.3406,FAR,0.4062,0.0,0.25,1.0
+1002,Marta Soler,R-STR-LEAD,Head of Strategy,0.3304,FAR,0.6607,0.0,0.0,0.0
+1002,Marta Soler,R-PM,Project Manager,0.6903,READY_WITH_SUPPORT,0.6806,1.0,0.0,1.0
+1002,Marta Soler,R-MTX-ARCH,Martech Architect,0.225,FAR,0.25,0.0,0.0,1.0
+1002,Marta Soler,R-CRM-ADMIN,CRM Admin (HubSpot),0.2618,FAR,0.3235,0.0,0.0,1.0
+1002,Marta Soler,R-DATA-ANL,Data Analyst,0.2579,FAR,0.3158,0.0,0.0,1.0
+1002,Marta Soler,R-CRT-LEAD,Creative Director,0.225,FAR,0.25,0.0,0.0,1.0
+1002,Marta Soler,R-DSN-SR,Senior Brand/UI Designer,0.33,FAR,0.25,0.0,0.7,1.0
+1002,Marta Soler,R-PERF-SPEC,Performance Media Specialist,0.3296,FAR,0.3158,0.1667,0.2,1.0
+1002,Marta Soler,R-SEO-SEM,SEO/SEM Manager,0.2879,FAR,0.3158,0.0,0.2,1.0
+1002,Marta Soler,R-SMM,Social Media Strategist,0.3057,FAR,0.3281,0.1667,0.0,1.0
+1003,Pablo Reyes,R-MTX-ARCH,Martech Architect,0.8471,READY,0.9342,1.0,0.2,1.0
+1003,Pablo Reyes,R-CRM-ADMIN,CRM Admin (HubSpot),0.5387,NEAR,0.7941,0.1667,0.0,1.0
+1003,Pablo Reyes,R-DATA-ANL,Data Analyst,0.4969,NEAR,0.7105,0.1667,0.0,1.0
+1003,Pablo Reyes,R-STR-LEAD,Head of Strategy,0.155,NOT_VIABLE,0.25,0.0,0.2,0.0
+1003,Pablo Reyes,R-PM,Project Manager,0.225,FAR,0.25,0.0,0.0,1.0
+1003,Pablo Reyes,R-CRT-LEAD,Creative Director,0.255,FAR,0.25,0.0,0.2,1.0
+1003,Pablo Reyes,R-DSN-SR,Senior Brand/UI Designer,0.225,FAR,0.25,0.0,0.0,1.0
+1003,Pablo Reyes,R-PERF-SPEC,Performance Media Specialist,0.2908,FAR,0.3816,0.0,0.0,1.0
+1003,Pablo Reyes,R-SEO-SEM,SEO/SEM Manager,0.2908,FAR,0.3816,0.0,0.0,1.0
+1003,Pablo Reyes,R-SMM,Social Media Strategist,0.3031,FAR,0.4062,0.0,0.0,1.0
+1004,Núria Aguilera,R-MTX-ARCH,Martech Architect,0.4495,NEAR,0.5526,0.1429,0.25,1.0
+1004,Núria Aguilera,R-CRM-ADMIN,CRM Admin (HubSpot),0.7993,READY,0.8235,1.0,0.25,1.0
+1004,Núria Aguilera,R-DATA-ANL,Data Analyst,0.3325,FAR,0.3816,0.1667,0.0,1.0
+1004,Núria Aguilera,R-STR-LEAD,Head of Strategy,0.125,NOT_VIABLE,0.25,0.0,0.0,0.0
+1004,Núria Aguilera,R-PM,Project Manager,0.225,FAR,0.25,0.0,0.0,1.0
+1004,Núria Aguilera,R-CRT-LEAD,Creative Director,0.225,FAR,0.25,0.0,0.0,1.0
+1004,Núria Aguilera,R-DSN-SR,Senior Brand/UI Designer,0.2925,FAR,0.25,0.0,0.45,1.0
+1004,Núria Aguilera,R-PERF-SPEC,Performance Media Specialist,0.3208,FAR,0.3816,0.0,0.2,1.0
+1004,Núria Aguilera,R-SEO-SEM,SEO/SEM Manager,0.3208,FAR,0.3816,0.0,0.2,1.0
+1004,Núria Aguilera,R-SMM,Social Media Strategist,0.35,FAR,0.5,0.0,0.0,1.0
+1005,Marc Serra,R-MTX-ARCH,Martech Architect,0.4252,NEAR,0.5789,0.1429,0.0,1.0
+1005,Marc Serra,R-CRM-ADMIN,CRM Admin (HubSpot),0.377,FAR,0.4706,0.1667,0.0,1.0
+1005,Marc Serra,R-DATA-ANL,Data Analyst,0.7908,READY,0.8816,1.0,0.0,1.0
+1005,Marc Serra,R-STR-LEAD,Head of Strategy,0.125,NOT_VIABLE,0.25,0.0,0.0,0.0
+1005,Marc Serra,R-PM,Project Manager,0.225,FAR,0.25,0.0,0.0,1.0
+1005,Marc Serra,R-CRT-LEAD,Creative Director,0.225,FAR,0.25,0.0,0.0,1.0
+1005,Marc Serra,R-DSN-SR,Senior Brand/UI Designer,0.33,FAR,0.25,0.0,0.7,1.0
+1005,Marc Serra,R-PERF-SPEC,Performance Media Specialist,0.4063,NEAR,0.5526,0.0,0.2,1.0
+1005,Marc Serra,R-SEO-SEM,SEO/SEM Manager,0.3537,FAR,0.4474,0.0,0.2,1.0
+1005,Marc Serra,R-SMM,Social Media Strategist,0.3422,FAR,0.4844,0.0,0.0,1.0
+1006,Adrián López,R-CRT-LEAD,Creative Director,0.8579,READY,0.9559,1.0,0.2,1.0
+1006,Adrián López,R-STR-LEAD,Head of Strategy,0.155,NOT_VIABLE,0.25,0.0,0.2,0.0
+1006,Adrián López,R-PM,Project Manager,0.225,FAR,0.25,0.0,0.0,1.0
+1006,Adrián López,R-MTX-ARCH,Martech Architect,0.255,FAR,0.25,0.0,0.2,1.0
+1006,Adrián López,R-CRM-ADMIN,CRM Admin (HubSpot),0.225,FAR,0.25,0.0,0.0,1.0
+1006,Adrián López,R-DATA-ANL,Data Analyst,0.225,FAR,0.25,0.0,0.0,1.0
+1006,Adrián López,R-DSN-SR,Senior Brand/UI Designer,0.4169,NEAR,0.5588,0.0,0.25,1.0
+1006,Adrián López,R-PERF-SPEC,Performance Media Specialist,0.225,FAR,0.25,0.0,0.0,1.0
+1006,Adrián López,R-SEO-SEM,SEO/SEM Manager,0.3039,FAR,0.4079,0.0,0.0,1.0
+1006,Adrián López,R-SMM,Social Media Strategist,0.3187,FAR,0.4375,0.0,0.0,1.0
+1007,Nerea Vidal,R-DSN-SR,Senior Brand/UI Designer,0.8279,READY,0.9559,1.0,0.0,1.0
+1007,Nerea Vidal,R-STR-LEAD,Head of Strategy,0.155,NOT_VIABLE,0.25,0.0,0.2,0.0
+1007,Nerea Vidal,R-PM,Project Manager,0.225,FAR,0.25,0.0,0.0,1.0
+1007,Nerea Vidal,R-MTX-ARCH,Martech Architect,0.255,FAR,0.25,0.0,0.2,1.0
+1007,Nerea Vidal,R-CRM-ADMIN,CRM Admin (HubSpot),0.225,FAR,0.25,0.0,0.0,1.0
+1007,Nerea Vidal,R-DATA-ANL,Data Analyst,0.225,FAR,0.25,0.0,0.0,1.0
+1007,Nerea Vidal,R-CRT-LEAD,Creative Director,0.4094,NEAR,0.5588,0.0,0.2,1.0
+1007,Nerea Vidal,R-PERF-SPEC,Performance Media Specialist,0.225,FAR,0.25,0.0,0.0,1.0
+1007,Nerea Vidal,R-SEO-SEM,SEO/SEM Manager,0.225,FAR,0.25,0.0,0.0,1.0
+1007,Nerea Vidal,R-SMM,Social Media Strategist,0.225,FAR,0.25,0.0,0.0,1.0
+1008,Sergio Martín,R-PERF-SPEC,Performance Media Specialist,0.9221,READY,0.9342,1.0,0.7,1.0
+1008,Sergio Martín,R-SEO-SEM,SEO/SEM Manager,0.4195,NEAR,0.5789,0.0,0.2,1.0
+1008,Sergio Martín,R-STR-LEAD,Head of Strategy,0.125,NOT_VIABLE,0.25,0.0,0.0,0.0
+1008,Sergio Martín,R-PM,Project Manager,0.2667,FAR,0.25,0.1667,0.0,1.0
+1008,Sergio Martín,R-MTX-ARCH,Martech Architect,0.225,FAR,0.25,0.0,0.0,1.0
+1008,Sergio Martín,R-CRM-ADMIN,CRM Admin (HubSpot),0.2985,FAR,0.3971,0.0,0.0,1.0
+1008,Sergio Martín,R-DATA-ANL,Data Analyst,0.3697,FAR,0.5395,0.0,0.0,1.0
+1008,Sergio Martín,R-CRT-LEAD,Creative Director,0.225,FAR,0.25,0.0,0.0,1.0
+1008,Sergio Martín,R-DSN-SR,Senior Brand/UI Designer,0.2925,FAR,0.25,0.0,0.45,1.0
+1008,Sergio Martín,R-SMM,Social Media Strategist,0.3406,FAR,0.4062,0.0,0.25,1.0
+1009,Laura Torres,R-PERF-SPEC,Performance Media Specialist,0.3866,FAR,0.5132,0.0,0.2,1.0
+1009,Laura Torres,R-SEO-SEM,SEO/SEM Manager,0.8479,READY,0.8158,1.0,0.6,1.0
+1009,Laura Torres,R-STR-LEAD,Head of Strategy,0.125,NOT_VIABLE,0.25,0.0,0.0,0.0
+1009,Laura Torres,R-PM,Project Manager,0.225,FAR,0.25,0.0,0.0,1.0
+1009,Laura Torres,R-MTX-ARCH,Martech Architect,0.225,FAR,0.25,0.0,0.0,1.0
+1009,Laura Torres,R-CRM-ADMIN,CRM Admin (HubSpot),0.2985,FAR,0.3971,0.0,0.0,1.0
+1009,Laura Torres,R-DATA-ANL,Data Analyst,0.2908,FAR,0.3816,0.0,0.0,1.0
+1009,Laura Torres,R-CRT-LEAD,Creative Director,0.2838,FAR,0.3676,0.0,0.0,1.0
+1009,Laura Torres,R-DSN-SR,Senior Brand/UI Designer,0.285,FAR,0.25,0.0,0.4,1.0
+1009,Laura Torres,R-SMM,Social Media Strategist,0.3656,FAR,0.5312,0.0,0.0,1.0
+1010,Claudia Riera,R-SMM,Social Media Strategist,0.7562,READY,0.8125,1.0,0.0,1.0
+1010,Claudia Riera,R-STR-LEAD,Head of Strategy,0.125,NOT_VIABLE,0.25,0.0,0.0,0.0
+1010,Claudia Riera,R-PM,Project Manager,0.2667,FAR,0.25,0.1667,0.0,1.0
+1010,Claudia Riera,R-MTX-ARCH,Martech Architect,0.225,FAR,0.25,0.0,0.0,1.0
+1010,Claudia Riera,R-CRM-ADMIN,CRM Admin (HubSpot),0.3426,FAR,0.4853,0.0,0.0,1.0
+1010,Claudia Riera,R-DATA-ANL,Data Analyst,0.2908,FAR,0.3816,0.0,0.0,1.0
+1010,Claudia Riera,R-CRT-LEAD,Creative Director,0.2838,FAR,0.3676,0.0,0.0,1.0
+1010,Claudia Riera,R-DSN-SR,Senior Brand/UI Designer,0.305,FAR,0.25,0.0,0.5333,1.0
+1010,Claudia Riera,R-PERF-SPEC,Performance Media Specialist,0.3208,FAR,0.3816,0.0,0.2,1.0
+1010,Claudia Riera,R-SEO-SEM,SEO/SEM Manager,0.3734,FAR,0.4868,0.0,0.2,1.0

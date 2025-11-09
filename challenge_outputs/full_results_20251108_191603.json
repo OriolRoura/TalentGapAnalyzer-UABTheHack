@@ -1,0 +1,3740 @@
+{
+  "metadata": {
+    "analysis_timestamp": "2025-11-08T19:16:03.328424",
+    "total_employees": 10,
+    "total_roles": 12,
+    "total_skills": 21,
+    "algorithm_version": "1.0.0",
+    "weights_used": {
+      "skills": 0.5,
+      "responsibilities": 0.25,
+      "ambitions": 0.15,
+      "dedication": 0.1
+    }
+  },
+  "compatibility_matrix": {
+    "summary": {
+      "total_employee_role_combinations": 120,
+      "ready_combinations": 15,
+      "readiness_percentage": 12.5
+    },
+    "detailed_results": [
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.88,
+        "band": "READY",
+        "skills_score": 1.0,
+        "responsibilities_score": 1.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 1
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.6769230769230768,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.9038461538461539,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.6769230769230768,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.9038461538461539,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.38,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.43333333333333335,
+        "band": "NEAR",
+        "skills_score": 0.4166666666666667,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.255,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.551923076923077,
+        "band": "NEAR",
+        "skills_score": 0.9038461538461539,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.551923076923077,
+        "band": "NEAR",
+        "skills_score": 0.9038461538461539,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.6769230769230768,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.9038461538461539,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.551923076923077,
+        "band": "NEAR",
+        "skills_score": 0.9038461538461539,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1001",
+        "employee_name": "Jordi Casals",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.6769230769230768,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.9038461538461539,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.505357142857143,
+        "band": "NEAR",
+        "skills_score": 0.6607142857142858,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.6269230769230769,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.6538461538461539,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.5019230769230769,
+        "band": "NEAR",
+        "skills_score": 0.6538461538461539,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.4666666666666667,
+        "band": "NEAR",
+        "skills_score": 0.3333333333333333,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.5019230769230769,
+        "band": "NEAR",
+        "skills_score": 0.6538461538461539,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.5019230769230769,
+        "band": "NEAR",
+        "skills_score": 0.6538461538461539,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.6269230769230769,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.6538461538461539,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.5019230769230769,
+        "band": "NEAR",
+        "skills_score": 0.6538461538461539,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1002",
+        "employee_name": "Marta Soler",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.6269230769230769,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.6538461538461539,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.755,
+        "band": "READY",
+        "skills_score": 1.0,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.75625,
+        "band": "READY",
+        "skills_score": 0.8125,
+        "responsibilities_score": 1.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 1
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.6416666666666667,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.8333333333333334,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.255,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.4461538461538461,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.255,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.3211538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.3211538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.4461538461538461,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.3211538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.4461538461538461,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1003",
+        "employee_name": "Pablo Reyes",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.3211538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.5553571428571429,
+        "band": "NEAR",
+        "skills_score": 0.6607142857142858,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.7770833333333332,
+        "band": "READY",
+        "skills_score": 0.8541666666666666,
+        "responsibilities_score": 1.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 1
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.43333333333333335,
+        "band": "NEAR",
+        "skills_score": 0.4166666666666667,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.4461538461538461,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.35115384615384615,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.35115384615384615,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.47615384615384615,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.3211538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.4461538461538461,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1004",
+        "employee_name": "Núria Aguilera",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.35115384615384615,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.5142857142857143,
+        "band": "NEAR",
+        "skills_score": 0.4285714285714286,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.55,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 1.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.7583333333333332,
+        "band": "READY",
+        "skills_score": 0.9166666666666666,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 1
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.5692307692307692,
+        "band": "NEAR",
+        "skills_score": 0.5384615384615384,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.4442307692307692,
+        "band": "NEAR",
+        "skills_score": 0.5384615384615384,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.4442307692307692,
+        "band": "NEAR",
+        "skills_score": 0.5384615384615384,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.5692307692307692,
+        "band": "NEAR",
+        "skills_score": 0.5384615384615384,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.4442307692307692,
+        "band": "NEAR",
+        "skills_score": 0.5384615384615384,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.5692307692307692,
+        "band": "NEAR",
+        "skills_score": 0.5384615384615384,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1005",
+        "employee_name": "Marc Serra",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.4442307692307692,
+        "band": "NEAR",
+        "skills_score": 0.5384615384615384,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.6749999999999999,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 1.0,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 1
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.55,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 1.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1006",
+        "employee_name": "Adrián López",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.475,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 1.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.255,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.35,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.38,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.35,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.3889285714285714,
+        "band": "FAR",
+        "skills_score": 0.5178571428571429,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.35,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.35,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1007",
+        "employee_name": "Nerea Vidal",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.47115384615384615,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 1.0,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.47615384615384615,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.4461538461538461,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.35,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.43333333333333335,
+        "band": "NEAR",
+        "skills_score": 0.4166666666666667,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.225,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 5
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.35115384615384615,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.47115384615384615,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 1.0,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.4461538461538461,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.0,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1008",
+        "employee_name": "Sergio Martín",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.35115384615384615,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.2,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.3961538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.5211538461538462,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.5211538461538462,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.5083333333333334,
+        "band": "NEAR",
+        "skills_score": 0.4166666666666667,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.37142857142857144,
+        "band": "FAR",
+        "skills_score": 0.3928571428571429,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.3961538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.3961538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.5211538461538462,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1009",
+        "employee_name": "Laura Torres",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.3961538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-SMM",
+        "role_title": "Social Media Strategist",
+        "overall_score": 0.6461538461538461,
+        "band": "READY_WITH_SUPPORT",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 1.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 2
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-INF-MGR",
+        "role_title": "Influency Manager",
+        "overall_score": 0.5211538461538462,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-STR-LEAD",
+        "role_title": "Head of Strategy",
+        "overall_score": 0.30000000000000004,
+        "band": "FAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-PM",
+        "role_title": "Project Manager",
+        "overall_score": 0.5211538461538462,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-MTX-ARCH",
+        "role_title": "Martech Architect",
+        "overall_score": 0.42500000000000004,
+        "band": "NEAR",
+        "skills_score": 0.25,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 4
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-CRM-ADMIN",
+        "role_title": "CRM Admin (HubSpot)",
+        "overall_score": 0.36250000000000004,
+        "band": "FAR",
+        "skills_score": 0.375,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-DATA-ANL",
+        "role_title": "Data Analyst",
+        "overall_score": 0.5083333333333334,
+        "band": "NEAR",
+        "skills_score": 0.4166666666666667,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-CRT-LEAD",
+        "role_title": "Creative Director",
+        "overall_score": 0.37142857142857144,
+        "band": "FAR",
+        "skills_score": 0.3928571428571429,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-DSN-SR",
+        "role_title": "Senior Brand/UI Designer",
+        "overall_score": 0.3961538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-PERF-SPEC",
+        "role_title": "Performance Media Specialist",
+        "overall_score": 0.3961538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-SEO-SEM",
+        "role_title": "SEO/SEM Manager",
+        "overall_score": 0.5211538461538462,
+        "band": "NEAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.5,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      },
+      {
+        "employee_id": "1010",
+        "employee_name": "Claudia Riera",
+        "role_id": "R-STR-SR",
+        "role_title": "Senior Strategy Consultant",
+        "overall_score": 0.3961538461538461,
+        "band": "FAR",
+        "skills_score": 0.44230769230769224,
+        "responsibilities_score": 0.0,
+        "ambitions_score": 0.5,
+        "dedication_score": 1.0,
+        "gaps_count": 3
+      }
+    ]
+  },
+  "rankings": {
+    "role_rankings": {
+      "R-STR-LEAD": [
+        "GapResult(employee_id='1001', role_id='R-STR-LEAD', overall_score=0.88, band=<GapBand.READY: 'READY'>, component_scores={'skills': 1.0, 'responsibilities': 1.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-STR-LEAD', overall_score=0.505357142857143, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6607142857142858, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-STR-LEAD', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: novato)', 'Skill gap: Análisis Estratégico (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-STR-LEAD', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: novato)', 'Skill gap: Análisis Estratégico (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-STR-LEAD', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: novato)', 'Skill gap: Análisis Estratégico (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-STR-LEAD', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: novato)', 'Skill gap: Análisis Estratégico (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-STR-LEAD', overall_score=0.255, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: novato)', 'Skill gap: Análisis Estratégico (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-STR-LEAD', overall_score=0.255, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: novato)', 'Skill gap: Análisis Estratégico (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-PM": [
+        "GapResult(employee_id='1001', role_id='R-PM', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-PM', overall_score=0.6269230769230769, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-PM', overall_score=0.5692307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-PM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-PM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-PM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-PM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-PM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-PM', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-PM', overall_score=0.35, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-MTX-ARCH": [
+        "GapResult(employee_id='1003', role_id='R-MTX-ARCH', overall_score=0.755, band=<GapBand.READY: 'READY'>, component_scores={'skills': 1.0, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-MTX-ARCH', overall_score=0.5553571428571429, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6607142857142858, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-MTX-ARCH', overall_score=0.5142857142857143, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4285714285714286, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-MTX-ARCH', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-MTX-ARCH', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-MTX-ARCH', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-MTX-ARCH', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-MTX-ARCH', overall_score=0.38, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-MTX-ARCH', overall_score=0.38, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-MTX-ARCH', overall_score=0.35, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-CRM-ADMIN": [
+        "GapResult(employee_id='1004', role_id='R-CRM-ADMIN', overall_score=0.7770833333333332, band=<GapBand.READY: 'READY'>, component_scores={'skills': 0.8541666666666666, 'responsibilities': 1.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-CRM-ADMIN', overall_score=0.75625, band=<GapBand.READY: 'READY'>, component_scores={'skills': 0.8125, 'responsibilities': 1.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-CRM-ADMIN', overall_score=0.55, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 1.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Email Marketing (actual: novato)'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-CRM-ADMIN', overall_score=0.36250000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.375, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-CRM-ADMIN', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Email Marketing (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-CRM-ADMIN', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Email Marketing (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-CRM-ADMIN', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Email Marketing (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ],
+      "R-DATA-ANL": [
+        "GapResult(employee_id='1005', role_id='R-DATA-ANL', overall_score=0.7583333333333332, band=<GapBand.READY: 'READY'>, component_scores={'skills': 0.9166666666666666, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-DATA-ANL', overall_score=0.6416666666666667, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.8333333333333334, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-DATA-ANL', overall_score=0.5083333333333334, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4166666666666667, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-DATA-ANL', overall_score=0.5083333333333334, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4166666666666667, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-DATA-ANL', overall_score=0.4666666666666667, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.3333333333333333, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-DATA-ANL', overall_score=0.43333333333333335, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4166666666666667, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-DATA-ANL', overall_score=0.43333333333333335, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4166666666666667, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-DATA-ANL', overall_score=0.43333333333333335, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4166666666666667, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-DATA-ANL', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-DATA-ANL', overall_score=0.35, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-CRT-LEAD": [
+        "GapResult(employee_id='1006', role_id='R-CRT-LEAD', overall_score=0.6749999999999999, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 1.0, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-CRT-LEAD', overall_score=0.3889285714285714, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.5178571428571429, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Copywriting (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-CRT-LEAD', overall_score=0.37142857142857144, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.3928571428571429, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Branding (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-CRT-LEAD', overall_score=0.37142857142857144, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.3928571428571429, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Branding (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-CRT-LEAD', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Copywriting (actual: novato)', 'Skill gap: Branding (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-CRT-LEAD', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Copywriting (actual: novato)', 'Skill gap: Branding (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-CRT-LEAD', overall_score=0.255, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Copywriting (actual: novato)', 'Skill gap: Branding (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-CRT-LEAD', overall_score=0.255, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Copywriting (actual: novato)', 'Skill gap: Branding (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-DSN-SR": [
+        "GapResult(employee_id='1001', role_id='R-DSN-SR', overall_score=0.551923076923077, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-DSN-SR', overall_score=0.5019230769230769, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-DSN-SR', overall_score=0.475, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 1.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-DSN-SR', overall_score=0.4442307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-DSN-SR', overall_score=0.3961538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-DSN-SR', overall_score=0.3961538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-DSN-SR', overall_score=0.35115384615384615, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-DSN-SR', overall_score=0.35115384615384615, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-DSN-SR', overall_score=0.3211538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-DSN-SR', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ],
+      "R-PERF-SPEC": [
+        "GapResult(employee_id='1001', role_id='R-PERF-SPEC', overall_score=0.551923076923077, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-PERF-SPEC', overall_score=0.55, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 1.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-PERF-SPEC', overall_score=0.5019230769230769, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-PERF-SPEC', overall_score=0.47115384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 1.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-PERF-SPEC', overall_score=0.4442307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-PERF-SPEC', overall_score=0.3961538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-PERF-SPEC', overall_score=0.3961538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-PERF-SPEC', overall_score=0.35115384615384615, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-PERF-SPEC', overall_score=0.3211538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-SEO-SEM": [
+        "GapResult(employee_id='1001', role_id='R-SEO-SEM', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-SEO-SEM', overall_score=0.6269230769230769, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-SEO-SEM', overall_score=0.5692307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-SEO-SEM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-SEO-SEM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-SEO-SEM', overall_score=0.47615384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-SEO-SEM', overall_score=0.47615384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-SEO-SEM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-SEO-SEM', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-SEO-SEM', overall_score=0.35, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-SMM": [
+        "GapResult(employee_id='1010', role_id='R-SMM', overall_score=0.6461538461538461, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 1.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-SMM', overall_score=0.551923076923077, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-SMM', overall_score=0.5019230769230769, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-SMM', overall_score=0.47115384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 1.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-SMM', overall_score=0.4442307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-SMM', overall_score=0.3961538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-SMM', overall_score=0.3211538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-SMM', overall_score=0.3211538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-SMM', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ],
+      "R-INF-MGR": [
+        "GapResult(employee_id='1001', role_id='R-INF-MGR', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-INF-MGR', overall_score=0.6269230769230769, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-INF-MGR', overall_score=0.5692307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-INF-MGR', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-INF-MGR', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-INF-MGR', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-INF-MGR', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-INF-MGR', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-INF-MGR', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-INF-MGR', overall_score=0.35, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "R-STR-SR": [
+        "GapResult(employee_id='1001', role_id='R-STR-SR', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-STR-SR', overall_score=0.5019230769230769, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-STR-SR', overall_score=0.4442307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-STR-SR', overall_score=0.3961538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-STR-SR', overall_score=0.3961538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-STR-SR', overall_score=0.35115384615384615, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-STR-SR', overall_score=0.35115384615384615, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-STR-SR', overall_score=0.3211538461538461, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-STR-SR', overall_score=0.30000000000000004, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ]
+    },
+    "career_paths": {
+      "1001": [
+        "GapResult(employee_id='1001', role_id='R-STR-LEAD', overall_score=0.88, band=<GapBand.READY: 'READY'>, component_scores={'skills': 1.0, 'responsibilities': 1.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-PM', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-STR-SR', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-SEO-SEM', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1001', role_id='R-INF-MGR', overall_score=0.6769230769230768, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.9038461538461539, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "1002": [
+        "GapResult(employee_id='1002', role_id='R-PM', overall_score=0.6269230769230769, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-SEO-SEM', overall_score=0.6269230769230769, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-INF-MGR', overall_score=0.6269230769230769, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-STR-LEAD', overall_score=0.505357142857143, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6607142857142858, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: OKRs y Roadmapping (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1002', role_id='R-STR-SR', overall_score=0.5019230769230769, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6538461538461539, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: intermedio)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ],
+      "1003": [
+        "GapResult(employee_id='1003', role_id='R-CRM-ADMIN', overall_score=0.75625, band=<GapBand.READY: 'READY'>, component_scores={'skills': 0.8125, 'responsibilities': 1.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-MTX-ARCH', overall_score=0.755, band=<GapBand.READY: 'READY'>, component_scores={'skills': 1.0, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-DATA-ANL', overall_score=0.6416666666666667, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.8333333333333334, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-PM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1003', role_id='R-SEO-SEM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "1004": [
+        "GapResult(employee_id='1004', role_id='R-CRM-ADMIN', overall_score=0.7770833333333332, band=<GapBand.READY: 'READY'>, component_scores={'skills': 0.8541666666666666, 'responsibilities': 1.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-MTX-ARCH', overall_score=0.5553571428571429, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.6607142857142858, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-SEO-SEM', overall_score=0.47615384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-PM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1004', role_id='R-INF-MGR', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "1005": [
+        "GapResult(employee_id='1005', role_id='R-DATA-ANL', overall_score=0.7583333333333332, band=<GapBand.READY: 'READY'>, component_scores={'skills': 0.9166666666666666, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-PM', overall_score=0.5692307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-SEO-SEM', overall_score=0.5692307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-INF-MGR', overall_score=0.5692307692307692, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.5384615384615384, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1005', role_id='R-CRM-ADMIN', overall_score=0.55, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 1.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Email Marketing (actual: novato)'], recommendations=[])"
+      ],
+      "1006": [
+        "GapResult(employee_id='1006', role_id='R-CRT-LEAD', overall_score=0.6749999999999999, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 1.0, 'responsibilities': 0.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-PERF-SPEC', overall_score=0.55, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 1.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-PM', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-MTX-ARCH', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1006', role_id='R-DATA-ANL', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ],
+      "1007": [
+        "GapResult(employee_id='1007', role_id='R-DSN-SR', overall_score=0.475, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 1.0, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-CRT-LEAD', overall_score=0.3889285714285714, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.5178571428571429, 'responsibilities': 0.0, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Storytelling (actual: novato)', 'Skill gap: Copywriting (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-MTX-ARCH', overall_score=0.38, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-PM', overall_score=0.35, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1007', role_id='R-DATA-ANL', overall_score=0.35, band=<GapBand.FAR: 'FAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Analytics y Métricas (actual: novato)', 'Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "1008": [
+        "GapResult(employee_id='1008', role_id='R-SEO-SEM', overall_score=0.47615384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.2, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-PERF-SPEC', overall_score=0.47115384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 1.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-SMM', overall_score=0.47115384615384615, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.0, 'ambitions': 1.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-PM', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])",
+        "GapResult(employee_id='1008', role_id='R-INF-MGR', overall_score=0.4461538461538461, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.0, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares', 'Rol no alineado con ambiciones expresadas'], recommendations=[])"
+      ],
+      "1009": [
+        "GapResult(employee_id='1009', role_id='R-SEO-SEM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-PM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-INF-MGR', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-DATA-ANL', overall_score=0.5083333333333334, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4166666666666667, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1009', role_id='R-MTX-ARCH', overall_score=0.42500000000000004, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.25, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: CRM Management (actual: novato)', 'Skill gap: Automatización (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ],
+      "1010": [
+        "GapResult(employee_id='1010', role_id='R-SMM', overall_score=0.6461538461538461, band=<GapBand.READY_WITH_SUPPORT: 'READY_WITH_SUPPORT'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 1.0, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-INF-MGR', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-PM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-SEO-SEM', overall_score=0.5211538461538462, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.44230769230769224, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: Project Management (actual: novato)', 'Skill gap: Stakeholder Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])",
+        "GapResult(employee_id='1010', role_id='R-DATA-ANL', overall_score=0.5083333333333334, band=<GapBand.NEAR: 'NEAR'>, component_scores={'skills': 0.4166666666666667, 'responsibilities': 0.5, 'ambitions': 0.5, 'dedication': 1.0}, detailed_gaps=['Skill gap: SQL & Python (actual: novato)', 'Skill gap: Data Management (actual: novato)', 'Gap significativo en responsabilidades similares'], recommendations=[])"
+      ]
+    },
+    "conflicts": {
+      "1001": [
+        "R-STR-LEAD",
+        "R-PM",
+        "R-DSN-SR",
+        "R-PERF-SPEC",
+        "R-SEO-SEM",
+        "R-SMM",
+        "R-INF-MGR",
+        "R-STR-SR"
+      ],
+      "1002": [
+        "R-STR-LEAD",
+        "R-PM",
+        "R-DSN-SR",
+        "R-PERF-SPEC",
+        "R-SEO-SEM",
+        "R-SMM",
+        "R-INF-MGR",
+        "R-STR-SR"
+      ],
+      "1005": [
+        "R-STR-LEAD",
+        "R-PM",
+        "R-MTX-ARCH",
+        "R-CRM-ADMIN",
+        "R-DATA-ANL",
+        "R-SEO-SEM",
+        "R-INF-MGR",
+        "R-STR-SR"
+      ],
+      "1003": [
+        "R-MTX-ARCH",
+        "R-CRM-ADMIN",
+        "R-DATA-ANL"
+      ],
+      "1004": [
+        "R-MTX-ARCH",
+        "R-CRM-ADMIN"
+      ],
+      "1009": [
+        "R-DATA-ANL",
+        "R-CRT-LEAD"
+      ],
+      "1006": [
+        "R-CRT-LEAD",
+        "R-PERF-SPEC"
+      ],
+      "1007": [
+        "R-CRT-LEAD",
+        "R-DSN-SR"
+      ]
+    },
+    "optimal_distribution": {
+      "1001": "R-STR-LEAD",
+      "1002": "R-PM",
+      "1003": "R-MTX-ARCH",
+      "1004": "R-CRM-ADMIN",
+      "1005": "R-DATA-ANL",
+      "1006": "R-CRT-LEAD",
+      "1010": "R-SMM"
+    },
+    "orphan_roles": [
+      "R-DSN-SR",
+      "R-PERF-SPEC"
+    ],
+    "ranking_summary": {
+      "total_positions": 12,
+      "positions_with_ready_candidates": 10,
+      "coverage_percentage": 83.33333333333334,
+      "total_ready_matches": 15,
+      "orphan_roles_count": 2,
+      "orphan_roles": [
+        "R-DSN-SR",
+        "R-PERF-SPEC"
+      ],
+      "readiness_distribution": {
+        "READY": 5,
+        "NEAR": 51,
+        "FAR": 44,
+        "READY_WITH_SUPPORT": 10
+      },
+      "avg_candidates_per_role": 9.166666666666666
+    }
+  },
+  "gap_analysis": {
+    "skill_gaps": {
+      "S-STAKE": {
+        "skill_name": "Stakeholder Management",
+        "skill_weight": 4,
+        "categoria": "Estrategia",
+        "required_in_roles": 8,
+        "role_ids": [
+          "R-STR-LEAD",
+          "R-PM",
+          "R-DSN-SR",
+          "R-PERF-SPEC",
+          "R-SEO-SEM",
+          "R-SMM",
+          "R-INF-MGR",
+          "R-STR-SR"
+        ],
+        "employees_with_gap": 64,
+        "blocked_transitions": 64,
+        "gap_percentage": 80.0,
+        "priority_level": 0.6400000000000001,
+        "roi_estimate": {
+          "roi_ratio": 0.0625,
+          "estimated_impact": 1
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1003",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-PM",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-DSN-SR",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-PERF-SPEC",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-SEO-SEM",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-SMM",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-INF-MGR",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-STR-SR",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-PM",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          }
+        ]
+      },
+      "S-PM": {
+        "skill_name": "Project Management",
+        "skill_weight": 4,
+        "categoria": "Gestión",
+        "required_in_roles": 7,
+        "role_ids": [
+          "R-PM",
+          "R-DSN-SR",
+          "R-PERF-SPEC",
+          "R-SEO-SEM",
+          "R-SMM",
+          "R-INF-MGR",
+          "R-STR-SR"
+        ],
+        "employees_with_gap": 56,
+        "blocked_transitions": 56,
+        "gap_percentage": 80.0,
+        "priority_level": 0.6400000000000001,
+        "roi_estimate": {
+          "roi_ratio": 0.07142857142857142,
+          "estimated_impact": 1
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1003",
+            "role_id": "R-PM",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-DSN-SR",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-PERF-SPEC",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-SEO-SEM",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-SMM",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-INF-MGR",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-STR-SR",
+            "overall_score": 0.3211538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-PM",
+            "overall_score": 0.4461538461538461,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-DSN-SR",
+            "overall_score": 0.35115384615384615,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-PERF-SPEC",
+            "overall_score": 0.35115384615384615,
+            "skill_impact": 0.4
+          }
+        ]
+      },
+      "S-CRM": {
+        "skill_name": "CRM Management",
+        "skill_weight": 5,
+        "categoria": "Martech",
+        "required_in_roles": 2,
+        "role_ids": [
+          "R-MTX-ARCH",
+          "R-CRM-ADMIN"
+        ],
+        "employees_with_gap": 16,
+        "blocked_transitions": 16,
+        "gap_percentage": 80.0,
+        "priority_level": 0.32000000000000006,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.38,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1001",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.5142857142857143,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.55,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.38,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-DATA": {
+        "skill_name": "Data Management",
+        "skill_weight": 5,
+        "categoria": "Datos",
+        "required_in_roles": 2,
+        "role_ids": [
+          "R-MTX-ARCH",
+          "R-DATA-ANL"
+        ],
+        "employees_with_gap": 16,
+        "blocked_transitions": 16,
+        "gap_percentage": 80.0,
+        "priority_level": 0.32000000000000006,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.38,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1001",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.43333333333333335,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.4666666666666667,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.5553571428571429,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.43333333333333335,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.38,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.35,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-ANALYTICS": {
+        "skill_name": "Analytics y Métricas",
+        "skill_weight": 5,
+        "categoria": "Datos",
+        "required_in_roles": 8,
+        "role_ids": [
+          "R-PM",
+          "R-DATA-ANL",
+          "R-DSN-SR",
+          "R-PERF-SPEC",
+          "R-SEO-SEM",
+          "R-SMM",
+          "R-INF-MGR",
+          "R-STR-SR"
+        ],
+        "employees_with_gap": 24,
+        "blocked_transitions": 24,
+        "gap_percentage": 30.0,
+        "priority_level": 0.3,
+        "roi_estimate": {
+          "roi_ratio": 0.625,
+          "estimated_impact": 3
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1002",
+            "role_id": "R-PM",
+            "overall_score": 0.6269230769230769,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-STR-SR",
+            "overall_score": 0.5019230769230769,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.4666666666666667,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-DSN-SR",
+            "overall_score": 0.5019230769230769,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-PERF-SPEC",
+            "overall_score": 0.5019230769230769,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-SEO-SEM",
+            "overall_score": 0.6269230769230769,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-SMM",
+            "overall_score": 0.5019230769230769,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-INF-MGR",
+            "overall_score": 0.6269230769230769,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-PM",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-AUTOM": {
+        "skill_name": "Automatización",
+        "skill_weight": 4,
+        "categoria": "Martech",
+        "required_in_roles": 2,
+        "role_ids": [
+          "R-MTX-ARCH",
+          "R-CRM-ADMIN"
+        ],
+        "employees_with_gap": 16,
+        "blocked_transitions": 16,
+        "gap_percentage": 80.0,
+        "priority_level": 0.25600000000000006,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.38,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1001",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.225,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.5142857142857143,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.55,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-MTX-ARCH",
+            "overall_score": 0.38,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.225,
+            "skill_impact": 0.4
+          }
+        ]
+      },
+      "S-OKR": {
+        "skill_name": "OKRs y Roadmapping",
+        "skill_weight": 5,
+        "categoria": "Estrategia",
+        "required_in_roles": 1,
+        "role_ids": [
+          "R-STR-LEAD"
+        ],
+        "employees_with_gap": 9,
+        "blocked_transitions": 9,
+        "gap_percentage": 90.0,
+        "priority_level": 0.18000000000000002,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1002",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.505357142857143,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1008",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1009",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1010",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-STORY": {
+        "skill_name": "Storytelling",
+        "skill_weight": 5,
+        "categoria": "Creatividad",
+        "required_in_roles": 1,
+        "role_ids": [
+          "R-CRT-LEAD"
+        ],
+        "employees_with_gap": 9,
+        "blocked_transitions": 9,
+        "gap_percentage": 90.0,
+        "priority_level": 0.18000000000000002,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.3889285714285714,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1008",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1009",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.37142857142857144,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1010",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.37142857142857144,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-ANALISIS": {
+        "skill_name": "Análisis Estratégico",
+        "skill_weight": 5,
+        "categoria": "Estrategia",
+        "required_in_roles": 1,
+        "role_ids": [
+          "R-STR-LEAD"
+        ],
+        "employees_with_gap": 8,
+        "blocked_transitions": 8,
+        "gap_percentage": 80.0,
+        "priority_level": 0.16000000000000003,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1003",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1008",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1009",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1010",
+            "role_id": "R-STR-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-SQLPY": {
+        "skill_name": "SQL & Python",
+        "skill_weight": 5,
+        "categoria": "Desarrollo",
+        "required_in_roles": 1,
+        "role_ids": [
+          "R-DATA-ANL"
+        ],
+        "employees_with_gap": 8,
+        "blocked_transitions": 8,
+        "gap_percentage": 80.0,
+        "priority_level": 0.16000000000000003,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.43333333333333335,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.4666666666666667,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.43333333333333335,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.42500000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.35,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1008",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.43333333333333335,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1009",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.5083333333333334,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1010",
+            "role_id": "R-DATA-ANL",
+            "overall_score": 0.5083333333333334,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-BRAND": {
+        "skill_name": "Branding",
+        "skill_weight": 5,
+        "categoria": "Diseño",
+        "required_in_roles": 1,
+        "role_ids": [
+          "R-CRT-LEAD"
+        ],
+        "employees_with_gap": 8,
+        "blocked_transitions": 8,
+        "gap_percentage": 80.0,
+        "priority_level": 0.16000000000000003,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1008",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1009",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.37142857142857144,
+            "skill_impact": 0.5
+          },
+          {
+            "employee_id": "1010",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.37142857142857144,
+            "skill_impact": 0.5
+          }
+        ]
+      },
+      "S-COPY": {
+        "skill_name": "Copywriting",
+        "skill_weight": 4,
+        "categoria": "Creatividad",
+        "required_in_roles": 1,
+        "role_ids": [
+          "R-CRT-LEAD"
+        ],
+        "employees_with_gap": 7,
+        "blocked_transitions": 7,
+        "gap_percentage": 70.0,
+        "priority_level": 0.11199999999999999,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1003",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.255,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1004",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.3889285714285714,
+            "skill_impact": 0.4
+          },
+          {
+            "employee_id": "1008",
+            "role_id": "R-CRT-LEAD",
+            "overall_score": 0.225,
+            "skill_impact": 0.4
+          }
+        ]
+      },
+      "S-EMAIL": {
+        "skill_name": "Email Marketing",
+        "skill_weight": 3,
+        "categoria": "Marketing",
+        "required_in_roles": 1,
+        "role_ids": [
+          "R-CRM-ADMIN"
+        ],
+        "employees_with_gap": 7,
+        "blocked_transitions": 7,
+        "gap_percentage": 70.0,
+        "priority_level": 0.084,
+        "roi_estimate": {
+          "roi_ratio": 0.0,
+          "estimated_impact": 0
+        },
+        "affected_employees": [
+          {
+            "employee_id": "1001",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.225,
+            "skill_impact": 0.3
+          },
+          {
+            "employee_id": "1002",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.3
+          },
+          {
+            "employee_id": "1005",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.55,
+            "skill_impact": 0.3
+          },
+          {
+            "employee_id": "1006",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.3
+          },
+          {
+            "employee_id": "1007",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.225,
+            "skill_impact": 0.3
+          },
+          {
+            "employee_id": "1008",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.225,
+            "skill_impact": 0.3
+          },
+          {
+            "employee_id": "1009",
+            "role_id": "R-CRM-ADMIN",
+            "overall_score": 0.30000000000000004,
+            "skill_impact": 0.3
+          }
+        ]
+      }
+    },
+    "chapter_gaps": {
+      "Strategy": {
+        "total_employees": 2,
+        "total_roles": 3,
+        "total_possible_transitions": 6,
+        "ready_transitions": 4,
+        "readiness_percentage": 66.66666666666666,
+        "critical_skills": {
+          "Analytics y Métricas": 2,
+          "OKRs y Roadmapping": 1
+        },
+        "health_status": "HEALTHY",
+        "recommended_actions": [
+          "Reforzar training en: Analytics y Métricas",
+          "Reforzar training en: OKRs y Roadmapping"
+        ]
+      },
+      "Creative": {
+        "total_employees": 1,
+        "total_roles": 1,
+        "total_possible_transitions": 1,
+        "ready_transitions": 1,
+        "readiness_percentage": 100.0,
+        "critical_skills": {},
+        "health_status": "HEALTHY",
+        "recommended_actions": []
+      },
+      "Design": {
+        "total_employees": 1,
+        "total_roles": 1,
+        "total_possible_transitions": 1,
+        "ready_transitions": 0,
+        "readiness_percentage": 0.0,
+        "critical_skills": {
+          "Project Management": 1,
+          "Analytics y Métricas": 1,
+          "Stakeholder Management": 1
+        },
+        "health_status": "CRITICAL",
+        "recommended_actions": [
+          "Urgente: Plan de desarrollo acelerado",
+          "Considerar contratación externa para roles críticos",
+          "Reforzar training en: Project Management",
+          "Reforzar training en: Analytics y Métricas"
+        ]
+      },
+      "Influency": {
+        "total_employees": 1,
+        "total_roles": 2,
+        "total_possible_transitions": 2,
+        "ready_transitions": 1,
+        "readiness_percentage": 50.0,
+        "critical_skills": {
+          "Project Management": 2,
+          "Stakeholder Management": 2
+        },
+        "health_status": "NEEDS_ATTENTION",
+        "recommended_actions": [
+          "Programa de desarrollo estructurado",
+          "Reforzar training en: Project Management",
+          "Reforzar training en: Stakeholder Management"
+        ]
+      },
+      "Performance": {
+        "total_employees": 2,
+        "total_roles": 2,
+        "total_possible_transitions": 4,
+        "ready_transitions": 0,
+        "readiness_percentage": 0.0,
+        "critical_skills": {
+          "Project Management": 4,
+          "Stakeholder Management": 4
+        },
+        "health_status": "CRITICAL",
+        "recommended_actions": [
+          "Urgente: Plan de desarrollo acelerado",
+          "Considerar contratación externa para roles críticos",
+          "Reforzar training en: Project Management",
+          "Reforzar training en: Stakeholder Management"
+        ]
+      },
+      "Martech": {
+        "total_employees": 3,
+        "total_roles": 3,
+        "total_possible_transitions": 9,
+        "ready_transitions": 5,
+        "readiness_percentage": 55.55555555555556,
+        "critical_skills": {
+          "Data Management": 2,
+          "CRM Management": 2,
+          "Automatización": 2,
+          "SQL & Python": 1,
+          "Email Marketing": 1
+        },
+        "health_status": "NEEDS_ATTENTION",
+        "recommended_actions": [
+          "Programa de desarrollo estructurado",
+          "Reforzar training en: Data Management",
+          "Reforzar training en: CRM Management"
+        ]
+      }
+    },
+    "bottlenecks": [
+      {
+        "skill_id": "S-STAKE",
+        "skill_name": "Stakeholder Management",
+        "gap_percentage": 80.0,
+        "affected_roles": 8,
+        "blocked_transitions": 64,
+        "bottleneck_impact": 25.6,
+        "priority_level": 0.6400000000000001
+      },
+      {
+        "skill_id": "S-PM",
+        "skill_name": "Project Management",
+        "gap_percentage": 80.0,
+        "affected_roles": 7,
+        "blocked_transitions": 56,
+        "bottleneck_impact": 22.4,
+        "priority_level": 0.6400000000000001
+      },
+      {
+        "skill_id": "S-ANALYTICS",
+        "skill_name": "Analytics y Métricas",
+        "gap_percentage": 30.0,
+        "affected_roles": 8,
+        "blocked_transitions": 24,
+        "bottleneck_impact": 12.0,
+        "priority_level": 0.3
+      },
+      {
+        "skill_id": "S-CRM",
+        "skill_name": "CRM Management",
+        "gap_percentage": 80.0,
+        "affected_roles": 2,
+        "blocked_transitions": 16,
+        "bottleneck_impact": 8.0,
+        "priority_level": 0.32000000000000006
+      },
+      {
+        "skill_id": "S-DATA",
+        "skill_name": "Data Management",
+        "gap_percentage": 80.0,
+        "affected_roles": 2,
+        "blocked_transitions": 16,
+        "bottleneck_impact": 8.0,
+        "priority_level": 0.32000000000000006
+      },
+      {
+        "skill_id": "S-AUTOM",
+        "skill_name": "Automatización",
+        "gap_percentage": 80.0,
+        "affected_roles": 2,
+        "blocked_transitions": 16,
+        "bottleneck_impact": 6.4,
+        "priority_level": 0.25600000000000006
+      },
+      {
+        "skill_id": "S-OKR",
+        "skill_name": "OKRs y Roadmapping",
+        "gap_percentage": 90.0,
+        "affected_roles": 1,
+        "blocked_transitions": 9,
+        "bottleneck_impact": 4.5,
+        "priority_level": 0.18000000000000002
+      },
+      {
+        "skill_id": "S-STORY",
+        "skill_name": "Storytelling",
+        "gap_percentage": 90.0,
+        "affected_roles": 1,
+        "blocked_transitions": 9,
+        "bottleneck_impact": 4.5,
+        "priority_level": 0.18000000000000002
+      },
+      {
+        "skill_id": "S-ANALISIS",
+        "skill_name": "Análisis Estratégico",
+        "gap_percentage": 80.0,
+        "affected_roles": 1,
+        "blocked_transitions": 8,
+        "bottleneck_impact": 4.0,
+        "priority_level": 0.16000000000000003
+      },
+      {
+        "skill_id": "S-SQLPY",
+        "skill_name": "SQL & Python",
+        "gap_percentage": 80.0,
+        "affected_roles": 1,
+        "blocked_transitions": 8,
+        "bottleneck_impact": 4.0,
+        "priority_level": 0.16000000000000003
+      },
+      {
+        "skill_id": "S-BRAND",
+        "skill_name": "Branding",
+        "gap_percentage": 80.0,
+        "affected_roles": 1,
+        "blocked_transitions": 8,
+        "bottleneck_impact": 4.0,
+        "priority_level": 0.16000000000000003
+      },
+      {
+        "skill_id": "S-COPY",
+        "skill_name": "Copywriting",
+        "gap_percentage": 70.0,
+        "affected_roles": 1,
+        "blocked_transitions": 7,
+        "bottleneck_impact": 2.8,
+        "priority_level": 0.11199999999999999
+      },
+      {
+        "skill_id": "S-EMAIL",
+        "skill_name": "Email Marketing",
+        "gap_percentage": 70.0,
+        "affected_roles": 1,
+        "blocked_transitions": 7,
+        "bottleneck_impact": 2.1,
+        "priority_level": 0.084
+      }
+    ],
+    "training_roi": {
+      "S-ANALYTICS": {
+        "skill_name": "Analytics y Métricas",
+        "employees_to_train": 10,
+        "high_potential_employees": 3,
+        "training_cost": 20000.0,
+        "estimated_promotions": 2.0999999999999996,
+        "estimated_value": 31499.999999999996,
+        "roi_ratio": 0.5749999999999998,
+        "roi_percentage": 57.499999999999986,
+        "payback_months": 24,
+        "priority_recommendation": "LOW"
+      },
+      "S-STAKE": {
+        "skill_name": "Stakeholder Management",
+        "employees_to_train": 10,
+        "high_potential_employees": 0,
+        "training_cost": 20000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-PM": {
+        "skill_name": "Project Management",
+        "employees_to_train": 10,
+        "high_potential_employees": 0,
+        "training_cost": 20000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-CRM": {
+        "skill_name": "CRM Management",
+        "employees_to_train": 10,
+        "high_potential_employees": 0,
+        "training_cost": 20000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-DATA": {
+        "skill_name": "Data Management",
+        "employees_to_train": 10,
+        "high_potential_employees": 0,
+        "training_cost": 20000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-AUTOM": {
+        "skill_name": "Automatización",
+        "employees_to_train": 10,
+        "high_potential_employees": 0,
+        "training_cost": 20000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-OKR": {
+        "skill_name": "OKRs y Roadmapping",
+        "employees_to_train": 9,
+        "high_potential_employees": 0,
+        "training_cost": 18000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-STORY": {
+        "skill_name": "Storytelling",
+        "employees_to_train": 9,
+        "high_potential_employees": 0,
+        "training_cost": 18000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-ANALISIS": {
+        "skill_name": "Análisis Estratégico",
+        "employees_to_train": 8,
+        "high_potential_employees": 0,
+        "training_cost": 16000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-SQLPY": {
+        "skill_name": "SQL & Python",
+        "employees_to_train": 8,
+        "high_potential_employees": 0,
+        "training_cost": 16000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-BRAND": {
+        "skill_name": "Branding",
+        "employees_to_train": 8,
+        "high_potential_employees": 0,
+        "training_cost": 16000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-COPY": {
+        "skill_name": "Copywriting",
+        "employees_to_train": 7,
+        "high_potential_employees": 0,
+        "training_cost": 14000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      },
+      "S-EMAIL": {
+        "skill_name": "Email Marketing",
+        "employees_to_train": 7,
+        "high_potential_employees": 0,
+        "training_cost": 14000.0,
+        "estimated_promotions": 0.0,
+        "estimated_value": 0.0,
+        "roi_ratio": -1.0,
+        "roi_percentage": -100.0,
+        "payback_months": -1,
+        "priority_recommendation": "NOT_RECOMMENDED"
+      }
+    }
+  },
+  "recommendations": {
+    "strategic": {
+      "immediate_actions": [
+        "Urgente: Programa intensivo de Stakeholder Management (64 transiciones bloqueadas)",
+        "Urgente: Programa intensivo de Project Management (56 transiciones bloqueadas)",
+        "Urgente: Programa intensivo de Analytics y Métricas (24 transiciones bloqueadas)"
+      ],
+      "short_term_investments": [],
+      "long_term_strategy": [
+        "Reestructurar chapters con baja readiness: Design, Performance"
+      ],
+      "hiring_priorities": [
+        "Contratar externamente: OKRs y Roadmapping (gap crítico no cubierto internamente)",
+        "Contratar externamente: Storytelling (gap crítico no cubierto internamente)"
+      ]
+    },
+    "organizational": {
+      "training_programs": [],
+      "hiring_priorities": [
+        {
+          "skill_required": "Stakeholder Management",
+          "urgency_level": "HIGH",
+          "roles_blocked": 8,
+          "recommended_level": "Senior/Expert",
+          "hiring_timeline": "1-2 meses",
+          "budget_impact": "HIGH"
+        },
+        {
+          "skill_required": "Project Management",
+          "urgency_level": "HIGH",
+          "roles_blocked": 7,
+          "recommended_level": "Senior/Expert",
+          "hiring_timeline": "1-2 meses",
+          "budget_impact": "HIGH"
+        },
+        {
+          "skill_required": "CRM Management",
+          "urgency_level": "HIGH",
+          "roles_blocked": 2,
+          "recommended_level": "Senior/Expert",
+          "hiring_timeline": "1-2 meses",
+          "budget_impact": "HIGH"
+        }
+      ],
+      "mentoring_programs": [
+        {
+          "program_name": "Leadership Pipeline Mentoring",
+          "target_group": "High potential employees",
+          "focus_areas": [
+            "Strategic thinking",
+            "Team leadership"
+          ],
+          "duration": "6 meses",
+          "expected_participants": 10
+        }
+      ],
+      "organizational_changes": [
+        {
+          "change_type": "Role restructuring",
+          "description": "Crear roles intermedios para facilitar progresión",
+          "rationale": "Gaps muy grandes entre niveles actuales",
+          "timeline": "3-6 meses",
+          "impact": "MEDIUM"
+        }
+      ]
+    },
+    "individual": {
+      "1001": [
+        {
+          "type": "career_action",
+          "category": "immediate_opportunity",
+          "title": "¡Oportunidad inmediata para R-STR-LEAD!",
+          "description": "Ya tienes las competencias necesarias. Solicita la promoción.",
+          "actions": [
+            "Hablar con tu manager sobre esta oportunidad",
+            "Preparar presentación de tu readiness",
+            "Solicitar feedback específico del rol"
+          ],
+          "timeline": "0-1 mes",
+          "priority_score": 1.0,
+          "effort_level": "LOW"
+        },
+        {
+          "type": "ambition_alignment",
+          "category": "career_planning",
+          "title": "Alinear proyectos con ambiciones",
+          "description": "Buscar proyectos que conecten con tus intereses",
+          "actions": [
+            "Proponer proyecto relacionado con: Estrategia",
+            "Documentar aprendizajes y resultados",
+            "Presentar resultados a stakeholders relevantes"
+          ],
+          "timeline": "2-4 meses",
+          "priority_score": 0.6,
+          "effort_level": "MEDIUM"
+        },
+        {
+          "type": "mentoring",
+          "category": "guidance",
+          "title": "Programa de mentoring",
+          "description": "Encontrar mentor para acelerar desarrollo",
+          "actions": [
+            "Identificar mentores potenciales en roles objetivo",
+            "Estructurar sesiones de mentoring mensuales",
+            "Definir objetivos específicos de mentoring"
+          ],
+          "timeline": "6-12 meses",
+          "priority_score": 0.5,
+          "effort_level": "MEDIUM"
+        },
+        {
+          "type": "career_action",
+          "category": "supported_transition",
+          "title": "Transición con soporte a R-PM",
+          "description": "Estás muy cerca. Con soporte específico puedes hacer la transición.",
+          "actions": [
+            "Identificar mentor interno en el rol",
+            "Solicitar shadowing de 2-4 semanas",
+            "Plan de onboarding estructurado"
+          ],
+          "timeline": "1-3 meses",
+          "priority_score": 0.45,
+          "effort_level": "MEDIUM"
+        },
+        {
+          "type": "networking",
+          "category": "professional_growth",
+          "title": "Expandir red profesional interna",
+          "description": "Conectar con profesionales de otros chapters",
+          "actions": [
+            "Participar en eventos internos cross-chapter",
+            "Solicitar coffee chats con líderes de otros departamentos",
+            "Unirse a grupos de trabajo interdisciplinarios"
+          ],
+          "timeline": "Ongoing",
+          "priority_score": 0.4,
+          "effort_level": "LOW"
+        },
+        {
+          "type": "career_action",
+          "category": "supported_transition",
+          "title": "Transición con soporte a R-STR-SR",
+          "description": "Estás muy cerca. Con soporte específico puedes hacer la transición.",
+          "actions": [
+            "Identificar mentor interno en el rol",
+            "Solicitar shadowing de 2-4 semanas",
+            "Plan de onboarding estructurado"
+          ],
+          "timeline": "1-3 meses",
+          "priority_score": 0.3,
+          "effort_level": "MEDIUM"
+        }
+      ],
+      "1002": [
+        {
+          "type": "development_plan",
+          "category": "structured_growth",
+          "title": "Plan de desarrollo hacia R-STR-LEAD",
+          "description": "Plan estructurado de 3-6 meses para cerrar los gaps.",
+          "actions": [
+            "Curso online: OKRs Fundamentals (2 semanas)",
+            "Workshop interno: Implementación de OKRs (1 día)",
+            "Proyecto práctico: Definir OKRs para tu área (1 mes)",
+            "Mentoring con Head of Strategy (mensual)",
+            "Solicitar proyecto piloto con responsabilidades del rol objetivo",
+            "Participar en comités de decisión relevantes",
+            "Documentar y presentar resultados de nuevas responsabilidades"
+          ],
+          "timeline": "3-6 meses",
+          "priority_score": 0.7,
+          "effort_level": "HIGH",
+          "milestones": [
+            {
+              "month": 3,
+              "milestone": "Competencia en OKRs y Roadmapping",
+              "success_criteria": "Nivel mínimo: avanzado"
+            },
+            {
+              "month": 4,
+              "milestone": "Demostración de responsabilidades clave",
+              "success_criteria": "Feedback positivo en nuevas responsabilidades"
+            }
+          ]
+        },
+        {
+          "type": "skill_development",
+          "category": "technical_growth",
+          "title": "Desarrollar competencia en OKRs y Roadmapping",
+          "description": "Pasar de intermedio a avanzado",
+          "actions": [
+            "Curso online: OKRs Fundamentals (2 semanas)",
+            "Workshop interno: Implementación de OKRs (1 día)",
+            "Proyecto práctico: Definir OKRs para tu área (1 mes)",
+            "Mentoring con Head of Strategy (mensual)"
+          ],
+          "timeline": "3 meses",
+          "priority_score": 0.6,
+          "effort_level": "MEDIUM",
+          "resources": [
+            "Coursera",
+            "Internal workshop",
+            "Mentoring"
+          ],
+          "success_indicators": [
+            "Certificación completada",
+            "OKRs implementados",
+            "Feedback positivo"
+          ]
+        },
+        {
+          "type": "ambition_alignment",
+          "category": "career_planning",
+          "title": "Alinear proyectos con ambiciones",
+          "description": "Buscar proyectos que conecten con tus intereses",
+          "actions": [
+            "Proponer proyecto relacionado con: PMO",
+            "Documentar aprendizajes y resultados",
+            "Presentar resultados a stakeholders relevantes"
+          ],
+          "timeline": "2-4 meses",
+          "priority_score": 0.6,
+          "effort_level": "MEDIUM"
+        },
+        {
+          "type": "mentoring",
+          "category": "guidance",
+          "title": "Programa de mentoring",
+          "description": "Encontrar mentor para acelerar desarrollo",
+          "actions": [
+            "Identificar mentores potenciales en roles objetivo",
+            "Estructurar sesiones de mentoring mensuales",
+            "Definir objetivos específicos de mentoring"
+          ],
+          "timeline": "6-12 meses",
+          "priority_score": 0.5,
+          "effort_level": "MEDIUM"
+        },
+        {
+          "type": "networking",
+          "category": "professional_growth",
+          "title": "Expandir red profesional interna",
+          "description": "Conectar con profesionales de otros chapters",
+          "actions": [
+            "Participar en eventos internos cross-chapter",
+            "Solicitar coffee chats con líderes de otros departamentos",
+            "Unirse a grupos de trabajo interdisciplinarios"
+          ],
+          "timeline": "Ongoing",
+          "priority_score": 0.4,
+          "effort_level": "LOW"
+        },
+        {
+          "type": "development_plan",
+          "category": "structured_growth",
+          "title": "Plan de desarrollo hacia R-STR-SR",
+          "description": "Plan estructurado de 3-6 meses para cerrar los gaps.",
+          "actions": [
+            "Curso especializado en Analytics y Métricas",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias",
+            "Solicitar proyecto piloto con responsabilidades del rol objetivo",
+            "Participar en comités de decisión relevantes",
+            "Documentar y presentar resultados de nuevas responsabilidades"
+          ],
+          "timeline": "3-6 meses",
+          "priority_score": 0.35,
+          "effort_level": "HIGH",
+          "milestones": [
+            {
+              "month": 2,
+              "milestone": "Competencia en Analytics y Métricas",
+              "success_criteria": "Nivel mínimo: avanzado"
+            },
+            {
+              "month": 4,
+              "milestone": "Demostración de responsabilidades clave",
+              "success_criteria": "Feedback positivo en nuevas responsabilidades"
+            }
+          ]
+        },
+        {
+          "type": "skill_development",
+          "category": "technical_growth",
+          "title": "Desarrollar competencia en Analytics y Métricas",
+          "description": "Pasar de intermedio a avanzado",
+          "actions": [
+            "Curso especializado en Analytics y Métricas",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias"
+          ],
+          "timeline": "2 meses",
+          "priority_score": 0.3,
+          "effort_level": "MEDIUM",
+          "resources": [
+            "External training",
+            "Internal project"
+          ],
+          "success_indicators": [
+            "Course completion",
+            "Project success"
+          ]
+        },
+        {
+          "type": "career_action",
+          "category": "supported_transition",
+          "title": "Transición con soporte a R-PM",
+          "description": "Estás muy cerca. Con soporte específico puedes hacer la transición.",
+          "actions": [
+            "Identificar mentor interno en el rol",
+            "Solicitar shadowing de 2-4 semanas",
+            "Plan de onboarding estructurado"
+          ],
+          "timeline": "1-3 meses",
+          "priority_score": 0.3,
+          "effort_level": "MEDIUM"
+        }
+      ],
+      "1003": [
+        {
+          "type": "development_plan",
+          "category": "structured_growth",
+          "title": "Plan de desarrollo hacia R-PM",
+          "description": "Plan estructurado de 3-6 meses para cerrar los gaps.",
+          "actions": [
+            "Curso especializado en Project Management",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias",
+            "Curso especializado en Stakeholder Management",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias",
+            "Solicitar proyecto piloto con responsabilidades del rol objetivo",
+            "Participar en comités de decisión relevantes",
+            "Documentar y presentar resultados de nuevas responsabilidades"
+          ],
+          "timeline": "3-6 meses",
+          "priority_score": 0.7,
+          "effort_level": "HIGH",
+          "milestones": [
+            {
+              "month": 2,
+              "milestone": "Competencia en Project Management",
+              "success_criteria": "Nivel mínimo: avanzado"
+            },
+            {
+              "month": 2,
+              "milestone": "Competencia en Stakeholder Management",
+              "success_criteria": "Nivel mínimo: avanzado"
+            },
+            {
+              "month": 4,
+              "milestone": "Demostración de responsabilidades clave",
+              "success_criteria": "Feedback positivo en nuevas responsabilidades"
+            }
+          ]
+        },
+        {
+          "type": "ambition_alignment",
+          "category": "career_planning",
+          "title": "Alinear proyectos con ambiciones",
+          "description": "Buscar proyectos que conecten con tus intereses",
+          "actions": [
+            "Proponer proyecto relacionado con: RevOps",
+            "Documentar aprendizajes y resultados",
+            "Presentar resultados a stakeholders relevantes"
+          ],
+          "timeline": "2-4 meses",
+          "priority_score": 0.6,
+          "effort_level": "MEDIUM"
+        },
+        {
+          "type": "mentoring",
+          "category": "guidance",
+          "title": "Programa de mentoring",
+          "description": "Encontrar mentor para acelerar desarrollo",
+          "actions": [
+            "Identificar mentores potenciales en roles objetivo",
+            "Estructurar sesiones de mentoring mensuales",
+            "Definir objetivos específicos de mentoring"
+          ],
+          "timeline": "6-12 meses",
+          "priority_score": 0.5,
+          "effort_level": "MEDIUM"
+        },
+        {
+          "type": "skill_development",
+          "category": "technical_growth",
+          "title": "Desarrollar competencia en Project Management",
+          "description": "Pasar de novato a avanzado",
+          "actions": [
+            "Curso especializado en Project Management",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias"
+          ],
+          "timeline": "2 meses",
+          "priority_score": 0.48,
+          "effort_level": "MEDIUM",
+          "resources": [
+            "External training",
+            "Internal project"
+          ],
+          "success_indicators": [
+            "Course completion",
+            "Project success"
+          ]
+        },
+        {
+          "type": "skill_development",
+          "category": "technical_growth",
+          "title": "Desarrollar competencia en Stakeholder Management",
+          "description": "Pasar de novato a avanzado",
+          "actions": [
+            "Curso especializado en Stakeholder Management",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias"
+          ],
+          "timeline": "2 meses",
+          "priority_score": 0.48,
+          "effort_level": "MEDIUM",
+          "resources": [
+            "External training",
+            "Internal project"
+          ],
+          "success_indicators": [
+            "Course completion",
+            "Project success"
+          ]
+        },
+        {
+          "type": "networking",
+          "category": "professional_growth",
+          "title": "Expandir red profesional interna",
+          "description": "Conectar con profesionales de otros chapters",
+          "actions": [
+            "Participar en eventos internos cross-chapter",
+            "Solicitar coffee chats con líderes de otros departamentos",
+            "Unirse a grupos de trabajo interdisciplinarios"
+          ],
+          "timeline": "Ongoing",
+          "priority_score": 0.4,
+          "effort_level": "LOW"
+        },
+        {
+          "type": "development_plan",
+          "category": "structured_growth",
+          "title": "Plan de desarrollo hacia R-SEO-SEM",
+          "description": "Plan estructurado de 3-6 meses para cerrar los gaps.",
+          "actions": [
+            "Curso especializado en Project Management",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias",
+            "Curso especializado en Stakeholder Management",
+            "Proyecto práctico supervisado",
+            "Evaluación de competencias",
+            "Solicitar proyecto piloto con responsabilidades del rol objetivo",
+            "Participar en comités de decisión relevantes",
+            "Documentar y presentar resultados de nuevas responsabilidades"
+          ],
+          "timeline": "3-6 meses",
+          "priority_score": 0.35,
+          "effort_level": "HIGH",
+          "milestones": [
+            {
+              "month": 2,
+              "milestone": "Competencia en Project Management",
+              "success_criteria": "Nivel mínimo: avanzado"
+            },
+            {
+              "month": 2,
+              "milestone": "Competencia en Stakeholder Management",
+              "success_criteria": "Nivel mínimo: avanzado"
+            },
+            {
+              "month": 4,
+              "milestone": "Demostración de responsabilidades clave",
+              "success_criteria": "Feedback positivo en nuevas responsabilidades"
+            }
+          ]
+        },
+        {
+          "type": "career_action",
+          "category": "immediate_opportunity",
+          "title": "¡Oportunidad inmediata para R-CRM-ADMIN!",
+          "description": "Ya tienes las competencias necesarias. Solicita la promoción.",
+          "actions": [
+            "Hablar con tu manager sobre esta oportunidad",
+            "Preparar presentación de tu readiness",
+            "Solicitar feedback específico del rol"
+          ],
+          "timeline": "0-1 mes",
+          "priority_score": 0.3333333333333333,
+          "effort_level": "LOW"
+        }
+      ]
+    }
+  },
+  "executive_summary": {
+    "overall_readiness": "13.6%",
+    "employees_analyzed": 10,
+    "roles_analyzed": 12,
+    "ready_transitions": 15,
+    "critical_bottlenecks": 12,
+    "chapters_needing_attention": 4,
+    "key_insights": [
+      "Readiness rate: 13.6% of analyzed transitions are ready",
+      "Critical bottlenecks: 12 skills blocking multiple transitions",
+      "Investment priority: Stakeholder Management"
+    ],
+    "next_steps": [
+      "Review individual development plans for high-potential employees",
+      "Implement training programs for bottleneck skills",
+      "Consider external hiring for critical gaps"
+    ]
+  }
+}
