@@ -2,7 +2,9 @@ import axios from 'axios';
 import { API_SERVER, API_INITIAL } from "../utils/constants";
 
 export const post = async (endpoint, data = null) => {
-    const fullPath = API_SERVER + API_INITIAL + endpoint;
+    // Eliminar barras iniciales del endpoint para evitar doble //
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+    const fullPath = API_SERVER + API_INITIAL + cleanEndpoint;
 
     try {
         const response = await axios.post(fullPath, data);
@@ -15,7 +17,9 @@ export const post = async (endpoint, data = null) => {
 };
 
 export const get = async (endpoint) => {
-    const fullPath = API_SERVER + API_INITIAL + endpoint;
+    // Eliminar barras iniciales del endpoint para evitar doble //
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+    const fullPath = API_SERVER + API_INITIAL + cleanEndpoint;
 
     try {
         const response = await axios.get(fullPath);

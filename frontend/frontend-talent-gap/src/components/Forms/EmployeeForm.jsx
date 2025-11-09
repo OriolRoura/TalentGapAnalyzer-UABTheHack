@@ -6,13 +6,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { SkillsSection } from './SkillsSection';
 import { DedicationSection } from './DedicationSection';
 import { AmbitionsSection } from './AmbitionsSection';
-import { submitForm } from '../../services/formService';
+import { submitEmployeeForm } from '../../services/formService';
 import { getRoles } from '../../services/rolesService';
 import { getChapters } from '../../services/chaptersService';
 import { getProjects } from '../../services/projectsService';
 
 const PERFORMANCE_RATINGS = ['D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+'];
 const RETENTION_RISKS = ['Baja', 'Media', 'Alta'];
+const MODALIDADES = ['FT', 'PT', 'Freelance'];
 
 export function EmployeeForm() {
   const [roles, setRoles] = useState([]);
@@ -23,21 +24,26 @@ export function EmployeeForm() {
   const [loadingProjects, setLoadingProjects] = useState(true);
   
   const [formData, setFormData] = useState({
+    employee_id: null, // opcional, si se proporciona actualiza el empleado existente
     nombre: '',
     email: '',
     chapter: '',
-    rol_actual: '',
+    rol_actual: '', // Rol actual del empleado
+    antigüedad: '', // Antigüedad en meses (formato: "24m")
+    modalidad: '', // FT, PT, Freelance
+    habilidades: {}, // Mantener como objeto para el componente SkillsSection
+    skills: [], // Array final para la API
+    ambiciones: {
+      nivel_aspiracion: '', // sin tilde
+      especialidades_preferidas: [],
+      areas_interes: [],
+    },
+    dedicacion_actual: {}, // Objeto con múltiples proyectos {"Royal": 40, "Arquimbau": 25}
+    // Campos adicionales para metadata interna (no van en la API)
     manager: '',
-    antigüedad: '',
     performance_rating: '',
     retention_risk: '',
     trayectoria: '',
-    habilidades: {},
-    dedicacion: {},
-    ambiciones: {
-      nivel_aspiración: '',
-      especialidades_preferidas: [],
-    },
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -75,23 +81,34 @@ export function EmployeeForm() {
   };
 
   const handleSkillsChange = (skills) => {
+    // Convertir el objeto de habilidades a array de objetos para la API
+    const skillsArray = Object.entries(skills || {}).map(([nombre, nivel]) => ({
+      nombre,
+      nivel,
+      experiencia_años: 0, // Valor por defecto, se puede mejorar después
+    }));
+    
     setFormData((prev) => ({
       ...prev,
-      habilidades: skills,
+      habilidades: skills, // Mantener el objeto para el componente
+      skills: skillsArray, // Array para la API
     }));
   };
 
-  const handleDedicationChange = (dedication) => {
+  const handleDedicationChange = (dedicacion) => {
     setFormData((prev) => ({
       ...prev,
-      dedicacion: dedication,
+      dedicacion_actual: dedicacion,
     }));
   };
 
   const handleAmbitionsChange = (ambiciones) => {
     setFormData((prev) => ({
       ...prev,
-      ambiciones,
+      ambiciones: {
+        ...prev.ambiciones,
+        ...ambiciones,
+      },
     }));
   };
 
@@ -101,37 +118,55 @@ export function EmployeeForm() {
     setMessage(null);
 
     try {
-      // Prepare payload matching the expected format
+      // Convertir dedicacion_actual de objeto a array solo con proyectos que tengan porcentaje > 0
+      const dedicacionArray = Object.entries(formData.dedicacion_actual)
+        .filter(([_, percentage]) => percentage > 0)
+        .map(([projectName, percentage]) => ({
+          proyecto_actual: projectName,
+          porcentaje_dedicacion: percentage,
+          horas_semana: Math.round((percentage / 100) * 40), // Asumir 40h/semana
+        }));
+
+      // Preparar payload según el schema HREmployeeSubmitForm
       const payload = {
+        employee_id: formData.employee_id, // opcional, null para nuevo empleado
         nombre: formData.nombre,
         email: formData.email,
         chapter: formData.chapter,
         rol_actual: formData.rol_actual,
-        manager: formData.manager,
-        antigüedad: `${formData.antigüedad}m`,
-        habilidades: JSON.stringify(formData.habilidades),
-        dedicación_actual: JSON.stringify(formData.dedicacion),
-        ambiciones: JSON.stringify(formData.ambiciones),
-        metadata: JSON.stringify({
-          performance_rating: formData.performance_rating,
-          retention_risk: formData.retention_risk,
-          trayectoria: formData.trayectoria,
-        }),
+        seniority: formData.antigüedad, // API llama "seniority" a lo que es "antigüedad" (ej: "24m")
+        modalidad: formData.modalidad,
+        skills: formData.skills, // array de {nombre, nivel, experiencia_años}
+        // responsabilidades: NO se envían - el backend las carga automáticamente del rol
+        ambiciones: {
+          nivel_aspiracion: formData.ambiciones.nivel_aspiracion,
+          especialidades_preferidas: formData.ambiciones.especialidades_preferidas,
+          areas_interes: formData.ambiciones.areas_interes,
+        },
+        dedicacion_actual: dedicacionArray, // Array de objetos [{proyecto_actual, porcentaje_dedicacion, horas_semana}]
       };
 
-      await submitForm(payload);
-      console.log('Employee Data:', formData);
+      console.log('Enviando datos:', payload);
+      
+      const response = await submitEmployeeForm(payload);
+      console.log('Respuesta:', response);
       
       setSubmitted(true);
-      setMessage({ type: 'success', text: 'Empleado añadido con éxito' });
+      setMessage({ 
+        type: 'success', 
+        text: `✓ ${response.message || 'Empleado guardado exitosamente'} (ID: ${response.employee_id})` 
+      });
       
+      // Reset form after 3 seconds
       setTimeout(() => {
         setSubmitted(false);
         setMessage(null);
-      }, 3000);
+        // Opcionalmente resetear el formulario aquí
+      }, 5000);
     } catch (err) {
-      console.error(err);
-      setMessage({ type: 'error', text: err?.message || 'Error al enviar el formulario' });
+      console.error('Error al enviar formulario:', err);
+      const errorMsg = err?.response?.data?.detail || err?.message || 'Error al enviar el formulario';
+      setMessage({ type: 'error', text: `✗ ${errorMsg}` });
     } finally {
       setSubmitting(false);
     }
@@ -209,25 +244,40 @@ export function EmployeeForm() {
                 </select>
               </div>
               <div>
-                <label className="block text-base font-medium mb-3">Gerente/Superior</label>
-                <Input
-                  type="text"
-                  placeholder="Nombre del superior directo"
-                  value={formData.manager}
-                  onChange={(e) => handleBasicChange('manager', e.target.value)}
-                  className="h-12 text-base"
-                />
-              </div>
-              <div>
-                <label className="block text-base font-medium mb-3">Antigüedad (meses)</label>
+                <label className="block text-base font-medium mb-3">Antigüedad (meses) *</label>
                 <Input
                   type="number"
-                  placeholder="Ej: 12"
-                  value={formData.antigüedad}
-                  onChange={(e) => handleBasicChange('antigüedad', e.target.value)}
+                  placeholder="Ej: 24"
+                  value={formData.antigüedad.replace('m', '')}
+                  onChange={(e) => {
+                    const months = e.target.value;
+                    handleBasicChange('antigüedad', months ? `${months}m` : '');
+                  }}
+                  min="0"
+                  required
                   className="h-12 text-base"
                 />
+                <p className="text-sm text-gray-500 mt-1">
+                  Tiempo trabajando en la empresa (meses)
+                </p>
               </div>
+              <div>
+                <label className="block text-base font-medium mb-3">Modalidad *</label>
+                <select
+                  value={formData.modalidad}
+                  onChange={(e) => handleBasicChange('modalidad', e.target.value)}
+                  className="flex h-12 w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                  required
+                >
+                  <option value="">Seleccionar modalidad</option>
+                  {MODALIDADES.map((mod) => (
+                    <option key={mod} value={mod}>
+                      {mod === 'FT' ? 'Full Time' : mod === 'PT' ? 'Part Time' : 'Freelance'}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
             </div>
           </CardContent>
         </Card>
@@ -295,12 +345,12 @@ export function EmployeeForm() {
           </TabsList>
 
           <TabsContent value="skills" className="mt-6">
-            <SkillsSection skills={formData.habilidades} onChange={handleSkillsChange} />
+            <SkillsSection skills={formData.habilidades || {}} onChange={handleSkillsChange} />
           </TabsContent>
 
           <TabsContent value="dedication" className="mt-6">
             <DedicationSection
-              dedication={formData.dedicacion}
+              dedication={formData.dedicacion_actual}
               onChange={handleDedicationChange}
               projects={projects}
             />

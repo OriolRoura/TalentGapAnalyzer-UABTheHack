@@ -21,9 +21,10 @@ export function SkillsSection({ skills, onChange }) {
   }, []);
 
   const addSkill = () => {
-    if (selectedSkill && !skills[selectedSkill]) {
+    const currentSkills = skills || {};
+    if (selectedSkill && !currentSkills[selectedSkill]) {
       onChange({
-        ...skills,
+        ...currentSkills,
         [selectedSkill]: skillRating,
       });
       setSelectedSkill('');
@@ -32,7 +33,8 @@ export function SkillsSection({ skills, onChange }) {
   };
 
   const removeSkill = (skill) => {
-    const { [skill]: _, ...remaining } = skills;
+    const currentSkills = skills || {};
+    const { [skill]: _, ...remaining } = currentSkills;
     onChange(remaining);
   };
 
@@ -57,7 +59,7 @@ export function SkillsSection({ skills, onChange }) {
                 {loadingSkills ? 'Cargando habilidades...' : 'Seleccionar habilidad...'}
               </option>
               {availableSkills
-                .filter((skill) => !skills[skill.id])
+                .filter((skill) => !(skills || {})[skill.id])
                 .map((skill) => (
                   <option key={skill.id} value={skill.id}>
                     {skill.nombre} ({skill.categoria})
@@ -81,9 +83,9 @@ export function SkillsSection({ skills, onChange }) {
           </div>
 
           {/* Skills List */}
-          {Object.keys(skills).length > 0 ? (
+          {Object.keys(skills || {}).length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(skills).map(([skillId, rating]) => {
+              {Object.entries(skills || {}).map(([skillId, rating]) => {
                 const skillInfo = availableSkills.find(s => s.id === skillId);
                 const displayName = skillInfo ? `${skillInfo.nombre} (${skillInfo.categoria})` : skillId;
                 

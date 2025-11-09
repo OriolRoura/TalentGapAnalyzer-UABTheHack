@@ -1,7 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { AlertTriangle, Users, ChevronDown, AlertCircle } from 'lucide-react';
+import { getAllEmployeesGapMatrix } from '../../../services/gapAnalysisService';
+import { transformGapDataToSkillBottleneck } from '../../../utils/gapDataTransformer';
 
 // Mock data - will be replaced with real data later
 const mockSkillsData = {
@@ -140,21 +142,63 @@ const mockSkillsData = {
 
 export function SkillBottleneck() {
   const [expandedSkill, setExpandedSkill] = useState(null);
+  const [skillsData, setSkillsData] = useState(mockSkillsData);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch gap matrix data from API
+  useEffect(() => {
+    const fetchGapData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        console.log('🔄 [SkillBottleneck] Fetching gap matrix data from API...');
+        const gapMatrixData = await getAllEmployeesGapMatrix();
+        console.log('✅ [SkillBottleneck] Raw API response:', gapMatrixData);
+        console.log(`📊 [SkillBottleneck] Number of employees in response: ${Array.isArray(gapMatrixData) ? gapMatrixData.length : 0}`);
+        
+        const transformedData = transformGapDataToSkillBottleneck(gapMatrixData);
+        console.log('🔄 [SkillBottleneck] Transformed data:', transformedData);
+        console.log(`📊 [SkillBottleneck] General skills found: ${transformedData.generalSkills.length}`);
+        console.log(`📊 [SkillBottleneck] Position skills found: ${transformedData.positionSkills.length}`);
+        
+        // Only update if we have valid data
+        if (transformedData.generalSkills.length > 0) {
+          console.log('✅ [SkillBottleneck] Updating state with real data from API');
+          setSkillsData(transformedData);
+        } else {
+          console.warn('⚠️ [SkillBottleneck] No skills found in transformed data, keeping mock data');
+        }
+      } catch (err) {
+        console.error('❌ [SkillBottleneck] Error fetching gap matrix data:', err);
+        console.error('❌ [SkillBottleneck] Error details:', err.message, err.response);
+        setError(err.message || 'Failed to load skill gap data');
+        console.warn('⚠️ [SkillBottleneck] Keeping mock data due to error');
+        // Keep using mock data on error
+      } finally {
+        setLoading(false);
+        console.log('🏁 [SkillBottleneck] Loading finished');
+      }
+    };
+
+    fetchGapData();
+  }, []);
 
   const sortedSkills = useMemo(() => {
-    return [...mockSkillsData.generalSkills].sort((a, b) => a.peopleWithSkill - b.peopleWithSkill);
-  }, []);
+    return [...(skillsData?.generalSkills || [])].sort((a, b) => a.peopleWithSkill - b.peopleWithSkill);
+  }, [skillsData]);
 
   const skillPositionsMap = useMemo(() => {
     const map = {};
 
-    mockSkillsData.generalSkills.forEach((skill) => {
+    (skillsData?.generalSkills || []).forEach((skill) => {
       map[skill.id] = [];
     });
 
-    mockSkillsData.positionSkills.forEach((position) => {
+    (skillsData?.positionSkills || []).forEach((position) => {
       position.skills.forEach((skill) => {
-        const generalSkill = mockSkillsData.generalSkills.find(s => s.name === skill.name);
+        const generalSkill = (skillsData?.generalSkills || []).find(s => s.name === skill.name);
         if (generalSkill && map[generalSkill.id]) {
           map[generalSkill.id].push({
             positionTitle: position.title,
@@ -165,7 +209,7 @@ export function SkillBottleneck() {
     });
 
     return map;
-  }, []);
+  }, [skillsData]);
 
   const chartData = useMemo(() => {
     return sortedSkills.map((skill) => ({
@@ -194,6 +238,17 @@ export function SkillBottleneck() {
             Identify positions with critical skill shortages across your organization. Focus on roles where only a few people have
             the required expertise—these are your critical risk areas.
           </p>
+          {loading && (
+            <div className="mt-4 text-blue-600 flex items-center justify-center gap-2">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+              <span className="text-sm">Loading skill gap data...</span>
+            </div>
+          )}
+          {error && !loading && (
+            <div className="mt-4 text-yellow-600 text-sm">
+              ⚠️ Using sample data. {error}
+            </div>
+          )}
         </div>
       </div>
 
@@ -229,7 +284,7 @@ export function SkillBottleneck() {
                 <p className="text-sm font-medium text-gray-600 uppercase tracking-wide">Total Skills</p>
                 <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
               </div>
-              <p className="text-4xl font-bold text-gray-900 mb-2">{mockSkillsData.generalSkills.length}</p>
+              <p className="text-4xl font-bold text-gray-900 mb-2">{sortedSkills.length}</p>
               <p className="text-xs text-gray-500">Across all positions</p>
             </div>
           </Card>
